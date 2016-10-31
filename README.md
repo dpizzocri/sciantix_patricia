@@ -1,2 +1,2 @@
 # sciantix
-# Day zero, there we go!
+# There we go!
