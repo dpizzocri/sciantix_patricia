@@ -9,7 +9,14 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "FuelDensity.h"
+#include "ManufacturedSolution.h"
+#include "ManufacturedCoefficient.h"
+#include "Solver.h"
+#include <iostream>
+#include <fstream>
+#include <vector>
 
-double Burnup( );
+//#include "GlobalVariables.h"
+
+void SolverVerification( );
+

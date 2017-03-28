@@ -9,7 +9,11 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "FuelDensity.h"
+#include <cmath>
 
-double Burnup( );
+namespace ManufacturedSolution
+{
+  void SinExpPow(double constants[], double time, double &solution, double &derivative);
+
+  void CosExp(double constants[], double time, double &solution, double &derivative);
+};

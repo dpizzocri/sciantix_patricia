@@ -10,6 +10,7 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
-#include "FuelDensity.h"
+#include "FissionYield.h"
+#include "Solver.h"
 
-double Burnup( );
+void GasProduction( );
