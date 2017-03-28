@@ -9,7 +9,6 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "FuelDensity.h"
+#include <vector>
 
-double Burnup( );
+double InputInterpolation( double x, std::vector<double> xx, std::vector<double> yy, unsigned short int n );

@@ -9,7 +9,11 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "FuelDensity.h"
+#include <cmath>
 
-double Burnup( );
+namespace ManufacturedCoefficient
+{
+  void Sin(double constants[], double time, double &coefficient);
+
+  void Sin2(double constants[], double time, double &coefficient);
+};

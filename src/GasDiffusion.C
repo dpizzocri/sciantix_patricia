@@ -9,7 +9,13 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "FuelDensity.h"
+#include "GasDiffusion.h"
 
-double Burnup( );
+void GasDiffusion( )
+{
+  const unsigned short int N(10);
+  const double gas_grain_initial(0.0);
+  static std::vector<double> gas_grain_modes(N,gas_grain_initial);
+  double diffusion_coefficient(0.0);
+  double grain_radius(0.0);
+}

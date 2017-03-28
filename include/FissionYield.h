@@ -9,7 +9,5 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "FuelDensity.h"
-
-double Burnup( );
+extern const double Fission_yield_Xe;
+extern const double Fission_yield_Kr;

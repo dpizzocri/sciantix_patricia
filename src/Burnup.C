@@ -15,4 +15,5 @@ double Burnup( )
 {
   //double dburnup =
   //double  burnup +=
+  return 1.0;
 }

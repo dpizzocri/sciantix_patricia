@@ -11,6 +11,8 @@
 
 #include "FuelDensity.h"
 
+/// FuelDensity
+
 double FuelDensity( )
 {
   double fuel_dens = 10960.0; // (kg/m3)

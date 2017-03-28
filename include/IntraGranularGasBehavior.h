@@ -10,6 +10,7 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
-#include "FuelDensity.h"
+#include "GasProduction.h"
+#include "GasDiffusion.h"
 
-double Burnup( );
+void IntraGranularGasBehavior( );

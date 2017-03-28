@@ -9,6 +9,6 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include <vector>
+#include "GlobalVariables.h"
 
-double InputInterpolator( double x, std::vector<double> xx, std::vector<double> yy, unsigned short int n );
+ void InterGranularGasBehavior( );

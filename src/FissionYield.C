@@ -9,7 +9,13 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "FuelDensity.h"
+/// FissionYield
+/// This routine collects the fission yields of several
+/// element/isotopes.
+/// If possible, it is recommended to add references
+/// as new yields are included.
 
-double Burnup( );
+#include "FissionYield.h"
+
+const double Fission_yield_Xe(0.27);
+const double Fission_yield_Kr(0.03);

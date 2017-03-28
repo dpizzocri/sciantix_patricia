@@ -12,20 +12,34 @@
 /// SCIANTIX is a 0D code developed at Politecnico di Milano.
 /// The objective of SCIANTIX is to represent the behaviour of a single grain of nuclear fuel.
 /// The modelling of inert gas behaviour is the main aspect considered.
+/// Engineering models are used, allowing for future integration in industrial fuel performance codes.
+/// Nevertheless, physically-based model are preferred to empirical models.
+/// This facilitates the incorporation of information from lower length scale calculations.
 
 #include "GlobalVariables.h"
+#include "SolverVerification.h"
 #include "InputStorage.h"
-#include "InputInterpolator.h"
+#include "InputInterpolation.h"
+#include "GrainGrowth.h"
+#include "InertGasBehavior.h"
 
 int main( )
 {
+  if (iverification) SolverVerification( );
 
-  while ( Time_h <= Time_end_h )
+  while (Time_h <= Time_end_h)
   {
+    // Operations to set up the history
 	InputStorage( );
-    Temperature[1] = InputInterpolator( Time_h, Time_temperature_input, Temperature_input, Temperature_input_points );
+    Temperature[1] = InputInterpolation(Time_h, Time_temperature_input, Temperature_input, Temperature_input_points);
 
-    if ( Time_h < Time_end_h )
+	// Physical calculations
+	if (igrain_growth) GrainGrowth( );
+
+	if (iinert_gas_behavior) InertGasBehavior( );
+
+    // Time increment
+    if (Time_h < Time_end_h)
 	{
 	  Time_step_number++;
 	  Time_h += dTime_h;
@@ -33,6 +47,6 @@ int main( )
 	}
 	else break;
   }
-	  
+
   return 0;
 }
