@@ -33,9 +33,9 @@ double  Time_h(0.0), dTime_h(0.0), Time_end_h(0.0); // (h)
 double  Time_s(0.0), dTime_s(0.0), Time_end_s(0.0); // (s)
 
 // input variables - options
-unsigned short int iverification(1);
+unsigned short int iverification(0);
 unsigned short int igrain_growth(0);
-unsigned short int iinert_gas_behavior(0);
+unsigned short int iinert_gas_behavior(1);
 
 // input variables - history
 int Temperature_input_points(1000);
