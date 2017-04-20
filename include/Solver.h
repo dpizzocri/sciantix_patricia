@@ -11,6 +11,7 @@
 
 #include <cmath>
 #include <vector>
+#include "GlobalVariables.h"
 
 namespace Solver
 {
@@ -24,4 +25,3 @@ namespace Solver
 
   double FORMAS(double initial_condition[], double diffusion_coefficient, double domain_radius, double source_term, double time_step);
 };
-

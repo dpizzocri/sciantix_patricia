@@ -6,7 +6,7 @@
 //  Version: 0.1                         //
 //  Year   : 2016                        //
 //  Authors: D. Pizzocri and T. Barani   //
-//  a                                     //
+//                                       //
 ///////////////////////////////////////////
 
 #include "Burnup.h"
