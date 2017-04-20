@@ -20,7 +20,9 @@
 /// These sub-models include the treatment
 /// peculiar gas behavior in the high burnup structure.
 
+#include "InertGasBehavior.h"
+
 void InertGasBehavior( )
 {
-
+  IntraGranularGasBehavior( );
 }

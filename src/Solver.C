@@ -17,7 +17,10 @@
 /// For non-linear problems, BE is paired
 /// with Newton method.
 
+#include <iostream>
 #include "Solver.h"
+#include "GlobalVariables.h"
+using namespace std;
 
 namespace Solver
 {
@@ -27,6 +30,7 @@ namespace Solver
   {
     return initial_condition + source_term * time_step;
   }
+  
   // Decay
   // Solver for the ODE [y' = - L y + S]
   double Decay(double initial_condition, double decay_rate, double source_term, double time_step)
@@ -46,11 +50,10 @@ namespace Solver
   // We apply a spectral approach in space, projecting the equation on the eigenfunctions of the laplacian operator.
   // We use the first order backward Euler solver in time.
   // The number of terms in the expansion, N, is fixed a priori.
-  double SpectralDiffusion(std::vector<double>& initial_condition, double diffusion_coefficient, double domain_radius, double source_term, double time_step)
-  {
+  double SpectralDiffusion(std::vector<double>& initial_condition, int N, double diffusion_coefficient, double domain_radius, double source_term, double time_step)
+  {   
     unsigned short int n(0);
     unsigned short int np1(1);
-    unsigned short int N(10);
 
     double diffusion_rate_coeff(0.0);
     double diffusion_rate(0.0);
@@ -60,9 +63,10 @@ namespace Solver
 	double projection_coeff(0.0);
 	double solution(0.0);
 
-    diffusion_rate_coeff = M_PI_2 * diffusion_coefficient / pow(domain_radius, 2);
-    projection_coeff = - 2.0 * domain_radius * sqrt(2.0 * domain_radius / M_PI);
+    diffusion_rate_coeff = pow(Pi, 2) * diffusion_coefficient / pow(domain_radius, 2);
+    projection_coeff = - 2.0 * domain_radius * sqrt(2.0 * domain_radius / Pi);
     source_rate_coeff = projection_coeff * source_term;
+    
 
     for (n = 0; n < N; n++)
     {
@@ -75,13 +79,12 @@ namespace Solver
       time_coefficient[n] = Solver::Decay(initial_condition[n], diffusion_rate, source_rate, time_step);
       initial_condition[n] = time_coefficient[n];
 
-      solution += projection_coeff * n_coeff * time_coefficient[n];
+      solution += projection_coeff * n_coeff * time_coefficient[n] / ((4./3.) * Pi * pow(domain_radius, 3));
     }
-
-
+    
     return solution;
   }
-
+  
   // FORMAS
   // Solver for the spatially average solution of the PDE [dy/dt = D div grad y + S]
   // designed for time-varying conditions [1,2]

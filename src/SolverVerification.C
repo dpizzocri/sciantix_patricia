@@ -30,6 +30,8 @@
 /// [1] Salari and Knupp, 2000, SAND2000-1444
 
 #include "SolverVerification.h"
+#include <iostream>
+using namespace std;
 
 void SolverVerification( )
 {
@@ -368,10 +370,11 @@ void SolverVerification( )
 
     const double diffusion_coefficient(1.0);
     const double domain_radius(1.0);
+    int N(5);
 
     if (n > 0)
     numerical_solution_1[1] =
-    Solver::SpectralDiffusion(initial_condition_vector, diffusion_coefficient, domain_radius, manufactured_source_term, time_step);
+    Solver::SpectralDiffusion(initial_condition_vector, N, diffusion_coefficient, domain_radius, manufactured_source_term, time_step);
 
     // Numerical solution with (time_step * 2.0)
     if (n_is_even)
@@ -380,7 +383,7 @@ void SolverVerification( )
 
       if (n > 0)
       numerical_solution_2[1] =
-      Solver::SpectralDiffusion(initial_condition_vector, diffusion_coefficient, domain_radius, manufactured_source_term, 2.0*time_step);
+      Solver::SpectralDiffusion(initial_condition_vector, N, diffusion_coefficient, domain_radius, manufactured_source_term, 2.0*time_step);
     }
 
     // Numerical estimation of the order of convergence

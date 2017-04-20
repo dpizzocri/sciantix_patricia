@@ -9,9 +9,8 @@
 //                                       //
 ///////////////////////////////////////////
 
+#include <cmath>
+#include <vector>
 #include "GlobalVariables.h"
-#include "Solver.h"
-#include "GasDiffusionCoefficient.h"
-#include <iostream>
 
-double GasDiffusion( );
+double GasDiffusionCoefficient(double temperature, double fission_rate);

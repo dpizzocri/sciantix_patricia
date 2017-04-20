@@ -22,6 +22,8 @@
 #include "InputInterpolation.h"
 #include "GrainGrowth.h"
 #include "InertGasBehavior.h"
+#include <iostream>
+using namespace std;
 
 int main( )
 {

@@ -25,7 +25,10 @@ const double s_h(3600.0); // (s/h)
 // physical constants
 const double Cons_bolt(1.380651e-23); // (J/K)
 const double Numb_avog(6.022e+23);    // (at/mol)
-const double Ener_fiss(312.0e-13);    // (J/fiss
+const double Ener_fiss(312.0e-13);    // (J/fiss)
+
+// mathematical constants
+const double Pi(3.141592653589793);
 
 // time
 long long int Time_step_number(0);
@@ -35,7 +38,8 @@ double  Time_s(0.0), dTime_s(0.0), Time_end_s(0.0); // (s)
 // input variables - options
 unsigned short int iverification(1);
 unsigned short int igrain_growth(0);
-unsigned short int iinert_gas_behavior(0);
+unsigned short int iinert_gas_behavior(1);
+unsigned short int igas_diffusion_coefficient(0);
 
 // input variables - history
 int Temperature_input_points(1000);
@@ -70,3 +74,7 @@ double dGas_produced(0.0);           // (at/m3)
 double dGas_grain(0.0);              // (at/m3)
 double dGas_boundary(0.0);           // (at/m3)
 double dGas_released(0.0);           // (at/m3)
+
+// bubble concentration
+double Intragranular_bubble_concentration[2] = {0.0, 0.0}; // (bubbles/m3)
+double Intragranular_bubble_radius[2] = {0.0, 0.0};        // (bubbles/m3)

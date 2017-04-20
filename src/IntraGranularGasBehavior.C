@@ -16,4 +16,6 @@ void IntraGranularGasBehavior( )
   GasProduction( );
 
   GasDiffusion( );
+  
+  //IntraGranularBubbleEvolution( );
 }
