@@ -23,7 +23,7 @@ objects =       Burnup.o                    \
                 GlobalVariables.o           \
                 GrainGrowth.o               \
                 InertGasBehavior.o          \
-                InputInterpolation.o         \
+                InputInterpolation.o        \
                 InputStorage.o              \
                 InterGranularGasBehavior.o  \
                 IntraGranularGasBehavior.o  \
