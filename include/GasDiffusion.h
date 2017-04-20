@@ -11,5 +11,7 @@
 
 #include "GlobalVariables.h"
 #include "Solver.h"
+#include "GasDiffusionCoefficient.h"
+#include <iostream>
 
 double GasDiffusion( );

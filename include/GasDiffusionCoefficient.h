@@ -11,5 +11,6 @@
 
 #include <cmath>
 #include <vector>
+#include "GlobalVariables.h"
 
-double GasDiffusionCoefficient(double T, double fission_rate, int option);
+double GasDiffusionCoefficient(double temperature, double fission_rate);

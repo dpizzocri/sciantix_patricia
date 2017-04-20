@@ -21,6 +21,9 @@ extern const double Cons_bolt;
 extern const double Numb_avog;
 extern const double Ener_fiss;
 
+// mathematical constants
+extern const double Pi;
+
 // time
 extern long long int Time_step_number;
 extern double  Time_h, dTime_h, Time_end_h;
@@ -30,6 +33,7 @@ extern double  Time_s, dTime_s, Time_end_s;
 extern unsigned short int iverification;
 extern unsigned short int igrain_growth;
 extern unsigned short int iinert_gas_behavior;
+extern unsigned short int igas_diffusion_coefficient;
 
 // input variables - history
 extern int Temperature_input_points;
@@ -52,7 +56,7 @@ extern double Hydrostaticstress[2];
 // input variables - initial values
 extern double initial_grain_radius;
 
-//
+// Properties
 extern double Grain_radius[2];
 
 // gas concentrations

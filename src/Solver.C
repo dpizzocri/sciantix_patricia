@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include "Solver.h"
+#include "GlobalVariables.h"
 using namespace std;
 
 namespace Solver
@@ -29,6 +30,7 @@ namespace Solver
   {
     return initial_condition + source_term * time_step;
   }
+  
   // Decay
   // Solver for the ODE [y' = - L y + S]
   double Decay(double initial_condition, double decay_rate, double source_term, double time_step)
@@ -52,7 +54,6 @@ namespace Solver
   {   
     unsigned short int n(0);
     unsigned short int np1(1);
-    // unsigned short int N(10);
 
     double diffusion_rate_coeff(0.0);
     double diffusion_rate(0.0);
@@ -62,8 +63,8 @@ namespace Solver
 	double projection_coeff(0.0);
 	double solution(0.0);
 
-    diffusion_rate_coeff = pow(3.1415926, 2) * diffusion_coefficient / pow(domain_radius, 2);
-    projection_coeff = - 2.0 * domain_radius * sqrt(2.0 * domain_radius / 3.1415926);
+    diffusion_rate_coeff = pow(Pi, 2) * diffusion_coefficient / pow(domain_radius, 2);
+    projection_coeff = - 2.0 * domain_radius * sqrt(2.0 * domain_radius / Pi);
     source_rate_coeff = projection_coeff * source_term;
     
 
@@ -71,7 +72,6 @@ namespace Solver
     {
       np1 = n + 1;
       const double n_coeff = pow(- 1.0, np1) / np1;
-      cout << "n coeff = " << n_coeff << endl;
 
       diffusion_rate = diffusion_rate_coeff * pow(np1, 2);
       source_rate = source_rate_coeff * n_coeff;
@@ -79,22 +79,11 @@ namespace Solver
       time_coefficient[n] = Solver::Decay(initial_condition[n], diffusion_rate, source_rate, time_step);
       initial_condition[n] = time_coefficient[n];
 
-      solution += projection_coeff * n_coeff * time_coefficient[n] / ((4./3.) * 3.1415926 * pow(domain_radius, 3));
+      solution += projection_coeff * n_coeff * time_coefficient[n] / ((4./3.) * Pi * pow(domain_radius, 3));
     }
     
-    cout << "diffusion rate coeff = " << diffusion_rate_coeff << endl;
-    cout << "projection coeff = " << projection_coeff << endl;
-    cout << "source rate coeff = " << source_rate_coeff << endl;
-    cout << "time coeff = " << time_coefficient[N-1] << endl;
-    cout << "diffusion rate = " << diffusion_rate << endl;
-    cout << "source rate = " << source_rate << endl;
-  
-    cout << "solution = " << solution << endl;
-
-
     return solution;
   }
-  
   
   // FORMAS
   // Solver for the spatially average solution of the PDE [dy/dt = D div grad y + S]
