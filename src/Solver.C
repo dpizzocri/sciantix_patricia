@@ -19,7 +19,7 @@
 
 #include <iostream>
 #include "Solver.h"
-#include "GlobalVariables.h"
+
 using namespace std;
 
 namespace Solver
@@ -30,7 +30,7 @@ namespace Solver
   {
     return initial_condition + source_term * time_step;
   }
-  
+
   // Decay
   // Solver for the ODE [y' = - L y + S]
   double Decay(double initial_condition, double decay_rate, double source_term, double time_step)
@@ -51,7 +51,7 @@ namespace Solver
   // We use the first order backward Euler solver in time.
   // The number of terms in the expansion, N, is fixed a priori.
   double SpectralDiffusion(std::vector<double>& initial_condition, int N, double diffusion_coefficient, double domain_radius, double source_term, double time_step)
-  {   
+  {
     unsigned short int n(0);
     unsigned short int np1(1);
 
@@ -66,7 +66,7 @@ namespace Solver
     diffusion_rate_coeff = pow(Pi, 2) * diffusion_coefficient / pow(domain_radius, 2);
     projection_coeff = - 2.0 * domain_radius * sqrt(2.0 * domain_radius / Pi);
     source_rate_coeff = projection_coeff * source_term;
-    
+
 
     for (n = 0; n < N; n++)
     {
@@ -81,10 +81,10 @@ namespace Solver
 
       solution += projection_coeff * n_coeff * time_coefficient[n] / ((4./3.) * Pi * pow(domain_radius, 3));
     }
-    
+
     return solution;
   }
-  
+
   // FORMAS
   // Solver for the spatially average solution of the PDE [dy/dt = D div grad y + S]
   // designed for time-varying conditions [1,2]
