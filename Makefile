@@ -8,147 +8,67 @@
 ##   Authors: D. Pizzocri and T. Barani   ##
 ##                                        ##
 ############################################
-#    Makefile
-#    @barat, 20/04/2017
+#    Makefile                              #
+#    @barat, 17/05/2017                    #
+############################################
 
 
 #Initialization of useful variables
 
-objects =       Burnup.o                    \
-                FissionYield.o              \
-                FuelDensity.o               \
-                GasDiffusion.o              \
-                GasDiffusionCoefficient.o   \
-                GasProduction.o             \
-                GlobalVariables.o           \
-                GrainGrowth.o               \
-                InertGasBehavior.o          \
-                InputInterpolation.o        \
-                InputStorage.o              \
-                InterGranularGasBehavior.o  \
-                IntraGranularGasBehavior.o  \
-                MainSCIANTIX.o              \
-                ManufacturedCoefficient.o   \
-                ManufacturedSolution.o      \
-                Solver.o                    \
-                SolverVerification.o
+CC          := g++
 
-INCLUDE_DIR  = include
+TARGET      := sciantix.x
 
-SRC_DIR = src
+SRCDIR      := src
+INCDIR      := include
+BUILDDIR    := obj
+TARGETDIR   := bin
+RESDIR      := src
+SRCEXT      := C
+DEPEXT      := d
+OBJEXT      := o
 
-vpath %.h /usr/include
+CFLAGS      := -Wall -O
+LIB         := -lm
+INC         := -I$(INCDIR) -I/usr/local/include
+INCDEP      := -I$(INCDIR)
 
-vpath %.h $(INCLUDE_DIR)
+SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS     := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
-vpath %.C $(SRC_DIR)
+#####################################################################################
 
-comp = g++
+all: resources $(TARGET)
 
-cflags = -Wall
+remake: cleaner all
 
-cflags += $(addprefix -I ,$(INCLUDE_DIR))
+resources: directories
+	@cp $(RESDIR)/* $(TARGETDIR)/
 
-lflag = -lm
-
-RM = /bin/rm -f
-
-Exe = sciantix.x
-
-#vpath %.h include
-
-.PHONY : clean
-
-###########################################################################
-
-#Beginning of the Makefile
-
-$(Exe): $(objects)
-
-	$(comp) $(lflag) -o $(Exe) $(objects)
+directories:
+	@mkdir -p $(TARGETDIR)
+	@mkdir -p $(BUILDDIR)
 
 clean:
-			@echo "Cleaning up.."
-			$(RM) $(objects) $(Exe)
+	@$(RM) -rf $(BUILDDIR)
+	@$(RM) -rf $(TARGETDIR)/*.$(SRCEXT)
 
-#Part to edit if new files are included <------
+cleaner: clean
+	@$(RM) -rf $(TARGETDIR)
 
-Burnup.o: Burnup.C Burnup.h
+-include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
 
-	$(comp) $(cflags) -c $(SRC_DIR)/Burnup.C
+$(TARGET): $(OBJECTS)
+	$(CC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
 
-FissionYield.o: FissionYield.C FissionYield.h
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
+	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
+	@rm -f $(BUILDDIR)/$*.$(DEPEXT).tmp
+	@$(RM) -rf $(TARGETDIR)/*.$(SRCEXT)
 
-	$(comp) $(cflags) -c $(SRC_DIR)/FissionYield.C
-
-FuelDensity.o: FuelDensity.C FuelDensity.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/FuelDensity.C
-
-GasDiffusion.o: GasDiffusion.C GasDiffusion.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/GasDiffusion.C
-
-GasDiffusionCoefficient.o: GasDiffusionCoefficient.C GasDiffusionCoefficient.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/GasDiffusionCoefficient.C
-
-GasProduction.o: GasProduction.C GasProduction.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/GasProduction.C
-
-GlobalVariables.o: GlobalVariables.C GlobalVariables.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/GlobalVariables.C
-
-GrainGrowth.o: GrainGrowth.C GrainGrowth.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/GrainGrowth.C
-
-InertGasBehavior.o: InertGasBehavior.C InertGasBehavior.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/InertGasBehavior.C
-
-InputInterpolation.o: InputInterpolation.C InputInterpolation.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/InputInterpolation.C
-
-InputStorage.o: InputStorage.C InputStorage.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/InputStorage.C
-
-InterGranularGasBehavior.o: InterGranularGasBehavior.C InterGranularGasBehavior.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/InterGranularGasBehavior.C
-
-IntraGranularGasBehavior.o: IntraGranularGasBehavior.C IntraGranularGasBehavior.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/IntraGranularGasBehavior.C
-
-MainSCIANTIX.o: MainSCIANTIX.C GlobalVariables.h SolverVerification.h InputStorage.h InputInterpolation.h GrainGrowth.h InertGasBehavior.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/MainSCIANTIX.C
-
-ManufacturedCoefficient.o: ManufacturedCoefficient.C ManufacturedCoefficient.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/ManufacturedCoefficient.C
-
-ManufacturedSolution.o: ManufacturedSolution.C ManufacturedSolution.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/ManufacturedSolution.C
-
-Solver.o: Solver.C Solver.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/Solver.C
-
-SolverVerification.o: SolverVerification.C SolverVerification.h
-
-	$(comp) $(cflags) -c $(SRC_DIR)/SolverVerification.C
-
-#.o: %.C
-
-#	$(comp) -c $<
-
-###########################################################################
-
-#End of the Makefile
+.PHONY: all remake clean cleaner resources
