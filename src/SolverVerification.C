@@ -293,12 +293,13 @@ void SolverVerification( )
     SinExpPow(constants, time, manufactured_solution, manufactured_solution_first_derivative);
 
     manufactured_source_term =
-    6.0/15.0 * manufactured_solution_first_derivative + 6.0 * manufactured_diffusion_rate * manufactured_solution;
+    6.0/15.0 * manufactured_solution_first_derivative + 2.0 * manufactured_diffusion_rate * manufactured_solution;
 
     // Numerical solution with (time_step * 1.0)
     numerical_solution_1[0] = numerical_solution_1[1];
 
-    const double diffusion_coefficient(1.0);
+    // const double diffusion_coefficient(1.0);
+    double diffusion_coefficient = 1.0;
     const double domain_radius(1.0);
 
     if (n > 0)
@@ -363,14 +364,15 @@ void SolverVerification( )
     SinExpPow(constants, time, manufactured_solution, manufactured_solution_first_derivative);
 
     manufactured_source_term =
-    6.0/15.0 * manufactured_solution_first_derivative + 6.0 * manufactured_diffusion_rate * manufactured_solution;
+    6.0/15.0 * manufactured_solution_first_derivative + 2.0 * manufactured_diffusion_rate * manufactured_solution;
 
     // Numerical solution with (time_step * 1.0)
     numerical_solution_1[0] = numerical_solution_1[1];
 
-    const double diffusion_coefficient(1.0);
+    // const double diffusion_coefficient(1.0);
+    double diffusion_coefficient = 1.0;
     const double domain_radius(1.0);
-    int N(5);
+    int N(1);
 
     if (n > 0)
     numerical_solution_1[1] =

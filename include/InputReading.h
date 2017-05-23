@@ -10,12 +10,6 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
-#include "Solver.h"
-#include "FissionYield.h"
-#include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
-#include "TrappingRate.h"
-#include <iostream>
+#include <string>
 
-void GasDiffusion( );
+void InputReading( );

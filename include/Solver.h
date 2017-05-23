@@ -11,13 +11,12 @@
 
 #include <cmath>
 #include <vector>
-#include "GlobalVariables.h"
 
 namespace Solver
 {
   double Integrator(double initial_condition, double source_term, double time_step);
 
-  double Decay(double initial_condition, double deacy_rate, double source_term, double time_step);
+  double Decay(double initial_condition, double decay_rate, double source_term, double time_step);
 
   double LimitedGrowth(double initial_condition, double growth_rate, double source_term, double time_step);
 
@@ -25,3 +24,4 @@ namespace Solver
 
   double FORMAS(double initial_condition[], double diffusion_coefficient, double domain_radius, double source_term, double time_step);
 };
+

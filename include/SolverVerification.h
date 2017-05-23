@@ -12,6 +12,7 @@
 #include "ManufacturedSolution.h"
 #include "ManufacturedCoefficient.h"
 #include "Solver.h"
+#include "GasDiffusionCoefficient.h"
 #include <iostream>
 #include <fstream>
 #include <vector>

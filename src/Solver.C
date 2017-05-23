@@ -19,7 +19,7 @@
 
 #include <iostream>
 #include "Solver.h"
-
+#include "GlobalVariables.h"
 using namespace std;
 
 namespace Solver
@@ -30,7 +30,7 @@ namespace Solver
   {
     return initial_condition + source_term * time_step;
   }
-
+  
   // Decay
   // Solver for the ODE [y' = - L y + S]
   double Decay(double initial_condition, double decay_rate, double source_term, double time_step)
@@ -39,7 +39,7 @@ namespace Solver
   }
 
   // LimitedGrowth
-  // Solver for the ODE [y' = k / y + S ]
+  // Solver for the ODE [y' = k / y + S]
   double LimitedGrowth(double initial_condition, double growth_rate, double source_term, double time_step)
   {
     return 0.5 * ((initial_condition + source_term * time_step) + sqrt(pow(initial_condition + source_term * time_step, 2) + 4.0 * growth_rate * time_step));
@@ -51,7 +51,7 @@ namespace Solver
   // We use the first order backward Euler solver in time.
   // The number of terms in the expansion, N, is fixed a priori.
   double SpectralDiffusion(std::vector<double>& initial_condition, int N, double diffusion_coefficient, double domain_radius, double source_term, double time_step)
-  {
+  {   
     unsigned short int n(0);
     unsigned short int np1(1);
 
@@ -67,7 +67,6 @@ namespace Solver
     projection_coeff = - 2.0 * domain_radius * sqrt(2.0 * domain_radius / Pi);
     source_rate_coeff = projection_coeff * source_term;
 
-
     for (n = 0; n < N; n++)
     {
       np1 = n + 1;
@@ -81,10 +80,10 @@ namespace Solver
 
       solution += projection_coeff * n_coeff * time_coefficient[n] / ((4./3.) * Pi * pow(domain_radius, 3));
     }
-
+    
     return solution;
   }
-
+  
   // FORMAS
   // Solver for the spatially average solution of the PDE [dy/dt = D div grad y + S]
   // designed for time-varying conditions [1,2]
@@ -137,10 +136,15 @@ namespace Solver
       t2 = dtau - 0.06159589 * (1.0 - exp( -9.86960440 * dtau));
 
     // Non-dimensional source
-    const double source = source_term * time_step / (t2 - t1);
+    if (abs(t2-t1) > 1.0e-15)
+    {
+    	const double source = source_term * time_step / (t2 - t1);
 
-    for (int n = 0; n < 4; n++)
-      initial_condition[n] += term[n] * (initial_condition[n] - source * a_over_b[n]);
+    	for (int n = 0; n < 4; n++)
+    	{
+    		initial_condition[n] += term[n] * (initial_condition[n] - source * a_over_b[n]);
+		}
+	}
 
     return (initial_condition[0] + initial_condition[1] + initial_condition[2] + initial_condition[3]);
   }

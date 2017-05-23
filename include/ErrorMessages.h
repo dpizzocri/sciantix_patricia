@@ -10,12 +10,11 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
-#include "Solver.h"
-#include "FissionYield.h"
-#include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
-#include "TrappingRate.h"
+#include <string>
 #include <iostream>
+#include <cstdlib>
 
-void GasDiffusion( );
+namespace ErrorMessages
+{
+  void Switch(std::string routine, std::string variable_name, int variable);
+};

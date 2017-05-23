@@ -9,13 +9,13 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "Solver.h"
-#include "FissionYield.h"
-#include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
-#include "TrappingRate.h"
-#include <iostream>
+/// Initialization
+/// This routine initializes some global variables
+/// to the values provided in input.
 
-void GasDiffusion( );
+#include "Initialization.h"
+
+void Initialization( )
+{
+  Grain_radius[1] = Initial_grain_radius;
+}

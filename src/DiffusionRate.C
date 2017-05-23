@@ -9,13 +9,17 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "Solver.h"
-#include "FissionYield.h"
-#include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
-#include "TrappingRate.h"
-#include <iostream>
+/// DiffusionRate
+/// This function contains the calculation of the
+/// diffusion of gas atoms per unit time (1/s)
 
-void GasDiffusion( );
+#include "DiffusionRate.h"
+
+double DiffusionRate(double diffusion_coefficient, double grain_radius)
+{
+	double diffusion_rate(0.0); // (1/s)
+	
+	diffusion_rate = diffusion_coefficient / pow(grain_radius, 2.0);
+	
+	return diffusion_rate;
+}

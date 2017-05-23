@@ -19,19 +19,24 @@
 
 double GasDiffusionCoefficient(double temperature, double fission_rate)
 {
-	double diffusion_coefficient(0.0);
-	
-	switch(igas_diffusion_coefficient) 
+	double diffusion_coefficient(0.0); // (m2/s)
+
+	switch(igas_diffusion_coefficient)
 	{
-		case 0 : 
+		case 0 :
    		  // constant value for trial
 		  diffusion_coefficient = 1.0e-20;
 		  break;
+
 		case 1 :
 		  // effective diffusion coefficient from [1]
-		  diffusion_coefficient = 5.0e-08 * exp(- 40262.0 / temperature); 
+		  diffusion_coefficient = 5.0e-08 * exp(- 40262.0 / temperature);
 		  break;
+
+        default :
+          ErrorMessages::Switch("GasDiffusionCoefficient", "igas_diffusion_coefficient", igas_diffusion_coefficient);
+          break;
 	}
-	
+
 	return diffusion_coefficient;
 }
