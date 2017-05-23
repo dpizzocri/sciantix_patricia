@@ -11,4 +11,4 @@
 
 #include "GlobalVariables.h"
 
- void InterGranularGasBehavior( );
+void InterGranularGasBehavior( );

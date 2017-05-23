@@ -9,13 +9,9 @@
 //                                       //
 ///////////////////////////////////////////
 
+#include <cmath>
+#include <vector>
 #include "GlobalVariables.h"
-#include "Solver.h"
-#include "FissionYield.h"
-#include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
-#include "TrappingRate.h"
-#include <iostream>
+#include "ErrorMessages.h"
 
-void GasDiffusion( );
+double BubbleRadius(double temperature, double n);

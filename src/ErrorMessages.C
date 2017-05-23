@@ -9,13 +9,17 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "Solver.h"
-#include "FissionYield.h"
-#include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
-#include "TrappingRate.h"
-#include <iostream>
+/// ErrorMessages
+/// This namespace collects the error messages.
 
-void GasDiffusion( );
+#include "ErrorMessages.h"
+
+namespace ErrorMessages
+{
+  void Switch(std::string routine, std::string variable_name, int variable)
+  {
+    Error_log << "Error in function " << routine << "." << std::endl;
+    Error_log << "The variable " << variable_name << " = " << variable << " is out of range." << std::endl;
+    exit(1);
+  }
+}
