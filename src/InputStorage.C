@@ -16,7 +16,8 @@ void InputStorage( )
   Temperature[0] = Temperature[1];
   Fissionrate[0] = Fissionrate[1];
   Hydrostaticstress[0] = Hydrostaticstress[1];
-
+  Burn_up[0] = Burn_up[1];
+  Effective_burn_up[0] = Effective_burn_up[1];
   Grain_radius[0] = Grain_radius[1];
   Gas_grain[0] = Gas_grain[1];
   Gas_grain_solution[0] = Gas_grain_solution[1];

@@ -15,6 +15,7 @@
 
 // u.o.m. conversions
 extern const double s_h;
+extern const double h_d;
 
 // physical constants
 extern const double Cons_bolt;
@@ -22,6 +23,8 @@ extern const double Numb_avog;
 extern const double Ener_fiss;
 extern const double Covolume_vdw;
 extern const double Surface_tension;
+extern const double Xenon_radius_in_lattice;
+extern const double U_UO2;
 
 // mathematical constants
 extern const double Pi;
@@ -46,6 +49,7 @@ extern unsigned short int iresolution_rate;
 extern unsigned short int itrapping_rate;
 extern unsigned short int inucleation_rate;
 extern unsigned short int isolver;
+extern unsigned short int iformat_output;
 
 // input variables - history
 extern int Input_history_points;
@@ -72,6 +76,7 @@ extern double Initial_grain_radius;
 extern double Number_of_time_steps_per_interval;
 
 // Properties
+extern double Fuel_density[2];
 extern double Grain_radius[2];
 
 // gas concentrations
@@ -87,7 +92,19 @@ extern double dGas_boundary;
 extern double dGas_released;
 extern double dGas_bubble;
 
+// burnup
+extern double Burn_up[2];
+extern double Effective_burn_up[2];
+extern double dBurn_up;
+extern double dEffective_burn_up;
+
 // bubble concentration
 extern double Intragranular_bubble_concentration[2];
 extern double Intragranular_bubble_radius[2];
 extern double Atoms_per_bubble[2];
+
+// scaling factors
+extern double sf_trapping_rate;
+extern double sf_resolution_rate;
+extern double sf_nucleation_rate;
+extern double sf_diffusion_rate;

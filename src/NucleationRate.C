@@ -19,7 +19,7 @@
 
 double NucleationRate(double fission_rate)
 {
-	double nucleation_rate(0.0); // (bubbles/s m3)
+	double nucleation_rate(0.0); // (bubbles/m3-s)
 
 	switch(inucleation_rate)
 	{
@@ -31,7 +31,7 @@ double NucleationRate(double fission_rate)
 		case 1 :
         {
             // from [1]
-			const double bubble_nucleated_per_ff(20.0);
+			const double bubble_nucleated_per_ff(25.0);
 			nucleation_rate = 2.0 * fission_rate * bubble_nucleated_per_ff;
 			break;
         }
@@ -41,6 +41,6 @@ double NucleationRate(double fission_rate)
           break;
 	}
 
-	return nucleation_rate;
+	return sf_nucleation_rate * nucleation_rate;
 }
 
