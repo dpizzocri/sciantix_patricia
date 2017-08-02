@@ -11,9 +11,7 @@
 
 #include "GlobalVariables.h"
 #include "ErrorMessages.h"
-#include <iostream>
-#include <iomanip>
+#include <vector>
 #include <cmath>
-#include <limits>
 
-void OutputWriting( );
+double TrappingRateAtDislocations(double diffusion_coefficient, double dislocation_radius);

@@ -25,6 +25,7 @@ extern const double Covolume_vdw;
 extern const double Surface_tension;
 extern const double Xenon_radius_in_lattice;
 extern const double U_UO2;
+extern const double Vacancy_volume;
 
 // mathematical constants
 extern const double Pi;
@@ -50,6 +51,10 @@ extern unsigned short int itrapping_rate;
 extern unsigned short int inucleation_rate;
 extern unsigned short int isolver;
 extern unsigned short int iformat_output;
+extern unsigned short int iprecipitation_at_dislocations;
+extern unsigned short int idislocation_density;
+extern unsigned short int itrapping_rate_at_dislocations;
+extern unsigned short int ivacancy_inflow;
 
 // input variables - history
 extern int Input_history_points;
@@ -84,6 +89,7 @@ extern double Gas_produced[2];
 extern double Gas_grain[2];
 extern double Gas_grain_solution[2];
 extern double Gas_grain_bubbles[2];
+extern double Gas_grain_dislocations[2];
 extern double Gas_boundary[2];
 extern double Gas_released[2];
 extern double dGas_produced;
@@ -102,9 +108,23 @@ extern double dEffective_burn_up;
 extern double Intragranular_bubble_concentration[2];
 extern double Intragranular_bubble_radius[2];
 extern double Atoms_per_bubble[2];
+extern double Intragranular_bubble_concentration_at_dislocations[2];
+extern double Intragranular_bubble_radius_at_dislocations[2];
+extern double Atoms_per_bubble_at_dislocations[2];
+extern double Group_bubble_growth[2];
+extern double Vacancies_per_bubble[2];
+extern double Trapping_rate_at_dislocations[2];
+
+// dislocations
+extern double Dislocation_density[2];
+extern double Burger_vector[2];
+extern double Max_distance_dislocation_inf;
 
 // scaling factors
 extern double sf_trapping_rate;
 extern double sf_resolution_rate;
 extern double sf_nucleation_rate;
 extern double sf_diffusion_rate;
+extern double sf_dislocation_density;
+extern double sf_burger;
+extern double sf_trapping_rate_at_dislocations;

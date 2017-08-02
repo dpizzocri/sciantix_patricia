@@ -17,5 +17,6 @@
 #include "BubbleRadius.h"
 #include "NucleationRate.h"
 #include "ResolutionRate.h"
+#include "DislocationDensity.h"
 
 void IntraGranularBubbleEvolution( );

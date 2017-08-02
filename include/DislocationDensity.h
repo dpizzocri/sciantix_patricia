@@ -11,9 +11,5 @@
 
 #include "GlobalVariables.h"
 #include "ErrorMessages.h"
-#include <iostream>
-#include <iomanip>
-#include <cmath>
-#include <limits>
 
-void OutputWriting( );
+double DislocationDensity(double temperature, double burnup);

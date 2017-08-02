@@ -31,14 +31,21 @@ void OutputWriting( )
            			<< "Gas in grains (at/m3)" << ","
            			<< "Gas in intra-granular solution (at/m3)" << ","
            			<< "Gas in intra-granular bubbles (at/m3)" << ","
+           			<< "Gas in intra-granular bubbles at dislocations (at/m3)" << ","
            			<< "Gas at grain boundaries (at/m3)" << ","
            			<< "Intra-granular bubble density (bubble/m3)" << ","
+           			<< "Intra-granular bubble density at dislocations (bubble/m3)" << ","
            			<< "Intra-granular bubble radius (m)" << ","
+           			<< "Intra-granular bubble radius at dislocations (m)" << ","
            			<< "Intra-granular atoms per bubble (at/bubble)" << ","
+           			<< "Intra-granular atoms per bubble at dislocations (at/bubble)" << ","
            			<< "Burnup (GWd/tU)" << ","
-           			<< "Effective burnup (GWd/tU)" << std::endl;
+           			<< "Effective burnup (GWd/tU)" << ","
+					<< "Trapping rate at dislocations (atoms/s)" << ","
+					<< "Non-dim group for bubble growth (-)" << std::endl;
 
-  			Output << Time_h << ","
+  			Output  << std::fixed << std::setprecision(12)
+			  		<< Time_h << ","
          			<< Temperature[1] << ","
          			<< Fissionrate[1] << ","
          			<< Hydrostaticstress[1] << ","
@@ -47,12 +54,18 @@ void OutputWriting( )
          			<< Gas_grain[1] << ","
          			<< Gas_grain_solution[1] << ","
          			<< Gas_grain_bubbles[1] << ","
+         			<< Gas_grain_dislocations[1] << ","
          			<< Gas_boundary[1] << ","
          			<< Intragranular_bubble_concentration[1] << ","
+         			<< Intragranular_bubble_concentration_at_dislocations[1] << ","
          			<< Intragranular_bubble_radius[1] << ","
+         			<< Intragranular_bubble_radius_at_dislocations[1] << ","
          			<< Atoms_per_bubble[1] << ","
+         			<< Atoms_per_bubble_at_dislocations[1] << ","
          			<< Burn_up[1] << ","
-         			<< Effective_burn_up[1] << std::endl;
+         			<< Effective_burn_up[1] << ","
+					<< Trapping_rate_at_dislocations[1] << ","
+					<< Group_bubble_growth[1] << std::endl;
          	break;
 		}
 
@@ -69,14 +82,21 @@ void OutputWriting( )
            			<< "Gas in grains (at/m3)" << "\t"
            			<< "Gas in intra-granular solution (at/m3)" << "\t"
            			<< "Gas in intra-granular bubbles (at/m3)" << "\t"
+           			<< "Gas in intra-granular bubbles at dislocations (at/m3)" << "\t"
            			<< "Gas at grain boundaries (at/m3)" << "\t"
            			<< "Intra-granular bubble density (bubble/m3)" << "\t"
+           			<< "Intra-granular bubble density at dislocations (bubble/m3)" << "\t"
            			<< "Intra-granular bubble radius (m)" << "\t"
+           			<< "Intra-granular bubble radius at dislocations (m)" << "\t"
            			<< "Intra-granular atoms per bubble (at/bubble)" << "\t"
+           			<< "Intra-granular atoms per bubble at dislocations (at/bubble)" << "\t"
            			<< "Burnup (GWd/tU)" << "\t"
-           			<< "Effective burnup (GWd/tU)" <<std::endl;
+           			<< "Effective burnup (GWd/tU)" << "\t"
+					<< "Trapping rate at dislocations (atoms/s)" << "\t"
+					<< "Non-dim group for bubble growth (-)" << std::endl;
 
-  			Output << Time_h << "\t"
+  			Output  << std::fixed << std::setprecision(12)
+			        << Time_h << "\t"
          			<< Temperature[1] << "\t"
          			<< Fissionrate[1] << "\t"
          			<< Hydrostaticstress[1] << "\t"
@@ -85,12 +105,18 @@ void OutputWriting( )
          			<< Gas_grain[1] << "\t"
          			<< Gas_grain_solution[1] << "\t"
          			<< Gas_grain_bubbles[1] << "\t"
+         			<< Gas_grain_dislocations[1] << "\t"
          			<< Gas_boundary[1] << "\t"
          			<< Intragranular_bubble_concentration[1] << "\t"
+         			<< Intragranular_bubble_concentration_at_dislocations[1] << "\t"
          			<< Intragranular_bubble_radius[1] << "\t"
+         			<< Intragranular_bubble_radius_at_dislocations[1] << "\t"
          			<< Atoms_per_bubble[1] << "\t"
+         			<< Atoms_per_bubble_at_dislocations[1] << "\t"
          			<< Burn_up[1] << "\t"
-         			<< Effective_burn_up[1] << std::endl;
+         			<< Effective_burn_up[1] << "\t"
+					<< Trapping_rate_at_dislocations[1] << "\t"
+					<< Group_bubble_growth[1] << std::endl;
          	break;
 		}
 

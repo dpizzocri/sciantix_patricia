@@ -72,10 +72,11 @@ void InputReading( )
   ///											  0 = typical constant value
   ///											  1 = model from Matzke, 1980
   ///											  2 = model from Turnbull, White, Wise, 1988
-  /// iintra_bubble_evolution		range [0,2]	  selects the intra-granular bubbles evolution model
+  /// iintra_bubble_evolution		range [0,3]	  selects the intra-granular bubbles evolution model
   ///											  0 = typical constant values
   ///											  1 = model from White and Tucker, 1983
   ///											  2 = model from Olander and Wongsawaeng, 2006
+  ///											  3 = model 2, extended to bubble growth case (White 2006, SEM database)
   /// ibubble_radius				range [0,5]	  selects the intra-granular bubbles radius model, among some models found in literature
   ///											  0 = typical constant value
   ///											  1 = model from Turnbull, 1971 and from Dollins and Nichols, 1977
@@ -99,6 +100,18 @@ void InputReading( )
   /// iformat_output				range [0,1]	  selects the format for the output file
   ///											  0 = output.csv
   ///											  1 = output.txt
+  /// iprecipitation_at_dislocations	range [0,1]   flag to switch on/off the model of dissolved gas precipitation into bubbles at dislocations
+  ///												  0 = off
+  ///												  1 = on
+  /// idislocation_density			range [0,1]   selects the model for the dislocation density estimation
+  ///											  0 = typical constant value
+  ///											  1 = model from ...
+  /// itrapping_rate_at_dislocations	range [0,1]   selects the model for the trapping rate by bubbles at dislocations
+  ///												  0 = typical constant value
+  ///												  1 = model from Ham ...
+  /// ivacancy_inflow				range [0,1]   flag to turn on/off the vacancy flow in bubble at dislocations model
+  ///											  0 = off
+  ///											  1 = on
   ///
   /// In order to add a variable or a parameter, use the corresponding functions herein defined.
   /// It is recommended to define input variables as global variables.
@@ -116,6 +129,10 @@ void InputReading( )
   inucleation_rate = ReadOneSetting("inucleation_rate", input_settings, input_check);
   isolver = ReadOneSetting("isolver", input_settings, input_check);
   iformat_output = ReadOneSetting("iformat_output", input_settings, input_check);
+  iprecipitation_at_dislocations = ReadOneSetting("iprecipitation_at_dislocations", input_settings, input_check);
+  idislocation_density = ReadOneSetting("idislocation_density", input_settings, input_check);
+  itrapping_rate_at_dislocations = ReadOneSetting("itrapping_rate_at_dislocations", input_settings, input_check);
+  ivacancy_inflow = ReadOneSetting("ivacancy_inflow", input_settings, input_check);
   Initial_grain_radius = ReadOneParameter("Initial_grain_radius", input_settings, input_check);
   Number_of_time_steps_per_interval = ReadOneParameter("Number_of_time_steps_per_interval", input_settings, input_check);
 
@@ -138,7 +155,7 @@ void InputReading( )
     n++;
     Input_history_points = n;
   }
-  
+
   Time_input.resize(Input_history_points);
   Temperature_input.resize(Input_history_points);
   Fissionrate_input.resize(Input_history_points);
@@ -148,15 +165,18 @@ void InputReading( )
   Time_end_s = Time_end_h * s_h;
 
   // input scaling factors
-  
+
   if (!input_scaling_factors.fail())
   {
     sf_resolution_rate = ReadOneParameter("sf_resolution_rate", input_scaling_factors, input_check);
     sf_trapping_rate = ReadOneParameter("sf_trapping_rate", input_scaling_factors, input_check);
     sf_nucleation_rate = ReadOneParameter("sf_nucleation_rate", input_scaling_factors, input_check);
     sf_diffusion_rate = ReadOneParameter("sf_diffusion_rate", input_scaling_factors, input_check);
+    sf_dislocation_density = ReadOneParameter("sf_dislocation_density", input_scaling_factors, input_check);
+    sf_burger = ReadOneParameter("sf_burger", input_scaling_factors, input_check);
+    sf_trapping_rate_at_dislocations = ReadOneParameter("sf_trapping_rate_at_dislocations", input_scaling_factors, input_check);
   }
-  
+
   input_check.close();
   input_settings.close();
   input_history.close();

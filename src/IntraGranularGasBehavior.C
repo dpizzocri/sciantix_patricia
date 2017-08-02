@@ -14,8 +14,10 @@
 void IntraGranularGasBehavior( )
 {
   GasProduction( );
-
-  GasDiffusion( );
   
+  GasDiffusion( );
+
+  //if(iprecipitation_at_dislocations) GasAtDislocations( );
+
   IntraGranularBubbleEvolution( );
 }
