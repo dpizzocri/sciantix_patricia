@@ -21,5 +21,5 @@ double DiffusionRate(double diffusion_coefficient, double grain_radius)
 	
 	diffusion_rate = diffusion_coefficient / pow(grain_radius, 2.0);
 	
-	return diffusion_rate;
+	return sf_diffusion_rate * diffusion_rate;
 }

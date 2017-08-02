@@ -34,7 +34,7 @@ double TrappingRate(double diffusion_coefficient, double bubble_radius, double b
 
 		case 1 :
 			// from [1]
-			trapping_rate = 4.0 * Pi * diffusion_coefficient * bubble_radius * bubble_density;
+			trapping_rate = 4.0 * Pi * diffusion_coefficient * (bubble_radius + Xenon_radius_in_lattice) * bubble_density;
 			break;
 
         default :
@@ -42,6 +42,6 @@ double TrappingRate(double diffusion_coefficient, double bubble_radius, double b
           break;
 	}
 
-	return trapping_rate;
+	return sf_trapping_rate * trapping_rate;
 }
 

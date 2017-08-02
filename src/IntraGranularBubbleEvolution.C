@@ -47,10 +47,7 @@ void IntraGranularBubbleEvolution( )
 			else
               Atoms_per_bubble[0] = 0.0;
 
-			if(Atoms_per_bubble[0] < 1.0)
-              Intragranular_bubble_radius[0] = 1.0e-9; // (m): vacancy radius, corresponding to the UO2 reticular pitch
-            else
-              Intragranular_bubble_radius[0] = BubbleRadius(Temperature[0], Atoms_per_bubble[0]);
+            Intragranular_bubble_radius[0] = BubbleRadius(Temperature[0], Atoms_per_bubble[0]);
 
 			double resolution_rate = ResolutionRate(Intragranular_bubble_radius[0], Fissionrate[0]);
 			double nucleation_rate = NucleationRate(Fissionrate[0]);
@@ -60,7 +57,7 @@ void IntraGranularBubbleEvolution( )
 	  		  Atoms_per_bubble[1] = Gas_grain_bubbles[1] / Intragranular_bubble_concentration[1];
 			else
               Atoms_per_bubble[1] = 0.0;
-              
+        
             Intragranular_bubble_radius[1] = BubbleRadius(Temperature[1], Atoms_per_bubble[1]);
 
 			break;

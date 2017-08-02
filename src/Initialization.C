@@ -18,4 +18,6 @@
 void Initialization( )
 {
   Grain_radius[1] = Initial_grain_radius;
+  Temperature[1] = Temperature_input[0];
+  Fissionrate[1] = Fissionrate_input[0];
 }

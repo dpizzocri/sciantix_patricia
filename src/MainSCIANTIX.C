@@ -20,6 +20,7 @@
 #include "SolverVerification.h"
 #include "InputStorage.h"
 #include "InputInterpolation.h"
+#include "Burnup.h"
 #include "GrainGrowth.h"
 #include "InertGasBehavior.h"
 #include "InputReading.h"
@@ -35,7 +36,9 @@ int main( )
 
   Initialization( );
 
-  Output.open("output.csv", std::ios::out);
+  if (iformat_output == 0) Output.open("output.csv", std::ios::out);
+  else Output.open("output.txt", std::ios::out);
+
   Error_log.open("error_log.txt", std::ios::out);
 
   if (iverification) SolverVerification( );
@@ -49,6 +52,8 @@ int main( )
     Hydrostaticstress[1] = InputInterpolation(Time_h, Time_input, Hydrostaticstress_input, Input_history_points);
 
 	// Physical calculations
+    Burnup( );
+
 	if (igrain_growth) GrainGrowth( );
 
 	if (iinert_gas_behavior) InertGasBehavior( );
