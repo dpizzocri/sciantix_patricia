@@ -9,19 +9,9 @@
 //                                              //
 //////////////////////////////////////////////////
 
-#include <cmath>
-#include <vector>
 #include "GlobalVariables.h"
-#include "Solver.h"
-#include "FissionYield.h"
-#include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
-#include "TrappingRate.h"
-#include "TrappingRateAtDislocations.h"
-#include "DislocationRadiusOfInfluence.h"
-#include "GasDiffusionIrradiation.h"
-#include "GasDiffusionAnnealing.h"
-#include <iostream>
+#include "ErrorMessages.h"
+#include <vector>
+#include <cmath>
 
-void GasDiffusion( );
+double TrappingRateAtDislocations(double diffusion_coefficient, double dislocation_radius);

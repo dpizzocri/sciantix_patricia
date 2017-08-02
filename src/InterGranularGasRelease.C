@@ -9,6 +9,16 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
+/// InterGranularGasRelease
+/// This routine calculates the release of
+/// gas from grain boundaries
+/// occuring after bubble percolation.
+/// [1] Pastore et al., NED, 256 (2013) 75-86
 
-void Initialization( );
+#include "InterGranularGasRelease.h"
+
+void InterGranularGasRelease( )
+{
+
+}
+

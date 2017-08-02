@@ -9,6 +9,9 @@
 //                                       //
 ///////////////////////////////////////////
 
+#include <cmath>
+#include <vector>
 #include "GlobalVariables.h"
+#include "ErrorMessages.h"
 
-void Initialization( );
+double IntraGranularBubbleRadius(double temperature, double atoms_per_bubble);

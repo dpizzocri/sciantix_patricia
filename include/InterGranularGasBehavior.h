@@ -10,5 +10,8 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
+#include "InterGranularBubbleEvolution.h"
+#include "InterGranularGasRelease.h"
+#include "InterGranularGasSwelling.h"
 
 void InterGranularGasBehavior( );

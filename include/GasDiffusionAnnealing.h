@@ -20,8 +20,6 @@
 #include "TrappingRate.h"
 #include "TrappingRateAtDislocations.h"
 #include "DislocationRadiusOfInfluence.h"
-#include "GasDiffusionIrradiation.h"
-#include "GasDiffusionAnnealing.h"
 #include <iostream>
 
-void GasDiffusion( );
+void GasDiffusionAnnealing(double diffusion_coefficient, double trapping_rate, double trapping_rate_bubble_at_dislocations, double trapping_rate_dislocations);

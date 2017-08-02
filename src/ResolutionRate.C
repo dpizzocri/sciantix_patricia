@@ -1,13 +1,13 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 0.1                         //
-//  Year   : 2016                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////
+//                                              //
+//           S C I A N T I X                    //
+//           ---------------                    //
+//                                              //
+//  Version: 0.1                                //
+//  Year   : 2016                               //
+//  Authors: D. Pizzocri, T. Barani, A. Magni   //
+//                                              //
+//////////////////////////////////////////////////
 
 /// ResolutionRate
 /// This function contains the evaluation of the
@@ -16,7 +16,7 @@
 /// [1] Olander, Wongsawaeng, Journal of Nuclear Materials, 354 (2006), 94-109
 /// [2] Olander, Nuclear Reactor Fuel Elements, Nat'l Tech. Info. Services, Document No. 26711, 1976, Section 13.7
 /// [3] Turnbull, Journal of Nuclear Materials, 38 (1971), 203
-/// [4] Losonen, Journal of Nuclear Materials, (2000) 
+/// [4] Losonen, Journal of Nuclear Materials, 280 (2000), 56-72 
 
 #include "ResolutionRate.h"
 
@@ -33,7 +33,7 @@ double ResolutionRate(double bubble_radius, double fission_rate)
 
 		case 1 :
         {
-            // from Olander model, [2], built on [3]
+            // from Olander model [2], originally from [3]
 			const double ff_influence_radius = 1.0e-09; // (m)
 			const double ff_range = 6.0e-06; // (m)
 
@@ -43,7 +43,7 @@ double ResolutionRate(double bubble_radius, double fission_rate)
         
         case 2 :
         	// from [4]
-        	resolution_rate = 3.0e-23 * fission_rate; // 3.0e-4
+        	resolution_rate = 3.0e-23 * fission_rate;
         	break;
 
         default :

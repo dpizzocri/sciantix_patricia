@@ -10,5 +10,6 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
+#include "Solver.h"
 
-void Initialization( );
+void GasAtDislocations( );

@@ -14,4 +14,4 @@
 #include "GlobalVariables.h"
 #include "ErrorMessages.h"
 
-double BubbleRadius(double temperature, double n);
+double BubbleRadius(double temperature, double atoms_per_bubble);
