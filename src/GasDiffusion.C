@@ -23,7 +23,19 @@ void GasDiffusion( )
   double diffusion_coefficient = GasDiffusionCoefficient(Temperature[0], Fissionrate[0]);
   double resolution_rate = ResolutionRate(Intragranular_bubble_radius[0], Fissionrate[0]);
   double trapping_rate = TrappingRate(diffusion_coefficient, Intragranular_bubble_radius[0], Intragranular_bubble_concentration[0]);
-  double equilibrium_fraction = resolution_rate / (resolution_rate + trapping_rate);
+  double resolution_rate_bubble_at_dislocations = ResolutionRate(Intragranular_bubble_radius_at_dislocations[0], Fissionrate[0]);
+  Trapping_rate_at_dislocations[1] = TrappingRateAtDislocations(diffusion_coefficient, sf_burger * 5.0 * Burger_vector[0]);
+  double trapping_rate_bubble_at_dislocation = TrappingRate(diffusion_coefficient, Intragranular_bubble_radius_at_dislocations[0], Intragranular_bubble_concentration_at_dislocations[0]);
+  
+  double ratio_trap_res = trapping_rate/resolution_rate;
+  double ratio_trap_res_at_dislocations = 0.0;
+  double ratio_trap_bubble_res_at_dislocations = 0.0;
+  if(iprecipitation_at_dislocations) {
+  	ratio_trap_res_at_dislocations = Trapping_rate_at_dislocations[1]/resolution_rate_bubble_at_dislocations;
+  	ratio_trap_bubble_res_at_dislocations = trapping_rate_bubble_at_dislocation/resolution_rate_bubble_at_dislocations;
+  }
+  
+  double equilibrium_fraction = 1.0 / (1.0 + (ratio_trap_res) + (ratio_trap_res_at_dislocations) + (ratio_trap_bubble_res_at_dislocations));
   double effective_diffusion_coefficient = diffusion_coefficient * equilibrium_fraction;
 
   const unsigned short int N(20);
@@ -50,6 +62,7 @@ void GasDiffusion( )
   }
   
   Gas_grain_solution[1] = Gas_grain[1] * equilibrium_fraction;
-  Gas_grain_bubbles[1] = Gas_grain[1] * (1.0 - equilibrium_fraction);
+  Gas_grain_bubbles[1] = Gas_grain_solution[1] * (ratio_trap_res);
+  Gas_grain_dislocations[1] = Gas_grain_solution[1] * (ratio_trap_res_at_dislocations + ratio_trap_bubble_res_at_dislocations);
   Gas_boundary[1] = Gas_produced[1] - Gas_grain[1];
 }

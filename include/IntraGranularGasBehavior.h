@@ -11,6 +11,7 @@
 
 #include "GlobalVariables.h"
 #include "GasProduction.h"
+#include "GasAtDislocations.h"
 #include "GasDiffusion.h"
 #include "IntraGranularBubbleEvolution.h"
 

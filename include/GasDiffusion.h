@@ -16,6 +16,7 @@
 #include "NucleationRate.h"
 #include "ResolutionRate.h"
 #include "TrappingRate.h"
+#include "TrappingRateAtDislocations.h"
 #include <iostream>
 
 void GasDiffusion( );

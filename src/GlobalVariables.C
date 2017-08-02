@@ -31,6 +31,7 @@ const double Covolume_vdw(0.085*10e-27);       // (m3)
 const double Surface_tension(0.7);    		   // (N/m)
 const double Xenon_radius_in_lattice(0.2e-09); // (m)
 const double U_UO2(0.8815);                    // (kgU/kgUO2)
+const double Vacancy_volume(4.09e-29);
 
 // mathematical constants
 const double Pi(3.141592653589793);
@@ -56,6 +57,10 @@ unsigned short int itrapping_rate(0);
 unsigned short int inucleation_rate(0);
 unsigned short int isolver(0);
 unsigned short int iformat_output(0);
+unsigned short int iprecipitation_at_dislocations(0);
+unsigned short int idislocation_density(0);
+unsigned short int itrapping_rate_at_dislocations(0);
+unsigned short int ivacancy_inflow(0);
 
 // input variables - history
 int Input_history_points(1000);
@@ -71,7 +76,7 @@ double Hydrostaticstress[2] = {0.0, 0.0}; // (MPa)
 double Initial_grain_radius(0.0); // (m)
 double Number_of_time_steps_per_interval(0.0); // (#)
 
-// Properties
+// properties
 double Fuel_density[2] = {10970.0, 10970.0}; // (kg/m3)
 double Grain_radius[2] = {0.0, 0.0}; // (m)
 
@@ -80,6 +85,7 @@ double Gas_produced[2] = {0.0, 0.0}; // (at/m3)
 double Gas_grain[2] = {0.0, 0.0};    // (at/m3)
 double Gas_grain_solution[2] = {0.0, 0.0}; 	 // (at/m3)
 double Gas_grain_bubbles[2] = {0.0, 0.0}; 	 // (at/m3)
+double Gas_grain_dislocations[2] = {0.0, 0.0}; // (at/m3)
 double Gas_boundary[2] = {0.0, 0.0}; // (at/m3)
 double Gas_released[2] = {0.0, 0.0}; // (at/m3)
 double dGas_produced(0.0);           // (at/m3)
@@ -92,6 +98,12 @@ double dGas_bubble(0.0); 	 		 // (at/m3)
 double Intragranular_bubble_concentration[2] = {0.0, 0.0}; // (bubbles/m3)
 double Intragranular_bubble_radius[2] = {0.0, 0.0};        // (m)
 double Atoms_per_bubble[2] = {0.0, 0.0};
+double Intragranular_bubble_concentration_at_dislocations[2] = {0.0, 0.0}; // (bubbles/m3)
+double Intragranular_bubble_radius_at_dislocations[2] = {0.0, 0.0};        // (m)
+double Atoms_per_bubble_at_dislocations[2] = {0.0, 0.0};
+double Group_bubble_growth[2] = {0.0, 0.0};
+double Vacancies_per_bubble[2] = {0.0, 0.0};
+double Trapping_rate_at_dislocations[2] = {0.0, 0.0};
 
 // burnup
 double Burn_up[2] = {0.0, 0.0};           // (GWd/tU)
@@ -99,8 +111,16 @@ double Effective_burn_up[2] = {0.0, 0.0}; // (GWd/tU)
 double dBurn_up(0.0);                     // (GWd/tU)
 double dEffective_burn_up(0.0);           // (GWd/tU)
 
+// dislocations
+double Dislocation_density[2] = {4.0e+13, 4.0e+13}; // (m/m3)
+double Burger_vector[2] = {3.85e-10, 3.85e-10};	  // (m)
+double Max_distance_dislocation_inf(5.0);
+
 // scaling factors
 double sf_trapping_rate(1.0);
 double sf_resolution_rate(1.0);
 double sf_nucleation_rate(1.0);
 double sf_diffusion_rate(1.0);
+double sf_dislocation_density(1.0);
+double sf_burger(1.0);
+double sf_trapping_rate_at_dislocations(1.0);
