@@ -1,16 +1,16 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 0.1                         //
-//  Year   : 2016                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////
+//                                              //
+//           S C I A N T I X                    //
+//           ---------------                    //
+//                                              //
+//  Version: 0.1                                //
+//  Year   : 2016                               //
+//  Authors: D. Pizzocri, T. Barani, A. Magni   //
+//                                              //
+//////////////////////////////////////////////////
 
 /// Solver
-/// This a namespace collecting all the solvers
+/// This is a namespace collecting all the solvers
 /// for ODEs and PDEs used in SCIANTIX.
 /// In general, the ODEs and PDEs are solved
 /// by the Backward Euler (BE) method.
@@ -30,7 +30,7 @@ namespace Solver
   {
     return initial_condition + source_term * time_step;
   }
-  
+
   // Decay
   // Solver for the ODE [y' = - L y + S]
   double Decay(double initial_condition, double decay_rate, double source_term, double time_step)
@@ -45,18 +45,31 @@ namespace Solver
     return 0.5 * ((initial_condition + source_term * time_step) + sqrt(pow(initial_condition + source_term * time_step, 2) + 4.0 * growth_rate * time_step));
   }
 
+  // BinaryInteraction
+  // Solver for the ODE [y' = - k y^2 + S]
+  double BinaryInteraction(double initial_condition, double geometric_coefficient, double source_term, double time_step)
+  {
+    if (geometric_coefficient > 0.0 && time_step > 0.0)
+      return (-1.0 + sqrt(1.0 + geometric_coefficient * time_step * (initial_condition + source_term * time_step))) / (2.0 * geometric_coefficient * time_step);
+    else if (geometric_coefficient > 0.0)
+      return initial_condition;
+    else
+      return Integrator(initial_condition, source_term, time_step);
+  }
+
   // SpectralDiffusion
   // Solver for the spatially averaged solution of the PDE [dy/dt = D div grad y + S]
   // We apply a spectral approach in space, projecting the equation on the eigenfunctions of the laplacian operator.
   // We use the first order backward Euler solver in time.
   // The number of terms in the expansion, N, is fixed a priori.
-  double SpectralDiffusion(std::vector<double>& initial_condition, int N, double diffusion_coefficient, double domain_radius, double source_term, double time_step)
-  {   
+  double SpectralDiffusion(std::vector<double>& initial_condition, int N, double diffusion_coefficient, double trapping_rate, double domain_radius, double source_term, double time_step)
+  {
     unsigned short int n(0);
     unsigned short int np1(1);
 
     double diffusion_rate_coeff(0.0);
     double diffusion_rate(0.0);
+    double decay_rate(0.0);
     double source_rate_coeff(0.0);
     double source_rate(0.0);
 	std::vector<double> time_coefficient(N, 0.0);
@@ -75,15 +88,17 @@ namespace Solver
       diffusion_rate = diffusion_rate_coeff * pow(np1, 2);
       source_rate = source_rate_coeff * n_coeff;
 
-      time_coefficient[n] = Solver::Decay(initial_condition[n], diffusion_rate, source_rate, time_step);
+      decay_rate = diffusion_rate + trapping_rate;
+
+      time_coefficient[n] = Solver::Decay(initial_condition[n], decay_rate, source_rate, time_step);
       initial_condition[n] = time_coefficient[n];
 
       solution += projection_coeff * n_coeff * time_coefficient[n] / ((4./3.) * Pi * pow(domain_radius, 3));
     }
-    
+
     return solution;
   }
-  
+
   // FORMAS
   // Solver for the spatially average solution of the PDE [dy/dt = D div grad y + S]
   // designed for time-varying conditions [1,2]

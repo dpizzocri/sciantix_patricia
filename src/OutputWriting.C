@@ -41,8 +41,8 @@ void OutputWriting( )
            			<< "Intra-granular atoms per bubble at dislocations (at/bubble)" << ","
            			<< "Burnup (GWd/tU)" << ","
            			<< "Effective burnup (GWd/tU)" << ","
-					<< "Trapping rate at dislocations (atoms/s)" << ","
-					<< "Non-dim group for bubble growth (-)" << std::endl;
+					<< "Non-dim group for bubble growth (-)" << ","
+					<< "Vacancies per bubble at dislocations (vac/bubble)" << std::endl;
 
   			Output  << std::fixed << std::setprecision(12)
 			  		<< Time_h << ","
@@ -60,12 +60,12 @@ void OutputWriting( )
          			<< Intragranular_bubble_concentration_at_dislocations[1] << ","
          			<< Intragranular_bubble_radius[1] << ","
          			<< Intragranular_bubble_radius_at_dislocations[1] << ","
-         			<< Atoms_per_bubble[1] << ","
-         			<< Atoms_per_bubble_at_dislocations[1] << ","
+         			<< Intragranular_atoms_per_bubble[1] << ","
+         			<< Intragranular_atoms_per_bubble_at_dislocations[1] << ","
          			<< Burn_up[1] << ","
          			<< Effective_burn_up[1] << ","
-					<< Trapping_rate_at_dislocations[1] << ","
-					<< Group_bubble_growth[1] << std::endl;
+					<< Group_bubble_growth[1] << "," 
+					<< Intragranular_vacancies_per_bubble_at_dislocations[1] << std::endl;
          	break;
 		}
 
@@ -92,8 +92,9 @@ void OutputWriting( )
            			<< "Intra-granular atoms per bubble at dislocations (at/bubble)" << "\t"
            			<< "Burnup (GWd/tU)" << "\t"
            			<< "Effective burnup (GWd/tU)" << "\t"
-					<< "Trapping rate at dislocations (atoms/s)" << "\t"
-					<< "Non-dim group for bubble growth (-)" << std::endl;
+					<< "Non-dim group for bubble growth (-)" << "\t"
+					<< "Vacancies per bubble at dislocations (vac/bubble)" << std::endl;
+
 
   			Output  << std::fixed << std::setprecision(12)
 			        << Time_h << "\t"
@@ -111,12 +112,13 @@ void OutputWriting( )
          			<< Intragranular_bubble_concentration_at_dislocations[1] << "\t"
          			<< Intragranular_bubble_radius[1] << "\t"
          			<< Intragranular_bubble_radius_at_dislocations[1] << "\t"
-         			<< Atoms_per_bubble[1] << "\t"
-         			<< Atoms_per_bubble_at_dislocations[1] << "\t"
+         			<< Intragranular_atoms_per_bubble[1] << "\t"
+         			<< Intragranular_atoms_per_bubble_at_dislocations[1] << "\t"
          			<< Burn_up[1] << "\t"
          			<< Effective_burn_up[1] << "\t"
-					<< Trapping_rate_at_dislocations[1] << "\t"
-					<< Group_bubble_growth[1] << std::endl;
+					<< Group_bubble_growth[1] << "\t"
+					<< Intragranular_vacancies_per_bubble_at_dislocations[1] << std::endl;
+
          	break;
 		}
 

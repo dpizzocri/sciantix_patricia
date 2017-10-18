@@ -15,13 +15,8 @@
 #include "Solver.h"
 #include "FissionYield.h"
 #include "GasDiffusionCoefficient.h"
-#include "NucleationRate.h"
 #include "ResolutionRate.h"
-#include "TrappingRate.h"
-#include "TrappingRateAtDislocations.h"
-#include "DislocationRadiusOfInfluence.h"
-#include "GasDiffusionIrradiation.h"
-#include "GasDiffusionAnnealing.h"
+#include "IntraGranularBubbleRadius.h"
 #include <iostream>
 
-void GasDiffusion( );
+void GasDiffusionIrradiation(double diffusion_coefficient, double trapping_rate, double trapping_rate_bubble_at_dislocations, double trapping_rate_dislocations);
