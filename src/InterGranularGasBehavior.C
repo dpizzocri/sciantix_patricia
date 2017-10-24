@@ -13,9 +13,5 @@
 
 void InterGranularGasBehavior( )
 {
-  InterGranularBubbleEvolution( );
 
-  InterGranularGasRelease( );
-
-  InterGranularGasSwelling( );
 }

@@ -9,11 +9,6 @@
 //                                       //
 ///////////////////////////////////////////
 
-/// Burnup
-/// This function contains the evaluation of
-/// the updated burnup and effective burnup
-/// after a time step in irradiation conditions.
-
 #include "Burnup.h"
 
 void Burnup( )
@@ -27,9 +22,11 @@ void Burnup( )
   const double temperature_threshold(1273.0);
   double fraction_below_threshold(0.0);
 
-  if ((Temperature[1] < temperature_threshold) && (Temperature[0] < temperature_threshold))
+  if ((Temperature[1] < temperature_threshold) &&
+      (Temperature[0] < temperature_threshold))
     fraction_below_threshold = 1.0;
-  else if ((Temperature[1] < temperature_threshold) || (Temperature[0] < temperature_threshold))
+  else if ((Temperature[1] < temperature_threshold) ||
+           (Temperature[0] < temperature_threshold))
     fraction_below_threshold = (temperature_threshold - Temperature[0]) / (Temperature[1] - Temperature[0]);
 
   dEffective_burn_up = fraction_below_threshold * dBurn_up;

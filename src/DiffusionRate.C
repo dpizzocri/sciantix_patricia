@@ -1,17 +1,17 @@
-//////////////////////////////////////////////////
-//                                              //
-//           S C I A N T I X                    //
-//           ---------------                    //
-//                                              //
-//  Version: 0.1                                //
-//  Year   : 2016                               //
-//  Authors: D. Pizzocri, T. Barani, A. Magni   //
-//                                              //
-//////////////////////////////////////////////////
+///////////////////////////////////////////
+//                                       //
+//           S C I A N T I X             //
+//           ---------------             //
+//                                       //
+//  Version: 0.1                         //
+//  Year   : 2016                        //
+//  Authors: D. Pizzocri and T. Barani   //
+//                                       //
+///////////////////////////////////////////
 
 /// DiffusionRate
 /// This function contains the calculation of the
-/// fission gas atoms diffusion rate (1/s)
+/// diffusion of gas atoms per unit time (1/s)
 
 #include "DiffusionRate.h"
 

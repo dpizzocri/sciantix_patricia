@@ -60,16 +60,14 @@ void InputReading( )
 
   /// First, the file input_settings.txt is read,
   /// and all the inputs are assigned to the respective global variables.
-  /// The syntax of the a single line of the input file is:
+  /// The sintax of the a single line of the input file is:
   /// <variable_value> # comment
   /// The variables currently considered are, in order:
   /// iverification         		range [0,1]   turns on (1) the verification of the solvers
   /// igrain_growth         		range [0,1]   selects the grain growth model
   ///                                     		  0 = no grain growth
   ///                                     		  1 = model from Ainscough et al., 1973
-  /// iinert_gas_behavior   		range [0,1]   flag to turn on/off the inert gas behavior model
-  ///											  0 = off
-  ///											  1 = on
+  /// iinert_gas_behavior   		range [0,1]   turns on (1) the inert gas behavior model
   /// igas_diffusion_coefficient	range [0,2]	  selects the diffusion coefficient model
   ///											  0 = typical constant value
   ///											  1 = model from Matzke, 1980
@@ -78,7 +76,7 @@ void InputReading( )
   ///											  0 = typical constant values
   ///											  1 = model from White and Tucker, 1983
   ///											  2 = model from Olander and Wongsawaeng, 2006
-  ///											  3 = model from [2], extended to include bubble growth (White 2006, SEM database)
+  ///											  3 = model 2, extended to bubble growth case (White 2006, SEM database)
   /// ibubble_radius				range [0,5]	  selects the intra-granular bubbles radius model, among some models found in literature
   ///											  0 = typical constant value
   ///											  1 = model from Turnbull, 1971 and from Dollins and Nichols, 1977
@@ -96,7 +94,7 @@ void InputReading( )
   /// inucleation_rate				range [0,1]	  selects the nucleation rate model
   ///											  0 = typical constant value
   ///											  1 = model from Olander and Wongsawaeng, 2006
-  /// idiffusion_solver				range [0,1]   selects the solver for intra-granular gas diffusion
+  /// isolver						range [0,1]   selects the solver for intra-granular gas diffusion
   ///											  0 = Spectral Diffusion solver
   ///								  			  1 = FORMAS solver
   /// iformat_output				range [0,1]	  selects the format for the output file
@@ -107,14 +105,13 @@ void InputReading( )
   ///												  1 = on
   /// idislocation_density			range [0,1]   selects the model for the dislocation density estimation
   ///											  0 = typical constant value
-  /// itrapping_rate_at_dislocations	range [0,1]   selects the model for the dislocations trapping rate
+  ///											  1 = model from ...
+  /// itrapping_rate_at_dislocations	range [0,1]   selects the model for the trapping rate by bubbles at dislocations
   ///												  0 = typical constant value
-  ///												  1 = model from Ham, 1958
-  /// iintragranular_bubble_coarsening	range [0,1]   flag to turn on/off the bubble coarsening model
-  ///											  	  0 = off
-  ///											      1 = on
-  /// idislocation_radius			range [0,1]   selects the model for the estimation of the dislocation radius of influence
-  ///											  0 = typical constant value
+  ///												  1 = model from Ham ...
+  /// ivacancy_inflow				range [0,1]   flag to turn on/off the vacancy flow in bubble at dislocations model
+  ///											  0 = off
+  ///											  1 = on
   ///
   /// In order to add a variable or a parameter, use the corresponding functions herein defined.
   /// It is recommended to define input variables as global variables.
@@ -130,15 +127,12 @@ void InputReading( )
   iresolution_rate = ReadOneSetting("iresolution_rate", input_settings, input_check);
   itrapping_rate = ReadOneSetting("itrapping_rate", input_settings, input_check);
   inucleation_rate = ReadOneSetting("inucleation_rate", input_settings, input_check);
-  idiffusion_solver = ReadOneSetting("idiffusion_solver", input_settings, input_check);
+  isolver = ReadOneSetting("isolver", input_settings, input_check);
   iformat_output = ReadOneSetting("iformat_output", input_settings, input_check);
-  igas_precipitation_at_dislocations = ReadOneSetting("igas_precipitation_at_dislocations", input_settings, input_check);
+  iprecipitation_at_dislocations = ReadOneSetting("iprecipitation_at_dislocations", input_settings, input_check);
   idislocation_density = ReadOneSetting("idislocation_density", input_settings, input_check);
   itrapping_rate_at_dislocations = ReadOneSetting("itrapping_rate_at_dislocations", input_settings, input_check);
-  iintragranular_bubble_coarsening = ReadOneSetting("iintragranular_bubble_coarsening", input_settings, input_check);
-  idislocation_radius_of_influence = ReadOneSetting("idislocation_radius_of_influence", input_settings, input_check);
-  igrain_boundary_vacancy_diffusion_coefficient = ReadOneSetting("igrain_boundary_vacancy_diffusion_coefficient", input_settings, input_check);
-
+  ivacancy_inflow = ReadOneSetting("ivacancy_inflow", input_settings, input_check);
   Initial_grain_radius = ReadOneParameter("Initial_grain_radius", input_settings, input_check);
   Number_of_time_steps_per_interval = ReadOneParameter("Number_of_time_steps_per_interval", input_settings, input_check);
 
@@ -171,6 +165,7 @@ void InputReading( )
   Time_end_s = Time_end_h * s_h;
 
   // input scaling factors
+
   if (!input_scaling_factors.fail())
   {
     sf_resolution_rate = ReadOneParameter("sf_resolution_rate", input_scaling_factors, input_check);
@@ -178,9 +173,8 @@ void InputReading( )
     sf_nucleation_rate = ReadOneParameter("sf_nucleation_rate", input_scaling_factors, input_check);
     sf_diffusion_rate = ReadOneParameter("sf_diffusion_rate", input_scaling_factors, input_check);
     sf_dislocation_density = ReadOneParameter("sf_dislocation_density", input_scaling_factors, input_check);
-    sf_dislocation_radius_of_influence = ReadOneParameter("sf_dislocation_radius_of_influence", input_scaling_factors, input_check);
+    sf_burger = ReadOneParameter("sf_burger", input_scaling_factors, input_check);
     sf_trapping_rate_at_dislocations = ReadOneParameter("sf_trapping_rate_at_dislocations", input_scaling_factors, input_check);
-    sf_diffusion_rate_vacancy = ReadOneParameter("sf_diffusion_rate_vacancy", input_scaling_factors, input_check);
   }
 
   input_check.close();
