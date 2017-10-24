@@ -10,7 +10,7 @@
 ///////////////////////////////////////////
 
 /// DislocationDensity
-/// This function contains models for
+/// This function contains possible models for
 /// the estimation of the dislocation density
 /// inside the fuel grain.
 
@@ -26,11 +26,16 @@ double DislocationDensity(double temperature, double burnup)
 			// constant value for trial
 			dislocation_density = 4.0e+13;
 			break;
-
+			
+		case 1 :
+			// MODEL
+			break;
+			
 		default :
           ErrorMessages::Switch("DislocationDensity", "idislocation_density", idislocation_density);
           break;
 	}
 
 	return sf_dislocation_density * dislocation_density;
+
 }

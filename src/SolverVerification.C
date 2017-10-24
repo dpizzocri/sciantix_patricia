@@ -1,13 +1,13 @@
-//////////////////////////////////////////////////
-//                                              //
-//           S C I A N T I X                    //
-//           ---------------                    //
-//                                              //
-//  Version: 0.1                                //
-//  Year   : 2016                               //
-//  Authors: D. Pizzocri, T. Barani, A. Magni   //
-//                                              //
-//////////////////////////////////////////////////
+///////////////////////////////////////////
+//                                       //
+//           S C I A N T I X             //
+//           ---------------             //
+//                                       //
+//  Version: 0.1                         //
+//  Year   : 2016                        //
+//  Authors: D. Pizzocri and T. Barani   //
+//                                       //
+///////////////////////////////////////////
 
 /// SolverVerification
 /// The method of manufactured solutions (MMS)
@@ -56,6 +56,7 @@ void SolverVerification( )
   int time_step_number(22); // from 0 to 1
   double time(0.0);
   double time_step(0.05);
+  double time_step_factor(1.0);
 
   bool n_is_even(0);
 
@@ -371,12 +372,11 @@ void SolverVerification( )
     // const double diffusion_coefficient(1.0);
     double diffusion_coefficient = 1.0;
     const double domain_radius(1.0);
-    double trapping_rate_spectral = 0.0;
     int N(1);
 
     if (n > 0)
     numerical_solution_1[1] =
-    Solver::SpectralDiffusion(initial_condition_vector, N, diffusion_coefficient, trapping_rate_spectral, domain_radius, manufactured_source_term, time_step);
+    Solver::SpectralDiffusion(initial_condition_vector, N, diffusion_coefficient, domain_radius, manufactured_source_term, time_step);
 
     // Numerical solution with (time_step * 2.0)
     if (n_is_even)
@@ -385,7 +385,7 @@ void SolverVerification( )
 
       if (n > 0)
       numerical_solution_2[1] =
-      Solver::SpectralDiffusion(initial_condition_vector, N, diffusion_coefficient, trapping_rate_spectral, domain_radius, manufactured_source_term, 2.0*time_step);
+      Solver::SpectralDiffusion(initial_condition_vector, N, diffusion_coefficient, domain_radius, manufactured_source_term, 2.0*time_step);
     }
 
     // Numerical estimation of the order of convergence

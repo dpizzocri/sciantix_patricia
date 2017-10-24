@@ -33,22 +33,17 @@ double GasDiffusionCoefficient(double temperature, double fission_rate)
 		  // effective diffusion coefficient from [1]
 		  diffusion_coefficient = 5.0e-08 * exp(- 40262.0 / temperature);
 		  break;
-
+		  
 		case 2 :
 		{
 		  // from [2]
 		  double d1 = 7.6e-10 * exp(- 4.86e-19 / (Cons_bolt * temperature));
 		  double d2 = 4.0 * 1.41e-25 * sqrt(fission_rate) * exp(- 1.91e-19 / (Cons_bolt * temperature));
 		  double d3 = 2.0e-40 * fission_rate;
-
+		  
 		  diffusion_coefficient = d1 + d2 + d3;
 		  break;
 		}
-
-		case 99:
-          // zero value for trial
-          diffusion_coefficient = 0.0;
-          break;
 
         default :
           ErrorMessages::Switch("GasDiffusionCoefficient", "igas_diffusion_coefficient", igas_diffusion_coefficient);
