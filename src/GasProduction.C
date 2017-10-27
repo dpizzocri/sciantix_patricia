@@ -19,6 +19,5 @@ void GasProduction( )
 {
   const double fission_yield = Fission_yield_Xe + Fission_yield_Kr;
 
-  Gas_produced[0] = Gas_produced[1];
   Gas_produced[1] = Solver::Integrator(Gas_produced[0], fission_yield * Fissionrate[1], dTime_s);
 }

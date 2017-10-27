@@ -9,6 +9,7 @@
 //                                       //
 ///////////////////////////////////////////
 
+#include <cmath>
 #include "GlobalVariables.h"
 
-void Initialization( );
+void IntraGranularGasSwelling( );

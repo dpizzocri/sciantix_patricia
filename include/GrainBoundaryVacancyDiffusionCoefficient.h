@@ -9,6 +9,8 @@
 //                                       //
 ///////////////////////////////////////////
 
+#include <cmath>
 #include "GlobalVariables.h"
+#include "ErrorMessages.h"
 
-void Initialization( );
+double GrainBoundaryVacancyDiffusionCoefficient(double temperature);
