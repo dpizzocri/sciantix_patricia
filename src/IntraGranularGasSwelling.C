@@ -9,6 +9,9 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
+#include "IntraGranularGasSwelling.h"
 
-void Initialization( );
+void IntraGranularGasSwelling( )
+{
+  Intragranular_gas_swelling[1] = 4.0/3.0*Pi * Intragranular_bubble_concentration[1] * pow(Intragranular_bubble_radius[1], 3);
+}

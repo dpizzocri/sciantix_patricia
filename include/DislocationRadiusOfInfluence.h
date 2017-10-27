@@ -10,5 +10,6 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
+#include "ErrorMessages.h"
 
-void Initialization( );
+double DislocationRadiusOfInfluence( );

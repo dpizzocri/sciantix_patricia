@@ -9,9 +9,6 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include <cmath>
-#include <vector>
 #include "GlobalVariables.h"
-#include "ErrorMessages.h"
 
-double BubbleRadius(double temperature, double atoms_per_bubble);
+void InterGranularGasRelease( );

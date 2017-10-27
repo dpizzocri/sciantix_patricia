@@ -1,13 +1,13 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 0.1                         //
-//  Year   : 2016                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////
+//                                              //
+//           S C I A N T I X                    //
+//           ---------------                    //
+//                                              //
+//  Version: 0.1                                //
+//  Year   : 2016                               //
+//  Authors: D. Pizzocri, T. Barani, A. Magni   //
+//                                              //
+//////////////////////////////////////////////////
 
 #include <vector>
 #include <iostream>
@@ -16,12 +16,13 @@
 // u.o.m. conversions
 extern const double s_h;
 extern const double h_d;
+extern const double M_1;
 
 // physical constants
 extern const double Cons_bolt;
 extern const double Numb_avog;
 extern const double Ener_fiss;
-extern const double Covolume_vdw;
+extern const double Xenon_covolume;
 extern const double Surface_tension;
 extern const double Xenon_radius_in_lattice;
 extern const double U_UO2;
@@ -49,12 +50,14 @@ extern unsigned short int ibubble_radius;
 extern unsigned short int iresolution_rate;
 extern unsigned short int itrapping_rate;
 extern unsigned short int inucleation_rate;
-extern unsigned short int isolver;
+extern unsigned short int idiffusion_solver;
 extern unsigned short int iformat_output;
-extern unsigned short int iprecipitation_at_dislocations;
+extern unsigned short int igas_precipitation_at_dislocations;
 extern unsigned short int idislocation_density;
 extern unsigned short int itrapping_rate_at_dislocations;
-extern unsigned short int ivacancy_inflow;
+extern unsigned short int iintragranular_bubble_coarsening;
+extern unsigned short int idislocation_radius_of_influence;
+extern unsigned short int igrain_boundary_vacancy_diffusion_coefficient;
 
 // input variables - history
 extern int Input_history_points;
@@ -76,8 +79,9 @@ extern double Fissionrate[2];
 extern double Specificpower[2];
 extern double Hydrostaticstress[2];
 
-// input variables - initial values and parameters
+// Initial values and parameters
 extern double Initial_grain_radius;
+extern double Initial_intergranular_bubble_concentration;
 extern double Number_of_time_steps_per_interval;
 
 // Properties
@@ -97,6 +101,7 @@ extern double dGas_grain;
 extern double dGas_boundary;
 extern double dGas_released;
 extern double dGas_bubble;
+extern int fannealing[2];
 
 // burnup
 extern double Burn_up[2];
@@ -107,18 +112,26 @@ extern double dEffective_burn_up;
 // bubble concentration
 extern double Intragranular_bubble_concentration[2];
 extern double Intragranular_bubble_radius[2];
-extern double Atoms_per_bubble[2];
+extern double Intragranular_atoms_per_bubble[2];
 extern double Intragranular_bubble_concentration_at_dislocations[2];
 extern double Intragranular_bubble_radius_at_dislocations[2];
-extern double Atoms_per_bubble_at_dislocations[2];
+extern double Intragranular_atoms_per_bubble_at_dislocations[2];
+extern double Intragranular_bubble_volume_at_dislocations[2];
 extern double Group_bubble_growth[2];
-extern double Vacancies_per_bubble[2];
-extern double Trapping_rate_at_dislocations[2];
+extern double Intragranular_gas_swelling[2];
+extern double Intragranular_vacancies_per_bubble_at_dislocations[2];
+extern double Intergranular_bubble_concentration[2];
+extern double Intergranular_atoms_per_bubble[2];
+extern double Intergranular_vacancies_per_bubble[2];
+extern double Intergranular_bubble_radius[2];
+extern double Intergranular_bubble_area[2];
+extern double Intergranular_bubble_volume[2];
+extern double Intergranular_fractional_coverage[2];
+extern double Intergranular_gas_swelling[2];
 
 // dislocations
 extern double Dislocation_density[2];
 extern double Burger_vector[2];
-extern double Max_distance_dislocation_inf;
 
 // scaling factors
 extern double sf_trapping_rate;
@@ -126,5 +139,6 @@ extern double sf_resolution_rate;
 extern double sf_nucleation_rate;
 extern double sf_diffusion_rate;
 extern double sf_dislocation_density;
-extern double sf_burger;
+extern double sf_dislocation_radius_of_influence;
 extern double sf_trapping_rate_at_dislocations;
+extern double sf_diffusion_rate_vacancy;

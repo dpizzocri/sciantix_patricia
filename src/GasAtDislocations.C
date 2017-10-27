@@ -23,9 +23,9 @@ void GasAtDislocations( )
   double initial_gas_grain_solution = Gas_grain_solution[1];
   
   Gas_grain_solution[1]  = Solver::Decay(initial_gas_grain_solution, trapping_rate_at_dislocations, 0.0, dTime_s);
-  double dGas_precipated_at_dislocations = Gas_grain_solution[1] - initial_gas_grain_solution;
+  double dGas_precipitated_at_dislocations = Gas_grain_solution[1] - initial_gas_grain_solution;
   
-  Gas_grain_dislocations[1] = Solver::Integrator(Gas_grain_dislocations[0], - dGas_precipated_at_dislocations, 1.0);
+  Gas_grain_dislocations[1] = Solver::Integrator(Gas_grain_dislocations[0], - dGas_precipitated_at_dislocations, 1.0);
   
 }
 

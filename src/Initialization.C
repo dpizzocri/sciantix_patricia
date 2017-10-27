@@ -18,6 +18,9 @@
 void Initialization( )
 {
   Grain_radius[1] = Initial_grain_radius;
+  Intergranular_bubble_concentration[1] = Initial_intergranular_bubble_concentration;
+
   Temperature[1] = Temperature_input[0];
   Fissionrate[1] = Fissionrate_input[0];
+  Hydrostaticstress[1] = Hydrostaticstress[0];
 }

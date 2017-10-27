@@ -18,7 +18,7 @@
 
 #include "GlobalVariables.h"
 #include "SolverVerification.h"
-#include "InputStorage.h"
+#include "Storage.h"
 #include "InputInterpolation.h"
 #include "Burnup.h"
 #include "GrainGrowth.h"
@@ -46,7 +46,7 @@ int main( )
   while (Time_h <= Time_end_h)
   {
     // Operations to set up the history
-	InputStorage( );
+	Storage( );
     Temperature[1] = InputInterpolation(Time_h, Time_input, Temperature_input, Input_history_points);
     Fissionrate[1] = InputInterpolation(Time_h, Time_input, Fissionrate_input, Input_history_points);
     Hydrostaticstress[1] = InputInterpolation(Time_h, Time_input, Hydrostaticstress_input, Input_history_points);

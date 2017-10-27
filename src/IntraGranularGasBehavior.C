@@ -9,15 +9,20 @@
 //                                       //
 ///////////////////////////////////////////
 
+/// IntraGranularGasBehavior
+/// This routine performs the evolution of
+/// fission gas inside the fuel grain
+/// during a time step.
+
 #include "IntraGranularGasBehavior.h"
 
 void IntraGranularGasBehavior( )
 {
   GasProduction( );
-  
+
   GasDiffusion( );
 
-  //if(iprecipitation_at_dislocations) GasAtDislocations( );
-
   IntraGranularBubbleEvolution( );
+
+  IntraGranularGasSwelling( );
 }

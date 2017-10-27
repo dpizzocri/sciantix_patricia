@@ -10,5 +10,7 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
+#include "Solver.h"
+#include "GrainBoundaryVacancyDiffusionCoefficient.h"
 
-void Initialization( );
+void InterGranularBubbleEvolution( );

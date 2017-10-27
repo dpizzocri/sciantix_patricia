@@ -1,13 +1,13 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 0.1                         //
-//  Year   : 2016                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////
+//                                              //
+//           S C I A N T I X                    //
+//           ---------------                    //
+//                                              //
+//  Version: 0.1                                //
+//  Year   : 2016                               //
+//  Authors: D. Pizzocri, T. Barani, A. Magni   //
+//                                              //
+//////////////////////////////////////////////////
 
 /// TrappingRate
 /// This function contains the evaluation of the
@@ -24,11 +24,11 @@ double TrappingRate(double diffusion_coefficient, double bubble_radius, double b
 	switch(itrapping_rate)
 	{
 		case 0 :
-			// constant value for trial, from [1] table pag. 95
-
-			// const double kd = 4 * Pi * diffusion_coefficient * bubble_radius; // (m3 s-1), used in [1]
+			// constant value for trial, from [1] table pag. 95:
+			// const double kd = 4 * Pi * diffusion_coefficient * bubble_radius; // (m3 s-1)
 			// const double bubble_density_const = 7.0 * 1.0e-04 * 1.0e+27; // (bubbles/m3)
 			// trapping_rate = kd * bubble_density_const; // 1.0e-04;
+			
 			trapping_rate = 1.0e-04;
 			break;
 
