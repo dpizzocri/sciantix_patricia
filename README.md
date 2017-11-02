@@ -1,2 +1,0 @@
-# sciantix
-# There we go!
