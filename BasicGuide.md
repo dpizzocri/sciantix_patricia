@@ -28,12 +28,14 @@ In Sciantix we use some basic guidelines to help keeping an uniform syntaxing st
 - Variables names are in lower cases, with words separated by "_" (e.g., `helium_diffusion_coefficient`).
 - Global variables are in Upper cases, with words separated by "_" (e.g., `Helium_produced`).
 - Input integers variables (e.g., used for model selection) start with an "i" (e.g., `iverification`).
-- Functions names are in Upper cases, with each word in Upper cases and no separation signs.
+- Functions names are in Upper cases, with each word in Upper cases and no separation signs (e.g., `HeliumDiffusionCoefficient`).
+- Files should have the same name as the function they contain.
 - Comments in the code with "///" are meant for inclusion in the Manual and should be collected at the beginning of every function.
+- Normal comments "//" should be used as much as possible.
 - References to scientic literature should be added as comment in the code at **every** occurrence (e.g., values of parameters, equations...).
 
-For example, a **good name** for a function evaluating the helium diffusion coefficient will be
-`HeliumDiffusionCoefficient`, 
+Thank for sticking as much as possible to these guidelines. We appreciate! :)
+
 
 
 
