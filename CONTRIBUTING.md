@@ -11,7 +11,7 @@ Create issue on gitlab.com, then proceed with the following instructions
 ```
 git checkout –b <BranchName_#IssueNumber>
 git add <Files>
-git commit –m “<CommitMessageEndingIn#IssueNumber>
+git commit –m "<CommitMessageEndingIn#IssueNumber>"
 git pull –-rebase upstream master
 git push origin <BranchName_#IssueNumber>
 ```
