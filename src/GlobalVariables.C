@@ -33,15 +33,6 @@ const double Xenon_radius_in_lattice(0.2e-09);		 // (m)
 // mathematical constants
 const double Pi(3.141592653589793);
 
-// files
-std::ofstream Output;
-std::ofstream Error_log;
-
-// time
-long long int Time_step_number(0);
-double  Time_h(0.0), dTime_h(0.0), Time_end_h(0.0); // (h)
-double  Time_s(0.0), dTime_s(0.0), Time_end_s(0.0); // (s)
-
 // input variables - options
 unsigned short int iverification(0);
 unsigned short int igrain_growth(0);
@@ -56,18 +47,14 @@ unsigned short int isolver(0);
 unsigned short int iformat_output(0);
 
 // input variables - history
-int Input_history_points(1000);
-std::vector<double> Time_input(1000,0.0);
-std::vector<double> Temperature_input(1000,0.0);
-std::vector<double> Fissionrate_input(1000,0.0);
-std::vector<double> Hydrostaticstress_input(1000,0.0);
+double dTime_s(0.0); // (s)
 double Temperature[2] = {300.0, 300.0};   // (K)
 double Fissionrate[2] = {0.0, 0.0};       // (fiss/m3-s)
 double Hydrostaticstress[2] = {0.0, 0.0}; // (MPa)
 
 // input variables - initial values and parameters
 double Initial_grain_radius(0.0); // (m)
-double Number_of_time_steps_per_interval(0.0); // (#)
+//double Number_of_time_steps_per_interval(0.0); // (#)
 
 // Properties
 double Grain_radius[2] = {0.0, 0.0}; // (m)
