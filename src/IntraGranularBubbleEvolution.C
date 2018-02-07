@@ -20,9 +20,6 @@
 
 void IntraGranularBubbleEvolution( )
 {
-	Intragranular_bubble_concentration[0] = Intragranular_bubble_concentration[1];
-	Intragranular_bubble_radius[0] = Intragranular_bubble_radius[1];
-
 	switch(iintra_bubble_evolution)
 	{
 		case 0 :
@@ -57,7 +54,7 @@ void IntraGranularBubbleEvolution( )
 	  		  Atoms_per_bubble[1] = Gas_grain_bubbles[1] / Intragranular_bubble_concentration[1];
 			else
               Atoms_per_bubble[1] = 0.0;
-        
+
             Intragranular_bubble_radius[1] = BubbleRadius(Temperature[1], Atoms_per_bubble[1]);
 
 			break;

@@ -11,4 +11,4 @@
 
 #include "GlobalVariables.h"
 
-void InputStorage( );
+void InputStorage(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[]);

@@ -104,7 +104,7 @@ void InputReading( )
   /// It is recommended to define input variables as global variables.
 
   // input settings
-
+/*
   iverification = ReadOneSetting("iverification", input_settings, input_check);
   igrain_growth = ReadOneSetting("igrain_growth", input_settings, input_check);
   iinert_gas_behavior = ReadOneSetting("iinert_gas_behavior", input_settings, input_check);
@@ -118,6 +118,18 @@ void InputReading( )
   iformat_output = ReadOneSetting("iformat_output", input_settings, input_check);
   Initial_grain_radius = ReadOneParameter("Initial_grain_radius", input_settings, input_check);
   Number_of_time_steps_per_interval = ReadOneParameter("Number_of_time_steps_per_interval", input_settings, input_check);
+*/
+  Sciantix_options[0] = ReadOneSetting("iverification", input_settings, input_check);
+  Sciantix_options[1] = ReadOneSetting("igrain_growth", input_settings, input_check);
+  Sciantix_options[2] = ReadOneSetting("iinert_gas_behavior", input_settings, input_check);
+  Sciantix_options[3] = ReadOneSetting("igas_diffusion_coefficient", input_settings, input_check);
+  Sciantix_options[4] = ReadOneSetting("iintra_bubble_evolution", input_settings, input_check);
+  Sciantix_options[5] = ReadOneSetting("ibubble_radius", input_settings, input_check);
+  Sciantix_options[6] = ReadOneSetting("iresolution_rate", input_settings, input_check);
+  Sciantix_options[7] = ReadOneSetting("itrapping_rate", input_settings, input_check);
+  Sciantix_options[8] = ReadOneSetting("inucleation_rate", input_settings, input_check);
+  Sciantix_options[9] = ReadOneSetting("isolver", input_settings, input_check);
+  Sciantix_options[10] = ReadOneSetting("iformat_output", input_settings, input_check);
 
   // input history
 
@@ -138,25 +150,31 @@ void InputReading( )
     n++;
     Input_history_points = n;
   }
-  
+
   Time_input.resize(Input_history_points);
   Temperature_input.resize(Input_history_points);
   Fissionrate_input.resize(Input_history_points);
   Hydrostaticstress_input.resize(Input_history_points);
 
   Time_end_h = Time_input[Input_history_points-1];
-  Time_end_s = Time_end_h * s_h;
+  Time_end_s = Time_end_h * 3600.0;
 
   // input scaling factors
-  
+
   if (!input_scaling_factors.fail())
   {
+/*
     sf_resolution_rate = ReadOneParameter("sf_resolution_rate", input_scaling_factors, input_check);
     sf_trapping_rate = ReadOneParameter("sf_trapping_rate", input_scaling_factors, input_check);
     sf_nucleation_rate = ReadOneParameter("sf_nucleation_rate", input_scaling_factors, input_check);
     sf_diffusion_rate = ReadOneParameter("sf_diffusion_rate", input_scaling_factors, input_check);
+*/
+    Sciantix_scaling_factors[0] = ReadOneParameter("sf_resolution_rate", input_scaling_factors, input_check);
+    Sciantix_scaling_factors[1] = ReadOneParameter("sf_trapping_rate", input_scaling_factors, input_check);
+    Sciantix_scaling_factors[2] = ReadOneParameter("sf_nucleation_rate", input_scaling_factors, input_check);
+    Sciantix_scaling_factors[3] = ReadOneParameter("sf_diffusion_rate", input_scaling_factors, input_check);
   }
-  
+
   input_check.close();
   input_settings.close();
   input_history.close();

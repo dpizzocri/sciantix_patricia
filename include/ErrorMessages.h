@@ -9,10 +9,11 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
+#include <fstream>
 
 namespace ErrorMessages
 {

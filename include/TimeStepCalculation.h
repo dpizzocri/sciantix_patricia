@@ -9,7 +9,6 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
+#include "MainVariables.h"
 
 double TimeStepCalculation( );
-
