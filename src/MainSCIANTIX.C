@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 0.1                         //
-//  Year   : 2016                        //
+//  Version: 1.0                         //
+//  Year   : 2018                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -18,9 +18,8 @@
 
 #include "GlobalVariables.h"
 #include "SolverVerification.h"
-#include "Storage.h"
+#include "InputStorage.h"
 #include "InputInterpolation.h"
-#include "Burnup.h"
 #include "GrainGrowth.h"
 #include "InertGasBehavior.h"
 #include "InputReading.h"
@@ -38,7 +37,7 @@ int main( )
 
   if (iformat_output == 0) Output.open("output.csv", std::ios::out);
   else Output.open("output.txt", std::ios::out);
-
+  
   Error_log.open("error_log.txt", std::ios::out);
 
   if (iverification) SolverVerification( );
@@ -46,14 +45,12 @@ int main( )
   while (Time_h <= Time_end_h)
   {
     // Operations to set up the history
-	Storage( );
+	InputStorage( );
     Temperature[1] = InputInterpolation(Time_h, Time_input, Temperature_input, Input_history_points);
     Fissionrate[1] = InputInterpolation(Time_h, Time_input, Fissionrate_input, Input_history_points);
     Hydrostaticstress[1] = InputInterpolation(Time_h, Time_input, Hydrostaticstress_input, Input_history_points);
 
 	// Physical calculations
-    Burnup( );
-
 	if (igrain_growth) GrainGrowth( );
 
 	if (iinert_gas_behavior) InertGasBehavior( );
