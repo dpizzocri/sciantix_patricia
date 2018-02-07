@@ -9,13 +9,17 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "IntraGranularGasBehavior.h"
+#include "InputStorage.h"
 
-void IntraGranularGasBehavior( )
+void InputStorage( )
 {
-  GasProduction( );
+  Temperature[0] = Temperature[1];
+  Fissionrate[0] = Fissionrate[1];
+  Hydrostaticstress[0] = Hydrostaticstress[1];
 
-  GasDiffusion( );
-  
-  IntraGranularBubbleEvolution( );
+  Grain_radius[0] = Grain_radius[1];
+  Gas_grain[0] = Gas_grain[1];
+  Gas_grain_solution[0] = Gas_grain_solution[1];
+  Gas_grain_bubbles[0] = Gas_grain_bubbles[1];
+  Gas_boundary[0] = Gas_boundary[1];
 }

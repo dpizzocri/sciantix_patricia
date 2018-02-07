@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 0.1                         //
-//  Year   : 2016                        //
+//  Version: 1.0                         //
+//  Year   : 2018                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -31,30 +31,12 @@ void OutputWriting( )
            			<< "Gas in grains (at/m3)" << ","
            			<< "Gas in intra-granular solution (at/m3)" << ","
            			<< "Gas in intra-granular bubbles (at/m3)" << ","
-           			<< "Gas in intra-granular bubbles at dislocations (at/m3)" << ","
            			<< "Gas at grain boundaries (at/m3)" << ","
            			<< "Intra-granular bubble density (bubble/m3)" << ","
-           			<< "Intra-granular bubble density at dislocations (bubble/m3)" << ","
            			<< "Intra-granular bubble radius (m)" << ","
-           			<< "Intra-granular bubble radius at dislocations (m)" << ","
-           			<< "Intra-granular atoms per bubble (at/bubble)" << ","
-           			<< "Intra-granular atoms per bubble at dislocations (at/bubble)" << ","
-					<< "Intra-granular vacancies per bubble at dislocations (vac/bubble)" << ","
-					<< "Non-dimensional group for intra-granular bubble coarsening (/)" << ","
-					<< "Intra-granular gas swelling (/)" << ","
-					<< "Inter-granular bubble concentration (bubble/m2)" << ","
-                    << "Inter-granular atoms per bubble (at/bubble)" << ","
-                    << "Inter-granular vacancies per bubble (vac/bubble)" << ","
-                    << "Inter-granular bubble radius (m)" << ","
-                    << "Inter-granular bubble area (m2)" << ","
-                    << "Inter-granular bubble volume (m3)" << ","
-                    << "Inter-granular fractional coverage (/)" << ","
-                    << "Inter-granular gas swelling (/)" << ","
-           			<< "Burnup (GWd/tU)" << ","
-           			<< "Effective burnup (GWd/tU)" << std::endl;
+           			<< "Intra-granular atoms per bubble (at/bubble)" << std::endl;
 
-  			Output  << std::fixed << std::setprecision(12) << std::scientific
-			  		<< Time_h << ","
+  			Output << Time_h << ","
          			<< Temperature[1] << ","
          			<< Fissionrate[1] << ","
          			<< Hydrostaticstress[1] << ","
@@ -63,30 +45,13 @@ void OutputWriting( )
          			<< Gas_grain[1] << ","
          			<< Gas_grain_solution[1] << ","
          			<< Gas_grain_bubbles[1] << ","
-         			<< Gas_grain_dislocations[1] << ","
          			<< Gas_boundary[1] << ","
          			<< Intragranular_bubble_concentration[1] << ","
-         			<< Intragranular_bubble_concentration_at_dislocations[1] << ","
          			<< Intragranular_bubble_radius[1] << ","
-         			<< Intragranular_bubble_radius_at_dislocations[1] << ","
-         			<< Intragranular_atoms_per_bubble[1] << ","
-         			<< Intragranular_atoms_per_bubble_at_dislocations[1] << ","
-					<< Intragranular_vacancies_per_bubble_at_dislocations[1] << ","
-					<< Group_bubble_growth[1] << ","
-					<< Intragranular_gas_swelling[1] << ","
-					<< Intergranular_bubble_concentration[1] << ","
-                    << Intergranular_atoms_per_bubble[1] << ","
-                    << Intergranular_vacancies_per_bubble[1] << ","
-                    << Intergranular_bubble_radius[1] << ","
-                    << Intergranular_bubble_area[1] << ","
-                    << Intergranular_bubble_volume[1] << ","
-                    << Intergranular_fractional_coverage[1] << ","
-                    << Intergranular_gas_swelling[1] << ","
-         			<< Burn_up[1] << ","
-         			<< Effective_burn_up[1] << std::endl;
+         			<< Atoms_per_bubble[1] << std::endl;
          	break;
 		}
-
+  		 
     	case 1 :
     	{
     		// output.txt
@@ -100,30 +65,12 @@ void OutputWriting( )
            			<< "Gas in grains (at/m3)" << "\t"
            			<< "Gas in intra-granular solution (at/m3)" << "\t"
            			<< "Gas in intra-granular bubbles (at/m3)" << "\t"
-           			<< "Gas in intra-granular bubbles at dislocations (at/m3)" << "\t"
            			<< "Gas at grain boundaries (at/m3)" << "\t"
            			<< "Intra-granular bubble density (bubble/m3)" << "\t"
-           			<< "Intra-granular bubble density at dislocations (bubble/m3)" << "\t"
            			<< "Intra-granular bubble radius (m)" << "\t"
-           			<< "Intra-granular bubble radius at dislocations (m)" << "\t"
-           			<< "Intra-granular atoms per bubble (at/bubble)" << "\t"
-           			<< "Intra-granular atoms per bubble at dislocations (at/bubble)" << "\t"
-					<< "Intra-granular vacancies per bubble at dislocations (vac/bubble)" << "\t"
-					<< "Non-dimensional group for intra-granular bubble coarsening (/)" << "\t"
-					<< "Intra-granular gas swelling (/)" << "\t"
-					<< "Inter-granular bubble concentration (bubble/m2)" << "\t"
-                    << "Inter-granular atoms per bubble (at/bubble)" << "\t"
-                    << "Inter-granular vacancies per bubble (vac/bubble)" << "\t"
-                    << "Inter-granular bubble radius (m)" << "\t"
-                    << "Inter-granular bubble area (m2)" << "\t"
-                    << "Inter-granular bubble volume (m3)" << "\t"
-                    << "Inter-granular fractional coverage (/)" << "\t"
-                    << "Inter-granular gas swelling (/)" << "\t"
-           			<< "Burnup (GWd/tU)" << "\t"
-           			<< "Effective burnup (GWd/tU)" << std::endl;
+           			<< "Intra-granular atoms per bubble (at/bubble)" << std::endl;
 
-  			Output  << std::fixed << std::setprecision(12) << std::scientific
-			        << Time_h << "\t"
+  			Output << Time_h << "\t"
          			<< Temperature[1] << "\t"
          			<< Fissionrate[1] << "\t"
          			<< Hydrostaticstress[1] << "\t"
@@ -132,33 +79,16 @@ void OutputWriting( )
          			<< Gas_grain[1] << "\t"
          			<< Gas_grain_solution[1] << "\t"
          			<< Gas_grain_bubbles[1] << "\t"
-         			<< Gas_grain_dislocations[1] << "\t"
          			<< Gas_boundary[1] << "\t"
          			<< Intragranular_bubble_concentration[1] << "\t"
-         			<< Intragranular_bubble_concentration_at_dislocations[1] << "\t"
          			<< Intragranular_bubble_radius[1] << "\t"
-         			<< Intragranular_bubble_radius_at_dislocations[1] << "\t"
-         			<< Intragranular_atoms_per_bubble[1] << "\t"
-         			<< Intragranular_atoms_per_bubble_at_dislocations[1] << "\t"
-					<< Intragranular_vacancies_per_bubble_at_dislocations[1] << "\t"
-					<< Group_bubble_growth[1] << "\t"
-					<< Intragranular_gas_swelling[1] << "\t"
-					<< Intergranular_bubble_concentration[1] << "\t"
-                    << Intergranular_atoms_per_bubble[1] << "\t"
-                    << Intergranular_vacancies_per_bubble[1] << "\t"
-                    << Intergranular_bubble_radius[1] << "\t"
-                    << Intergranular_bubble_area[1] << "\t"
-                    << Intergranular_bubble_volume[1] << "\t"
-                    << Intergranular_fractional_coverage[1] << "\t"
-                    << Intergranular_gas_swelling[1] << "\t"
-         			<< Burn_up[1] << "\t"
-         			<< Effective_burn_up[1] << std::endl;
+         			<< Atoms_per_bubble[1] << std::endl;
          	break;
 		}
-
+    	    
     	default :
           ErrorMessages::Switch("OutputWriting", "iformat_output", iformat_output);
           break;
   }
-
+  
 }
