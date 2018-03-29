@@ -9,9 +9,11 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include <cmath>
-#include <vector>
-#include "GlobalVariables.h"
-#include "ErrorMessages.h"
+#include "FuelMicroStructure.h"
 
-double BubbleRadius(double temperature, double n);
+void FuelMicroStructure( )
+{
+  GrainGrowth( );
+
+  GrainRecrystallization( );
+}

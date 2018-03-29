@@ -56,7 +56,6 @@ void SolverVerification( )
   int time_step_number(22); // from 0 to 1
   double time(0.0);
   double time_step(0.05);
-  double time_step_factor(1.0);
 
   bool n_is_even(0);
 
@@ -410,5 +409,3 @@ void SolverVerification( )
   verification_SpectralDiffusion_out.close( );
   // ---
 }
-
-

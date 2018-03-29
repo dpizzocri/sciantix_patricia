@@ -13,5 +13,6 @@
 #include "GasProduction.h"
 #include "GasDiffusion.h"
 #include "IntraGranularBubbleEvolution.h"
+#include "IntraGranularGasSwelling.h"
 
 void IntraGranularGasBehavior( );

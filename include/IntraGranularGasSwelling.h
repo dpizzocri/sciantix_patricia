@@ -9,9 +9,7 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "GlobalVariables.h"
-#include "Solver.h"
-#include "ErrorMessages.h"
 #include <cmath>
+#include "GlobalVariables.h"
 
-void GrainGrowth( );
+void IntraGranularGasSwelling( );

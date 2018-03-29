@@ -11,5 +11,4 @@
 
 #include "GlobalVariables.h"
 
-double FuelDensity( );
-	
+void FuelDensity( );

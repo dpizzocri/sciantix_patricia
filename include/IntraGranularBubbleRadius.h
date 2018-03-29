@@ -9,6 +9,9 @@
 //                                       //
 ///////////////////////////////////////////
 
+#include <cmath>
+#include <vector>
 #include "GlobalVariables.h"
+#include "ErrorMessages.h"
 
-void InputStorage(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[]);
+double IntraGranularBubbleRadius(double temperature, double n);

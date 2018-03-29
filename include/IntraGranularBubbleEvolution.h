@@ -14,7 +14,7 @@
 #include "GlobalVariables.h"
 #include "ErrorMessages.h"
 #include "Solver.h"
-#include "BubbleRadius.h"
+#include "IntraGranularBubbleRadius.h"
 #include "NucleationRate.h"
 #include "ResolutionRate.h"
 

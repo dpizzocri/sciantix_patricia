@@ -24,5 +24,9 @@
 
 void InertGasBehavior( )
 {
+  if (!iinert_gas_behavior) return;
+
   IntraGranularGasBehavior( );
+
+  InterGranularGasBehavior( );
 }

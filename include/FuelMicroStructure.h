@@ -10,8 +10,7 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
-#include "Solver.h"
-#include "ErrorMessages.h"
-#include <cmath>
+#include "GrainGrowth.h"
+#include "GrainRecrystallization.h"
 
-void GrainGrowth( );
+void FuelMicroStructure( );

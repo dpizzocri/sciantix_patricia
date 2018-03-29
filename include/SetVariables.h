@@ -10,8 +10,5 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
-#include "Solver.h"
-#include "ErrorMessages.h"
-#include <cmath>
 
-void GrainGrowth( );
+void SetVariables(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[]);

@@ -9,9 +9,9 @@
 //                                       //
 ///////////////////////////////////////////
 
-#include "InputStorage.h"
+#include "SetVariables.h"
 
-void InputStorage(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[])
+void SetVariables(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[])
 {
   iverification = Sciantix_options[0];
   igrain_growth = Sciantix_options[1];
@@ -23,7 +23,11 @@ void InputStorage(int Sciantix_options[], double Sciantix_history[], double Scia
   itrapping_rate = Sciantix_options[7];
   inucleation_rate = Sciantix_options[8];
   isolver = Sciantix_options[9];
-  iformat_output = Sciantix_options[10];
+  ioutput = Sciantix_options[10];
+  igrain_boundary_vacancy_diffusion_coefficient = Sciantix_options[11];
+  igrain_boundary_behaviour = Sciantix_options[12];
+  igrain_boundary_micro_cracking = Sciantix_options[13];
+  igrain_recrystallization = Sciantix_options[14];
 
   Temperature[0] = Sciantix_history[0];
   Temperature[1] = Sciantix_history[1];
@@ -42,23 +46,22 @@ void InputStorage(int Sciantix_options[], double Sciantix_history[], double Scia
   Gas_released[0] = Sciantix_variables[6];
   Intragranular_bubble_concentration[0] = Sciantix_variables[7];
   Intragranular_bubble_radius[0] = Sciantix_variables[8];
-  //Intragranular_swelling[0] = Sciantix_variables[9];
+  Intragranular_gas_swelling[0] = Sciantix_variables[9];
+  Intergranular_bubble_concentration[0] = Sciantix_variables[10];
+  Intergranular_atoms_per_bubble[0] = Sciantix_variables[11];
+  Intergranular_vacancies_per_bubble[0] = Sciantix_variables[12];
+  Intergranular_bubble_radius[0] = Sciantix_variables[13];
+  Intergranular_bubble_area[0] = Sciantix_variables[14];
+  Intergranular_bubble_volume[0] = Sciantix_variables[15];
+  Intergranular_fractional_coverage[0] = Sciantix_variables[16];
+  Intergranular_saturation_fractional_coverage[0] = Sciantix_variables[17];
+  Intergranular_gas_swelling[0] = Sciantix_variables[18];
+  Intergranular_fractional_intactness[0] = Sciantix_variables[19];
+  Burn_up[0] = Sciantix_variables[20];
+  Effective_burn_up[0] = Sciantix_variables[21];
 
   sf_resolution_rate = Sciantix_scaling_factors[0];
   sf_trapping_rate = Sciantix_scaling_factors[1];
   sf_nucleation_rate = Sciantix_scaling_factors[2];
   sf_diffusion_rate = Sciantix_scaling_factors[3];
-
-  /*Temperature[0] = Temperature[1];
-  Fissionrate[0] = Fissionrate[1];
-  Hydrostaticstress[0] = Hydrostaticstress[1];
-
-  Grain_radius[0] = Grain_radius[1];
-  Gas_grain[0] = Gas_grain[1];
-  Gas_grain_solution[0] = Gas_grain_solution[1];
-  Gas_grain_bubbles[0] = Gas_grain_bubbles[1];
-  Gas_boundary[0] = Gas_boundary[1];
-  Intragranular_bubble_concentration[0] = Intragranular_bubble_concentration[1];
-  Intragranular_bubble_radius[0] = Intragranular_bubble_radius[1];
-  */
 }
