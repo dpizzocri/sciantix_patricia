@@ -13,8 +13,7 @@
 
 /// FuelDensity
 
-double FuelDensity( )
+void FuelDensity( )
 {
-  double fuel_dens = 10960.0; // (kg/m3)
-  return fuel_dens;
+  Fuel_density[1] = 10970.0; // (kg/m3)
 }

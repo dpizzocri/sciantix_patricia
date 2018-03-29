@@ -16,7 +16,7 @@
 /// [1] Olander, Wongsawaeng, Journal of Nuclear Materials, 354 (2006), 94-109
 /// [2] Olander, Nuclear Reactor Fuel Elements, Nat'l Tech. Info. Services, Document No. 26711, 1976, Section 13.7
 /// REF TURNBULL
-/// [4] Losonen, Journal of Nuclear Materials, (2000) 
+/// [4] Losonen, Journal of Nuclear Materials, (2000)
 
 #include "ResolutionRate.h"
 
@@ -28,27 +28,27 @@ double ResolutionRate(double bubble_radius, double fission_rate)
 	{
 		case 0 :
 			// constant value for trial, from [1] table pag. 95
-			resolution_rate = 1.0e-05;
+			resolution_rate = 1.0e-04;
 			break;
 
 		case 1 :
-        {
-            // from Olander model, [2], TAKEN FROM TURNBULL
+    {
+      // from Olander model, [2], TAKEN FROM TURNBULL
 			const double ff_influence_radius = 1.0e-09; // (m)
 			const double ff_range = 6.0e-06; // (m)
 
 			resolution_rate = 2.0 * Pi * ff_range * pow((ff_influence_radius + bubble_radius), 2) * fission_rate;
 			break;
-        }
-        
-        case 2 :
-        	// from [4]
-        	resolution_rate = 3.0e-23 * fission_rate; // 3.0e-4
-        	break;
+    }
 
-        default :
-          ErrorMessages::Switch("ResolutionRate", "iresolution_rate", iresolution_rate);
-          break;
+    case 2 :
+      // from [4]
+      resolution_rate = 3.0e-23 * fission_rate; // 3.0e-4
+      break;
+
+    default :
+      ErrorMessages::Switch("ResolutionRate", "iresolution_rate", iresolution_rate);
+      break;
 	}
 
 	return sf_resolution_rate * resolution_rate;

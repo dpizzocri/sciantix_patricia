@@ -10,13 +10,18 @@
 ///////////////////////////////////////////
 
 // u.o.m. conversions
+extern const double um_m;
 extern const double s_h;
+extern const double h_d;
+extern const double M_1;
+extern const double U_UO2;
 
 // physical constants
 extern const double Cons_bolt;
 extern const double Numb_avog;
 extern const double Ener_fiss;
-extern const double Covolume_vdw;
+extern const double Xenon_covolume;
+extern const double Vacancy_volume;
 extern const double Surface_tension;
 extern const double Xenon_radius_in_lattice;
 
@@ -34,7 +39,11 @@ extern unsigned short int iresolution_rate;
 extern unsigned short int itrapping_rate;
 extern unsigned short int inucleation_rate;
 extern unsigned short int isolver;
-extern unsigned short int iformat_output;
+extern unsigned short int ioutput;
+extern unsigned short int igrain_boundary_vacancy_diffusion_coefficient;
+extern unsigned short int igrain_boundary_behaviour;
+extern unsigned short int igrain_boundary_micro_cracking;
+extern unsigned short int igrain_recrystallization;
 
 // input variables - history
 extern double Time[2];
@@ -49,7 +58,10 @@ extern double Initial_grain_radius;
 //extern double Number_of_time_steps_per_interval;
 
 // Properties
+extern double Burn_up[2];
+extern double Effective_burn_up[2];
 extern double Grain_radius[2];
+extern double Fuel_density[2];
 
 // gas concentrations
 extern double Gas_produced[2];
@@ -67,7 +79,18 @@ extern double dGas_bubble;
 // bubble concentration
 extern double Intragranular_bubble_concentration[2];
 extern double Intragranular_bubble_radius[2];
-extern double Atoms_per_bubble[2];
+extern double Intragranular_atoms_per_bubble[2];
+extern double Intragranular_gas_swelling[2];
+extern double Intergranular_bubble_concentration[2];
+extern double Intergranular_atoms_per_bubble[2];
+extern double Intergranular_vacancies_per_bubble[2];
+extern double Intergranular_bubble_radius[2];
+extern double Intergranular_bubble_area[2];
+extern double Intergranular_bubble_volume[2];
+extern double Intergranular_fractional_coverage[2];
+extern double Intergranular_saturation_fractional_coverage[2];
+extern double Intergranular_gas_swelling[2];
+extern double Intergranular_fractional_intactness[2];
 
 // scaling factors
 extern double sf_trapping_rate;

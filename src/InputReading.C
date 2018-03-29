@@ -58,67 +58,7 @@ void InputReading( )
   input_history.open("input_history.txt");
   input_scaling_factors.open("input_scaling_factors.txt");
 
-  /// First, the file input_settings.txt is read,
-  /// and all the inputs are assigned to the respective global variables.
-  /// The sintax of the a single line of the input file is:
-  /// <variable_value> # comment
-  /// The variables currently considered are, in order:
-  /// iverification         		range [0,1]   turns on (1) the verification of the solvers
-  /// igrain_growth         		range [0,1]   selects the grain growth model
-  ///                                     		  0 = no grain growth
-  ///                                     		  1 = model from Ainscough et al., 1973
-  /// iinert_gas_behavior   		range [0,1]   turns on (1) the inert gas behavior model
-  /// igas_diffusion_coefficient	range [0,2]	  selects the diffusion coefficient model
-  ///											  0 = typical constant value
-  ///											  1 = model from Matzke, 1980
-  ///											  2 = model from Turnbull ...
-  /// iintra_bubble_evolution		range [0,2]	  selects the intra-granular bubbles evolution model
-  ///											  0 = typical constant values
-  ///											  1 = model from White and Tucker, 1983
-  ///											  2 = model from Olander and Wongsawaeng, 2006
-  /// ibubble_radius				range [0,5]	  selects the intra-granular bubbles radius model, among some models found in literature
-  ///											  0 = typical constant value
-  ///											  1 = model from Turnbull, 1971 and from Dollins and Nichols, 1977
-  ///											  2 = model from Ronchi and Matzke, 1972/73
-  ///											  3 = model from Losonen, 2002
-  ///											  4 = model from Spino, Rest, Goll, Walker, 2005
-  ///											  5 = model from Olander, Wongsawaeng, 2006
-  /// iresolution_rate				range [0,2]	  selects the re-solution rate model
-  ///											  0 = typical constant value
-  ///											  1 = model from Olander, 1976
-  ///											  2 = model from Losonen, 2000
-  /// itrapping_rate				range [0,1]	  selects the trapping rate model
-  ///											  0 = typical constant value
-  ///											  1 = model from Olander and Wongsawaeng, 2006
-  /// inucleation_rate				range [0,1]	  selects the nucleation rate model
-  ///											  0 = typical constant value
-  ///											  1 = model from Olander and Wongsawaeng, 2006
-  /// isolver						range [0,1]   selects the solver for intra-granular gas diffusion
-  ///											  0 = Spectral Diffusion solver
-  ///								  			  1 = FORMAS solver
-  /// iformat_output				range [0,1]	  selects the format for the output file
-  ///											  0 = output.csv
-  ///											  1 = output.txt
-  ///
-  /// In order to add a variable or a parameter, use the corresponding functions herein defined.
-  /// It is recommended to define input variables as global variables.
-
   // input settings
-/*
-  iverification = ReadOneSetting("iverification", input_settings, input_check);
-  igrain_growth = ReadOneSetting("igrain_growth", input_settings, input_check);
-  iinert_gas_behavior = ReadOneSetting("iinert_gas_behavior", input_settings, input_check);
-  igas_diffusion_coefficient = ReadOneSetting("igas_diffusion_coefficient", input_settings, input_check);
-  iintra_bubble_evolution = ReadOneSetting("iintra_bubble_evolution", input_settings, input_check);
-  ibubble_radius = ReadOneSetting("ibubble_radius", input_settings, input_check);
-  iresolution_rate = ReadOneSetting("iresolution_rate", input_settings, input_check);
-  itrapping_rate = ReadOneSetting("itrapping_rate", input_settings, input_check);
-  inucleation_rate = ReadOneSetting("inucleation_rate", input_settings, input_check);
-  isolver = ReadOneSetting("isolver", input_settings, input_check);
-  iformat_output = ReadOneSetting("iformat_output", input_settings, input_check);
-  Initial_grain_radius = ReadOneParameter("Initial_grain_radius", input_settings, input_check);
-  Number_of_time_steps_per_interval = ReadOneParameter("Number_of_time_steps_per_interval", input_settings, input_check);
-*/
   Sciantix_options[0] = ReadOneSetting("iverification", input_settings, input_check);
   Sciantix_options[1] = ReadOneSetting("igrain_growth", input_settings, input_check);
   Sciantix_options[2] = ReadOneSetting("iinert_gas_behavior", input_settings, input_check);
@@ -130,9 +70,12 @@ void InputReading( )
   Sciantix_options[8] = ReadOneSetting("inucleation_rate", input_settings, input_check);
   Sciantix_options[9] = ReadOneSetting("isolver", input_settings, input_check);
   Sciantix_options[10] = ReadOneSetting("iformat_output", input_settings, input_check);
+  Sciantix_options[11] = ReadOneSetting("igrain_boundary_vacancy_diffusion_coefficient", input_settings, input_check);
+  Sciantix_options[12] = ReadOneSetting("igrain_boundary_behaviour", input_settings, input_check);
+  Sciantix_options[13] = ReadOneSetting("igrain_boundary_micro_cracking", input_settings, input_check);
+  Sciantix_options[14] = ReadOneSetting("igrain_recrystallization", input_settings, input_check);
 
   // input history
-
   int n = 0;
   while(!input_history.eof())
   {
@@ -160,15 +103,8 @@ void InputReading( )
   Time_end_s = Time_end_h * 3600.0;
 
   // input scaling factors
-
   if (!input_scaling_factors.fail())
   {
-/*
-    sf_resolution_rate = ReadOneParameter("sf_resolution_rate", input_scaling_factors, input_check);
-    sf_trapping_rate = ReadOneParameter("sf_trapping_rate", input_scaling_factors, input_check);
-    sf_nucleation_rate = ReadOneParameter("sf_nucleation_rate", input_scaling_factors, input_check);
-    sf_diffusion_rate = ReadOneParameter("sf_diffusion_rate", input_scaling_factors, input_check);
-*/
     Sciantix_scaling_factors[0] = ReadOneParameter("sf_resolution_rate", input_scaling_factors, input_check);
     Sciantix_scaling_factors[1] = ReadOneParameter("sf_trapping_rate", input_scaling_factors, input_check);
     Sciantix_scaling_factors[2] = ReadOneParameter("sf_nucleation_rate", input_scaling_factors, input_check);

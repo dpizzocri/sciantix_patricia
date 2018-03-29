@@ -30,26 +30,26 @@ void GasDiffusion( )
   static std::vector<double> gas_grain_modes(N, 0.0);
   double initial_condition = 0.0;
   static double initial_condition_term[4] = {initial_condition, initial_condition, initial_condition, initial_condition};
-  
+
   const double fission_yield = Fission_yield_Xe + Fission_yield_Kr;
   double source_term = fission_yield * Fissionrate[1]; // (at/m3-s)
-  
+
   switch(isolver)
   {
   	case 0 :
   		Gas_grain[1] = Solver::SpectralDiffusion(gas_grain_modes, N, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
   		break;
-  		
+
   	case 1 :
   		Gas_grain[1] = Solver::FORMAS(initial_condition_term, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
   		break;
-  		
+
   	default :
         ErrorMessages::Switch("GasDiffusion", "isolver", isolver);
         break;
   }
-  
+
   Gas_grain_solution[1] = Gas_grain[1] * equilibrium_fraction;
   Gas_grain_bubbles[1] = Gas_grain[1] * (1.0 - equilibrium_fraction);
-  Gas_boundary[1] = Gas_produced[1] - Gas_grain[1];
+  Gas_boundary[1] = Gas_produced[1] - Gas_grain[1] - Gas_released[1];
 }

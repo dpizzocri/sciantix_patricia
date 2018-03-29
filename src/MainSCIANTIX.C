@@ -22,9 +22,11 @@
 #include "InputInterpolation.h"
 #include "InputReading.h"
 #include "Initialization.h"
-//#include "OutputWriting.h"
 #include "TimeStepCalculation.h"
+#include "OutputWriting.h"
 #include <iostream>
+#include <fstream>
+#include <ctime>
 using namespace std;
 
 int main( )
@@ -33,20 +35,16 @@ int main( )
 
   Initialization( );
 
-  //if (iformat_output == 0) Output.open("output.csv", std::ios::out);
-  //else Output.open("output.txt", std::ios::out);
+  if (Sciantix_options[0]) SolverVerification( );
 
+  Output_file.open("output.txt", std::ios::out);
+  Execution_file.open("execution.txt", std::ios::out);
 
-  if (iverification) SolverVerification( );
+  timer = clock( );
 
-  Sciantix_history[6] = 0.0;
   while (Time_h <= Time_end_h)
   {
     // Operations to set up the history
-    //Temperature[1] = InputInterpolation(Time_h, Time_input, Temperature_input, Input_history_points);
-    //Fissionrate[1] = InputInterpolation(Time_h, Time_input, Fissionrate_input, Input_history_points);
-    //Hydrostaticstress[1] = InputInterpolation(Time_h, Time_input, Hydrostaticstress_input, Input_history_points);
-
     Sciantix_history[0] = Sciantix_history[1];
     Sciantix_history[1] = InputInterpolation(Time_h, Time_input, Temperature_input, Input_history_points);
     Sciantix_history[2] = Sciantix_history[3];
@@ -59,6 +57,8 @@ int main( )
     dTime_h = TimeStepCalculation( );
     Sciantix_history[6] = dTime_h * s_h;
 
+    if (Sciantix_options[10]) OutputWriting( );
+
     if (Time_h < Time_end_h)
 	  {
 	    Time_step_number++;
@@ -66,17 +66,13 @@ int main( )
   	  Time_s += Sciantix_history[6];
   	}
 	  else break;
-    //InputStorage( );
-	  // Physical calculations
-    // Output writing
-	  //OutputWriting( );
-
-    // Time increment
-
   }
 
-  //Output.close( );
-  //Error_log.close( );
+  timer = clock( ) - timer;
+  Execution_file << std::setprecision(12) << std::scientific << (double)timer/CLOCKS_PER_SEC << "\t" << CLOCKS_PER_SEC << "\t" << (double)timer << "\t" << Time_step_number << std::endl;
+
+  Output_file.close( );
+  Execution_file.close( );
 
   return 0;
 }

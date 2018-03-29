@@ -10,8 +10,12 @@
 ///////////////////////////////////////////
 
 #include "GlobalVariables.h"
-#include "InputStorage.h"
-#include "GrainGrowth.h"
+#include "SetVariables.h"
+#include "FuelDensity.h"
+#include "Burnup.h"
+#include "FuelMicroStructure.h"
 #include "InertGasBehavior.h"
+#include "UpdateVariables.h"
+#include "OutputWriting.h"
 
 void Sciantix(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[]);

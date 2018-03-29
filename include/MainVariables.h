@@ -12,6 +12,9 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <ctime>
+
+extern clock_t timer, timer_time_step;
 
 extern int Sciantix_options[20];
 extern double Sciantix_history[8];
@@ -23,8 +26,8 @@ extern double  Time_h, dTime_h, Time_end_h;
 extern double  Time_s, Time_end_s;
 extern double  Number_of_time_steps_per_interval;
 
-//extern std::ofstream Output;
-//extern std::ofstream Error_log;
+extern std::ofstream Output_file;
+extern std::ofstream Execution_file;
 
 extern int Input_history_points;
 extern int Temperature_input_points;
