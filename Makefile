@@ -3,8 +3,8 @@
 ##            S C I A N T I X             ##
 ##            ---------------             ##
 ##                                        ##
-##   Version: 0.1                         ##
-##   Year   : 2016                        ##
+##   Version: 1.0                         ##
+##   Year   : 2018                        ##
 ##   Authors: D. Pizzocri and T. Barani   ##
 ##                                        ##
 ############################################
@@ -15,7 +15,7 @@
 
 #Initialization of useful variables
 
-CC          := g++
+CC          := g++ #change this accordingly to your C++ compiler
 
 TARGET      := sciantix.x
 
@@ -30,7 +30,7 @@ OBJEXT      := o
 
 CFLAGS      := -Wall -O
 LIB         := -lm
-INC         := -I$(INCDIR) -I/usr/local/include
+INC         := -I$(INCDIR) -I/usr/local/include #also this may change according to your environment specs
 INCDEP      := -I$(INCDIR)
 
 SOURCES     := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
