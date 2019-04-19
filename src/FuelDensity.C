@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -15,5 +15,5 @@
 
 void FuelDensity( )
 {
-  Fuel_density[1] = 10970.0; // (kg/m3)
+  Fuel_density[1] = Fuel_density[0]; // (kg/m3)
 }

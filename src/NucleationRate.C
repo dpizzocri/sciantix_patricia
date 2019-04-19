@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -19,28 +19,27 @@
 
 double NucleationRate(double fission_rate)
 {
-	double nucleation_rate(0.0); // (bubbles/m3-s)
+  double nucleation_rate(0.0); // (bubbles/m3-s)
 
-	switch(inucleation_rate)
-	{
-		case 0 :
-			// constant value for trial, from [1] table pag. 95
-			nucleation_rate = 4.0e+20;
-			break;
+  switch(inucleation_rate)
+  {
+    case 0 :
+      // constant value for trial, from [1] table pag. 95
+      nucleation_rate = 4.0e+20;
+      break;
 
-		case 1 :
+    case 1 :
         {
-            // from [1]
-			const double bubble_nucleated_per_ff(25.0);
-			nucleation_rate = 2.0 * fission_rate * bubble_nucleated_per_ff;
-			break;
+          // from [1]
+          const double bubble_nucleated_per_ff(25.0);
+          nucleation_rate = 2.0 * fission_rate * bubble_nucleated_per_ff;
+          break;
         }
 
-        default :
-          ErrorMessages::Switch("NucleationRate", "inucleation_rate", inucleation_rate);
-          break;
-	}
+    default :
+        ErrorMessages::Switch("NucleationRate", "inucleation_rate", inucleation_rate);
+        break;
+  }
 
-	return sf_nucleation_rate * nucleation_rate;
+  return sf_nucleation_rate * nucleation_rate;
 }
-

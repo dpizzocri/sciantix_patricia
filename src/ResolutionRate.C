@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -15,30 +15,30 @@
 /// intragranular bubbles into the UO2 fuel matrix.
 /// [1] Olander, Wongsawaeng, Journal of Nuclear Materials, 354 (2006), 94-109
 /// [2] Olander, Nuclear Reactor Fuel Elements, Nat'l Tech. Info. Services, Document No. 26711, 1976, Section 13.7
-/// REF TURNBULL
+/// [3] J.A. Turnbull, Journal of Nuclear Materials, 38 (1971), 203
 /// [4] Losonen, Journal of Nuclear Materials, (2000)
 
 #include "ResolutionRate.h"
 
 double ResolutionRate(double bubble_radius, double fission_rate)
 {
-	double resolution_rate(0.0); // (atoms/s)
+  double resolution_rate(0.0); // (atoms/s)
 
-	switch(iresolution_rate)
-	{
-		case 0 :
-			// constant value for trial, from [1] table pag. 95
-			resolution_rate = 1.0e-04;
-			break;
+  switch(iresolution_rate)
+  {
+    case 0 :
+      // constant value for trial, from [1] table pag. 95
+      resolution_rate = 1.0e-04;
+      break;
 
-		case 1 :
+    case 1 :
     {
-      // from Olander model, [2], TAKEN FROM TURNBULL
-			const double ff_influence_radius = 1.0e-09; // (m)
-			const double ff_range = 6.0e-06; // (m)
+      // from [3]
+      const double ff_influence_radius = 1.0e-09; // (m)
+      const double ff_range = 6.0e-06; // (m)
 
-			resolution_rate = 2.0 * Pi * ff_range * pow((ff_influence_radius + bubble_radius), 2) * fission_rate;
-			break;
+      resolution_rate = 2.0 * Pi * ff_range * pow((ff_influence_radius + bubble_radius), 2) * fission_rate;
+      break;
     }
 
     case 2 :
@@ -49,7 +49,7 @@ double ResolutionRate(double bubble_radius, double fission_rate)
     default :
       ErrorMessages::Switch("ResolutionRate", "iresolution_rate", iresolution_rate);
       break;
-	}
+  }
 
-	return sf_resolution_rate * resolution_rate;
+  return sf_resolution_rate * resolution_rate;
 }

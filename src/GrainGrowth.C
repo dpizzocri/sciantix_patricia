@@ -1,13 +1,13 @@
-//////////////////////////////////////////////////////
-//                                                  //
-//                  S C I A N T I X                 //
-//                  ---------------                 //
-//                                                  //
-//  Version: 0.1                                    //
-//  Year   : 2017                                   //
-//  Authors: D. Pizzocri, T. Barani and L. Cognini  //
-//                                                  //
-//////////////////////////////////////////////////////
+///////////////////////////////////////////
+//                                       //
+//           S C I A N T I X             //
+//           ---------------             //
+//                                       //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
+//  Authors: D. Pizzocri and T. Barani   //
+//           L. Cognini                  //
+///////////////////////////////////////////
 
 /// GrainGrowth
 /// This model describes grain growth as a temperature controlled mechanism.
@@ -16,9 +16,7 @@
 /// materials, Vol. C, North Holland, Amsterdam, NL, (1979), p. C1/9 (1 - 10)
 /// [3] Botazzoli, PhD Thesis, Politecnico di Milano (2011)
 
-#include <cmath>
 #include "GrainGrowth.h"
-#include "GlobalVariables.h"
 
 void GrainGrowth( )
 {

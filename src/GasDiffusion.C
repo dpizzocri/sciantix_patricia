@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -36,17 +36,17 @@ void GasDiffusion( )
 
   switch(isolver)
   {
-  	case 0 :
-  		Gas_grain[1] = Solver::SpectralDiffusion(gas_grain_modes, N, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
-  		break;
+    case 0 :
+      Gas_grain[1] = Solver::FORMAS(initial_condition_term, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
+      break;
 
-  	case 1 :
-  		Gas_grain[1] = Solver::FORMAS(initial_condition_term, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
-  		break;
+    case 1 :
+      Gas_grain[1] = Solver::SpectralDiffusion(gas_grain_modes, N, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
+      break;
 
-  	default :
-        ErrorMessages::Switch("GasDiffusion", "isolver", isolver);
-        break;
+    default :
+      ErrorMessages::Switch("GasDiffusion", "isolver", isolver);
+      break;
   }
 
   Gas_grain_solution[1] = Gas_grain[1] * equilibrium_fraction;
