@@ -1,13 +1,13 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+///////////////////////////////////////////////////////
+//                                                   //
+//           S C I A N T I X                         //
+//           ---------------                         //
+//                                                   //
+//  Version: 1.4                                     //
+//  Year   : 2019                                    //
+//  Authors: D. Pizzocri, T. Barani and L. Cognini   //
+//                                                   //
+///////////////////////////////////////////////////////
 
 /// FissionYield
 /// This routine collects the fission yields of several
@@ -19,3 +19,4 @@
 
 const double Fission_yield_Xe(0.27);
 const double Fission_yield_Kr(0.03);
+const double Fission_yield_He(0.0022);

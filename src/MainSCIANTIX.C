@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -19,6 +19,7 @@
 #include "MainVariables.h"
 #include "Sciantix.h"
 #include "SolverVerification.h"
+#include "Solver.h"
 #include "InputInterpolation.h"
 #include "InputReading.h"
 #include "Initialization.h"
@@ -27,10 +28,10 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
-using namespace std;
 
 int main( )
 {
+
   InputReading( );
 
   Initialization( );

@@ -1,3 +1,18 @@
+///////////////////////////////////////////
+//                                       //
+//           S C I A N T I X             //
+//           ---------------             //
+//                                       //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
+//  Authors: D. Pizzocri and T. Barani   //
+//                                       //
+///////////////////////////////////////////
+
+/// Initialization
+/// This routine initializes Sciantix internal variables with
+/// initial conditions/interface variables
+
 #include "Initialization.h"
 
 void Initialization( )
@@ -10,13 +25,6 @@ void Initialization( )
   Sciantix_history[5] = Hydrostaticstress_input[0];
   Sciantix_history[6] = 0.0;
 
-  Sciantix_variables[0] = 5.0e-06;
-  Sciantix_variables[1] = 0.0;
-  Sciantix_variables[2] = 0.0;
-  Sciantix_variables[3] = 0.0;
-  Sciantix_variables[4] = 0.0;
-  Sciantix_variables[5] = 0.0;
-  Sciantix_variables[6] = 0.0;
   Sciantix_variables[7] = 0.0;
   Sciantix_variables[8] = 0.0;
   Sciantix_variables[9] = 0.0;
@@ -33,8 +41,25 @@ void Initialization( )
   Sciantix_variables[20] = 0.0;
   Sciantix_variables[21] = 0.0;
 
-  Sciantix_scaling_factors[0] = 1.0;
-  Sciantix_scaling_factors[1] = 1.0;
-  Sciantix_scaling_factors[2] = 1.0;
-  Sciantix_scaling_factors[3] = 1.0;
+  double Mmol_HM = 0.01 * (
+                Sciantix_variables[61] * 234.04 + Sciantix_variables[62] * 235.04 + Sciantix_variables[63] * 236.05 + Sciantix_variables[64] * 237.05 + Sciantix_variables[65] * 238.05 +
+                Sciantix_variables[66] * 237.04 + Sciantix_variables[67] * 238.05 + Sciantix_variables[68] * 239.05 +
+                Sciantix_variables[69] * 238.05 + Sciantix_variables[70] * 239.05 + Sciantix_variables[71] * 240.05 + Sciantix_variables[72] * 241.06 + Sciantix_variables[72] * 242.06 + Sciantix_variables[73] * 243.06 +
+                Sciantix_variables[75] * 241.06 + Sciantix_variables[76] * 242.06 + Sciantix_variables[77] * 242.06 + Sciantix_variables[78] * 243.06 + Sciantix_variables[78] * 244.06 +
+                Sciantix_variables[80] * 242.06 + Sciantix_variables[81] * 243.06 + Sciantix_variables[82] * 244.06 + Sciantix_variables[83] * 245.07
+                );
+
+  double HM_HMO2 = Mmol_HM / (Mmol_HM + 32.0); // Heavy Metals over Heavy Metal Oxides in mass
+
+  double HM_m3 = 1000. * Sciantix_variables[84] * 6.022e+23 / (Mmol_HM + 32.0);
+
+  for (int i = 24; i < 61; i++)
+    Sciantix_variables[i] = 0.0;
+
+  for (int j = 61; j < 83; j++)
+    Sciantix_variables[j] *= 0.01 * HM_m3;
+
+  Sciantix_variables[23] = HM_m3 * Sciantix_variables[85];
+
+  CrossSectionChooser( );
 }

@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -25,4 +25,20 @@ namespace Solver
   double SpectralDiffusion(std::vector<double>& initial_condition, int N, double diffusion_coefficient, double domain_radius, double source_term, double time_step);
 
   double FORMAS(double initial_condition[], double diffusion_coefficient, double domain_radius, double source_term, double time_step);
+
+  void ConjugateGradient(int N, double A[], double b[]);
+
+  void PBiCG(int N, double A[], double b[]);
+
+  void PBiCGSTAB(int N, double A[], double b[]);
+
+  void LUGauss(int N, double * A, double * b);
+
+  void Laplace2x2(double A[], double b[]);
+
+  void Laplace3x3(double A[], double b[]);
+
+  double det(int N, double A[]);
+
+  void Laplace(int  N, double A[], double b[]);
 };

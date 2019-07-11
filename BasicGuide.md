@@ -5,14 +5,14 @@ Open your terminal and type in the following instructions
 git clone git@gitlab.com:<UserName>/sciantix.git
 cd sciantix
 git remote add upstream git@gitlab.com:poliminrg/sciantix.git
-git pull –-rebase upstream devel
+git pull –-rebase upstream version1.0
 ```
 Create issue on gitlab.com, then proceed with the following instructions
 ```
 git checkout –b <BranchName_#IssueNumber>
 git add <Files>
 git commit –m "<CommitMessageEndingIn#IssueNumber>"
-git pull –-rebase upstream devel
+git pull –-rebase upstream version1.0
 git push origin <BranchName_#IssueNumber>
 ```
 Create merge request gitlab.com.

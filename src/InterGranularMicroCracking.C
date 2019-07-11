@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -12,7 +12,7 @@
 #include "InterGranularMicroCracking.h"
 
 // Based on
-// Barani et al., JNM, 486 (2017) 96-110
+// Barani et al., JNM, 486 (2019) 96-110
 
 void InterGranularMicroCracking( )
 {

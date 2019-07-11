@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -28,47 +28,48 @@
 
 double IntraGranularBubbleRadius(double temperature, double atoms_per_bubble)
 {
-	double bubble_radius(0.0); // (m)
+  double bubble_radius(0.0); // (m)
 
-	switch(ibubble_radius)
-	{
-		case 0 :
-   		    // constant value for trial
-		    bubble_radius = 1.0e-09;
-		    break;
+  switch(ibubble_radius)
+  {
+    case 0 :
+      // constant value for trial
+      bubble_radius = 1.0e-09;
+      break;
 
-		case 1 :
-			// from [1], [3]
-			bubble_radius = pow(3.0*Xenon_covolume/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
-			break;
+    case 1 :
+      {
+        // from [6]
+        double Xenon_volume_in_lattice = 4.4581e-29; // [m3]
+        bubble_radius = pow(3.0*Xenon_volume_in_lattice/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
+        break;
+      }
 
-		case 2 :
-			// from [2]
-			bubble_radius = pow(3.0*Cons_bolt*temperature/(8.0*Pi*Surface_tension),0.5) * pow(atoms_per_bubble,0.5);
-			break;
+    case 2 :
+      // from [1], [3]
+      bubble_radius = pow(3.0*Xenon_covolume/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
+      break;
 
-		case 3 :
-			// from [4]
-			bubble_radius = pow(3.0*0.4*Xenon_covolume/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
-			break;
+    case 3 :
+      // from [2]
+      bubble_radius = pow(3.0*Cons_bolt*temperature/(8.0*Pi*Surface_tension),0.5) * pow(atoms_per_bubble,0.5);
+      break;
 
-		case 4 :
-			// from [5]
-			bubble_radius = pow(3.0*0.6*Xenon_covolume/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
-			break;
+    case 4 :
+      // from [4]
+      bubble_radius = pow(3.0*0.4*Xenon_covolume/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
+      break;
 
-		case 5 :
-		{
-			// from [6]
-			double Xenon_volume_in_lattice = 4.4581e-29; // [m3]
-			bubble_radius = pow(3.0*Xenon_volume_in_lattice/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
-			break;
-		}
+    case 5 :
+      // from [5]
+      bubble_radius = pow(3.0*0.6*Xenon_covolume/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
+      break;
+
 
     default :
       ErrorMessages::Switch("IntraGranularBubbleRadius", "ibubble_radius", ibubble_radius);
       break;
-	}
+  }
 
-	return bubble_radius;
+  return bubble_radius;
 }

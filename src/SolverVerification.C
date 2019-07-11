@@ -3,8 +3,8 @@
 //           S C I A N T I X             //
 //           ---------------             //
 //                                       //
-//  Version: 1.0                         //
-//  Year   : 2018                        //
+//  Version: 1.4                         //
+//  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
 //                                       //
 ///////////////////////////////////////////
@@ -58,6 +58,8 @@ void SolverVerification( )
   double time_step(0.05);
 
   bool n_is_even(0);
+
+  int Matrix_dimension_Laplace(4);
 
   // We recommend replicating the lines between "// ---"
   // to introduce the verification of another solver.
@@ -407,5 +409,117 @@ void SolverVerification( )
 
   }
   verification_SpectralDiffusion_out.close( );
+  // ---
+
+  // ---
+  // Laplace2x2
+  //Verification of the solver for 2x2 linear system [Ax = b]
+  std::ofstream verification_Laplace2x2;
+  verification_Laplace2x2.open("verification_Laplace2x2.csv", std::ios::out);
+  {
+  // creates manufactured matrix
+  double A[4] = {0.0, 0.0, 0.0, 0.0};
+  ManufacturedCoefficient::HilbertMatrix2x2(A);
+
+  // creates manufactured solution
+  double x[2] = {0.0, 0.0};
+  ManufacturedSolution::Vector1x2(x);
+
+  // calculates manufactured rhs
+  double b[2] = {0.0, 0.0};
+  b[0] = A[0]*x[0] + A[1]*x[1];
+  b[1] = A[2]*x[0] + A[3]*x[1];
+
+  // calculates the numerical solution
+  double num_x[2] = {0.0, 0.0};
+  Solver::Laplace2x2(A, b);
+  num_x[0] = b[0];
+  num_x[1] = b[1];
+
+  // compares numx & x
+  double err(0.0);
+  err = x[0]-num_x[0] + x[1]-num_x[1];
+
+  // writes Output
+  verification_Laplace2x2 << err;
+  }
+  // ---
+
+  // ---
+  // Laplace3x3
+  //Verification of the solver for 3x3 linear system [Ax = b]
+  std::ofstream verification_Laplace3x3;
+  verification_Laplace3x3.open("verification_Laplace3x3.csv", std::ios::out);
+  {
+  // creates manufactured matrix
+  double A[9] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+  ManufacturedCoefficient::HilbertMatrix3x3(A);
+
+  // creates manufactured solution
+  double x[3] = {0.0, 0.0, 0.0};
+  ManufacturedSolution::Vector1x3(x);
+
+  // calculates manufactured rhs
+  double b[3] = {0.0, 0.0, 0.0};
+  b[0] = A[0]*x[0] + A[1]*x[1] + A[2]*x[2];
+  b[1] = A[3]*x[0] + A[4]*x[1] + A[5]*x[2];
+  b[2] = A[6]*x[0] + A[7]*x[1] + A[8]*x[2];
+
+  // calculates the numerical solution
+  double num_x[3] = {0.0, 0.0, 0.0};
+  Solver::Laplace3x3(A, b);
+  num_x[0] = b[0];
+  num_x[1] = b[1];
+  num_x[2] = b[2];
+
+  // compares num_x & x
+  double err(0.0);
+  err = x[0]-num_x[0] + x[1]-num_x[1] + x[2]-num_x[2];
+
+  // writes Output
+  verification_Laplace3x3 << err;
+  }
+  // ---
+
+  // ---
+  // Laplace
+  //Verification of the solver for NxN linear system [Ax = b]
+  std::ofstream verification_Laplace;
+  verification_Laplace.open("verification_Laplace.csv", std::ios::out);
+  {
+    // creates manufactured matrix
+    int N = Matrix_dimension_Laplace;
+    double A[N*N];
+    ManufacturedCoefficient::HilbertMatrix(N, A);
+
+    // creates manufactured solutions
+    double x[N];
+    ManufacturedSolution::Vector1xN(N, x);
+
+    // calculates manufactured rhs
+    double b[N];
+    for (int i = 0; i < N; i++) {
+      b[i] = 0.0;
+      for (int j = 0; j < N; j++) {
+        b[i] += A[i*N + j]*x[j];
+      }
+    }
+
+    // calculates the numerical solution
+    double num_x[N];
+    Solver::Laplace(N, A, b);
+    for (int i = 0; i < N; i++) {
+      num_x[i] = b[i];
+    }
+
+    // compare numerical solution with manufactured solutions
+    double err(0.0);
+    for (int i = 0; i < N; i++) {
+      err += x[i] - num_x[i];
+    }
+
+  // writes Output
+  verification_Laplace << err;
+  }
   // ---
 }
