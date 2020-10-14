@@ -9,5 +9,8 @@
 1 # inucleation_rate
 0 # isolver
 1 # iformat_output
-5.0e-06 # Initial_grain_radius
-1000 # Number_of_time_steps_per_interval
+0 #
+0 #
+0 # 
+0 #
+0 #
