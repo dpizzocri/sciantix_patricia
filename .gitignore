@@ -33,4 +33,4 @@
 *.x
 
 # Folders
-bin\
+.\bin
