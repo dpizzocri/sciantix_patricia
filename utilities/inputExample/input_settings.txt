@@ -12,5 +12,5 @@
 1 #  gb vac diff coeff (1= Reynolds and Burton, 1979)
 1 #  gb behavior (1= do InterGranularGasBehavior - Pastore et al., 2013; Barani et al., 2017)
 1 #  gb micro-cracking (1 = Barani et al., 2017)
-0 #  hbs formation (0 = non active)
+0 #  grain recrystallization (0 = non active)
 0 #  fuel/reactor couple for burnup calculations (0=UO2/PWR)

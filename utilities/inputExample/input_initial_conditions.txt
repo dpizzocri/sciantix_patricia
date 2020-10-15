@@ -15,7 +15,7 @@
 0 # initial He in ig bubbles (at/m3)
 0 # initial He in gb bubbles (at/m3)
 0 # initial He released (at/m3)
-0 1 0 0 99
+0 3 0 0 97
 # initial U234 U235 U236 U237 U238 (% of heavy atoms) content
 0 0 0
 # initial Np237 Np238 Np239 (% of heavy atoms) content
