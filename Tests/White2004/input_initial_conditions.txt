@@ -1,4 +1,4 @@
-5e-6 # initial grain radius (um)
+12.3e-6 # initial grain radius (um)
 0 # initial Gas produced (at/m3)
 0 # initial Gas in grains (dissolved plus ig bubbles) (at/m3)
 0 # initial Gas in solution (at/m3)

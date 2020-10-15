@@ -7,14 +7,14 @@ ibubble_radius = 1
 iresolution_rate = 1
 itrapping_rate = 1
 inucleation_rate = 1
-isolver = 1
+isolver = 0
 iformat_output = 1
 igrain_boundary_vacancy_diffusion_coefficient = 1
 igrain_boundary_behaviour = 1
 igrain_boundary_micro_cracking = 1
 igrain_recrystallization = 0
 ifuel_reactor_type = 0
-Grain_radius[0] = 5e-006
+Grain_radius[0] = 1.23e-005
 Gas_produced[0] = 0
 Gas_grain[0] = 0
 Gas_grain_solution[0] = 0
@@ -54,10 +54,11 @@ Initial composition Cm0 = 0
 Initial composition Cm1 = 0
 Initial composition Cm2 = 0
 Initial composition Cm3 = 0
-0	1000	1e+019	0	
-10	1800	1e+019	0	
-1000	1800	1e+019	0	
-1010	1500	1e+019	0	
-5000	1500	1e+019	0	
-5010	1000	1e+019	0	
-10000	1000	1e+019	0	
+0	1157	4.15e+018	-0.21	
+35316.9	1157	4.15e+018	-0.21	
+35604.9	1157	4.15e+018	-0.21	
+35604.9	2048	1.08e+019	-14.8	
+35605.4	2048	1.08e+019	-14.8	
+35605.4	1157	4.15e+018	-0.21	
+35607.1	1157	4.15e+018	-0.21	
+35607.1	573	0	0	
