@@ -61,5 +61,5 @@ void Initialization( )
 
   Sciantix_variables[23] = HM_m3 * Sciantix_variables[85];
 
-  CrossSectionChooser( );
+//  CrossSectionChooser( );
 }

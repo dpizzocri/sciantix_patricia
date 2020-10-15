@@ -15,7 +15,7 @@ void IntraGranularGasBehavior( )
 {
   GasProduction( );
 
-  HeliumProduction();
+//  HeliumProduction();
 
   GasDiffusion( );
 

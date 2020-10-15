@@ -23,7 +23,7 @@ void Sciantix(int Sciantix_options[],
 
   FuelDensity( );
 
-  NuclidesEvolution( );
+//  NuclidesEvolution( );
 
   OxygenToMetalRatio( );
 
