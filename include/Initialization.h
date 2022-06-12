@@ -10,6 +10,7 @@
 ///////////////////////////////////////////
 
 #include "MainVariables.h"
+#include <cmath>
 //#include "CrossSectionChooser.h"
 
 void Initialization( );

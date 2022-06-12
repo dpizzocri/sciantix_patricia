@@ -27,7 +27,7 @@ double GasDiffusionCoefficient(double temperature, double fission_rate)
   {
     case 0 :
          // constant value for trial
-      diffusion_coefficient = 0.0e+00;
+      diffusion_coefficient = 7e-19;
       break;
 
     case 1 :

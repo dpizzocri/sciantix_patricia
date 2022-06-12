@@ -20,6 +20,7 @@ extern int Sciantix_options[20];
 extern double Sciantix_history[8];
 extern double Sciantix_variables[100];
 extern double Sciantix_scaling_factors[4];
+extern double Sciantix_diffusion_modes[100];
 
 extern long long int Time_step_number;
 extern double  Time_h, dTime_h, Time_end_h;

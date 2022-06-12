@@ -38,6 +38,7 @@ double ResolutionRate(double bubble_radius, double fission_rate)
       const double ff_range = 6.0e-06; // (m)
 
       resolution_rate = 2.0 * Pi * ff_range * pow((ff_influence_radius + bubble_radius), 2) * fission_rate;
+//      std::cout << "b = " << resolution_rate << std::endl;
       break;
     }
 

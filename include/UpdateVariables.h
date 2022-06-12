@@ -11,4 +11,4 @@
 
 #include "GlobalVariables.h"
 
-void UpdateVariables(double Sciantix_variables[]);
+void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_modes[]);

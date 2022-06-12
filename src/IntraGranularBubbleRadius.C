@@ -40,7 +40,7 @@ double IntraGranularBubbleRadius(double temperature, double atoms_per_bubble)
     case 1 :
       {
         // from [6]
-        double Xenon_volume_in_lattice = 4.4581e-29; // [m3]
+        double Xenon_volume_in_lattice = 4.09e-29; //4.4581e-29; // [m3]
         bubble_radius = pow(3.0*Xenon_volume_in_lattice/(4.0*Pi),(1.0/3.0)) * pow(atoms_per_bubble,(1.0/3.0));
         break;
       }

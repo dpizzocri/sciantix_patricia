@@ -9,6 +9,8 @@
 //           L. Cognini                  //
 ///////////////////////////////////////////
 
+#include <vector>
+
 // u.o.m. conversions
 extern const double um_m;
 extern const double s_h;
@@ -77,6 +79,8 @@ extern double dGas_grain;
 extern double dGas_boundary;
 extern double dGas_released;
 extern double dGas_bubble;
+
+extern std::vector<double> gas_grain_modes;
 
 // helium concentrations both as single gas atoms and bubbles
 extern double Helium_produced[2];

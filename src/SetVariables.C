@@ -11,7 +11,7 @@
 
 #include "SetVariables.h"
 
-void SetVariables(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[])
+void SetVariables(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[], double Sciantix_diffusion_modes[])
 {
   iverification = Sciantix_options[0];
   igrain_growth = Sciantix_options[1];
@@ -137,4 +137,9 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sf_trapping_rate = Sciantix_scaling_factors[1];
   sf_nucleation_rate = Sciantix_scaling_factors[2];
   sf_diffusion_rate = Sciantix_scaling_factors[3];
+
+  for(int i=0; i<40; ++i)
+  {
+    gas_grain_modes[i] = Sciantix_diffusion_modes[i];
+  }
 }

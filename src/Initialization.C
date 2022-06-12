@@ -61,5 +61,36 @@ void Initialization( )
 
   Sciantix_variables[23] = HM_m3 * Sciantix_variables[85];
 
-//  CrossSectionChooser( );
+  // projection on diffusion modes of the initial conditions
+  double initial_condition(0.0);
+  double projection_remainder(0.0);
+  double reconstructed_solution(0.0);
+  int iteration(0), iteration_max(20), n(0), np1(1), n_modes(40), k(0), K(1);
+  double projection_coeff(0.0);
+  projection_coeff = - sqrt(8.0 / M_PI);
+
+  for (k = 0; k < K; ++k)
+  {
+    switch (k)
+		{
+  		case 0  : initial_condition = Sciantix_variables[2]; break;     // Xe grain
+
+    	default : initial_condition = 0.0; break;
+		}
+
+		projection_remainder = initial_condition;
+		for (iteration = 0; iteration < iteration_max; ++iteration)
+    {
+      reconstructed_solution = 0.0;
+      for (n = 0; n < n_modes; ++n)
+      {
+        np1 = n+1;
+        const double n_coeff = pow(- 1.0, np1) / np1;
+        Sciantix_diffusion_modes[k * n_modes + n] += projection_coeff * n_coeff * projection_remainder;
+        reconstructed_solution += projection_coeff * n_coeff * Sciantix_diffusion_modes[k * n_modes + n] * 3.0 / (4.0 * M_PI);
+      }
+      projection_remainder = initial_condition - reconstructed_solution;
+    }
+  }
+
 }

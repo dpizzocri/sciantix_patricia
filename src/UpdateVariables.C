@@ -11,7 +11,7 @@
 
 #include "UpdateVariables.h"
 
-void UpdateVariables(double Sciantix_variables[])
+void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_modes[])
 {
   Sciantix_variables[0] = Grain_radius[1];
   Sciantix_variables[1] = Gas_produced[1];
@@ -105,4 +105,10 @@ void UpdateVariables(double Sciantix_variables[])
   Sciantix_variables[89] = Helium_grain_bubbles[1];
   Sciantix_variables[90] = Helium_boundary[1];
   Sciantix_variables[91] = Helium_released[1];
+
+  for(int i=0; i<40; ++i)
+  {
+    Sciantix_diffusion_modes[i] = gas_grain_modes[i];
+  }
+
 }

@@ -17,6 +17,7 @@ int Sciantix_options[20];
 double Sciantix_history[8];
 double Sciantix_variables[100];
 double Sciantix_scaling_factors[4];
+double Sciantix_diffusion_modes[100];
 
 long long int Time_step_number(0);
 double  Time_h(0.0), dTime_h(0.0), Time_end_h(0.0); // (h)

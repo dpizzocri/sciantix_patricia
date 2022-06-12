@@ -33,7 +33,7 @@ const double Ener_fiss(312.0e-13);    		 // (J/fiss)
 const double Xenon_covolume(8.50e-29);     // (m3)
 const double Vacancy_volume(4.09e-29);     // (m3)
 const double Surface_tension(0.7);    		 // (N/m)
-const double Xenon_radius_in_lattice(0.2e-09);		 // (m)
+const double Xenon_radius_in_lattice(0.21e-09);		 // (m)
 
 // mathematical constants
 const double Pi(3.141592653589793);
@@ -85,6 +85,8 @@ double dGas_grain(0.0);              // (at/m3)
 double dGas_boundary(0.0);           // (at/m3)
 double dGas_released(0.0);           // (at/m3)
 double dGas_bubble(0.0); 	 		 // (at/m3)
+
+std::vector<double> gas_grain_modes(40, 0.0);
 
 // helium concentrations both as single gas atoms and bubbles
 double Helium_produced[2] = {0.0, 0.0}; // (at/m3)

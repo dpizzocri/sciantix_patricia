@@ -10,6 +10,8 @@
 ///////////////////////////////////////////
 
 #include "FuelDensity.h"
+#include "Solver.h"
+#include <iostream>
 
 /// FuelDensity
 

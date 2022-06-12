@@ -54,9 +54,11 @@ if (Time_step_number%1 == 0) {
   for (int index_history = 0; index_history < index_history_max; index_history++)
     Output_file << "\t" << Sciantix_history[2*index_history+1];
 
-  const int index_variables_max(22);
+  const int index_variables_max(21);
   for (int index_variables = 0; index_variables < index_variables_max; index_variables++)
     Output_file << "\t" << Sciantix_variables[index_variables];
+
+  Output_file << "\t" << Sciantix_variables[84];
 
   Output_file << "\n";
 }
