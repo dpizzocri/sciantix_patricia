@@ -21,6 +21,7 @@
         "UpdateVariables.C": "cpp",
         "Sciantix.C": "cpp",
         "NucleationRate.C": "cpp",
-        "InputInterpolation.C": "cpp"
+        "InputInterpolation.C": "cpp",
+        "GrainGrowth.C": "cpp"
     }
 }
