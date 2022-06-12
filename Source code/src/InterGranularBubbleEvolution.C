@@ -51,7 +51,7 @@ void InterGranularBubbleEvolution( )
     const double sink_strength = -0.25*((3.0-Intergranular_fractional_coverage[0])*(1.0-Intergranular_fractional_coverage[0])+2.0*log(Intergranular_fractional_coverage[0])); // (/)
     const double volume_flow_rate = 2.0*Pi*grain_boundary_thickness*vacancy_diffusion_coefficient/sink_strength; // (m3)
     const double growth_rate = volume_flow_rate * Intergranular_atoms_per_bubble[1] / Vacancy_volume;
-    const double equilibrium_pressure = 2.0 * Surface_tension / Intergranular_bubble_radius[0] - Hydrostaticstress[0]/M_1;
+    const double equilibrium_pressure = 2.0 * Surface_tension / Intergranular_bubble_radius[0] - Hydrostaticstress[0]*M_1;
     const double equilibrium_term = - volume_flow_rate * equilibrium_pressure / (Cons_bolt * Temperature[0]);
     Intergranular_vacancies_per_bubble[1] = Solver::LimitedGrowth(Intergranular_vacancies_per_bubble[0], growth_rate, equilibrium_term, dTime_s);
   }

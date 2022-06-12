@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "InterGranularGasBehavior.C": "cpp",
+        "InterGranularBubbleEvolution.C": "cpp"
+    }
+}
