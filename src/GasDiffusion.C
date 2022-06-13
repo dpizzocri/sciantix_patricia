@@ -24,7 +24,6 @@ void GasDiffusion( )
   double resolution_rate = ResolutionRate(Intragranular_bubble_radius[0], Fissionrate[0]);
   double trapping_rate = TrappingRate(diffusion_coefficient, Intragranular_bubble_radius[0], Intragranular_bubble_concentration[0]);
   double equilibrium_fraction = resolution_rate / (resolution_rate + trapping_rate);
-  Intergranular_gas_swelling[1] = trapping_rate;
   double effective_diffusion_coefficient = diffusion_coefficient * equilibrium_fraction;
 
   const unsigned short int N(40);
