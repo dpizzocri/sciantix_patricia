@@ -34,6 +34,7 @@
 
 # Folders
 bin/
+/.vscode/
 
 # ignore the entire directory, no matter where it is located
 **/.vscode/
