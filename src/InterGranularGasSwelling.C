@@ -19,5 +19,5 @@
 void InterGranularGasSwelling( )
 {
   const double surface_to_volume_ratio = 3.0 / Grain_radius[1];
-  //Intergranular_gas_swelling[1] = surface_to_volume_ratio * Intergranular_bubble_concentration[1] * Intergranular_bubble_volume[1];
+  Intergranular_gas_swelling[1] = surface_to_volume_ratio * Intergranular_bubble_concentration[1] * Intergranular_bubble_volume[1];
 }

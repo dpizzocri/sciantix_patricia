@@ -17,6 +17,6 @@
 
 #include "FissionYield.h"
 
-const double Fission_yield_Xe(0.27);
+const double Fission_yield_Xe(0.24);
 const double Fission_yield_Kr(0.03);
 const double Fission_yield_He(0.0022);

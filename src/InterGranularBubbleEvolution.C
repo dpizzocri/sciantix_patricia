@@ -56,9 +56,6 @@ void InterGranularBubbleEvolution( )
 
     const double equilibrium_term = - volume_flow_rate * equilibrium_pressure / (Cons_bolt * Temperature[0]);
     Intergranular_vacancies_per_bubble[1] = Solver::LimitedGrowth(Intergranular_vacancies_per_bubble[0], growth_rate, equilibrium_term, dTime_s);
-
-    //std::cout << growth_rate << std::endl;
-    //std::cout << equilibrium_term << std::endl;
   }
   else
     Intergranular_vacancies_per_bubble[1] = 0.0;
@@ -69,20 +66,11 @@ void InterGranularBubbleEvolution( )
   Intergranular_bubble_radius[1] = pow(3.0*Intergranular_bubble_volume[1]/(4.0*Pi*lenticular_shape_factor),1.0/3.0);
   Intergranular_bubble_area[1] = Pi*pow(Intergranular_bubble_radius[1]*sin(semidihedral_angle), 2);
 
-  //std::cout << "dopo vacanze\n";
-  //std::cout << Intergranular_bubble_area[0] << std::endl;
-  //std::cout << Intergranular_bubble_area[1] << std::endl;
-  //std::cout << Intergranular_bubble_area[1] - Intergranular_bubble_area[0] << std::endl;
-
   // Bubble interconnection decreases the number of bubbles
 
   const double geometric_coefficient(2.0);
   const double dbubble_area = Intergranular_bubble_area[1] - Intergranular_bubble_area[0];
   Intergranular_bubble_concentration[1] = Solver::BinaryInteraction(Intergranular_bubble_concentration[0], geometric_coefficient, dbubble_area);
-
-  //std::cout << dbubble_area << std::endl;
-  //std::cout << Intergranular_bubble_area[1] << std::endl;
-  //std::cout << Intergranular_bubble_concentration[1] << std::endl;
 
   Intergranular_atoms_per_bubble[1] *= Intergranular_bubble_concentration[0] / Intergranular_bubble_concentration[1];
   Intergranular_vacancies_per_bubble[1] *= Intergranular_bubble_concentration[0] / Intergranular_bubble_concentration[1];

@@ -36,10 +36,6 @@ double TrappingRate(double diffusion_coefficient, double bubble_radius, double b
     case 1 :
       // from [2]
       trapping_rate = 4.0 * Pi * diffusion_coefficient * (bubble_radius + Xenon_radius_in_lattice) * bubble_density;
-//      std::cout << "g = " << diffusion_coefficient << std::endl;
-//      std::cout << "g = " << bubble_radius << std::endl;
-//      std::cout << "g = " << Xenon_radius_in_lattice << std::endl;
-//      std::cout << "g = " << bubble_density << std::endl;
       break;
 
     default :
