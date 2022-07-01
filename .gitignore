@@ -38,3 +38,5 @@ bin/
 
 # ignore the entire directory, no matter where it is located
 **/.vscode/
+**/old_files
+/documentation
