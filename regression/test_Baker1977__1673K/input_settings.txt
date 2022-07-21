@@ -10,6 +10,6 @@
 1	#	igrain_boundary_behaviour
 1	#	igrain_boundary_micro_cracking
 0	#	ifuel_matrix
-0	#	igrain_boundary_venting
+1	#	igrain_boundary_venting
 0	#	iradioactive_gas_behaviour
 0	#	ihelium

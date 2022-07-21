@@ -621,7 +621,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(/)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[46]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[46]);
-  sciantix_variable[sv_counter].setOutput(toOutputVenting);
+  sciantix_variable[sv_counter].setOutput(0);
   ++sv_counter;
   
   sciantix_variable.emplace_back();

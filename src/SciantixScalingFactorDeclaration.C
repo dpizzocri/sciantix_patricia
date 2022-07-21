@@ -22,3 +22,6 @@ double sf_resolution_rate(1.0);
 double sf_trapping_rate(1.0);
 double sf_nucleation_rate(1.0);
 double sf_diffusion_coeff(1.0);
+double sf_screw_parameter(1.0);
+double sf_span_parameter(1.0);
+double sf_cent_parameter(1.0);

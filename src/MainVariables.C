@@ -21,7 +21,7 @@ clock_t timer, timer_time_step;
 int    Sciantix_options[40];
 double Sciantix_history[9];
 double Sciantix_variables[300];
-double Sciantix_scaling_factors[6];
+double Sciantix_scaling_factors[10];
 double Sciantix_diffusion_modes[1000];
 
 long long int Time_step_number(0);

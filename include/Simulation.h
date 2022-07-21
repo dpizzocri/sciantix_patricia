@@ -663,7 +663,6 @@ class Simulation : public Solver, public Model
 
   void GrainBoundaryVenting( )
   {
-
     // cracking invariant G = ln(F) - f
     const double cracking_invariant = 
        log(sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()) - 

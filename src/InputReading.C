@@ -197,6 +197,9 @@ void InputReading( )
     Sciantix_scaling_factors[1] = ReadOneParameter("sf_trapping_rate", input_scaling_factors, input_check);
     Sciantix_scaling_factors[2] = ReadOneParameter("sf_nucleation_rate", input_scaling_factors, input_check);
     Sciantix_scaling_factors[3] = ReadOneParameter("sf_diffusion_coeff", input_scaling_factors, input_check);
+    Sciantix_scaling_factors[4] = ReadOneParameter("sf_screw_parameter", input_scaling_factors, input_check);
+    Sciantix_scaling_factors[5] = ReadOneParameter("sf_span_parameter", input_scaling_factors, input_check);
+    Sciantix_scaling_factors[6] = ReadOneParameter("sf_cent_parameter", input_scaling_factors, input_check);
   }
   else
   {
@@ -204,6 +207,9 @@ void InputReading( )
     Sciantix_scaling_factors[1] = 1.0;
     Sciantix_scaling_factors[2] = 1.0;
     Sciantix_scaling_factors[3] = 1.0;
+    Sciantix_scaling_factors[4] = 1.0;
+    Sciantix_scaling_factors[5] = 1.0;
+    Sciantix_scaling_factors[6] = 1.0;
   }
 
   input_check.close();
