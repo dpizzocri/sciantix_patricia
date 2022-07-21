@@ -663,16 +663,23 @@ class Simulation : public Solver, public Model
 
   void GrainBoundaryVenting( )
   {
+
+    // cracking invariant G = ln(F) - f
+    const double cracking_invariant = 
+      log(sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()) - 
+      sciantix_variable[sv["intergranular fractional intactness"]].getFinalValue();
+    
+    const double sigmoid_parameter = exp(cracking_invariant + 1);
+    
     // Vented fraction
     sciantix_variable[sv["Intergranular vented fraction"]].setFinalValue(
       1.0 / 
       pow(( 1.0 + model[sm["Grain-boundary venting"]].getParameter().at(0) * 
             exp( - model[sm["Grain-boundary venting"]].getParameter().at(1) * 
-                ( sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()
-                  - model[sm["Grain-boundary venting"]].getParameter().at(2)) ) ),
+                ( sigmoid_parameter - model[sm["Grain-boundary venting"]].getParameter().at(2)) ) ),
           (1.0 / model[sm["Grain-boundary venting"]].getParameter().at(0))
           )
-    );
+      );
     
     // Venting probability
     sciantix_variable[sv["Intergranular venting probability"]].setFinalValue(
