@@ -155,13 +155,13 @@ void InputReading( )
     std::vector<double> initial_composition_Xe133;
     initial_composition_Xe133  = ReadSeveralParameters("Initial composition Xe133", input_initial_conditions, input_check);
     
-    Sciantix_variables[47] = initial_composition_Xe133[0];    
-    Sciantix_variables[48] = initial_composition_Xe133[1];
-    Sciantix_variables[49] = initial_composition_Xe133[2];
-    Sciantix_variables[50] = initial_composition_Xe133[3];
-    Sciantix_variables[51] = initial_composition_Xe133[4];
-    Sciantix_variables[52] = initial_composition_Xe133[5];
-    Sciantix_variables[53] = initial_composition_Xe133[6];
+    Sciantix_variables[48] = initial_composition_Xe133[0];    
+    Sciantix_variables[49] = initial_composition_Xe133[1];
+    Sciantix_variables[50] = initial_composition_Xe133[2];
+    Sciantix_variables[51] = initial_composition_Xe133[3];
+    Sciantix_variables[52] = initial_composition_Xe133[4];
+    Sciantix_variables[53] = initial_composition_Xe133[5];
+    Sciantix_variables[54] = initial_composition_Xe133[6];
 
   }
 

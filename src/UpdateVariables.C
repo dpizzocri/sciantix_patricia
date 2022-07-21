@@ -66,14 +66,15 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
   Sciantix_variables[43] = sciantix_variable[sv["U236"]].getFinalValue( );
   Sciantix_variables[44] = sciantix_variable[sv["U237"]].getFinalValue( );
   Sciantix_variables[45] = sciantix_variable[sv["U238"]].getFinalValue( );
-  Sciantix_variables[46] = sciantix_variable[sv["Intergranular venting probability"]].getFinalValue( );
-  Sciantix_variables[47] = sciantix_variable[sv["Xe133 produced"]].getFinalValue( );
-  Sciantix_variables[48] = sciantix_variable[sv["Xe133 in grain"]].getFinalValue( );
-  Sciantix_variables[49] = sciantix_variable[sv["Xe133 in intragranular solution"]].getFinalValue( );
-  Sciantix_variables[50] = sciantix_variable[sv["Xe133 in intragranular bubbles"]].getFinalValue( );
-  Sciantix_variables[51] = sciantix_variable[sv["Xe133 decayed"]].getFinalValue( );
-  Sciantix_variables[52] = sciantix_variable[sv["Xe133 at grain boundary"]].getFinalValue( );
-  Sciantix_variables[53] = sciantix_variable[sv["Xe133 released"]].getFinalValue( );
+  Sciantix_variables[46] = sciantix_variable[sv["Intergranular vented fraction"]].getFinalValue( );
+  Sciantix_variables[47] = sciantix_variable[sv["Intergranular venting probability"]].getFinalValue( );
+  Sciantix_variables[48] = sciantix_variable[sv["Xe133 produced"]].getFinalValue( );
+  Sciantix_variables[49] = sciantix_variable[sv["Xe133 in grain"]].getFinalValue( );
+  Sciantix_variables[50] = sciantix_variable[sv["Xe133 in intragranular solution"]].getFinalValue( );
+  Sciantix_variables[51] = sciantix_variable[sv["Xe133 in intragranular bubbles"]].getFinalValue( );
+  Sciantix_variables[52] = sciantix_variable[sv["Xe133 decayed"]].getFinalValue( );
+  Sciantix_variables[53] = sciantix_variable[sv["Xe133 at grain boundary"]].getFinalValue( );
+  Sciantix_variables[54] = sciantix_variable[sv["Xe133 released"]].getFinalValue( );
 
 
   for(int i = 0; i < n_modes; ++i)

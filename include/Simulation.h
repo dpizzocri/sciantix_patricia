@@ -666,27 +666,28 @@ class Simulation : public Solver, public Model
 
     // cracking invariant G = ln(F) - f
     const double cracking_invariant = 
-      log(sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()) - 
-      sciantix_variable[sv["intergranular fractional intactness"]].getFinalValue();
+       log(sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()) - 
+       sciantix_variable[sv["intergranular fractional intactness"]].getFinalValue();
     
-    const double sigmoid_parameter = exp(cracking_invariant + 1);
-    
+    double sigmoid_variable;
+    sigmoid_variable = exp(cracking_invariant + 1);
+    // sigmoid_variable = sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue() / sciantix_variable[sv["Intergranular fractional intactness"]].getInitialValue();
+
     // Vented fraction
     sciantix_variable[sv["Intergranular vented fraction"]].setFinalValue(
       1.0 / 
-      pow(( 1.0 + model[sm["Grain-boundary venting"]].getParameter().at(0) * 
+      pow( ( 1.0 + model[sm["Grain-boundary venting"]].getParameter().at(0) * 
             exp( - model[sm["Grain-boundary venting"]].getParameter().at(1) * 
-                ( sigmoid_parameter - model[sm["Grain-boundary venting"]].getParameter().at(2)) ) ),
-          (1.0 / model[sm["Grain-boundary venting"]].getParameter().at(0))
-          )
-      );
+                ( sigmoid_variable - model[sm["Grain-boundary venting"]].getParameter().at(2)) ) ),
+        (1.0 / model[sm["Grain-boundary venting"]].getParameter().at(0)))
+    );
     
     // Venting probability
     sciantix_variable[sv["Intergranular venting probability"]].setFinalValue(
       (1.0 - sciantix_variable[sv["Intergranular fractional intactness"]].getFinalValue()) 
       + sciantix_variable[sv["Intergranular fractional intactness"]].getFinalValue() * sciantix_variable[sv["Intergranular vented fraction"]].getFinalValue() 
     );
-
+    
     // Gas is vented by subtracting a fraction of the gas concentration at grain boundaries arrived from diffusion
     for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
       sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].setFinalValue(
@@ -695,7 +696,7 @@ class Simulation : public Solver, public Model
 	      - sciantix_variable[sv["Intergranular venting probability"]].getFinalValue(),
 	        sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getIncrement()
 	    )
-	  );
+    );
   }
 
 

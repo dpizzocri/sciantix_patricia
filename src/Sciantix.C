@@ -66,7 +66,7 @@ void Sciantix(int Sciantix_options[],
   if(input_variable[iv["iGrainBoundaryMicroCracking"]].getValue())
     simulation.GrainBoundaryMicroCracking( );
 
-  GrainBoundaryVenting( );                  MapModel();
+  GrainBoundaryVenting( );                        MapModel();
   if(input_variable[iv["iGrainBoundaryVenting"]].getValue())
     simulation.GrainBoundaryVenting( );
 
