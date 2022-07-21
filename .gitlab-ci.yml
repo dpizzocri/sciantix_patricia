@@ -1,0 +1,9 @@
+# stages:
+#  - build
+#  - code_quality
+
+# The lines below create a build job which build the source code using Makefile
+build:
+  stage: build
+  script:
+    - make

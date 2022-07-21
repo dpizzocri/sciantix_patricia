@@ -1,0 +1,97 @@
+Model #0: 	Burnup	Burnup evolution.
+Model #1: 	Grain growth	Ainscough et al., Journal of Nuclear Materials, 49 (1973) 117-128
+Model #2: 	Gas production - Xe in UO2	From cumulative yield
+Model #3: 	Gas production - Kr in UO2	From cumulative yield
+Model #4: 	Gas production - He in UO2	From cumulative yield
+Model #5: 	Gas production - Xe133 in UO2	From cumulative yield
+Model #6: 	Nucleation rate	Olander, Wongsawaeng, Journal of Nuclear Materials, 354 (2006), 94-109, table pag. 95
+Model #7: 	Resolution rate	J.A. Turnbull, Journal of Nuclear Materials, 38 (1971), 203
+Model #8: 	Intragranular bubble evolution	Pizzocri et al., JNM, 502 (2018) 323-330
+Model #9: 	Trapping rate	F.S. Ham, Journal of Physics and Chemistry of Solids, 6 (1958) 335-351.
+Model #10: 	Gas diffusion - Xe in UO2	Booth, A. H. (1957).
+Model #11: 	Gas diffusion - Kr in UO2	Booth, A. H. (1957).
+Model #12: 	Gas diffusion - He in UO2	Booth, A. H. (1957).
+Model #13: 	Gas diffusion - Xe133 in UO2	Booth, A. H. (1957).
+Model #14: 	Grain boundary vacancy diffusion coefficient	from G. L. Reynolds and B. Burton, JNM, 82 (1979) 22-25
+Model #15: 	Grain-boundary micro-cracking	from Barani et al. (2017), JNM
+Model #16: 	Intergranular bubble evolution	from G. Pastore et al., NED, 256 (2013) 75-86
+
+System #0: 	Xe in UO2	Donald R. Olander, & Motta, A. T. (2021). Light Water reactor Materials Volume II: Applications. In American Nuclear Society.
+Diffusivity from J. A. Turnbull et al (1988), Preston, UK.
+System #1: 	Kr in UO2	Donald R. Olander, & Motta, A. T. (2021). Light Water reactor Materials Volume II: Applications. In American Nuclear Society.
+System #2: 	He in UO2	Romano, M., Pizzocri, D., & Luzzi, L. (2021). On the intra-granular behaviour of a cocktail of inert gases in oxide nuclear fuel: Methodological recommendation for accelerated experimental investigation. Nuclear Engineering and Technology. https://doi.org/10.1016/J.NET.2021.11.020.
+System #3: 	Xe133 in UO2	Donald R. Olander, & Motta, A. T. (2021). Light Water reactor Materials Volume II: Applications. In American Nuclear Society.
+Diffusivity from J. A. Turnbull et al (1988), Preston, UK.
+
+Input setting #0: 	iGrainGrowth = 1
+Input setting #1: 	iGasDiffusionCoefficient = 1
+Input setting #2: 	iGasDiffusionSolver = 2
+Input setting #3: 	iIntraGranularBubbleEvolution = 1
+Input setting #4: 	iResolutionRate = 1
+Input setting #5: 	iTrappingRate = 1
+Input setting #6: 	iNucleationRate = 1
+Input setting #7: 	iOutput = 1
+Input setting #8: 	iGrainBoundaryVacancyDiffusionCoefficient = 1
+Input setting #9: 	iGrainBoundaryBehaviour = 1
+Input setting #10: 	iGrainBoundaryMicroCracking = 1
+Input setting #11: 	iFuelMatrix = 0
+Input setting #12: 	iGrainBoundaryVenting = 0
+Input setting #13: 	iRadioactiveFissionGas = 0
+Input setting #14: 	iHelium = 0
+
+Sciantix variable #0: 	Grain radius (m)
+Sciantix variable #1: 	Xe produced (at/m3)
+Sciantix variable #2: 	Xe in grain (at/m3)
+Sciantix variable #3: 	Xe in intragranular solution (at/m3)
+Sciantix variable #4: 	Xe in intragranular bubbles (at/m3)
+Sciantix variable #5: 	Xe at grain boundary (at/m3)
+Sciantix variable #6: 	Xe released (at/m3)
+Sciantix variable #7: 	Xe133 produced (at/m3)
+Sciantix variable #8: 	Xe133 in grain (at/m3)
+Sciantix variable #9: 	Xe133 in intragranular solution (at/m3)
+Sciantix variable #10: 	Xe133 in intragranular bubbles (at/m3)
+Sciantix variable #11: 	Xe133 decayed (at/m3)
+Sciantix variable #12: 	Xe133 at grain boundary (at/m3)
+Sciantix variable #13: 	Xe133 released (at/m3)
+Sciantix variable #14: 	Kr produced (at/m3)
+Sciantix variable #15: 	Kr in grain (at/m3)
+Sciantix variable #16: 	Kr in intragranular solution (at/m3)
+Sciantix variable #17: 	Kr in intragranular bubbles (at/m3)
+Sciantix variable #18: 	Kr at grain boundary (at/m3)
+Sciantix variable #19: 	Kr released (at/m3)
+Sciantix variable #20: 	He produced (at/m3)
+Sciantix variable #21: 	He in grain (at/m3)
+Sciantix variable #22: 	He in intragranular solution (at/m3)
+Sciantix variable #23: 	He in intragranular bubbles (at/m3)
+Sciantix variable #24: 	He at grain boundary (at/m3)
+Sciantix variable #25: 	He released (at/m3)
+Sciantix variable #26: 	Intragranular bubble concentration (bub/m3)
+Sciantix variable #27: 	Intragranular bubble radius (m)
+Sciantix variable #28: 	Intragranular bubble volume (m3)
+Sciantix variable #29: 	Intragranular Xe atoms per bubble (at/bub)
+Sciantix variable #30: 	Intragranular Kr atoms per bubble (at/bub)
+Sciantix variable #31: 	Intragranular He atoms per bubble (at/bub)
+Sciantix variable #32: 	Intragranular atoms per bubble (at/bub)
+Sciantix variable #33: 	Intragranular gas swelling (/)
+Sciantix variable #34: 	Intergranular bubble concentration (bub/m2)
+Sciantix variable #35: 	Intergranular Xe atoms per bubble (at/bub)
+Sciantix variable #36: 	Intergranular Kr atoms per bubble (at/bub)
+Sciantix variable #37: 	Intergranular He atoms per bubble (at/bub)
+Sciantix variable #38: 	Intergranular atoms per bubble (at/bub)
+Sciantix variable #39: 	Intergranular vacancies per bubble (vac/bub)
+Sciantix variable #40: 	Intergranular bubble radius (m)
+Sciantix variable #41: 	Intergranular bubble area (m2)
+Sciantix variable #42: 	Intergranular bubble volume (m3)
+Sciantix variable #43: 	Intergranular fractional coverage (/)
+Sciantix variable #44: 	Intergranular saturation fractional coverage (/)
+Sciantix variable #45: 	Intergranular gas swelling (/)
+Sciantix variable #46: 	Intergranular fractional intactness (/)
+Sciantix variable #47: 	Burnup (MWd/kgUO2)
+Sciantix variable #48: 	Effective burnup (MWd/kgUO2)
+Sciantix variable #49: 	Fuel density (kg/m3)
+Sciantix variable #50: 	U234 (kg/m3)
+Sciantix variable #51: 	U235 (kg/m3)
+Sciantix variable #52: 	U236 (kg/m3)
+Sciantix variable #53: 	U237 (kg/m3)
+Sciantix variable #54: 	U238 (kg/m3)
+Sciantix variable #55: 	Intergranular venting probability (/)

@@ -1,0 +1,13 @@
+1	#	igrain_growth
+1	#	igas_diffusion_coefficient
+1	#	iintra_bubble_evolution
+1	#	iresolution_rate
+1	#	itrapping_rate
+1	#	inucleation_rate
+1	#	isolver
+1	#	ioutput
+1	#	igrain_boundary_vacancy_diffusion_coefficient
+1	#	igrain_boundary_behaviour
+1	#	igrain_boundary_micro_cracking
+0	#	ifuel_matrix
+0   #   igrain_boundary_venting
