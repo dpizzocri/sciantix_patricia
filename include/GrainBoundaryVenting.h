@@ -18,6 +18,7 @@
 #include "HistoryVariableDeclaration.h"
 #include "PhysicsConstantDeclaration.h"
 #include "ModelDeclaration.h"
+#include "SciantixScalingFactorDeclaration.h"
 
 #include "MapSciantixVariable.h"
 #include "MapHistoryVariable.h"

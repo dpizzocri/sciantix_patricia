@@ -657,6 +657,9 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sf_trapping_rate   = Sciantix_scaling_factors[1];
   sf_nucleation_rate = Sciantix_scaling_factors[2];
   sf_diffusion_coeff = Sciantix_scaling_factors[3];
+  sf_screw_parameter = Sciantix_scaling_factors[4];
+  sf_span_parameter  = Sciantix_scaling_factors[5];
+  sf_cent_parameter  = Sciantix_scaling_factors[6]; 
   // ----------------------------------------------------------------------------
   // Maps
   // ----------------------------------------------------------------------------

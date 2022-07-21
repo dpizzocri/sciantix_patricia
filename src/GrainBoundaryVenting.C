@@ -28,15 +28,15 @@ void GrainBoundaryVenting( )
   
   // screw parameter
   const double screw_parameter = 0.1;
-  parameter.push_back(screw_parameter);
+  parameter.push_back(sf_screw_parameter * screw_parameter);
 
   // span parameter
-  const double span_parameter = 12.0;
-  parameter.push_back(span_parameter);
+  const double span_parameter = 10.0;
+  parameter.push_back(sf_span_parameter * span_parameter);
 
   // cent parameter
   const double cent_parameter = 0.43;
-  parameter.push_back(cent_parameter);
+  parameter.push_back(sf_cent_parameter * cent_parameter);
   
   model[model_index].setParameter(parameter);
   model[model_index].setRef("from Pizzocri et al., D6.1 (2020), H2020 Project INSPYRE");
