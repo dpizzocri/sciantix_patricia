@@ -440,8 +440,6 @@ class Simulation : public Solver, public Model
     sciantix_variable[sv["Intergranular bubble concentration"]].setFinalValue(
       solver.BinaryInteraction(sciantix_variable[sv["Intergranular bubble concentration"]].getInitialValue(), 2.0, dbubble_area));
 
-    /*
-
     // Conservation
     for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
     {
@@ -552,7 +550,6 @@ class Simulation : public Solver, public Model
       sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() *
       sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue()
     );
-  */
   }
 
   void GrainBoundaryMicroCracking( )
