@@ -33,7 +33,7 @@ void Initialization( )
 
   // Sciantix_variables initialization
   Sciantix_variables[25] = 4.0e+13;  // Intergranular_bubble_concentration[0]
-  Sciantix_variables[35] = 0.5;      // Intergranular_saturation_fractional_coverage[0]
+  Sciantix_variables[35] = 1.0;      // Intergranular_saturation_fractional_coverage[0]
   Sciantix_variables[37] = 1.0;      // Intergranular_fractional_intactness[0]
 
   // https://pubchem.ncbi.nlm.nih.gov/compound/Uranium-234
@@ -54,10 +54,10 @@ void Initialization( )
   for (k = 0; k < K; ++k)
   {
     switch (k)
-		{
-  		case 0  : initial_condition = Sciantix_variables[2];  break;  // Xe in grain
-  		case 1  : initial_condition = Sciantix_variables[3];  break;  // Xe in grain - solution
-    	case 2  : initial_condition = Sciantix_variables[4];  break;  // Xe in grain - bubbles
+	{
+  	  case 0  : initial_condition = Sciantix_variables[2];  break;  // Xe in grain
+  	  case 1  : initial_condition = Sciantix_variables[3];  break;  // Xe in grain - solution
+      case 2  : initial_condition = Sciantix_variables[4];  break;  // Xe in grain - bubbles
 
       case 3  : initial_condition = Sciantix_variables[8];  break;  // Kr in grain
       case 4  : initial_condition = Sciantix_variables[9];  break;  // Kr in grain - solution

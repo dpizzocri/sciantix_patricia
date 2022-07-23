@@ -440,6 +440,8 @@ class Simulation : public Solver, public Model
     sciantix_variable[sv["Intergranular bubble concentration"]].setFinalValue(
       solver.BinaryInteraction(sciantix_variable[sv["Intergranular bubble concentration"]].getInitialValue(), 2.0, dbubble_area));
 
+    /*
+
     // Conservation
     for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
     {
@@ -550,6 +552,7 @@ class Simulation : public Solver, public Model
       sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() *
       sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue()
     );
+  */
   }
 
   void GrainBoundaryMicroCracking( )
@@ -663,24 +666,42 @@ class Simulation : public Solver, public Model
 
   void GrainBoundaryVenting( )
   {
+    const double grain_edge_length = 0.57 * sciantix_variable[sv["Grain radius"]].getFinalValue();
+    const double geom_density = sciantix_variable[sv["Fuel density"]].getFinalValue() / 10950;
+    const double porosity = 1 - geom_density;
+    const double b = 0.547 * sqrt(porosity/20) * grain_edge_length;
+    const double prob = 2 / (grain_edge_length * grain_edge_length) * sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * 
+      (sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() + 2 * b);
+    //const double R_crit = - b + sqrt(b*b + grain_edge_length * grain_edge_length * 0.5);
+    const double R_crit = (grain_edge_length - 2*b)*0.25;
+
+    std::cout << "---" << std::endl;
+    std::cout << grain_edge_length << std::endl;
+    std::cout << porosity << std::endl;
+    std::cout << b << std::endl;
+    std::cout << prob << std::endl;
+    std::cout << R_crit << std::endl;
+
     // cracking invariant G = ln(F) - f
     const double cracking_invariant = 
        log(sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()) - 
-       sciantix_variable[sv["intergranular fractional intactness"]].getFinalValue();
+       sciantix_variable[sv["Intergranular fractional intactness"]].getFinalValue();
     
     double sigmoid_variable;
     sigmoid_variable = exp(cracking_invariant + 1);
-    // sigmoid_variable = sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue() / sciantix_variable[sv["Intergranular fractional intactness"]].getInitialValue();
 
     // Vented fraction
-    sciantix_variable[sv["Intergranular vented fraction"]].setFinalValue(
-      1.0 / 
-      pow( ( 1.0 + model[sm["Grain-boundary venting"]].getParameter().at(0) * 
-            exp( - model[sm["Grain-boundary venting"]].getParameter().at(1) * 
-                ( sigmoid_variable - model[sm["Grain-boundary venting"]].getParameter().at(2)) ) ),
-        (1.0 / model[sm["Grain-boundary venting"]].getParameter().at(0)))
-    );
-    
+    if(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() < R_crit)
+      sciantix_variable[sv["Intergranular vented fraction"]].setFinalValue(prob);
+    else
+      sciantix_variable[sv["Intergranular vented fraction"]].setFinalValue(
+        1.0 / 
+        pow( ( 1.0 + model[sm["Grain-boundary venting"]].getParameter().at(0) * 
+              exp( - model[sm["Grain-boundary venting"]].getParameter().at(1) * 
+                  ( sigmoid_variable - model[sm["Grain-boundary venting"]].getParameter().at(2)) ) ),
+          (1.0 / model[sm["Grain-boundary venting"]].getParameter().at(0)))
+      );
+
     // Venting probability
     sciantix_variable[sv["Intergranular venting probability"]].setFinalValue(
       (1.0 - sciantix_variable[sv["Intergranular fractional intactness"]].getFinalValue()) 
