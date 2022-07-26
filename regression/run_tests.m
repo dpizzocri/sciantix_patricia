@@ -14,7 +14,7 @@ tic
 
 % 0 = regression test function
 % 1 = gold function
-mode_GOLD = 0;
+mode_GOLD = 1;
 
 % name of the executable to be tested
 exe_name = 'sciantix.exe'; 

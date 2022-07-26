@@ -72,7 +72,6 @@ std::vector<double> ReadSeveralParameters(std::string variable_name, std::ifstre
   return vector_read;
 }
 
-
 void InputReading( )
 {
   /// Besides the two input files, this routines creates an input_check.txt file
