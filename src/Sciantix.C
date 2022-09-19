@@ -43,7 +43,8 @@ void Sciantix(int Sciantix_options[],
     simulation.GrainGrowthANN();
 
   GrainBoundarySweeping( );                       MapModel();
-  simulation.GrainBoundarySweeping( );
+  if(input_variable[iv["iGrainBoundarySweeping"]].getValue())
+    simulation.GrainBoundarySweeping( );
   
   GasProduction( );                               MapModel();
   simulation.GasProduction();
