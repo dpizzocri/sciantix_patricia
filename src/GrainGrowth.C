@@ -6,7 +6,7 @@
 //  Version: 1.4                         //
 //  Year   : 2019                        //
 //  Authors: D. Pizzocri and T. Barani   //
-//           L. Cognini                  //
+//           G. Zullo, F. Rotea          //
 ///////////////////////////////////////////
 
 /// GrainGrowth
@@ -58,8 +58,15 @@ void GrainGrowth( )
       grain_diameter_limit = 2.23e+03 * exp(-7620.0 / temperature) / um_m;
       burnup_factor = 1.0 + 2 * burnup / U_UO2;
       source_term = - (grain_boundary_mobility * burnup_factor) / grain_diameter_limit;
-      grain_diameter = Solver::LimitedGrowth(grain_diameter, grain_boundary_mobility, source_term, dTime_s);
-      Grain_radius[1] = grain_diameter / 2.0;
+      
+      if(grain_diameter < grain_diameter_limit / burnup_factor)
+      {
+        grain_diameter = Solver::LimitedGrowth(grain_diameter, grain_boundary_mobility, source_term, dTime_s);
+        Grain_radius[1] = grain_diameter / 2.0;
+      }
+      else
+        Grain_radius[1] = Grain_radius[0];
+
       break;
     }
 
