@@ -36,8 +36,7 @@
 #include "MapSystem.h"
 
 #include "GrainGrowth.h"
-#include "TrappingRate.h"
-#include "ResolutionRate.h"
+#include "GrainBoundarySweeping.h"
 #include "NucleationRate.h"
 #include "GasProduction.h"
 #include "GasDiffusion.h"

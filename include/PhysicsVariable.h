@@ -51,6 +51,11 @@ class PhysicsVariable : virtual public Variable
       return uom;
     }
 
+    void setConstant()
+    {
+      final_value = initial_value;
+    }
+
     void setFinalValue(double FinalValue)
     {
       final_value = FinalValue;

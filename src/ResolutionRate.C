@@ -38,8 +38,10 @@ void ResolutionRate( )
       model[model_index].setRef(reference);
       break;
     }
+
     case 1 :
     {
+      // The irradiation-induced resolution rate is here the same for all the fission gas
       std::string reference = "J.A. Turnbull, Journal of Nuclear Materials, 38 (1971), 203";
       double resolution_rate = 2.0 * M_PI * matrix[sma["UO2"]].getFFrange() * pow(matrix[sma["UO2"]].getFFinfluenceRadius()
                         + sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue(), 2) * history_variable[hv["Fission rate"]].getFinalValue();
@@ -65,7 +67,7 @@ void ResolutionRate( )
 
       break;
     }
-
+    
     default :
       ErrorMessages::Switch("model for resolution rate", "iresolution_rate", input_variable[iv["iResolutionRate"]].getValue());
       break;

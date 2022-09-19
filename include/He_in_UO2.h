@@ -16,7 +16,11 @@
 
 #include "SystemDeclaration.h"
 #include "MatrixDeclaration.h"
+#include "SciantixVariableDeclaration.h"
+#include "MapSciantixVariable.h"
 #include "MapMatrix.h"
 #include "SciantixScalingFactorDeclaration.h"
+
+/// He_in_UO2
 
 void He_in_UO2( );

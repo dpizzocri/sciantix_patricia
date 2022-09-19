@@ -141,7 +141,7 @@ p1 = loglog(gb_swelling_white, gb_swelling_1_0,'r.','MarkerSize',16);
 hold on
 p2 = loglog(gb_swelling_white, gb_swelling_gold,'g.','MarkerSize',16);
 hold on
-p3 = loglog(gb_swelling_white, gb_swelling_test,'k+','MarkerSize',16);
+p3 = loglog(gb_swelling_white, gb_swelling_test,'b.','MarkerSize',16);
 hold on
 plot([10^-3 10^2],[10^-3 10^2],'k-')
 hold on
@@ -149,14 +149,14 @@ plot([10^-3 10^2],[2*10^-3 2*10^2],'k--')
 hold on
 plot([10^-3 10^2],[0.5*10^-3 0.5*10^2],'k--')
 hold on
-title('Inter-granular bubble swelling %')
+title('Inter-granular gaseous swelling')
 ylabel('Simulated (%)')
 xlabel('Experimental (%)')
 xlim([10^-3 10^2])
 ylim([10^-3 10^2])
-legend([p1 p2 p3],{'SCIANTIX 1.0','SCIANTIX 2.0 gold', 'SCIANTIX 2.0 test'},'location','NorthWest')
+legend([p1 p2 p3],{'SCIANTIX 1.0','SCIANTIX 2.0 GOLD', 'SCIANTIX 2.0 TEST'},'location','best')
 
-% saveas(gcf,'White et al 2006.png');
+saveas(gcf,'White et al 2006.png');
 
 %% Baker
 test_list = ["test_Baker1977__1273K", ...
@@ -238,11 +238,147 @@ plot([10^-3 10^2],[2*10^-3 2*10^2],'k--')
 hold on
 plot([10^-3 10^2],[0.5*10^-3 0.5*10^2],'k--')
 hold on
-title('Intra-granular bubble swelling %')
+title('Intra-granular gaseous swelling')
 ylabel('Simulated (%)')
 xlabel('Experimental (%)')
 xlim([10^-3 10^2])
 ylim([10^-3 10^2])
-legend([p1 p2 p3],{'SCIANTIX 1.0','SCIANTIX 2.0 gold', 'SCIANTIX 2.0 test'},'location','NorthWest')
+legend([p1 p2 p3],{'SCIANTIX 1.0','SCIANTIX 2.0 GOLD', 'SCIANTIX 2.0 TEST'},'location','best')
 
-% saveas(gcf,'Baker 1977.png');
+saveas(gcf,'Baker 1977.png');
+
+%% Plot with intra- and inter-granular gaseous swelling
+
+% figure
+% p1 = loglog(gb_swelling_white, gb_swelling_1_0,'r.','MarkerSize',16);
+% hold on
+% p2 = loglog(gb_swelling_white, gb_swelling_gold,'g.','MarkerSize',16);
+% hold on
+% p3 = loglog(ig_swelling_baker, ig_swelling_1_0,'r.','MarkerSize',16);
+% hold on
+% p4 = loglog(ig_swelling_baker, ig_swelling_gold,'g.','MarkerSize',16);
+% hold on
+% plot([10^-3 10^2],[10^-3 10^2],'k-')
+% hold on
+% % plot([10^-3 10^2],[2*10^-3 2*10^2],'k--')
+% % hold on
+% % plot([10^-3 10^2],[0.5*10^-3 0.5*10^2],'k--')
+% % hold on
+% title('Gaseous swelling (%)')
+% ylabel('Simulated (%)')
+% xlabel('Experimental (%)')
+% xlim([10^-2 10^1])
+% ylim([10^-2 10^1])
+
+% legend([p1 p2],{'SCIANTIX 1.0','SCIANTIX 2.0'},'location','best')
+
+%% II Plot of GB gaseous swelling
+figure
+p1 = loglog(gb_swelling_white, gb_swelling_1_0,'r.','MarkerSize',16);
+hold on
+p2 = loglog(gb_swelling_white, gb_swelling_test,'g.','MarkerSize',16);
+hold on
+plot([10^-3 10^2],[10^-3 10^2],'k-')
+hold on
+plot([10^-3 10^2],[2*10^-3 2*10^2],'k--')
+hold on
+plot([10^-3 10^2],[0.5*10^-3 0.5*10^2],'k--')
+hold on
+title('Inter-granular gaseous swelling')
+ylabel('Simulated (%)')
+xlabel('Experimental (%)')
+xlim([10^-3 10^2])
+ylim([10^-3 10^2])
+legend([p1 p2],{'SCIANTIX 1.0','SCIANTIX 2.0'},'location','best')
+
+saveas(gcf,'White et al 2006 (venting).png');
+
+%% Plot: Talip database
+% add a folder name to add a test
+test_list = ["test_Talip2014_1400K", ...
+             "test_Talip2014_1600K", ...
+             "test_Talip2014_1663K", ...
+             "test_Talip2014_1800K", ...
+             "test_Talip2014_2265.4K", ...
+             "test_Talip2014_2323K", ...
+             ];
+
+test_num  = length(test_list);
+
+root = strcat(pwd,"\");
+
+destination_path = strcat(root,test_list(1),'\');
+cd(destination_path)
+output_file = importdata('output.txt');
+length_output = numel(output_file.colheaders);
+output_file = importdata('output_gold.txt');
+length_output_gold = numel(output_file.colheaders);
+cd ..
+
+%% output.txt
+% positions of interest
+for jj = 1:length_output
+    destination_path = strcat(root,test_list(1),'\');
+    cd(destination_path)
+    output_file = importdata('output.txt');
+    if(output_file.colheaders(1, jj) == "He fractional release (/)")
+        he_fractional_release_col = jj;
+    end
+    if(output_file.colheaders(1, jj) == "He release rate (at/m3 s)")
+        he_release_rate_col = jj;
+    end
+    cd ..
+end
+
+% import he fractional release from output.txt
+jj = 1;
+destination_path = strcat(root,test_list(jj),'\');
+cd(destination_path)
+output_file = importdata('output.txt');
+time1 = output_file.data(:,1);
+temperature1 = output_file.data(:,2);
+he_fractional_release1 = output_file.data(:,he_fractional_release_col);
+he_release_rate1 = output_file.data(:,he_release_rate_col);
+cd ..
+
+jj = 2;
+destination_path = strcat(root,test_list(jj),'\');
+cd(destination_path)
+output_file = importdata('output.txt');
+time2 = output_file.data(:,1);
+temperature2 = output_file.data(:,2);
+he_fractional_release2 = output_file.data(:,he_fractional_release_col);
+he_release_rate2 = output_file.data(:,he_release_rate_col);
+cd ..
+
+
+
+figure
+p1 = plot(time1, he_fractional_release1,'b-','MarkerSize',16);
+hold on
+yyaxis right
+p3 = plot(time1, temperature1,'r.','MarkerSize',16);
+hold on
+% p3 = loglog(gb_swelling_white, gb_swelling_test,'b.','MarkerSize',16);
+% hold on
+% plot([10^-3 10^2],[10^-3 10^2],'k-')
+% hold on
+% plot([10^-3 10^2],[2*10^-3 2*10^2],'k--')
+% hold on
+% plot([10^-3 10^2],[0.5*10^-3 0.5*10^2],'k--')
+% hold on
+title('He fractional release')
+xlabel('Time (h)')
+ylabel('He fractional release (/)')
+% xlim([10^-3 10^2])
+% ylim([10^-3 10^2])
+% legend([p1 p2 p3],{'SCIANTIX 1.0','SCIANTIX 2.0 GOLD', 'SCIANTIX 2.0 TEST'},'location','best')
+
+figure
+p1 = plot(temperature1, he_release_rate1,'b-','MarkerSize',16);
+xlabel('Temperature (K)')
+ylabel('He release rate (at m^{-3} s^{-1})')
+
+
+
+

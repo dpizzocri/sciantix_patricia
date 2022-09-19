@@ -18,6 +18,8 @@
 #include "MatrixDeclaration.h"
 #include "MapMatrix.h"
 #include "SciantixScalingFactorDeclaration.h"
+#include "SciantixVariableDeclaration.h"
+#include "MapSciantixVariable.h"
 
 /// Xe_in_UO2
 

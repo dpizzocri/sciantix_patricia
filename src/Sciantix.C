@@ -41,25 +41,24 @@ void Sciantix(int Sciantix_options[],
     simulation.GrainGrowth();
   else if(input_variable[iv["iGrainGrowth"]].getValue() == 2)
     simulation.GrainGrowthANN();
+
+  GrainBoundarySweeping( );                       MapModel();
+  simulation.GrainBoundarySweeping( );
   
-  // Fission gas behaviour
   GasProduction( );                               MapModel();
   simulation.GasProduction();
 
   simulation.GasDecay();
 
   NucleationRate( );                              MapModel();
-  ResolutionRate( );                              MapModel();
 
   IntraGranularBubbleEvolution( );                MapModel();
-
-  simulation.IntraGranularBubbleBehaviour();
-  TrappingRate( );                                MapModel();
+  if(input_variable[iv["iIntraGranularBubbleEvolution"]].getValue() != 3)
+    simulation.IntraGranularBubbleBehaviour();
 
   GasDiffusion( );                                MapModel(); 
   simulation.GasDiffusion();
 
-  // Intergranular gas / bubble behaviour
   GrainBoundaryVacancyDiffusionCoefficient( );    MapModel();
 
   GrainBoundaryMicroCracking( );                  MapModel();
@@ -71,7 +70,8 @@ void Sciantix(int Sciantix_options[],
     simulation.GrainBoundaryVenting( );
 
   InterGranularBubbleEvolution( );                MapModel();
-  simulation.InterGranularBubbleBehaviour();
+  if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() != 2)
+    simulation.InterGranularBubbleBehaviour();
 
   UpdateVariables(Sciantix_variables, Sciantix_diffusion_modes);
 

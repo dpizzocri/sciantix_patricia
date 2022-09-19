@@ -41,12 +41,12 @@ void GasDiffusion( )
         model.emplace_back();
         model_index = model.size() - 1;
         model[model_index].setName("Gas diffusion - " + sciantix_system[i].getName());
-        model[model_index].setRef("Booth, A. H. (1957).");
+        model[model_index].setRef("Booth, A. H. (1957), Speight 1969.");
 
         parameter.push_back(n_modes); // number of modes
         parameter.push_back(
-          ( model[sm["Resolution rate"]].getParameter( ).front() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) /
-          ( model[sm["Resolution rate"]].getParameter( ).front() + model[sm["Trapping rate"]].getParameter( ).front() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) * sciantix_system[i].getDiffusivity()); // effective diffusivity
+          ( sciantix_system[i].getResolutionRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) /
+          ( sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) * sciantix_system[i].getDiffusivity()); // effective diffusivity
         parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue()); // grain radius
         parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue()); // production rate
         parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate() ); // decay rate
@@ -77,12 +77,12 @@ void GasDiffusion( )
         model.emplace_back();
         model_index = model.size() - 1;
         model[model_index].setName("Gas diffusion - " + sciantix_system[i].getName());
-        model[model_index].setRef("Booth, A. H. (1957).");
+        model[model_index].setRef("Booth, A. H. (1957), Speight (1969) withouth quasi-stationary hypothesis.");
 
         parameter.push_back(n_modes); // number of modes
         parameter.push_back(sciantix_system[i].getDiffusivity()); // diffusivity
-        parameter.push_back(model[sm["Resolution rate"]].getParameter( ).front());
-        parameter.push_back(model[sm["Trapping rate"]].getParameter( ).front());
+        parameter.push_back(sciantix_system[i].getResolutionRate()); // resolution rate
+        parameter.push_back(sciantix_system[i].getTrappingRate()); // trapping rate
         parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate() ); // decay rate
         parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue()); // grain radius
         parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue()); // production rate

@@ -19,9 +19,6 @@
 /// SetMatrix
 /// This routine defines the materials of the fuel matrix and their properties
 
-// to be come setModel
-// una serie di file
-
 void SetMatrix( )
 {
   for(int m = 0; m < 1; ++m)

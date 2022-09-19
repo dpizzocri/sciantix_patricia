@@ -65,8 +65,8 @@ void GrainGrowth( )
       double burnup_factor(0.0); // (/)
 
       grain_diameter_limit = 2.23e-03 * exp(-7620.0 / history_variable[hv["Temperature"]].getFinalValue());
-      burnup_factor = 1.0 + 0.002 * sciantix_variable[sv["Burnup"]].getFinalValue() / 0.88 * 1.0e-03;
-
+      burnup_factor = 1.0 + 2.0 * sciantix_variable[sv["Burnup"]].getFinalValue() / 0.88;
+      
       parameter.push_back(matrix[sma["UO2"]].getGrainBoundaryMobility()); // parameter[0] = growth rate
       parameter.push_back(- (matrix[sma["UO2"]].getGrainBoundaryMobility() * burnup_factor) / grain_diameter_limit); // parameter[1] = source term
 

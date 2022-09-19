@@ -58,9 +58,11 @@ void IntraGranularBubbleEvolution( )
 
     case 1 :
     {
+      // Evolution of intra-granular bubbles with fission gases (xenon and krypton)
+
       std::string reference = "Pizzocri et al., JNM, 502 (2018) 323-330";
       std::vector<double> parameter;
-      parameter.push_back(model[sm["Resolution rate"]].getParameter().front()); // decay rate
+      parameter.push_back(sciantix_system[sy["Xe in UO2"]].getResolutionRate()); // decay rate
       parameter.push_back(model[sm["Nucleation rate"]].getParameter().front()); // source rate
 
       model[model_index].setParameter(parameter);
@@ -95,6 +97,30 @@ void IntraGranularBubbleEvolution( )
 
       break;
     }
+
+    case 3 :
+    {
+      // Evolution of intra-granular bubbles with helium (only helium considered)
+
+      std::string reference = "Model for evolution of intra-granular bubbles with helium.";
+
+      sciantix_variable[sv["Intragranular bubble concentration"]].setInitialValue(2.08e+20);
+      sciantix_variable[sv["Intragranular bubble radius"]].setInitialValue(1.0e-9);
+      sciantix_variable[sv["Intragranular atoms per bubble"]].setInitialValue(400);
+      
+      sciantix_variable[sv["Intragranular bubble concentration"]].setFinalValue(2.08e+20);
+      sciantix_variable[sv["Intragranular bubble radius"]].setFinalValue(1.0e-9);
+      sciantix_variable[sv["Intragranular atoms per bubble"]].setFinalValue(400);
+
+      std::vector<double> parameter;
+      parameter.push_back(0.);
+      parameter.push_back(0.);
+      model[model_index].setParameter(parameter);
+      model[model_index].setRef(reference);
+
+      break;
+    }
+
     default :
       ErrorMessages::Switch("model for intragranular bubble evolution", "iintra_bubble_evolution", input_variable[iv["iIntraGranularBubbleEvolution"]].getValue());
       break;

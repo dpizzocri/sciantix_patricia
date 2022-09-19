@@ -106,6 +106,7 @@ void InputReading( )
   Sciantix_options[12] = ReadOneSetting("igrain_boundary_venting", input_settings, input_check);
   Sciantix_options[13] = ReadOneSetting("iradioactive_fission_gas", input_settings, input_check);
   Sciantix_options[14] = ReadOneSetting("ihelium", input_settings, input_check);
+  Sciantix_options[15] = ReadOneSetting("igrain_boundary_sweeping", input_settings, input_check);
 
   if (!input_initial_conditions.fail())
   {

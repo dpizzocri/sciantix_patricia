@@ -30,10 +30,6 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   // Input variable
   // The vector is used to collect all user input settings relating to the choice of SCIANTIX models
   // -----------------------------------------------------------------------------------------------
-
-  // TO DO:
-  // add some if-loops to activate/deactivate output quantities according to input settings
-  // e.g., if gb venting is off -> venting probability not in output
   int iv_counter(0);
   if(input_variable.empty())
   {
@@ -111,6 +107,11 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
     input_variable[iv_counter].setName("iHelium");
     input_variable[iv_counter].setValue(Sciantix_options[14]);
     ++iv_counter;
+
+    input_variable.emplace_back();
+    input_variable[iv_counter].setName("iGrainBoundarySweeping");
+    input_variable[iv_counter].setValue(Sciantix_options[15]);
+    ++iv_counter;
   }
   MapInputVariable();
 
@@ -125,6 +126,9 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 
   bool toOutputCracking(0);
   if(input_variable[iv["iGrainBoundaryMicroCracking"]].getValue() != 0) toOutputCracking = 1;
+
+  bool toOutputGrainBoundary(0);
+  if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1) toOutputGrainBoundary = 1;
 
   // ----------------------------------------------------------------------------
   // Physics variable
@@ -233,6 +237,14 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   ++sv_counter;
 
   sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("Xe decayed");
+  sciantix_variable[sv_counter].setUOM("(at/m3)");
+  sciantix_variable[sv_counter].setInitialValue(0.0);
+  sciantix_variable[sv_counter].setFinalValue(0.0);
+  sciantix_variable[sv_counter].setOutput(0);
+  ++sv_counter;
+  
+  sciantix_variable.emplace_back();
   sciantix_variable[sv_counter].setName("Xe133 produced");
   sciantix_variable[sv_counter].setUOM("(at/m3)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[48]);
@@ -287,6 +299,14 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[54]);
   sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
   ++sv_counter;
+  
+  sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("Xe133 R/B");
+  sciantix_variable[sv_counter].setUOM("(/)");
+  sciantix_variable[sv_counter].setInitialValue(0.0);
+  sciantix_variable[sv_counter].setFinalValue(0.0);
+  sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
+  ++sv_counter;
 
   sciantix_variable.emplace_back();
   sciantix_variable[sv_counter].setName("Kr produced");
@@ -337,6 +357,22 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   ++sv_counter;
 
   sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("Kr decayed");
+  sciantix_variable[sv_counter].setUOM("(at/m3)");
+  sciantix_variable[sv_counter].setInitialValue(0.0);
+  sciantix_variable[sv_counter].setFinalValue(0.0);
+  sciantix_variable[sv_counter].setOutput(0);
+  ++sv_counter;
+
+  sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("Fission gas release");
+  sciantix_variable[sv_counter].setUOM("(/)");
+  sciantix_variable[sv_counter].setInitialValue(0.0);
+  sciantix_variable[sv_counter].setFinalValue(0.0);
+  sciantix_variable[sv_counter].setOutput(1);
+  ++sv_counter;
+
+  sciantix_variable.emplace_back();
   sciantix_variable[sv_counter].setName("He produced");
   sciantix_variable[sv_counter].setUOM("(at/m3)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[13]);
@@ -381,6 +417,30 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(at/m3)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[18]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[18]);
+  sciantix_variable[sv_counter].setOutput(toOutputHelium);
+  ++sv_counter;
+
+  sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("He decayed");
+  sciantix_variable[sv_counter].setUOM("(at/m3)");
+  sciantix_variable[sv_counter].setInitialValue(0.0);
+  sciantix_variable[sv_counter].setFinalValue(0.0);
+  sciantix_variable[sv_counter].setOutput(0);
+  ++sv_counter;
+
+  sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("He fractional release");
+  sciantix_variable[sv_counter].setUOM("(/)");
+  sciantix_variable[sv_counter].setInitialValue(0.0);
+  sciantix_variable[sv_counter].setFinalValue(0.0);
+  sciantix_variable[sv_counter].setOutput(toOutputHelium);
+  ++sv_counter;
+
+  sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("He release rate");
+  sciantix_variable[sv_counter].setUOM("(at/m3 s)");
+  sciantix_variable[sv_counter].setInitialValue(0.0);
+  sciantix_variable[sv_counter].setFinalValue(0.0);
   sciantix_variable[sv_counter].setOutput(toOutputHelium);
   ++sv_counter;
 
@@ -453,7 +513,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(bub/m2)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[25]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[25]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -485,7 +545,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(at/bub)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[29]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[29]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -493,7 +553,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(vac/bub)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[30]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[30]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -501,7 +561,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(m)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[31]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[31]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -509,7 +569,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(m2)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[32]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[32]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -517,7 +577,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(m3)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[33]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[33]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -525,7 +585,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(/)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[34]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[34]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -533,7 +593,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(/)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[35]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[35]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -541,7 +601,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(/)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[36]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[36]);
-  sciantix_variable[sv_counter].setOutput(1);
+  sciantix_variable[sv_counter].setOutput(toOutputGrainBoundary);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -621,7 +681,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setUOM("(/)");
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[46]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[46]);
-  sciantix_variable[sv_counter].setOutput(0);
+  sciantix_variable[sv_counter].setOutput(toOutputVenting);
   ++sv_counter;
   
   sciantix_variable.emplace_back();

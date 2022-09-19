@@ -4,7 +4,8 @@ clc
 
 tic
 
-%% Regression test [A. Magni, D. Pizzocri]
+%% Regression test [A. Magni, D. Pizzocri, G. Zullo]
+% for White and Baker validation
 % This function performs the regression test of the SCIANTIX version 
 % placed in this folder (i.e., sciantix.exe, line 16).
 % mode_GOLD = 0: execute all the simulations of the database and gives back (for each simulation)
@@ -14,10 +15,10 @@ tic
 
 % 0 = regression test function
 % 1 = gold function
-mode_GOLD = 1;
+mode_GOLD = 0;
 
 % name of the executable to be tested
-exe_name = 'sciantix.exe'; 
+exe_name = 'sciantix_codeblocks.exe'; 
 
 % name of the input_settings.txt file, copied and pasted in all the
 % subdirectories being tested
@@ -78,7 +79,6 @@ test_list = ["test_Baker1977__1273K", ...
              "test_White2004_4163-4", ...
              ];
 
-
 test_num  = length(test_list);
 
 root = strcat(pwd,"\");
@@ -89,6 +89,72 @@ for ii = 1 : test_num
         
    copyfile(exe_name, strcat(test_path, exe_name));
    copyfile(input_settings_name, strcat(test_path, input_settings_name));
+        
+   disp(strcat("Running      ", test_list(ii)));
+
+   cd (test_path)
+   [status,result] = system(exe_name);
+   
+   if(~mode_GOLD)
+     gold = importdata('output_gold.txt');
+     test = importdata('output.txt');
+     % The two output file MUST have the same numbers of colums with the
+     % same labelling! Adding a new column, removing one or simply changing
+     % the name, provokes the test to FAIL!
+     if(isequaln(gold.data, test.data)) 
+          fprintf(  "............................PASSED\n");
+     else fprintf(2,"............................FAILED\n");
+     end
+
+   end
+
+   if(mode_GOLD)
+     copyfile("output.txt", "output_gold.txt");
+     fprintf(  "..............................GOLD\n");
+   end
+   
+   delete('execution.txt');
+   delete('overview.txt');
+   delete('input_check.txt');
+   delete(exe_name);
+   
+   cd ..
+end
+
+%% Regression test [A. Magni, D. Pizzocri, G. Zullo]
+% for Talip validation
+% This function performs the regression test of the SCIANTIX version 
+% placed in this folder (i.e., sciantix.exe, line 16).
+% mode_GOLD = 0: execute all the simulations of the database and gives back (for each simulation)
+% PASSED if the output file is equal to the output_gold file (in the folders),
+% FAILED, otherwise.
+% mode_GOLD = 1: replace the output_gold files with the output produced by the current executable file.
+
+% 0 = regression test function
+% 1 = gold function
+mode_GOLD = 0;
+
+% name of the executable to be tested
+exe_name = 'sciantix_codeblocks.exe';
+
+% add a folder name to add a test
+test_list = ["test_Talip2014_1400K", ...
+             "test_Talip2014_1600K", ...
+             "test_Talip2014_1663K", ...
+             "test_Talip2014_1800K", ...
+             "test_Talip2014_2265.4K", ...
+             "test_Talip2014_2323K", ...
+             ];
+
+test_num  = length(test_list);
+
+root = strcat(pwd,"\");
+
+for ii = 1 : test_num
+   
+   test_path = strcat(root, test_list(ii), '\');
+        
+   copyfile(exe_name, strcat(test_path, exe_name));
         
    disp(strcat("Running      ", test_list(ii)));
 

@@ -38,7 +38,9 @@ class System : virtual public Gas, virtual public Matrix
    double yield;
    double radius_in_lattice;
    double volume_in_lattice;
-   double diffusivity; // non si inizializzano
+   double diffusivity;
+   double henry_constant;
+   double resolution_rate;
    double trapping_rate;
    std::string gas_name;
 
@@ -93,14 +95,52 @@ class System : virtual public Gas, virtual public Matrix
 
     void setDiffusivity(double d)
     {
+      /// Member function to set the diffusivity of the isotope in the fuel matrix
       diffusivity = d;
     }
 
     double getDiffusivity()
     {
+      /// Member function to get the diffusivity of the isotope in the fuel matrix
       return diffusivity;
     }
+
+    void setHenryConstant(double h)
+    {
+      /// Member function to set the value of the Henry constant
+      henry_constant = h;
+    }
+
+    double getHenryConstant()
+    {
+      /// Member function to get the value of the Henry constant
+      return henry_constant;
+    }
+
+    void setResolutionRate(double r)
+    {
+      /// Member function to set the value of the resolution rate of the isotope from fuel matrix nanobubbles
+      resolution_rate = r;
+    }
+
+    double getResolutionRate()
+    {
+      /// Member function to get the value of the resolution rate of the isotope from fuel matrix nanobubbles
+      return resolution_rate;
+    }
   
+    void setTrappingRate(double t)
+    {
+      /// Member function to set the value of the trapping rate of the isotope in the fuel matrix nanobubbles
+      trapping_rate = t;
+    }
+
+    double getTrappingRate()
+    {
+      /// Member function to get the value of the trapping rate of the isotope in the fuel matrix nanobubbles
+      return trapping_rate;
+    }
+
     System() { }
     ~System() { }
 };

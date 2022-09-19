@@ -31,11 +31,9 @@ void UO2( )
   matrix[index].setFFinfluenceRadius(1.0e-9);    // (m)
   matrix[index].setFFrange(6.0e-6);              // (m)
   matrix[index].setSchottkyVolume(4.09e-29);
-  //matrix[index].setSchottkyVolume(4.4581e-29); // false
   matrix[index].setOIS(7.8e-30);
   matrix[index].setSemidihedralAngle(0.872664626); // (rad), 50 deg, Koo et al., 2000; White, 2004
   matrix[index].setGrainBoundaryThickness(5.0e-10); // (m) Kogai, 1997
-  //matrix[index].setLenticularShapeFactor(1.0 - 1.5*cos(0.872664626) + 0.5*pow(cos(0.872664626), 3));
-  matrix[index].setLenticularShapeFactor(0.168610764);
+  matrix[index].setLenticularShapeFactor(0.168610764); // 1.0 - 1.5*cos(0.872664626) + 0.5*pow(cos(0.872664626), 3)
 }
 
