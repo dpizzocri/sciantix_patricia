@@ -48,7 +48,7 @@ void Xe_in_UO2( )
       double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
       double d1 = 7.6e-10 * exp(- 4.86e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
       double d2 = 4.0 * 1.41e-25 * sqrt(fission_rate) * exp(- 1.91e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
-      double d3 = 2.0e-40 * fission_rate;
+      double d3 = 8.0e-40 * fission_rate;
       diff_value = d1 + d2 + d3;
       break;
     }
