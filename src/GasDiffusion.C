@@ -34,8 +34,6 @@ void GasDiffusion( )
     {
       int model_index;
       std::vector<double> parameter;
-      // Loop over all the sciantix systems (gas in matrix)
-      // both stable and radiaoctive
       for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
       {
         model.emplace_back();
@@ -43,13 +41,13 @@ void GasDiffusion( )
         model[model_index].setName("Gas diffusion - " + sciantix_system[i].getName());
         model[model_index].setRef("Booth, A. H. (1957), Speight 1969.");
 
-        parameter.push_back(n_modes); // number of modes
+        parameter.push_back(n_modes);
         parameter.push_back(
           ( sciantix_system[i].getResolutionRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) /
-          ( sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) * sciantix_system[i].getDiffusivity()); // effective diffusivity
-        parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue()); // grain radius
-        parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue()); // production rate
-        parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate() ); // decay rate
+          ( sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) * sciantix_system[i].getDiffusivity());
+        parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue());
+        parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue());
+        parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate());
 
         model[model_index].setParameter(parameter);
         parameter.clear();
@@ -77,13 +75,13 @@ void GasDiffusion( )
         model[model_index].setName("Gas diffusion - " + sciantix_system[i].getName());
         model[model_index].setRef("Booth, A. H. (1957), Speight (1969) withouth quasi-stationary hypothesis.");
 
-        parameter.push_back(n_modes); // number of modes
+        parameter.push_back(n_modes);
         parameter.push_back(sciantix_system[i].getDiffusivity());
         parameter.push_back(sciantix_system[i].getResolutionRate());
         parameter.push_back(sciantix_system[i].getTrappingRate());
         parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate());
         parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue());
-        parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue()); // production rate
+        parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue());
         parameter.push_back(0.0);
 
         model[model_index].setParameter(parameter);

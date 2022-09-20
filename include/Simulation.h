@@ -655,7 +655,7 @@ class Simulation : public Solver, public Model
     );
 
     // Sat fractional coverage
-    // dFcsat / dT = - (dm/dT F) Fcsat
+    // dFcsat / dT = - (dm/dT f) Fcsat
     sciantix_variable[sv["Intergranular saturation fractional coverage"]].setFinalValue(
       solver.Decay(
       	sciantix_variable[sv["Intergranular saturation fractional coverage"]].getInitialValue(),
@@ -734,6 +734,13 @@ class Simulation : public Solver, public Model
     
     double sigmoid_variable;
     sigmoid_variable = exp(cracking_invariant + 1);
+
+    // WARNING:
+    // By definition, d(sigmoid_variable)/dT = 0
+    // If one plots from output.txt vented_fraction(fractional_coverage), the sigmoid below is not represented
+    // especially in transient conditions, because the fractional coverage in output.txt is the one
+    // computed also after the intergranular bubble behaviour. Namely, after the bubble coalescence
+    // fractional coverage changes 
 
     // Vented fraction
     sciantix_variable[sv["Intergranular vented fraction"]].setFinalValue(

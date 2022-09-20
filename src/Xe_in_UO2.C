@@ -25,12 +25,11 @@ void Xe_in_UO2( )
 
   sciantix_system[index].setName("Xe in UO2");
   sciantix_system[index].setGasName("Xe");
-  sciantix_system[index].setYield(0.24); // from Motta & Olander 2021 vol. 2
+  sciantix_system[index].setYield(0.24);
   sciantix_system[index].setRadiusInLattice(0.21e-9);     // (m), number from experimental results, assumed equal for Xe and Kr
   sciantix_system[index].setVolumeInLattice(matrix[sma["UO2"]].getSchottkyVolume());
   sciantix_system[index].setHenryConstant(0.0);
 
-  // Diffusivity of the gas in the fuel matrix
   double diff_value(0.0);
   std::string ref_diffusivity;
   switch(input_variable[iv["iGasDiffusionCoefficient"]].getValue())
@@ -63,7 +62,7 @@ void Xe_in_UO2( )
 
     case 3 :
     {
-      ref_diffusivity = "Diffusvity from J. A. Turnbull et al., (2010), Background and Derivation of ANS-5.4 Standard Fission Product Release Model.";
+      ref_diffusivity = "Diffusivity from J. A. Turnbull et al., (2010), Background and Derivation of ANS-5.4 Standard Fission Product Release Model.";
       double temperature = history_variable[hv["Temperature"]].getFinalValue();
       double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
       double d1 = 7.6e-11 * exp(- 4.86e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
@@ -88,7 +87,6 @@ void Xe_in_UO2( )
   diff_value *= sf_diffusion_coeff;
   sciantix_system[index].setDiffusivity(diff_value);
 
-  // Re-solution of the gas in the fuel matrix
   double resolution_rate(0.0);
   std::string ref_resolution_rate;
   switch(input_variable[iv["iResolutionRate"]].getValue())
@@ -133,7 +131,6 @@ void Xe_in_UO2( )
   resolution_rate *= sf_resolution_rate;
   sciantix_system[index].setResolutionRate(resolution_rate);
 
-  // Trapping of the gas in the fuel matrix
   double trapping_rate(0.0);
   std::string ref_trapping_rate;
   switch(input_variable[iv["iTrappingRate"]].getValue())

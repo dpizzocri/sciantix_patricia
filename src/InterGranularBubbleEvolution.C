@@ -31,6 +31,15 @@ void InterGranularBubbleEvolution( )
   int model_index = model.size() - 1;
   model[model_index].setName("Intergranular bubble evolution");
   std::vector<double> parameter;
+
+  if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 0)
+  {
+    parameter.push_back(0.0);
+    parameter.push_back(0.0);
+
+    model[model_index].setParameter(parameter);
+    model[model_index].setRef("No model for grain-boundary bubble evolution.");
+  }
   
   if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1)
   {

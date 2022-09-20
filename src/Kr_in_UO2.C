@@ -25,7 +25,6 @@ void Kr_in_UO2( )
 
   sciantix_system[index].setName("Kr in UO2");
   sciantix_system[index].setGasName("Kr");
-  sciantix_system[index].setRef("Donald R. Olander, & Motta, A. T. (2021). Light Water reactor Materials Volume II: Applications. In American Nuclear Society.");
   sciantix_system[index].setYield(0.03);
   sciantix_system[index].setRadiusInLattice(0.21e-9);     // (m), number from experimental results, assumed equal for Xe and Kr
   sciantix_system[index].setVolumeInLattice(matrix[sma["UO2"]].getSchottkyVolume());
@@ -43,7 +42,7 @@ void Kr_in_UO2( )
 
     case 1 :
     {
-      ref_diffusivity = "from J. A. Turnbull et al (1988), IWGFPT-32, Preston, UK, Sep 18-22.";
+      ref_diffusivity = "Diffusivity from J. A. Turnbull et al (1988), IWGFPT-32, Preston, UK, Sep 18-22.";
       double temperature = history_variable[hv["Temperature"]].getFinalValue();
       double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
       double d1 = 7.6e-10 * exp(- 4.86e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
@@ -55,7 +54,7 @@ void Kr_in_UO2( )
 
     case 2 :
     {
-      ref_diffusivity = "from Matzke (1980), Radiation Effects, 53, 219-242.";
+      ref_diffusivity = "Diffusivity from Matzke (1980), Radiation Effects, 53, 219-242.";
       diff_value = 5.0e-08 * exp(- 40262.0 / history_variable[hv["Temperature"]].getFinalValue());
 
       break;
@@ -63,7 +62,7 @@ void Kr_in_UO2( )
 
     case 3 :
     {
-      ref_diffusivity = "from J. A. Turnbull et al., (2010), Background and Derivation of ANS-5.4 Standard Fission Product Release Model.";
+      ref_diffusivity = "Diffusivity from J. A. Turnbull et al., (2010), Background and Derivation of ANS-5.4 Standard Fission Product Release Model.";
       double temperature = history_variable[hv["Temperature"]].getFinalValue();
       double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
       double d1 = 7.6e-11 * exp(- 4.86e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
@@ -88,7 +87,6 @@ void Kr_in_UO2( )
   diff_value *= sf_diffusion_coeff;
   sciantix_system[index].setDiffusivity(diff_value);
 
-  // Re-solution of the gas in the fuel matrix
   double resolution_rate(0.0);
   std::string ref_resolution_rate;
   switch(input_variable[iv["iResolutionRate"]].getValue())
@@ -133,7 +131,6 @@ void Kr_in_UO2( )
   resolution_rate *= sf_resolution_rate;
   sciantix_system[index].setResolutionRate(resolution_rate);
 
-  // Trapping of the gas in the fuel matrix
   double trapping_rate(0.0);
   std::string ref_trapping_rate;
   switch(input_variable[iv["iTrappingRate"]].getValue())

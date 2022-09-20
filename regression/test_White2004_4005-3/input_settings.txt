@@ -1,6 +1,6 @@
 1	#	igrain_growth
 1	#	igas_diffusion_coefficient
-2	#	igas_diffusion_solver
+1	#	igas_diffusion_solver
 1	#	iintra_bubble_evolution
 1	#	iresolution_rate
 1	#	itrapping_rate
