@@ -37,15 +37,11 @@ void Sciantix(int Sciantix_options[],
 
   // Grain growth
   GrainGrowth( );                                 MapModel();
-  if(input_variable[iv["iGrainGrowth"]].getValue() == 1)
-    simulation.GrainGrowth();
-  else if(input_variable[iv["iGrainGrowth"]].getValue() == 2)
-    simulation.GrainGrowthANN();
+  simulation.GrainGrowth();
 
   GrainBoundarySweeping( );                       MapModel();
-  if(input_variable[iv["iGrainBoundarySweeping"]].getValue())
-    simulation.GrainBoundarySweeping( );
-  
+  simulation.GrainBoundarySweeping( );
+
   GasProduction( );                               MapModel();
   simulation.GasProduction();
 
@@ -71,8 +67,11 @@ void Sciantix(int Sciantix_options[],
     simulation.GrainBoundaryVenting( );
 
   InterGranularBubbleEvolution( );                MapModel();
-  if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() != 2)
-    simulation.InterGranularBubbleBehaviour();
+
+  simulation.InterGranularBubbleBehaviour();
+
+  ReleaseFromDefectiveFuelRods( );                MapModel();
+  simulation.ReleaseFromDefectiveFuelRods( );
 
   UpdateVariables(Sciantix_variables, Sciantix_diffusion_modes);
 

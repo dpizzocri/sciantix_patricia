@@ -26,4 +26,5 @@ void Helium( )
   gas[index].setAtomicNumber(2);
   gas[index].setVanDerWaalsVolume(9.97e-30);
   gas[index].setDecayRate(0.0);
+  gas[index].setEscapeCoefficient(0.0);
 }

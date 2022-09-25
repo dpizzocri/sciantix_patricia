@@ -26,4 +26,5 @@ void Krypton( )
   gas[index].setAtomicNumber(36);
   gas[index].setVanDerWaalsVolume(6.61e-29);
   gas[index].setDecayRate(0.0);
+  gas[index].setEscapeCoefficient(0.0);
 }

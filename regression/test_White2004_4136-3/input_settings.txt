@@ -14,3 +14,4 @@
 0	#	iradioactive_gas_behaviour
 0	#	ihelium
 0	#	igrain_boundary_sweeping
+0   #   idefective_fuel_rod

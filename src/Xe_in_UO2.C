@@ -100,6 +100,7 @@ void Xe_in_UO2( )
 
     case 1 :
     {
+      // b = 2 F * L * pi (az + r_ig)^2
       ref_resolution_rate = "Resolution rate from J.A. Turnbull, Journal of Nuclear Materials, 38 (1971), 203";
       resolution_rate = 2.0 * M_PI * matrix[sma["UO2"]].getFFrange() * pow(matrix[sma["UO2"]].getFFinfluenceRadius()
                         + sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue(), 2) * history_variable[hv["Fission rate"]].getFinalValue();

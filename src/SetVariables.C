@@ -112,6 +112,11 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
     input_variable[iv_counter].setName("iGrainBoundarySweeping");
     input_variable[iv_counter].setValue(Sciantix_options[15]);
     ++iv_counter;
+
+    input_variable.emplace_back();
+    input_variable[iv_counter].setName("iDefectiveFuelRod");
+    input_variable[iv_counter].setValue(Sciantix_options[16]);
+    ++iv_counter;
   }
   MapInputVariable();
 
@@ -129,6 +134,9 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 
   bool toOutputGrainBoundary(0);
   if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1) toOutputGrainBoundary = 1;
+
+  bool toOutputDefectiveFuelRod(0);
+  if(input_variable[iv["iDefectiveFuelRod"]].getValue() == 1) toOutputDefectiveFuelRod = 1;
 
   // ----------------------------------------------------------------------------
   // Physics variable
@@ -300,6 +308,15 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
   ++sv_counter;
   
+
+  sciantix_variable.emplace_back();
+  sciantix_variable[sv_counter].setName("Xe133 in fuel rod free volume");
+  sciantix_variable[sv_counter].setUOM("(at/m3)");
+  sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[55]);
+  sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[55]);
+  sciantix_variable[sv_counter].setOutput(toOutputDefectiveFuelRod);
+  ++sv_counter;
+
   sciantix_variable.emplace_back();
   sciantix_variable[sv_counter].setName("Xe133 R/B");
   sciantix_variable[sv_counter].setUOM("(/)");

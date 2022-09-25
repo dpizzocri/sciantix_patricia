@@ -185,6 +185,9 @@ for jj = 1:length_output
     if(output_file.colheaders(1, jj) == "Intergranular gas swelling (/)")
         gb_swelling_col = jj;
     end
+    if(output_file.colheaders(1, jj) == "Grain radius (m)")
+        grain_radius_col = jj;
+    end
     cd ..
 end
 
@@ -194,7 +197,8 @@ for jj = 1:test_num
     output_file = importdata('output.txt');
     % N_output(jj) = output_file.data(end,18);
     % R_output(jj) = output_file.data(end,19);
-    ig_swelling_test(jj) = output_file.data(end,ig_swelling_col) * 100;    
+    ig_swelling_test(jj) = output_file.data(end,ig_swelling_col) * 100;
+    grain_radius(jj) = output_file.data(end,grain_radius_col);
     cd ..
 end
 
@@ -209,6 +213,9 @@ for jj = 1:length_output_gold
     if(output_file.colheaders(1, jj) == "Intergranular gas swelling (/)")
         gb_swelling_col = jj;
     end
+    if(output_file.colheaders(1, jj) == "Grain radius (m)")
+        grain_radius_col = jj;
+    end
     cd ..
 end
 
@@ -218,12 +225,21 @@ for jj = 1:test_num
     output_file = importdata('output_gold.txt');
     % N_output(jj) = output_file.data(end,18);
     % R_output(jj) = output_file.data(end,19);
-    ig_swelling_gold(jj) = output_file.data(end,ig_swelling_col) * 100;    
+    ig_swelling_gold(jj) = output_file.data(end,ig_swelling_col) * 100;
+    grain_radius_gold(jj) = output_file.data(end,grain_radius_col);
+    temperature(jj) = output_file.data(end,2);
     cd ..
 end
 
 ig_swelling_1_0 = [0.033, 0.048, 0.062, 0.073, 0.079, 0.082, 0.083, 0.084, 0.086];
 ig_swelling_baker = [0.06, 0.07, 0.08, 0.09, 0.12, 0.15, 0.18, 0.24, 0.31];
+
+figure
+p1 = loglog(temperature, grain_radius,'r.','MarkerSize',16);
+hold on
+ylabel('Grain radius (m)')
+xlabel('Temperature (K)')
+legend([p1],{'Grain radius'},'location','best')
 
 figure
 p1 = loglog(ig_swelling_baker, ig_swelling_1_0,'r.','MarkerSize',16);

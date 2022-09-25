@@ -75,7 +75,7 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
   Sciantix_variables[52] = sciantix_variable[sv["Xe133 decayed"]].getFinalValue( );
   Sciantix_variables[53] = sciantix_variable[sv["Xe133 at grain boundary"]].getFinalValue( );
   Sciantix_variables[54] = sciantix_variable[sv["Xe133 released"]].getFinalValue( );
-
+  Sciantix_variables[55] = sciantix_variable[sv["Xe133 in fuel rod free volume"]].getFinalValue( );
 
   for(int i = 0; i < n_modes; ++i)
   {

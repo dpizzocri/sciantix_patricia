@@ -46,6 +46,7 @@
 #include "InterGranularBubbleEvolution.h"
 #include "GrainBoundaryMicroCracking.h"
 #include "GrainBoundaryVenting.h"
+#include "ReleaseFromDefectiveFuelRods.h"
 
 #include "ErrorMessages.h"
 
