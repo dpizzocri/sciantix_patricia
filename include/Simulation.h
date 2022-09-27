@@ -757,7 +757,7 @@ class Simulation : public Solver, public Model
     //  + sciantix_variable[sv["Intergranular fractional intactness"]].getFinalValue() * sciantix_variable[sv["Intergranular vented fraction"]].getFinalValue() 
     //);
 
-    sciantix_variable[sv["Intergranular venting probability"]].setFinalValue(sigmoid_variable);
+    sciantix_variable[sv["Intergranular venting probability"]].setFinalValue(sciantix_variable[sv["Intergranular vented fraction"]].getFinalValue());
     
     // Gas is vented by subtracting a fraction of the gas concentration at grain boundaries arrived from diffusion
     for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
