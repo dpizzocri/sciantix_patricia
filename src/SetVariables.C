@@ -39,8 +39,13 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
     ++iv_counter;
 
     input_variable.emplace_back();
-    input_variable[iv_counter].setName("iGasDiffusionCoefficient");
+    input_variable[iv_counter].setName("iFGDiffusionCoefficient");
     input_variable[iv_counter].setValue(Sciantix_options[1]);
+    ++iv_counter;
+
+    input_variable.emplace_back();
+    input_variable[iv_counter].setName("iHeDiffusionCoefficient");
+    input_variable[iv_counter].setValue(Sciantix_options[16]);
     ++iv_counter;
 
     input_variable.emplace_back();

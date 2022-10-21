@@ -141,8 +141,8 @@ p1 = loglog(gb_swelling_white, gb_swelling_1_0,'r.','MarkerSize',16);
 hold on
 p2 = loglog(gb_swelling_white, gb_swelling_gold,'g.','MarkerSize',16);
 hold on
-% p3 = loglog(gb_swelling_white, gb_swelling_test,'b.','MarkerSize',16);
-% hold on
+p3 = loglog(gb_swelling_white, gb_swelling_test,'b.','MarkerSize',16);
+hold on
 plot([10^-3 10^2],[10^-3 10^2],'k-')
 hold on
 plot([10^-3 10^2],[2*10^-3 2*10^2],'k--')
@@ -154,7 +154,7 @@ ylabel('Simulated (%)')
 xlabel('Experimental (%)')
 xlim([10^-3 10^2])
 ylim([10^-3 10^2])
-legend([p1 p2],{'SCIANTIX 1.0','SCIANTIX 2.0'},'location','best')
+legend([p1 p2 p3],{'SCIANTIX 1.0','SCIANTIX 2.0 gold', 'SCIANTIX 2.0 test'},'location','best')
 
 saveas(gcf,'White et al 2006.png');
 
@@ -243,12 +243,12 @@ ig_swelling_baker = [0.06, 0.07, 0.08, 0.09, 0.12, 0.15, 0.18, 0.24, 0.31];
 % legend([p1],{'Grain radius'},'location','best')
 
 figure
-p1 = loglog(ig_swelling_baker, ig_swelling_1_0,'r.','MarkerSize',16);
+p1 = loglog(ig_swelling_baker, ig_swelling_1_0, 'r.','MarkerSize',16);
 hold on
 p2 = loglog(ig_swelling_baker, ig_swelling_gold,'g.','MarkerSize',16);
 hold on
-% p3 = loglog(ig_swelling_baker, ig_swelling_test,'k+','MarkerSize',16);
-% hold on
+p3 = loglog(ig_swelling_baker, ig_swelling_test,'b.','MarkerSize',16);
+hold on
 plot([10^-3 10^2],[10^-3 10^2],'k-')
 hold on
 plot([10^-3 10^2],[2*10^-3 2*10^2],'k--')
@@ -260,7 +260,7 @@ ylabel('Simulated (%)')
 xlabel('Experimental (%)')
 xlim([10^-3 10^2])
 ylim([10^-3 10^2])
-legend([p1 p2],{'SCIANTIX 1.0','SCIANTIX 2.0'},'location','best')
+legend([p1 p2 p3],{'SCIANTIX 1.0','SCIANTIX 2.0 gold', 'SCIANTIX 2.0 test'},'location','best')
 
 saveas(gcf,'Baker 1977.png');
 

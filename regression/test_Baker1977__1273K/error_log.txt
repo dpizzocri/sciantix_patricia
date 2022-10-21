@@ -1,0 +1,2 @@
+Error in GasDiffusionCoefficient.
+The variable igas_diffusion_coefficient = 4 is out of range.

@@ -92,7 +92,7 @@ void InputReading( )
   input_scaling_factors.open("input_scaling_factors.txt");
 
   Sciantix_options[0] = ReadOneSetting("igrain_growth", input_settings, input_check);
-  Sciantix_options[1] = ReadOneSetting("igas_diffusion_coefficient", input_settings, input_check);
+  Sciantix_options[1] = ReadOneSetting("ifission_gas_diffusion_coefficient", input_settings, input_check);
   Sciantix_options[2] = ReadOneSetting("igas_diffusion_solver", input_settings, input_check);
   Sciantix_options[3] = ReadOneSetting("iintragranular_bubble_evolution", input_settings, input_check);
   Sciantix_options[4] = ReadOneSetting("iresolution_rate", input_settings, input_check);
@@ -107,6 +107,7 @@ void InputReading( )
   Sciantix_options[13] = ReadOneSetting("iradioactive_fission_gas", input_settings, input_check);
   Sciantix_options[14] = ReadOneSetting("ihelium", input_settings, input_check);
   Sciantix_options[15] = ReadOneSetting("igrain_boundary_sweeping", input_settings, input_check);
+  Sciantix_options[16] = ReadOneSetting("ihelium_diffusion_coefficient", input_settings, input_check);
 
   if (!input_initial_conditions.fail())
   {

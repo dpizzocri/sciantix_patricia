@@ -1,5 +1,5 @@
 1	#	igrain_growth
-1	#	igas_diffusion_coefficient
+4	#	igas_diffusion_coefficient
 1	#	igas_diffusion_solver
 1	#	iintra_bubble_evolution
 1	#	iresolution_rate
@@ -14,3 +14,4 @@
 0	#	iradioactive_gas_behaviour
 0	#	ihelium
 0	#	igrain_boundary_sweeping
+0   #   ihelium_diffusion_coefficient

@@ -32,7 +32,7 @@ void Xe133_in_UO2( )
 
   double diff_value(0.0);
   std::string ref_diffusivity;
-  switch(input_variable[iv["iGasDiffusionCoefficient"]].getValue())
+  switch(input_variable[iv["iFGDiffusionCoefficient"]].getValue())
   {
     case 0 :
     {
@@ -74,6 +74,18 @@ void Xe133_in_UO2( )
       break;
     }
 
+      case 4 :
+    {
+      ref_diffusivity = "Diffusivity from Ronchi, C. Thermophysical properties affecting safety and performance of nuclear fuel. High Temp 45, 552–571 (2007). https://doi.org/10.1134/S0018151X07040177.";
+      double temperature = history_variable[hv["Temperature"]].getFinalValue();
+      double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
+      double d1 = 7.6e-10 * exp(- 4.86e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
+      double d2 = 6.64e-25 * sqrt(fission_rate) * exp(- 1.91e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
+      double d3 = 1.2e-39 * fission_rate;
+      diff_value = d1 + d2 + d3;
+      break;
+    }
+
     case 99 :
     {
       ref_diffusivity = "Test case: zero diffusion coefficient";
@@ -82,7 +94,7 @@ void Xe133_in_UO2( )
     }
 
     default :
-      ErrorMessages::Switch("GasDiffusionCoefficient", "igas_diffusion_coefficient", input_variable[iv["iGasDiffusionCoefficient"]].getValue());
+      ErrorMessages::Switch("Xe133_in_UO2", "igas_diffusion_coefficient", input_variable[iv["iFGDiffusionCoefficient"]].getValue());
       break;
   }
   diff_value *= sf_diffusion_coeff;

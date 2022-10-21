@@ -37,7 +37,7 @@ void He_in_UO2( )
   // DIFFUSIVITY
   double diff_value(0.0);
   std::string ref_diffusivity;
-  switch(input_variable[iv["iGasDiffusionCoefficient"]].getValue())
+  switch(input_variable[iv["iHeDiffusionCoefficient"]].getValue())
   {
     case 0 :
     {
@@ -70,7 +70,7 @@ void He_in_UO2( )
     }
 
     default :
-      ErrorMessages::Switch("GasDiffusionCoefficient", "igas_diffusion_coefficient", input_variable[iv["iGasDiffusionCoefficient"]].getValue());
+      ErrorMessages::Switch("He_in_UO2", "igas_diffusion_coefficient", input_variable[iv["iHeDiffusionCoefficient"]].getValue());
       break;
   }
   diff_value *= sf_diffusion_coeff;
