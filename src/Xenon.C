@@ -28,10 +28,10 @@ void Xenon( )
   gas[index].setVanDerWaalsVolume(8.48e-29);
   gas[index].setDecayRate(0.0);
   gas[index].setEscapeCoefficient(0.0);
+  ++index;
 
   // 133-xenon
   gas.emplace_back();
-  ++index;
   gas[index].setName("Xe133");
   gas[index].setAtomicNumber(54);
   gas[index].setMassNumber(133);

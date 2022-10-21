@@ -112,11 +112,6 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
     input_variable[iv_counter].setName("iGrainBoundarySweeping");
     input_variable[iv_counter].setValue(Sciantix_options[15]);
     ++iv_counter;
-
-    input_variable.emplace_back();
-    input_variable[iv_counter].setName("iDefectiveFuelRod");
-    input_variable[iv_counter].setValue(Sciantix_options[16]);
-    ++iv_counter;
   }
   MapInputVariable();
 
@@ -135,59 +130,67 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   bool toOutputGrainBoundary(0);
   if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1) toOutputGrainBoundary = 1;
 
-  bool toOutputDefectiveFuelRod(0);
-  if(input_variable[iv["iDefectiveFuelRod"]].getValue() == 1) toOutputDefectiveFuelRod = 1;
-
   // ----------------------------------------------------------------------------
   // Physics variable
   // ----------------------------------------------------------------------------
+  int pv_counter(0);
+
   physics_variable.emplace_back();
-  physics_variable[0].setName("Time step");
-  physics_variable[0].setUOM("(s)");
-  physics_variable[0].setInitialValue(Sciantix_history[6]);
-  physics_variable[0].setFinalValue(Sciantix_history[6]);
-  physics_variable[0].setOutput(0);
+  physics_variable[pv_counter].setName("Time step");
+  physics_variable[pv_counter].setUOM("(s)");
+  physics_variable[pv_counter].setInitialValue(Sciantix_history[6]);
+  physics_variable[pv_counter].setFinalValue(Sciantix_history[6]);
+  physics_variable[pv_counter].setOutput(0);
+  ++pv_counter;
+
   // ----------------------------------------------------------------------------
   // History variable
   // ----------------------------------------------------------------------------
+  int hv_counter(0);
   history_variable.emplace_back();
-  history_variable[0].setName("Time");
-  history_variable[0].setUOM("(h)");
-  history_variable[0].setInitialValue(Sciantix_history[7]);
-  history_variable[0].setFinalValue(Sciantix_history[7]);
-  history_variable[0].setOutput(1);
+  history_variable[hv_counter].setName("Time");
+  history_variable[hv_counter].setUOM("(h)");
+  history_variable[hv_counter].setInitialValue(Sciantix_history[7]);
+  history_variable[hv_counter].setFinalValue(Sciantix_history[7]);
+  history_variable[hv_counter].setOutput(1);
+  ++hv_counter;
 
   history_variable.emplace_back();
-  history_variable[1].setName("Time step number");
-  history_variable[1].setUOM("(/)");
-  history_variable[1].setInitialValue(Sciantix_history[8]);
-  history_variable[1].setFinalValue(Sciantix_history[8]);
-  history_variable[1].setOutput(0);
+ history_variable[hv_counter].setName("Time step number");
+ history_variable[hv_counter].setUOM("(/)");
+ history_variable[hv_counter].setInitialValue(Sciantix_history[8]);
+ history_variable[hv_counter].setFinalValue(Sciantix_history[8]);
+ history_variable[hv_counter].setOutput(0);
+  ++hv_counter;
 
   history_variable.emplace_back();
-  history_variable[2].setName("Temperature");
-  history_variable[2].setUOM("(K)");
-  history_variable[2].setInitialValue(Sciantix_history[0]);
-  history_variable[2].setFinalValue(Sciantix_history[1]);
-  history_variable[2].setOutput(1);
+ history_variable[hv_counter].setName("Temperature");
+ history_variable[hv_counter].setUOM("(K)");
+ history_variable[hv_counter].setInitialValue(Sciantix_history[0]);
+ history_variable[hv_counter].setFinalValue(Sciantix_history[1]);
+ history_variable[hv_counter].setOutput(1);
+  ++hv_counter;
 
   history_variable.emplace_back();
-  history_variable[3].setName("Fission rate");
-  history_variable[3].setUOM("(fiss / m3 s)");
-  history_variable[3].setInitialValue(Sciantix_history[2]);
-  history_variable[3].setFinalValue(Sciantix_history[3]);
-  history_variable[3].setOutput(1);
+ history_variable[hv_counter].setName("Fission rate");
+ history_variable[hv_counter].setUOM("(fiss / m3 s)");
+ history_variable[hv_counter].setInitialValue(Sciantix_history[2]);
+ history_variable[hv_counter].setFinalValue(Sciantix_history[3]);
+ history_variable[hv_counter].setOutput(1);
+  ++hv_counter;
 
   history_variable.emplace_back();
-  history_variable[4].setName("Hydrostatic stress");
-  history_variable[4].setUOM("(MPa)");
-  history_variable[4].setInitialValue(Sciantix_history[4]);
-  history_variable[4].setFinalValue(Sciantix_history[5]);
-  history_variable[4].setOutput(1);
+ history_variable[hv_counter].setName("Hydrostatic stress");
+ history_variable[hv_counter].setUOM("(MPa)");
+ history_variable[hv_counter].setInitialValue(Sciantix_history[4]);
+ history_variable[hv_counter].setFinalValue(Sciantix_history[5]);
+ history_variable[hv_counter].setOutput(1);
+  ++hv_counter;
+
   // ----------------------------------------------------------------------------
   // Sciantix variable
   // ----------------------------------------------------------------------------
-  int sv_counter = 0;
+  int sv_counter(0);
   sciantix_variable.emplace_back();
   sciantix_variable[sv_counter].setName("Grain radius");
   sciantix_variable[sv_counter].setUOM("(m)");
@@ -306,15 +309,6 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[54]);
   sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[54]);
   sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
-  ++sv_counter;
-  
-
-  sciantix_variable.emplace_back();
-  sciantix_variable[sv_counter].setName("Xe133 in fuel rod free volume");
-  sciantix_variable[sv_counter].setUOM("(at/m3)");
-  sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[55]);
-  sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[55]);
-  sciantix_variable[sv_counter].setOutput(toOutputDefectiveFuelRod);
   ++sv_counter;
 
   sciantix_variable.emplace_back();
@@ -714,19 +708,20 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   // ----------------------------------------------------------------------------
   for(int i = 0; i < n_modes; ++i)
   {
-    xe_diffusion_modes[i] = Sciantix_diffusion_modes[i];
-    xe_diffusion_modes_solution[i] = Sciantix_diffusion_modes[1 * n_modes + i];
-    xe_diffusion_modes_bubbles[i]  = Sciantix_diffusion_modes[2 * n_modes + i];
-    kr_diffusion_modes[i] = Sciantix_diffusion_modes[3 * n_modes + i];
-    kr_diffusion_modes_solution[i] = Sciantix_diffusion_modes[4 * n_modes + i];
-    kr_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[5 * n_modes + i];
-    he_diffusion_modes[i] = Sciantix_diffusion_modes[6 * n_modes + i];
-    he_diffusion_modes_solution[i] = Sciantix_diffusion_modes[7 * n_modes + i];
-    he_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[8 * n_modes + i];
-    xe133_diffusion_modes[i] = Sciantix_diffusion_modes[9 * n_modes + i];
+    xe_diffusion_modes[i]             = Sciantix_diffusion_modes[i];
+    xe_diffusion_modes_solution[i]    = Sciantix_diffusion_modes[1 * n_modes + i];
+    xe_diffusion_modes_bubbles[i]     = Sciantix_diffusion_modes[2 * n_modes + i];
+    kr_diffusion_modes[i]             = Sciantix_diffusion_modes[3 * n_modes + i];
+    kr_diffusion_modes_solution[i]    = Sciantix_diffusion_modes[4 * n_modes + i];
+    kr_diffusion_modes_bubbles[i]     = Sciantix_diffusion_modes[5 * n_modes + i];
+    he_diffusion_modes[i]             = Sciantix_diffusion_modes[6 * n_modes + i];
+    he_diffusion_modes_solution[i]    = Sciantix_diffusion_modes[7 * n_modes + i];
+    he_diffusion_modes_bubbles[i]     = Sciantix_diffusion_modes[8 * n_modes + i];
+    xe133_diffusion_modes[i]          = Sciantix_diffusion_modes[9 * n_modes + i];
     xe133_diffusion_modes_solution[i] = Sciantix_diffusion_modes[10 * n_modes + i];
-    xe133_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[11 * n_modes + i];
+    xe133_diffusion_modes_bubbles[i]  = Sciantix_diffusion_modes[11 * n_modes + i];
   }
+
   // ----------------------------------------------------------------------------
   // Scaling factors
   // ----------------------------------------------------------------------------
@@ -736,7 +731,8 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   sf_diffusion_coeff = Sciantix_scaling_factors[3];
   sf_screw_parameter = Sciantix_scaling_factors[4];
   sf_span_parameter  = Sciantix_scaling_factors[5];
-  sf_cent_parameter  = Sciantix_scaling_factors[6]; 
+  sf_cent_parameter  = Sciantix_scaling_factors[6];
+   
   // ----------------------------------------------------------------------------
   // Maps
   // ----------------------------------------------------------------------------

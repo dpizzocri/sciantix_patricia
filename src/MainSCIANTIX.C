@@ -33,8 +33,10 @@
 
 int main( )
 {
+  // Function that reads input_history.txt, input_settings.txt, input_initial_conditions.txt, etc.
   InputReading( );
 
+  // Function that initializes the array sciantix_variables and sciantix_diffusion_modes
   Initialization( );
 
   remove( "output.txt" );
@@ -80,5 +82,4 @@ int main( )
   Execution_file.close( );
 
   return 0;
-
 }

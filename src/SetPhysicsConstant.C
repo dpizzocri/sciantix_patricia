@@ -24,13 +24,13 @@ void SetPhysicsConstant( )
   physics_constant[index].setName("Boltzmann constant");
   physics_constant[index].setUOM("J/K");
   physics_constant[index].setValue(1.380651e-23);
-
   ++index;
 
   physics_constant.emplace_back();
   physics_constant[index].setName("U_UO2");
   physics_constant[index].setUOM("(/)");
   physics_constant[index].setValue(0.8815);
+  ++index;
 
   MapPhysicsConstant();
 }

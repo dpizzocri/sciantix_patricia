@@ -19,7 +19,7 @@
 /// IntraGranularBubbleEvolution
 /// This model contains a choice among possible
 /// expressions for the bubble number density and
-/// the bubble radius inside a fuel grain.
+/// the bubble radius inside the fuel grain.
 
 void IntraGranularBubbleEvolution( )
 {
@@ -31,6 +31,7 @@ void IntraGranularBubbleEvolution( )
     case 0 :
     {
       std::string reference = "Constant trial values.";
+
       sciantix_variable[sv["Intragranular bubble concentration"]].setInitialValue(7.0e23);
       sciantix_variable[sv["Intragranular bubble radius"]].setInitialValue(1.0e-9);
 
@@ -41,11 +42,13 @@ void IntraGranularBubbleEvolution( )
       {
         sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(
           sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue() /
-          sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue());
+          sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue()
+        );
 
         sciantix_variable[sv["Intragranular atoms per bubble"]].setFinalValue(
           sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue() + 
-          sciantix_variable[sv["Intragranular atoms per bubble"]].getFinalValue());
+          sciantix_variable[sv["Intragranular atoms per bubble"]].getFinalValue()
+        );
       }
       
       std::vector<double> parameter;
@@ -58,7 +61,8 @@ void IntraGranularBubbleEvolution( )
 
     case 1 :
     {
-      // Evolution of intra-granular bubbles with fission gases (xenon and krypton)
+      // The evolution of small intra-granular bubbles in fuel grains is controlled by
+      // bubble nucleation, gas atom trapping, and irradiation-induced gas atom re-solution back in the lattice
 
       std::string reference = "Pizzocri et al., JNM, 502 (2018) 323-330";
       std::vector<double> parameter;

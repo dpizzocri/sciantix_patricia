@@ -28,6 +28,7 @@ class Variable : virtual public Entity
 {
   protected:
     std::string name;
+    std::string reference;
 
   public:
     Variable() { }

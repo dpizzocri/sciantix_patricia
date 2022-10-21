@@ -23,13 +23,13 @@
 class Entity
 {
   protected:
-    std::string overview;
+    std::string reference;
     std::string name;
 
   public:
     void setName(std::string n)
     {
-      /// Member function to set the name of the declared object
+      /// Member function to set the name of the object
       name = n;
     }
 
@@ -41,14 +41,14 @@ class Entity
 
     void setRef(std::string n)
     {
-      /// Member function to set the name of the declared object
-      overview = n;
+      /// Member function to set the reference field of the object
+      reference = n;
     }
 
     std::string getRef( )
     {
-      /// Member function to get the name of the object
-      return overview;
+      /// Member function to get the reference field of the object
+      return reference;
     }
 
 

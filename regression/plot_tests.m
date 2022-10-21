@@ -234,12 +234,13 @@ end
 ig_swelling_1_0 = [0.033, 0.048, 0.062, 0.073, 0.079, 0.082, 0.083, 0.084, 0.086];
 ig_swelling_baker = [0.06, 0.07, 0.08, 0.09, 0.12, 0.15, 0.18, 0.24, 0.31];
 
-figure
-p1 = loglog(temperature, grain_radius,'r.','MarkerSize',16);
-hold on
-ylabel('Grain radius (m)')
-xlabel('Temperature (K)')
-legend([p1],{'Grain radius'},'location','best')
+
+% figure
+% p1 = loglog(temperature, grain_radius,'r.','MarkerSize',16);
+% hold on
+% ylabel('Grain radius (m)')
+% xlabel('Temperature (K)')
+% legend([p1],{'Grain radius'},'location','best')
 
 figure
 p1 = loglog(ig_swelling_baker, ig_swelling_1_0,'r.','MarkerSize',16);

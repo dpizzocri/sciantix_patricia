@@ -43,10 +43,13 @@ class Simulation : public Solver, public Model
 
   void BurnupEvolution( )
   {
-    sciantix_variable[sv["Burnup"]].setFinalValue(solver.Integrator(
-      sciantix_variable[sv["Burnup"]].getInitialValue(),
-      model[sm["Burnup"]].getParameter().at(0),
-      physics_variable[pv["Time step"]].getFinalValue( )));
+    sciantix_variable[sv["Burnup"]].setFinalValue(
+      solver.Integrator(
+        sciantix_variable[sv["Burnup"]].getInitialValue(),
+        model[sm["Burnup"]].getParameter().at(0),
+        physics_variable[pv["Time step"]].getFinalValue( )
+      )
+    );
   }
 
   void GasProduction( )
@@ -59,10 +62,13 @@ class Simulation : public Solver, public Model
     
     for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
     {
-      sciantix_variable[sv[sciantix_system[i].getGasName() + " produced"]].setFinalValue(solver.Integrator(
-        sciantix_variable[sv[sciantix_system[i].getGasName() + " produced"]].getInitialValue(),
-        model[sm["Gas production - " + sciantix_system[i].getGasName() + " in UO2"]].getParameter().at(0),
-        physics_variable[pv["Time step"]].getFinalValue()));
+      sciantix_variable[sv[sciantix_system[i].getGasName() + " produced"]].setFinalValue(
+        solver.Integrator(
+          sciantix_variable[sv[sciantix_system[i].getGasName() + " produced"]].getInitialValue(),
+          model[sm["Gas production - " + sciantix_system[i].getGasName() + " in UO2"]].getParameter().at(0),
+          physics_variable[pv["Time step"]].getFinalValue()
+        )
+      );
     }
   }
 
@@ -382,13 +388,15 @@ class Simulation : public Solver, public Model
   {
     // dN / dt = - resolution_rate * N + nucleation_rate
     sciantix_variable[sv["Intragranular bubble concentration"]].setFinalValue(
-      solver.Decay(sciantix_variable[sv["Intragranular bubble concentration"]].getInitialValue(),
+      solver.Decay(
+        sciantix_variable[sv["Intragranular bubble concentration"]].getInitialValue(),
         model[sm["Intragranular bubble evolution"]].getParameter().at(0),
         model[sm["Intragranular bubble evolution"]].getParameter().at(1),
-        physics_variable[pv["Time step"]].getFinalValue()));
+        physics_variable[pv["Time step"]].getFinalValue()
+      )
+    );
 
-    // atom per bubbles and bubble radius
-    // xe, kr, he, etc...
+    // Atom per bubbles and bubble radius
     for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
     {
       if(gas[ga[sciantix_system[i].getGasName()]].getDecayRate() == 0.0)
@@ -398,6 +406,7 @@ class Simulation : public Solver, public Model
             sciantix_variable[sv[sciantix_system[i].getGasName() + " in intragranular bubbles"]].getFinalValue() /
             sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue()
           );
+        
         else
           sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(0.0);
 
@@ -406,8 +415,8 @@ class Simulation : public Solver, public Model
         );
       }
     }
-    // intragranular bubble radius R = (3Vn/4pi)^(1/3)
-    // if i_intragranular bubble evolution = 0, i don't want the radius to change
+
+    // Intragranular bubble radius
     if(input_variable[iv["iIntraGranularBubbleEvolution"]].getValue())
       sciantix_variable[sv["Intragranular bubble radius"]].setFinalValue(0.620350491 * pow(sciantix_variable[sv["Intragranular bubble volume"]].getFinalValue(), (1.0/3.0)));
 
@@ -767,31 +776,6 @@ class Simulation : public Solver, public Model
 	      - sciantix_variable[sv["Intergranular vented fraction"]].getFinalValue(),
 	        sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getIncrement()
 	    )
-    );
-  }
-
-  void ReleaseFromDefectiveFuelRods( )
-  {
-    if(!input_variable[iv["iDefectiveFuelRod"]].getValue()) return;
-
-    // Fuel --- Gap --- Cladding --- Coolant
-    // dR / dt = - epsilon R
-
-    sciantix_variable[sv["Xe133 released"]].setFinalValue(
-      solver.Decay(
-        sciantix_variable[sv["Xe133 released"]].getFinalValue(),
-        gas[ga["Xe133"]].getEscapeCoefficient(),
-        0.0,
-        physics_variable[pv["Time step"]].getFinalValue()
-      )
-    );
-
-    sciantix_variable[sv["Xe133 in fuel rod free volume"]].setFinalValue(
-      sciantix_variable[sv["Xe133 produced"]].getFinalValue() -
-      sciantix_variable[sv["Xe133 decayed"]].getFinalValue() -
-      sciantix_variable[sv["Xe133 in grain"]].getFinalValue() -
-      sciantix_variable[sv["Xe133 at grain boundary"]].getFinalValue() -
-      sciantix_variable[sv["Xe133 released"]].getFinalValue()
     );
   }
 
