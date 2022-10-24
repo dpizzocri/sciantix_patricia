@@ -1,0 +1,18 @@
+5.0e-06
+#	initial grain radius (m)
+0.0	0.0	0.0	0.0	0.0	0.0
+#	initial Xe (at/m3) produced, ig, ig-solution, ig-bubbles, gb, released
+0.0	0.0	0.0	0.0	0.0	0.0
+#	initial Kr (at/m3) produced, ig, ig-solution, ig-bubbles, gb, released
+1493999999999999836422144	1493999999999999836422144	944744713860761685852160	549255286139238150569984	0.0	0.0
+#	initial He (at/m3) produced, ig, ig-solution, ig-bubbles, gb, released
+0.0
+#	initial fuel burn-up (MWd/kgUO2)
+0.0
+#	initial effective_burn-up (MWd/kgUO2)
+10970.0
+#	initial fuel density (kg/m3)
+0.0	1.0	0.0	0.0	99.0
+#	initial U234 U235 U236 U237 U238 (% of heavy atoms) content
+0.0	0.0	0.0	0.0	0.0	0.0	0.0
+#	initial Xe133 (at/m3) produced, ig, ig-solution, ig-bubbles, decayed, gb, released

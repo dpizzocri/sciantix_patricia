@@ -1,13 +1,18 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.4                         //
-//  Year   : 2019                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//       _______.  ______  __       ___      .__   __. .___________. __  ___   ___  //
+//      /       | /      ||  |     /   \     |  \ |  | |           ||  | \  \ /  /  //
+//     |   (----`|  ,----'|  |    /  ^  \    |   \|  | `---|  |----`|  |  \  V  /   //
+//      \   \    |  |     |  |   /  /_\  \   |  . `  |     |  |     |  |   >   <    //
+//  .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |     |  |  /  .  \   //
+//  |_______/     \______||__| /__/     \__\ |__| \__|     |__|     |__| /__/ \__\  //
+//                                                                                  //
+//  Originally developed by D. Pizzocri & T. Barani                                 //
+//                                                                                  //
+//  Version: 2.0                                                                    //
+//  Year: 2022                                                                      //
+//  Authors: D. Pizzocri, G. Zullo.                                                 //
+//                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////
 
 /// InterGranularBubbleEvolution
 /// This function contains a choice among possible
@@ -16,68 +21,109 @@
 /// The model considers one-off nucleation,
 /// growth of lenticular bubbles by vacancy absorption
 /// and coalescence of bubbles.
-/// [1] Pastore et al., NED, 256 (2013) 75-86
 /// [2] White, JNM, 325 (2004) 61-77
 
 #include "InterGranularBubbleEvolution.h"
 
 void InterGranularBubbleEvolution( )
 {
-  // One-off nucleation
-  // The bubble concentration is set during Initialization
-  Intergranular_bubble_concentration[1] = Intergranular_bubble_concentration[0];
+  model.emplace_back();
+  int model_index = model.size() - 1;
+  model[model_index].setName("Intergranular bubble evolution");
+  std::vector<double> parameter;
 
-  // Gas is distributed among bubbles
-  const double grain_surface_to_volume_ratio = 3.0 / Grain_radius[0];
-  Intergranular_atoms_per_bubble[1] = Gas_boundary[1] / (Intergranular_bubble_concentration[1] * grain_surface_to_volume_ratio);
-
-  // Bubble growth
-  // Vacancies per bubbles are updated to over/under equilibrium bubble pressure
-  const double semidihedral_angle = 50.0 * Pi / 180.0; // (rad) Koo et al., 2000; White, 2004
-  const double grain_boundary_thickness(5.0e-10); // (m) Kogai, 1997
-  if (Intergranular_bubble_radius[0] <= 0.0)
-    // radius is initialized assuming the bubble as a circle of atoms with no vacancies
-    // C = 1.46e-10 (m)
-    // where C = sqrt(Xenon_volume_in_the_lattice / (pi * grain_boundary_thickness))
+  if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 0)
   {
-    Intergranular_bubble_radius[0] = 1.46e-10*sqrt(Intergranular_atoms_per_bubble[1])/sin(semidihedral_angle);
-    Intergranular_bubble_area[0] = Pi*pow(Intergranular_bubble_radius[1]*sin(semidihedral_angle), 2);
+    parameter.push_back(0.0);
+    parameter.push_back(0.0);
+
+    model[model_index].setParameter(parameter);
+    model[model_index].setRef("No model for grain-boundary bubble evolution.");
+  }
+  
+  if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1)
+  {
+
+    // Gas is distributed among bubbles
+    // n(at/bub) = c(at/m3) / (N(bub/m2) S/V(1/m))
+    double n_at(0);
+    for(std::vector<System>::size_type i = 0; i != sciantix_system.size() - 1; ++i)
+    {
+      sciantix_variable[sv["Intergranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(
+        sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue() /
+        (sciantix_variable[sv["Intergranular bubble concentration"]].getInitialValue() * (3.0 / sciantix_variable[sv["Grain radius"]].getFinalValue())));
+
+      n_at +=  sciantix_variable[sv["Intergranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue();
+    }
+    sciantix_variable[sv["Intergranular atoms per bubble"]].setFinalValue(n_at);
+
+    // Calculation of the bubble dimension
+    // initial volume
+    double vol(0);
+    for(std::vector<System>::size_type i = 0; i != sciantix_system.size() - 1; ++i)
+    {
+      vol += sciantix_variable[sv["Intergranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue() * 
+      gas[ga[sciantix_system[i].getGasName()]].getVanDerWaalsVolume();
+    }
+    vol += sciantix_variable[sv["Intergranular vacancies per bubble"]].getInitialValue() * matrix[sma["UO2"]].getSchottkyVolume();
+    sciantix_variable[sv["Intergranular bubble volume"]].setFinalValue(vol);
+
+    // initial radius
+    sciantix_variable[sv["Intergranular bubble radius"]].setFinalValue(
+      0.620350491 * pow(sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue() / (matrix[sma["UO2"]].getLenticularShapeFactor()), 1./3.));
+
+    // initial area
+    sciantix_variable[sv["Intergranular bubble area"]].setFinalValue(
+      M_PI*pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sin(matrix[sma["UO2"]].getSemidihedralAngle()), 2));
+
+    // initial fractional coverage  
+    sciantix_variable[sv["Intergranular fractional coverage"]].setInitialValue(
+      sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() *
+      sciantix_variable[sv["Intergranular bubble area"]].getFinalValue());
+
+    // approximation of 1/S, S = -1/4 ((1-F)(3-F)+2lnF)
+    const double AA = 1830.1;
+    const double BB = -1599.2;
+    const double CC = 690.91;
+    const double DD = -99.993;
+    const double EE = 20.594;
+
+    double sink_strength = 0.4054 +
+      AA * pow(sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue(), 5) +
+      BB * pow(sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue(), 4) +
+      CC * pow(sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue(), 3) +
+      DD * pow(sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue(), 2) + 
+      EE *     sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue();
+
+    const double volume_flow_rate
+      = 2.0 * M_PI * matrix[sma["UO2"]].getGrainBoundaryThickness() * model[sm["Grain boundary vacancy diffusion coefficient"]].getParameter().front() * sink_strength;
+
+    // Initial value of the growth rate = 2 pi t D n / S V
+    const double growth_rate = volume_flow_rate * sciantix_variable[sv["Intergranular atoms per bubble"]].getFinalValue() / matrix[sma["UO2"]].getSchottkyVolume();
+
+    double equilibrium_pressure(0), equilibrium_term(0);
+    if(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue())
+    {
+      equilibrium_pressure = 2.0 * matrix[sma["UO2"]].getSurfaceTension() /sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() -
+        history_variable[hv["Hydrostatic stress"]].getFinalValue() * 1e6;
+
+      equilibrium_term = - volume_flow_rate * equilibrium_pressure /
+        (physics_constant[pc["Boltzmann constant"]].getValue() * history_variable[hv["Temperature"]].getFinalValue());
+    }
+
+    parameter.push_back(growth_rate);
+    parameter.push_back(equilibrium_term);
+
+    model[model_index].setParameter(parameter);
+    model[model_index].setRef("from G. Pastore et al., NED, 256 (2013) 75-86");
   }
 
-  if (Intergranular_atoms_per_bubble[1] > 0.0)
+  else if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 2)
   {
-    const double vacancy_diffusion_coefficient = GrainBoundaryVacancyDiffusionCoefficient(Temperature[0]);
-    Intergranular_fractional_coverage[0] = Intergranular_bubble_concentration[0] * Intergranular_bubble_area[0];
-    const double sink_strength = -0.25*((3.0-Intergranular_fractional_coverage[0])*(1.0-Intergranular_fractional_coverage[0])+2.0*log(Intergranular_fractional_coverage[0])); // (/)
-    const double volume_flow_rate = 2.0*Pi*grain_boundary_thickness*vacancy_diffusion_coefficient/sink_strength; // (m3)
-    const double growth_rate = volume_flow_rate * Intergranular_atoms_per_bubble[1] / Vacancy_volume;
+    parameter.push_back(0.0);
+    parameter.push_back(0.0);
 
-    const double equilibrium_pressure = 2.0 * Surface_tension / Intergranular_bubble_radius[0] - Hydrostaticstress[0] * M_1;
-
-    const double equilibrium_term = - volume_flow_rate * equilibrium_pressure / (Cons_bolt * Temperature[0]);
-    Intergranular_vacancies_per_bubble[1] = Solver::LimitedGrowth(Intergranular_vacancies_per_bubble[0], growth_rate, equilibrium_term, dTime_s);
+    model[model_index].setParameter(parameter);
+    model[model_index].setRef("Model for KEMS simulation: the behaviour of grain-boundary bubbles is neglected. All the gas coming from within grains is released.");
   }
-  else
-    Intergranular_vacancies_per_bubble[1] = 0.0;
-
-  // Bubble growth (shrink) due to vacancy inflow (outflow), all geometrical quantities are updated
-  const double lenticular_shape_factor = 1.0 - 1.5*cos(semidihedral_angle) + 0.5*pow(cos(semidihedral_angle), 3);
-  Intergranular_bubble_volume[1] = Intergranular_atoms_per_bubble[1] * Xenon_covolume + Intergranular_vacancies_per_bubble[1] * Vacancy_volume;
-  Intergranular_bubble_radius[1] = pow(3.0*Intergranular_bubble_volume[1]/(4.0*Pi*lenticular_shape_factor),1.0/3.0);
-  Intergranular_bubble_area[1] = Pi*pow(Intergranular_bubble_radius[1]*sin(semidihedral_angle), 2);
-
-  // Bubble interconnection decreases the number of bubbles
-
-  const double geometric_coefficient(2.0);
-  const double dbubble_area = Intergranular_bubble_area[1] - Intergranular_bubble_area[0];
-  Intergranular_bubble_concentration[1] = Solver::BinaryInteraction(Intergranular_bubble_concentration[0], geometric_coefficient, dbubble_area);
-
-  Intergranular_atoms_per_bubble[1] *= Intergranular_bubble_concentration[0] / Intergranular_bubble_concentration[1];
-  Intergranular_vacancies_per_bubble[1] *= Intergranular_bubble_concentration[0] / Intergranular_bubble_concentration[1];
-  Intergranular_bubble_volume[1] = Intergranular_atoms_per_bubble[1] * Xenon_covolume + Intergranular_vacancies_per_bubble[1] * Vacancy_volume;
-  Intergranular_bubble_radius[1] = pow(3.0*Intergranular_bubble_volume[1]/(4.0*Pi*lenticular_shape_factor),1.0/3.0);
-  Intergranular_bubble_area[1] = Pi*pow(Intergranular_bubble_radius[1]*sin(semidihedral_angle), 2);
-
-  // Fractional coverage
-  Intergranular_fractional_coverage[1] = Intergranular_bubble_concentration[1] * Intergranular_bubble_area[1];
 }

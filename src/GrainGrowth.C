@@ -1,40 +1,45 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.4                         //
-//  Year   : 2019                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//           G. Zullo, F. Rotea          //
-///////////////////////////////////////////
-
-/// GrainGrowth
-/// This model describes grain growth as a temperature controlled mechanism.
-/// [1] Ainscough et al., Journal of Nuclear Materials, 49 (1973) 117-128
-/// [2] Olsen, Transactions of SMIRT, Analysis of Reactor fuel and cladding
-/// materials, Vol. C, North Holland, Amsterdam, NL, (1979), p. C1/9 (1 - 10)
-/// [3] Botazzoli, PhD Thesis, Politecnico di Milano (2011)
+//////////////////////////////////////////////////////////////////////////////////////
+//       _______.  ______  __       ___      .__   __. .___________. __  ___   ___  //
+//      /       | /      ||  |     /   \     |  \ |  | |           ||  | \  \ /  /  //
+//     |   (----`|  ,----'|  |    /  ^  \    |   \|  | `---|  |----`|  |  \  V  /   //
+//      \   \    |  |     |  |   /  /_\  \   |  . `  |     |  |     |  |   >   <    //
+//  .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |     |  |  /  .  \   //
+//  |_______/     \______||__| /__/     \__\ |__| \__|     |__|     |__| /__/ \__\  //
+//                                                                                  //
+//  Originally developed by D. Pizzocri & T. Barani                                 //
+//                                                                                  //
+//  Version: 2.0                                                                    //
+//  Year: 2022                                                                      //
+//  Authors: D. Pizzocri, G. Zullo.                                                 //
+//                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////
 
 #include "GrainGrowth.h"
 
+/// GrainGrowth
+/// This model describes grain growth as a temperature controlled mechanism.
 void GrainGrowth( )
 {
-  const double temperature = Temperature[1];
-  const double burnup = Burn_up[1];
-  double grain_diameter = Grain_radius[0] * 2.0; // (m)
+  model.emplace_back();
 
-  double grain_boundary_mobility(0.0); // (m^4/s)
-  double grain_diameter_limit(0.0); // (m)
-  double burnup_factor(0.0); // (/)
-  double source_term(0.0);
+  int model_index = model.size() - 1;
 
-  switch (igrain_growth)
+  model[model_index].setName("Grain growth");
+  switch (input_variable[iv["iGrainGrowth"]].getValue())
   {
     case 0 :
-			// no grain growth
-      Grain_radius[1] = grain_diameter / 2.0;
+    // no grain growth
+    {
+      const std::string reference = "No grain growth.";
+      std::vector<double> parameter;
+      parameter.push_back(0);
+      parameter.push_back(0);
+
+      model[model_index].setParameter(parameter);
+      model[model_index].setRef(reference);
+
       break;
+		}
 
     case 1 :
     // from [1]
@@ -54,24 +59,39 @@ void GrainGrowth( )
     // allows to take into account the effect of irradiation on grain growth
     // (consisting in the increasing retarding effect of fission products)
     {
-      grain_boundary_mobility = 5.24e+07 * exp(-32114.5 / temperature) / (pow(um_m, 2) * s_h);
-      grain_diameter_limit = 2.23e+03 * exp(-7620.0 / temperature) / um_m;
-      burnup_factor = 1.0 + 2 * burnup / U_UO2;
-      source_term = - (grain_boundary_mobility * burnup_factor) / grain_diameter_limit;
+      const std::string reference = "Ainscough et al., Journal of Nuclear Materials, 49 (1973) 117-128";
+      std::vector<double> parameter;
+      double grain_diameter_limit(0.0); // (m)
+      double burnup_factor(0.0); // (/)
+
+      grain_diameter_limit = 2.23e-03 * exp(-7620.0 / history_variable[hv["Temperature"]].getFinalValue());
+      burnup_factor = 1.0 + 2.0 * sciantix_variable[sv["Burnup"]].getFinalValue() / 0.88;
       
-      if(grain_diameter < grain_diameter_limit / burnup_factor)
-      {
-        grain_diameter = Solver::LimitedGrowth(grain_diameter, grain_boundary_mobility, source_term, dTime_s);
-        Grain_radius[1] = grain_diameter / 2.0;
-      }
-      else
-        Grain_radius[1] = Grain_radius[0];
+      parameter.push_back(matrix[sma["UO2"]].getGrainBoundaryMobility()); // parameter[0] = growth rate
+      parameter.push_back(- (matrix[sma["UO2"]].getGrainBoundaryMobility() * burnup_factor) / grain_diameter_limit); // parameter[1] = source term
+
+      model[model_index].setParameter(parameter);
+      model[model_index].setRef(reference);
 
       break;
     }
 
+    case 2 :
+    // ANN
+    {
+      const std::string reference = "ANN fitting Ainscough data";
+      std::vector<double> parameter;
+      parameter.push_back(0);
+      parameter.push_back(0);
+
+      model[model_index].setParameter(parameter);
+      model[model_index].setRef(reference);
+
+      break;
+		}
+
     default :
-      ErrorMessages::Switch("GrainGrowth", "igrain_growth", igrain_growth);
+      ErrorMessages::Switch("model for grain growth", "igrain_growth", input_variable[iv["iGrainGrowth"]].getValue());
       break;
   }
 }

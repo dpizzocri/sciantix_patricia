@@ -1,54 +1,97 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.4                         //
-//  Year   : 2019                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//       _______.  ______  __       ___      .__   __. .___________. __  ___   ___  //
+//      /       | /      ||  |     /   \     |  \ |  | |           ||  | \  \ /  /  //
+//     |   (----`|  ,----'|  |    /  ^  \    |   \|  | `---|  |----`|  |  \  V  /   //
+//      \   \    |  |     |  |   /  /_\  \   |  . `  |     |  |     |  |   >   <    //
+//  .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |     |  |  /  .  \   //
+//  |_______/     \______||__| /__/     \__\ |__| \__|     |__|     |__| /__/ \__\  //
+//                                                                                  //
+//  Originally developed by D. Pizzocri & T. Barani                                 //
+//                                                                                  //
+//  Version: 2.0                                                                    //
+//  Year: 2022                                                                      //
+//  Authors: D. Pizzocri, G. Zullo.                                                 //
+//                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////
 
-/// GasDiffusion
+#include "GasDiffusion.h"
+
+/// Model: (Intragranular) Gas diffusion
 /// This function calls the solver SpectralDiffusion
 /// to evaluate the fission gas concentration
 /// inside the single grain after a fixed time step.
 /// Typical numerical values for UO2 fuel are taken from:
 /// [1] Olander, Wongsawaeng, Journal of Nuclear Materials, 354 (2006), 94-109
-
-#include "GasDiffusion.h"
+/// [2] Lassmann, Benk, JNM, 280 (2000), 127-135
+/// [3] Van Uffelen et al., NET, vol.43, N.6, (2011)
 
 void GasDiffusion( )
 {
-  double diffusion_coefficient = GasDiffusionCoefficient(Temperature[1], Fissionrate[1]);
-  double resolution_rate = ResolutionRate(Intragranular_bubble_radius[1], Fissionrate[1]);
-  double trapping_rate = TrappingRate(diffusion_coefficient, Intragranular_bubble_radius[1], Intragranular_bubble_concentration[1]);
-  double equilibrium_fraction = resolution_rate / (resolution_rate + trapping_rate);
-  double effective_diffusion_coefficient = diffusion_coefficient * equilibrium_fraction;
 
-  const unsigned short int N(40);
-  double initial_condition = 0.0;
-  static double initial_condition_term[4] = {initial_condition, initial_condition, initial_condition, initial_condition};
-
-  const double fission_yield = Fission_yield_Xe + Fission_yield_Kr;
-  double source_term = fission_yield * Fissionrate[1]; // (at/m3-s)
-
-  switch(isolver)
+  switch(input_variable[iv["iGasDiffusionSolver"]].getValue())
   {
-    case 0 :
-      Gas_grain[1] = Solver::FORMAS(initial_condition_term, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
-      break;
-
     case 1 :
-      Gas_grain[1] = Solver::SpectralDiffusion(gas_grain_modes, N, effective_diffusion_coefficient, Grain_radius[1], source_term, dTime_s);
+    {
+      int model_index;
+      std::vector<double> parameter;
+      for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
+      {
+        model.emplace_back();
+        model_index = model.size() - 1;
+        model[model_index].setName("Gas diffusion - " + sciantix_system[i].getName());
+        model[model_index].setRef("Booth, A. H. (1957), Speight 1969.");
+
+        parameter.push_back(n_modes);
+        parameter.push_back(
+          ( sciantix_system[i].getResolutionRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) /
+          ( sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) * sciantix_system[i].getDiffusivity());
+        parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue());
+        parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue());
+        parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate());
+
+        model[model_index].setParameter(parameter);
+        parameter.clear();
+      }
       break;
+    }
+
+    case 2 :
+    {
+      // parameter --> N
+      //               diffusion_coefficient
+      //               resolution_rate
+      //               trapping_rate
+      //               decay rate 
+      //               domain_radius 
+      //               source_term 
+      //               source_term_bubbles
+      int model_index;
+      std::vector<double> parameter;
+
+      for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
+      {
+        model.emplace_back();
+        model_index = model.size() - 1;
+        model[model_index].setName("Gas diffusion - " + sciantix_system[i].getName());
+        model[model_index].setRef("Booth, A. H. (1957), Speight (1969) withouth quasi-stationary hypothesis.");
+
+        parameter.push_back(n_modes);
+        parameter.push_back(sciantix_system[i].getDiffusivity());
+        parameter.push_back(sciantix_system[i].getResolutionRate());
+        parameter.push_back(sciantix_system[i].getTrappingRate());
+        parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate());
+        parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue());
+        parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue());
+        parameter.push_back(0.0);
+
+        model[model_index].setParameter(parameter);
+        parameter.clear();
+      }
+      break;
+    }
 
     default :
-      ErrorMessages::Switch("GasDiffusion", "isolver", isolver);
+      ErrorMessages::Switch("GasDiffusion", "iGasDiffusionSolver", input_variable[iv["iGasDiffusionSolver"]].getValue());
       break;
   }
-
-  Gas_grain_solution[1] = Gas_grain[1] * equilibrium_fraction;
-  Gas_grain_bubbles[1] = Gas_grain[1] * (1.0 - equilibrium_fraction);
-  Gas_boundary[1] = Gas_produced[1] - Gas_grain[1] - Gas_released[1];
 }

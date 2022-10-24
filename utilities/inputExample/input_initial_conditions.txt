@@ -1,27 +1,9 @@
-5e-6 # initial grain radius (um)
-0 # initial Gas produced (at/m3)
-0 # initial Gas in grains (dissolved plus ig bubbles) (at/m3)
-0 # initial Gas in solution (at/m3)
-0 # initial Gas in ig bubbles (at/m3)
-0 # initial Gas in gb bubbles (at/m3)
-0 # initial Gas released (at/m3)
-0 # initial fuel burnup (MWd/kgUO2)
-0 # initial effective fuel burnup (MWd/kgUO2)
-10970 # initial fuel density (kg/m3)
-2 # initial O/M (/)
-0 # initial He produced (every manner) (at/m3)
-0 # initial He in grains (dissolved plus ig bubbles) (at/m3)
-0 # initial He in solution (at/m3)
-0 # initial He in ig bubbles (at/m3)
-0 # initial He in gb bubbles (at/m3)
-0 # initial He released (at/m3)
-0 3 0 0 97
-# initial U234 U235 U236 U237 U238 (% of heavy atoms) content
-0 0 0
-# initial Np237 Np238 Np239 (% of heavy atoms) content
-0 0 0 0 0 0
-# initial Pu238 Pu239 Pu240 Pu241 Pu242 Pu243 (% of heavy atoms) content
-0 0 0 0 0
-# initial Am241 Am242g Am242m Am243 Am244 (% of heavy atoms) content
-0 0 0 0
-# initial Cm242 Cm243 Cm244 Cm245 (% of heavy atoms) content
+0.00000750	#	initial grain radius (m)
+0.0 0.0 0.0 0.0 0.0     #   initial Xe (at/m3) produced - intragranular - in solution - in ig bubble - at grain boundary - released
+0.0 0.0 0.0 0.0 0.0     #   initial Xe133 (at/m3) produced - intragranular - decayed - at grain boundary - released
+0.0 0.0 0.0 0.0 0.0     #   initial Kr (at/m3) produced - intragranular - in solution - in ig bubble - at grain boundary - released
+0.0 0.0 0.0 0.0 0.0     #   initial He (at/m3) produced - intragranular - in solution - in ig bubble - at grain boundary - released
+0.0	#	initial fuel burn-up (MWd/kgUO2)
+0.0	#	initial effective_burn-up (MWd/kgUO2)
+10960.0	#	initial fuel density (kg/m3)
+0.0	3.0	0.0	0.0	97.0	#	initial U234 U235 U236 U237 U238 (% of heavy atoms) content

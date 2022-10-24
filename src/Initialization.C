@@ -1,13 +1,18 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.4                         //
-//  Year   : 2019                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//       _______.  ______  __       ___      .__   __. .___________. __  ___   ___  //
+//      /       | /      ||  |     /   \     |  \ |  | |           ||  | \  \ /  /  //
+//     |   (----`|  ,----'|  |    /  ^  \    |   \|  | `---|  |----`|  |  \  V  /   //
+//      \   \    |  |     |  |   /  /_\  \   |  . `  |     |  |     |  |   >   <    //
+//  .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |     |  |  /  .  \   //
+//  |_______/     \______||__| /__/     \__\ |__| \__|     |__|     |__| /__/ \__\  //
+//                                                                                  //
+//  Originally developed by D. Pizzocri & T. Barani                                 //
+//                                                                                  //
+//  Version: 2.0                                                                    //
+//  Year: 2022                                                                      //
+//  Authors: D. Pizzocri, G. Zullo.                                                 //
+//                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////
 
 /// Initialization
 /// This routine initializes Sciantix internal variables with
@@ -17,6 +22,7 @@
 
 void Initialization( )
 {
+  // Sciantix_history initialization
   Sciantix_history[0] = Temperature_input[0];
   Sciantix_history[1] = Temperature_input[0];
   Sciantix_history[2] = Fissionrate_input[0];
@@ -25,55 +31,45 @@ void Initialization( )
   Sciantix_history[5] = Hydrostaticstress_input[0];
   Sciantix_history[6] = 0.0;
 
-  Sciantix_variables[7] = 0.0;
-  Sciantix_variables[8] = 0.0;
-  Sciantix_variables[9] = 0.0;
-  Sciantix_variables[10] = 4.0e+13;
-  Sciantix_variables[11] = 0.0;
-  Sciantix_variables[12] = 0.0;
-  Sciantix_variables[13] = 1.0e-08;
-  Sciantix_variables[14] = 0.0;
-  Sciantix_variables[15] = 0.0;
-  Sciantix_variables[16] = 0.0;
-  Sciantix_variables[17] = 0.5;
-  Sciantix_variables[18] = 0.0;
-  Sciantix_variables[19] = 1.0;
-  Sciantix_variables[20] = 0.0;
-  Sciantix_variables[21] = 0.0;
+  // Sciantix_variables initialization
+  Sciantix_variables[25] = 4.0e+13;  // Intergranular_bubble_concentration[0]
+  Sciantix_variables[35] = 0.5;      // Intergranular_saturation_fractional_coverage[0]
+  Sciantix_variables[37] = 1.0;      // Intergranular_fractional_intactness[0]
 
-  double Mmol_HM = 0.01 * (
-                Sciantix_variables[61] * 234.04 + Sciantix_variables[62] * 235.04 + Sciantix_variables[63] * 236.05 + Sciantix_variables[64] * 237.05 + Sciantix_variables[65] * 238.05 +
-                Sciantix_variables[66] * 237.04 + Sciantix_variables[67] * 238.05 + Sciantix_variables[68] * 239.05 +
-                Sciantix_variables[69] * 238.05 + Sciantix_variables[70] * 239.05 + Sciantix_variables[71] * 240.05 + Sciantix_variables[72] * 241.06 + Sciantix_variables[72] * 242.06 + Sciantix_variables[73] * 243.06 +
-                Sciantix_variables[75] * 241.06 + Sciantix_variables[76] * 242.06 + Sciantix_variables[77] * 242.06 + Sciantix_variables[78] * 243.06 + Sciantix_variables[78] * 244.06 +
-                Sciantix_variables[80] * 242.06 + Sciantix_variables[81] * 243.06 + Sciantix_variables[82] * 244.06 + Sciantix_variables[83] * 245.07
-                );
-
-  double HM_HMO2 = Mmol_HM / (Mmol_HM + 32.0); // Heavy Metals over Heavy Metal Oxides in mass
-
-  double HM_m3 = 1000. * Sciantix_variables[84] * 6.022e+23 / (Mmol_HM + 32.0);
-
-  for (int i = 24; i < 61; i++)
-    Sciantix_variables[i] = 0.0;
-
-  for (int j = 61; j < 83; j++)
-    Sciantix_variables[j] *= 0.01 * HM_m3;
-
-  Sciantix_variables[23] = HM_m3 * Sciantix_variables[85];
+  // https://pubchem.ncbi.nlm.nih.gov/compound/Uranium-234
+  Sciantix_variables[41] *= Sciantix_variables[40] * 6.022e+24 * 0.8815 / 234.04095; // U-234
+  Sciantix_variables[42] *= Sciantix_variables[40] * 6.022e+24 * 0.8815 / 235.04393; // U-235
+  Sciantix_variables[43] *= Sciantix_variables[40] * 6.022e+24 * 0.8815 / 236.04557; // U-236
+  Sciantix_variables[44] *= Sciantix_variables[40] * 6.022e+24 * 0.8815 / 237.04873; // U-237
+  Sciantix_variables[45] *= Sciantix_variables[40] * 6.022e+24 * 0.8815 / 238.05079; // U-238
 
   // projection on diffusion modes of the initial conditions
   double initial_condition(0.0);
   double projection_remainder(0.0);
   double reconstructed_solution(0.0);
-  int iteration(0), iteration_max(20), n(0), np1(1), n_modes(40), k(0), K(1);
+  int iteration(0), iteration_max(20), n(0), np1(1), n_modes(40), k(0), K(20);
   double projection_coeff(0.0);
   projection_coeff = - sqrt(8.0 / M_PI);
 
   for (k = 0; k < K; ++k)
   {
     switch (k)
-		{
-  		case 0  : initial_condition = Sciantix_variables[2]; break;     // Xe grain
+	{
+  	  case 0  : initial_condition = Sciantix_variables[2];  break;  // Xe in grain
+  	  case 1  : initial_condition = Sciantix_variables[3];  break;  // Xe in grain - solution
+      case 2  : initial_condition = Sciantix_variables[4];  break;  // Xe in grain - bubbles
+
+      case 3  : initial_condition = Sciantix_variables[8];  break;  // Kr in grain
+      case 4  : initial_condition = Sciantix_variables[9];  break;  // Kr in grain - solution
+      case 5  : initial_condition = Sciantix_variables[10]; break;  // Kr in grain - bubbles
+
+      case 6  : initial_condition = Sciantix_variables[14]; break;  // He in grain
+      case 7  : initial_condition = Sciantix_variables[15]; break;  // He in grain - solution
+      case 8  : initial_condition = Sciantix_variables[16]; break;  // He in grain - bubbles
+      
+      case 9  : initial_condition = Sciantix_variables[49]; break;  // Xe133 in grain
+      case 10 : initial_condition = Sciantix_variables[50]; break;  // Xe133 in grain - solution
+      case 11 : initial_condition = Sciantix_variables[51]; break;  // Xe133 in grain - bubbles
 
     	default : initial_condition = 0.0; break;
 		}
@@ -84,7 +80,7 @@ void Initialization( )
       reconstructed_solution = 0.0;
       for (n = 0; n < n_modes; ++n)
       {
-        np1 = n+1;
+        np1 = n + 1;
         const double n_coeff = pow(- 1.0, np1) / np1;
         Sciantix_diffusion_modes[k * n_modes + n] += projection_coeff * n_coeff * projection_remainder;
         reconstructed_solution += projection_coeff * n_coeff * Sciantix_diffusion_modes[k * n_modes + n] * 3.0 / (4.0 * M_PI);
@@ -92,5 +88,4 @@ void Initialization( )
       projection_remainder = initial_condition - reconstructed_solution;
     }
   }
-
 }

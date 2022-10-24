@@ -1,37 +1,38 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.4                         //
-//  Year   : 2019                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//       _______.  ______  __       ___      .__   __. .___________. __  ___   ___  //
+//      /       | /      ||  |     /   \     |  \ |  | |           ||  | \  \ /  /  //
+//     |   (----`|  ,----'|  |    /  ^  \    |   \|  | `---|  |----`|  |  \  V  /   //
+//      \   \    |  |     |  |   /  /_\  \   |  . `  |     |  |     |  |   >   <    //
+//  .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |     |  |  /  .  \   //
+//  |_______/     \______||__| /__/     \__\ |__| \__|     |__|     |__| /__/ \__\  //
+//                                                                                  //
+//  Originally developed by D. Pizzocri & T. Barani                                 //
+//                                                                                  //
+//  Version: 2.0                                                                    //
+//  Year: 2022                                                                      //
+//  Authors: D. Pizzocri, G. Zullo.                                                 //
+//                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////
+
+/// Burnup model
+/// This routine sets the objects that represent the models used by Sciantix during the simulation
+/// Each Model contains its own parameters which are used by the solver
 
 #include "Burnup.h"
 
-void Burnup() {
-  const double specific_power =
-      (Fissionrate[1] * Ener_fiss / Fuel_density[1]) / (M_1 * h_d * s_h);
-  Burn_up[1] = Solver::Integrator(Burn_up[0], specific_power, dTime_s);
-  const double temperature_threshold(1273.0);
-  double time_below_threshold = 1.0;
-  if (temperature_threshold > Temperature[0] &&
-      temperature_threshold > Temperature[1])
-    time_below_threshold = 1.0;
-  if (temperature_threshold < Temperature[0] &&
-      temperature_threshold < Temperature[1])
-    time_below_threshold = 0.0;
-  if (temperature_threshold > Temperature[0] &&
-      temperature_threshold < Temperature[1])
-    time_below_threshold = (temperature_threshold - Temperature[0]) /
-                           (Temperature[1] - Temperature[0]);
-  if (temperature_threshold < Temperature[0] &&
-      temperature_threshold > Temperature[1])
-    time_below_threshold = (temperature_threshold - Temperature[1]) /
-                           (Temperature[1] - Temperature[0]);
+void Burnup( )
+{
+  model.emplace_back();
+  int model_index = model.size() - 1;
+  model[model_index].setName("Burnup");
 
-  Effective_burn_up[1] = Solver::Integrator(
-      Effective_burn_up[0], time_below_threshold * specific_power, dTime_s);
+  double specific_power = (history_variable[hv["Fission rate"]].getFinalValue()
+    * 3.611111e-22 / sciantix_variable[sv["Fuel density"]].getFinalValue());
+  
+  std::string reference = "Burnup evolution.";
+  std::vector<double> parameter;
+  parameter.push_back(specific_power);
+
+  model[model_index].setParameter(parameter);
+  model[model_index].setRef(reference);
 }

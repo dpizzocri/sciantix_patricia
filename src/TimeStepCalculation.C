@@ -1,13 +1,18 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.4                         //
-//  Year   : 2019                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//       _______.  ______  __       ___      .__   __. .___________. __  ___   ___  //
+//      /       | /      ||  |     /   \     |  \ |  | |           ||  | \  \ /  /  //
+//     |   (----`|  ,----'|  |    /  ^  \    |   \|  | `---|  |----`|  |  \  V  /   //
+//      \   \    |  |     |  |   /  /_\  \   |  . `  |     |  |     |  |   >   <    //
+//  .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |     |  |  /  .  \   //
+//  |_______/     \______||__| /__/     \__\ |__| \__|     |__|     |__| /__/ \__\  //
+//                                                                                  //
+//  Originally developed by D. Pizzocri & T. Barani                                 //
+//                                                                                  //
+//  Version: 2.0                                                                    //
+//  Year: 2022                                                                      //
+//  Authors: D. Pizzocri, T. Barani                                                 //
+//                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////
 
 /// TimeStepCalculation
 /// This routine calculates the time step length
@@ -33,7 +38,13 @@ double TimeStepCalculation( )
   time_step = (upper_bound - lower_bound) / Number_of_time_steps_per_interval;
 
   if ((Time_h+time_step) > upper_bound)
+    {
     time_step = upper_bound - Time_h;
+
+    }
+
+  //if ((upper_bound - (Time_h+time_step) < 1.0e-3))
+  //time_step = upper_bound - Time_h;
 
   return time_step;
 }

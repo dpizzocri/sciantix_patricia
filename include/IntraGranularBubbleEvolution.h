@@ -1,21 +1,31 @@
-///////////////////////////////////////////
-//                                       //
-//           S C I A N T I X             //
-//           ---------------             //
-//                                       //
-//  Version: 1.4                         //
-//  Year   : 2019                        //
-//  Authors: D. Pizzocri and T. Barani   //
-//                                       //
-///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//       _______.  ______  __       ___      .__   __. .___________. __  ___   ___  //
+//      /       | /      ||  |     /   \     |  \ |  | |           ||  | \  \ /  /  //
+//     |   (----`|  ,----'|  |    /  ^  \    |   \|  | `---|  |----`|  |  \  V  /   //
+//      \   \    |  |     |  |   /  /_\  \   |  . `  |     |  |     |  |   >   <    //
+//  .----)   |   |  `----.|  |  /  _____  \  |  |\   |     |  |     |  |  /  .  \   //
+//  |_______/     \______||__| /__/     \__\ |__| \__|     |__|     |__| /__/ \__\  //
+//                                                                                  //
+//  Originally developed by D. Pizzocri & T. Barani                                 //
+//                                                                                  //
+//  Version: 2.0                                                                    //
+//  Year: 2022                                                                      //
+//  Authors: D. Pizzocri, G. Zullo.                                                 //
+//                                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
-#include <vector>
-#include "GlobalVariables.h"
-#include "ErrorMessages.h"
-#include "Solver.h"
-#include "IntraGranularBubbleRadius.h"
-#include "NucleationRate.h"
-#include "ResolutionRate.h"
+#include "ModelDeclaration.h"
+#include "MapModel.h"
+#include "SciantixVariableDeclaration.h"
+#include "MapSciantixVariable.h"
+#include "SystemDeclaration.h"
+#include "MapSystem.h"
 
 void IntraGranularBubbleEvolution( );
+
+
+
+
+
+
+
