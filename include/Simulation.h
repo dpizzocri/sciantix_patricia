@@ -775,12 +775,12 @@ class Simulation : public Solver, public Model
  
  void Stoichiometry_deviation()
  {
-    double coeff = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue())* 457;
-    double beta = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue()) * 457 * 0.25;
+    //double coeff = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue())* 457;
+    //double beta = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue()) * 457 * 0.25;
 
    sciantix_variable[sv["Stoichiometry deviation"]].setFinalValue(
     solver.Decay(
-     sciantix_variable[sv["Stoichiometry deviationn"]].getInitialValue(),
+     sciantix_variable[sv["Stoichiometry deviation"]].getInitialValue(),
         model[sm["Stoichiometry deviation"]].getParameter().at(0),
         model[sm["Stoichiometry deviation"]].getParameter().at(1),
         physics_variable[pv["Time step"]].getFinalValue()

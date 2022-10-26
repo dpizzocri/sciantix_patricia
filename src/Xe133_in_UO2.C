@@ -74,6 +74,20 @@ void Xe133_in_UO2( )
       break;
     }
 
+    case 4 :
+    {
+      //scrivere due stronzate
+      ref_diffusivity = "Kim simplified model";
+      double temperature = history_variable[hv["Temperature"]].getFinalValue();
+      double x = sciantix_variable[sv["Stoichiometry deviation"]].getFinalValue();
+      double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
+      // metti double f con coeff di diff che dipende da x 
+      double f = 1.0 + 493.0 * x + 31282*pow(x,2);
+      diff_value = 7.6e-10*exp(-35000/temperature)*f + 2.0e-40*fission_rate;
+      
+      break;
+    }
+
     case 99 :
     {
       ref_diffusivity = "Test case: zero diffusion coefficient";

@@ -53,11 +53,14 @@ void StoichiometryDeviation( )
       std::vector<double> parameter;
       double coeff(0.0);
       double beta(0.0);
-      
-      coeff = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue())* 457;
-      beta = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue()) * 457 * 0.25;
+      double alpha(0.0);
+
+      coeff = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue())*3/sciantix_variable[sv["Grain radius"]].getFinalValue()/1312;
+      beta = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue()) * 600000*0.1/1312;
+      //alpha = 0.365 * exp(-23500/history_variable[hv["Temperature"]].getFinalValue());
       parameter.push_back(coeff); // x_eq
       parameter.push_back(beta);
+      //std::cout << alpha << std::endl; //fa output su terminale
       //parameter.push_back(0.0);
 
       model[model_index].setParameter(parameter);

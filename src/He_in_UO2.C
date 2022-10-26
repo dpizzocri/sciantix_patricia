@@ -61,6 +61,25 @@ void He_in_UO2( )
       diff_value = 1.0e-7 * exp(- 30057.9 /  history_variable[hv["Temperature"]].getFinalValue());
       break;
     }
+    
+    case 3 :
+    {
+     // The best estimate correlation for the cluster data available in literature with no or very limited lattice damage.
+      // This correlation is recommended for sample in which INFUSION technique has been adopted.
+      ref_diffusivity = "diffusivity from L. Luzzi et al., Nuclear Engineering and Design, 330 (2018) 265-271";
+      diff_value = 2.0e-10 * exp(- 24603.4 / history_variable[hv["Temperature"]].getFinalValue());      
+      break;
+    }
+
+    case 4 :
+    {
+     // The best estimate correlation for the cluster data available in literature with no or very limited lattice damage.
+      // This correlation is recommended for sample in which INFUSION technique has been adopted.
+      ref_diffusivity = "diffusivity from L. Luzzi et al., Nuclear Engineering and Design, 330 (2018) 265-271";
+      diff_value = 2.0e-10 * exp(- 24603.4 / history_variable[hv["Temperature"]].getFinalValue());      
+      break;
+    }
+
 
     case 99 :
     {

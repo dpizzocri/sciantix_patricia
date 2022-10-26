@@ -49,6 +49,7 @@ void Xe_in_UO2( )
       double d2 = 4.0 * 1.41e-25 * sqrt(fission_rate) * exp(- 1.91e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
       double d3 = 8.0e-40 * fission_rate;
       diff_value = d1 + d2 + d3;
+      std::cout << diff_value << std::endl;
       break;
     }
 
@@ -69,22 +70,21 @@ void Xe_in_UO2( )
       double d2 = 1.41e-25 * sqrt(fission_rate) * exp(- 1.91e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
       double d3 = 2.0e-40 * fission_rate;
       diff_value = d1 + d2 + d3;
-
+      
       break;
     }
 
     case 4 :
     {
-      ref_diffusivity = "diff che dipendeda x";
+      //scrivere due stronzate
+      ref_diffusivity = "Kim simplified model";
       double temperature = history_variable[hv["Temperature"]].getFinalValue();
       double x = sciantix_variable[sv["Stoichiometry deviation"]].getFinalValue();
       double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
       // metti double f con coeff di diff che dipende da x 
-      double d1 = 7.6e-10 * exp(- 4.86e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
-      double d2 = 5.64e-25 * sqrt(fission_rate) * exp(- 1.91e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
-      double d3 = 8.0e-40 * fission_rate;
-      diff_value = d1 + d2 + d3;
-
+      double f = 1.0 + 493.0 * x + 31282*pow(x,2);
+      diff_value = 7.6e-10*exp(-35000/temperature)*f + 2.0e-40*fission_rate;
+      std::cout << diff_value << std::endl;
       break;
     }
 
