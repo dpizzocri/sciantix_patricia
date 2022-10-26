@@ -77,19 +77,7 @@ class Gas : virtual public Material
       /// Member function to get the Wan der Waals volume of the gas
       return decay_rate;
     }
-
-      void setEscapeCoefficient(double e)
-    {
-      /// Member function to set the gas escape coefficient
-      escape_coefficient = e;
-    }
-
-    double getEscapeCoefficient( )
-    {
-      /// Member function to get the gas escape coefficient
-      return escape_coefficient;
-    }
-
+    
     Gas() { }
     ~Gas() { }
 };

@@ -27,7 +27,6 @@ void Xenon( )
   gas[index].setAtomicNumber(54);
   gas[index].setVanDerWaalsVolume(8.48e-29);
   gas[index].setDecayRate(0.0);
-  gas[index].setEscapeCoefficient(0.0);
   ++index;
 
   // 133-xenon
@@ -37,5 +36,4 @@ void Xenon( )
   gas[index].setMassNumber(133);
   gas[index].setVanDerWaalsVolume(8.48e-29);
   gas[index].setDecayRate(1.53e-6);
-  gas[index].setEscapeCoefficient(1e-6);
 }
