@@ -70,7 +70,7 @@ void He_in_UO2( )
     }
 
     default :
-      ErrorMessages::Switch("He_in_UO2", "igas_diffusion_coefficient", input_variable[iv["iHeDiffusionCoefficient"]].getValue());
+      ErrorMessages::Switch("He_in_UO2", "ihe_diffusion_coefficient", input_variable[iv["iHeDiffusionCoefficient"]].getValue());
       break;
   }
   diff_value *= sf_diffusion_coeff;
