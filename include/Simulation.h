@@ -637,7 +637,7 @@ class Simulation : public Solver, public Model
   void GrainBoundaryMicroCracking( )
   {
     // Parameters:
-    // 1st = d(microcracking parameter)/dT
+    // 1st = microcracking parameter
     // 2nd = healing parameter
 
     // Intergranular fractional intactness
@@ -729,15 +729,13 @@ class Simulation : public Solver, public Model
       sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue());
     }
   }
-
-
-  void GrainBoundaryVenting( )
+	
+	void GrainBoundaryVenting( )
   {
     // cracking invariant G = ln(F) - f
     // double cracking_invariant = 
     //  log(sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()) - 
     //  sciantix_variable[sv["Intergranular fractional intactness"]].getFinalValue();
-    
     // x = exp(G + 1)
     // x = exp(lnF - f + 1)
     // x = F * e(1 - f)
@@ -769,6 +767,7 @@ class Simulation : public Solver, public Model
     sciantix_variable[sv["Intergranular venting probability"]].setFinalValue(sciantix_variable[sv["Intergranular vented fraction"]].getFinalValue());
     
     // Gas is vented by subtracting a fraction of the gas concentration at grain boundaries arrived from diffusion
+    // Bf = Bf - p_v * dB
     for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
       sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].setFinalValue(
 	    solver.Integrator(

@@ -41,7 +41,7 @@ void InterGranularBubbleEvolution( )
     model[model_index].setRef("No model for grain-boundary bubble evolution.");
   }
   
-  if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1)
+  else if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1)
   {
   	// Gas is distributed among bubbles
     // n(at/bub) = c(at/m3) / (N(bub/m2) S/V(1/m))
@@ -73,19 +73,19 @@ void InterGranularBubbleEvolution( )
   	vol += sciantix_variable[sv["Intergranular vacancies per bubble"]].getInitialValue() * matrix[sma["UO2"]].getSchottkyVolume();
   	sciantix_variable[sv["Intergranular bubble volume"]].setFinalValue(vol);
 
-  // initial radius
-  sciantix_variable[sv["Intergranular bubble radius"]].setFinalValue(
-    0.620350491 * pow(sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue() / (matrix[sma["UO2"]].getLenticularShapeFactor()), 1./3.));
-
-  // initial area
-  sciantix_variable[sv["Intergranular bubble area"]].setFinalValue(
-    M_PI*pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sin(matrix[sma["UO2"]].getSemidihedralAngle()), 2));
-
-  // initial fractional coverage  
-  sciantix_variable[sv["Intergranular fractional coverage"]].setInitialValue(
-    sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() *
-    sciantix_variable[sv["Intergranular bubble area"]].getFinalValue());
-    
+	  // initial radius
+	  sciantix_variable[sv["Intergranular bubble radius"]].setFinalValue(
+	    0.620350491 * pow(sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue() / (matrix[sma["UO2"]].getLenticularShapeFactor()), 1./3.));
+	
+	  // initial area
+	  sciantix_variable[sv["Intergranular bubble area"]].setFinalValue(
+	    M_PI*pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sin(matrix[sma["UO2"]].getSemidihedralAngle()), 2));
+	
+	  // initial fractional coverage  
+	  sciantix_variable[sv["Intergranular fractional coverage"]].setInitialValue(
+	    sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() *
+	    sciantix_variable[sv["Intergranular bubble area"]].getFinalValue());
+	    
     // approximation of 1/S, S = -1/4 ((1-F)(3-F)+2lnF)
     const double AA = 1830.1;
     const double BB = -1599.2;
