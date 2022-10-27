@@ -1,3 +1,8 @@
+# Preliminary file for continuous integration (CI) in gitlab repository
+# up to now, just check if code compile
+#
+# G. Zullo
+
 # stages:
 #  - build
 #  - code_quality
