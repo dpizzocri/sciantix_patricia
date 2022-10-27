@@ -38,19 +38,20 @@ void IntraGranularBubbleEvolution( )
       sciantix_variable[sv["Intragranular bubble concentration"]].setFinalValue(7.0e23);
       sciantix_variable[sv["Intragranular bubble radius"]].setFinalValue(1.0e-9);
 
+      sciantix_variable[sv["Intragranular atoms per bubble"]].setFinalValue(0.0);
       for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
       {
-        sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(
-          sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue() /
-          sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue()
-        );
+        if(gas[ga[sciantix_system[i].getGasName()]].getDecayRate() == 0.0)
+        {
+          sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(
+            sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue() /
+            sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue()
+          );
 
-        sciantix_variable[sv["Intragranular atoms per bubble"]].setFinalValue(
-          sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue() + 
-          sciantix_variable[sv["Intragranular atoms per bubble"]].getFinalValue()
-        );
+          sciantix_variable[sv["Intragranular atoms per bubble"]].addValue(sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue());
+        }      
       }
-      
+
       std::vector<double> parameter;
       parameter.push_back(0.);
       parameter.push_back(0.);
@@ -66,8 +67,8 @@ void IntraGranularBubbleEvolution( )
 
       std::string reference = "Pizzocri et al., JNM, 502 (2018) 323-330";
       std::vector<double> parameter;
-      parameter.push_back(sciantix_system[sy["Xe in UO2"]].getResolutionRate()); // decay rate
-      parameter.push_back(model[sm["Nucleation rate"]].getParameter().front()); // source rate
+      parameter.push_back(sciantix_system[sy["Xe in UO2"]].getResolutionRate());
+      parameter.push_back(matrix[sma["UO2"]].getNucleationRate());
 
       model[model_index].setParameter(parameter);
       model[model_index].setRef(reference);
@@ -81,15 +82,14 @@ void IntraGranularBubbleEvolution( )
       sciantix_variable[sv["Intragranular bubble concentration"]].setFinalValue((1.52e+27 / history_variable[hv["Temperature"]].getFinalValue() ) - 3.3e+23);
       sciantix_variable[sv["Intragranular bubble radius"]].setFinalValue(5.0e-10 * (1.0 + 106.0 * exp(- 5.43222789e22 * history_variable[hv["Temperature"]].getFinalValue())));
       
+      sciantix_variable[sv["Intragranular atoms per bubble"]].setFinalValue(0.0);
       for(std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
       {
         sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(
           sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue() /
           sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue());
 
-        sciantix_variable[sv["Intragranular atoms per bubble"]].setFinalValue(
-          sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue() + 
-          sciantix_variable[sv["Intragranular atoms per bubble"]].getFinalValue());
+        sciantix_variable[sv["Intragranular atoms per bubble"]].addValue(sciantix_variable[sv["Intragranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue());
       }
 
       std::vector<double> parameter;

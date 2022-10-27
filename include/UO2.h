@@ -19,6 +19,12 @@
 #include "MapSciantixVariable.h"
 #include "HistoryVariableDeclaration.h"
 #include "MapHistoryVariable.h"
+#include "ModelDeclaration.h"
+#include "SystemDeclaration.h"
+#include "MapSystem.h"
+#include "MapModel.h"
+#include "SciantixScalingFactorDeclaration.h"
+
 #define _USE_MATH_DEFINES
 #include <cmath>
 

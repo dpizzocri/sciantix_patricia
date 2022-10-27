@@ -20,6 +20,10 @@
 #include "MapSciantixVariable.h"
 #include "SystemDeclaration.h"
 #include "MapSystem.h"
+#include "GasDeclaration.h"
+#include "MapGas.h"
+#include "MatrixDeclaration.h"
+#include "MapMatrix.h"
 
 void IntraGranularBubbleEvolution( );
 

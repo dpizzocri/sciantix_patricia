@@ -46,13 +46,12 @@ void Sciantix(int Sciantix_options[],
 
   simulation.GasDecay();
 
-  NucleationRate( );                              MapModel();
-
   IntraGranularBubbleEvolution( );                MapModel();
   if(input_variable[iv["iIntraGranularBubbleEvolution"]].getValue() != 3)
     simulation.IntraGranularBubbleBehaviour();
 
   GasDiffusion( );                                MapModel(); 
+
   simulation.GasDiffusion();
 
   GrainBoundaryVacancyDiffusionCoefficient( );    MapModel();
@@ -72,6 +71,8 @@ void Sciantix(int Sciantix_options[],
   UpdateVariables(Sciantix_variables, Sciantix_diffusion_modes);
 
   Output( );
+
+  std::cout << matrix[sma["UO2"]].getNucleationRate() << std::endl;
 
   history_variable.clear();
   sciantix_variable.clear();

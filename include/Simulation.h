@@ -104,8 +104,9 @@ class Simulation : public Solver, public Model
         )
       );
 
-      double equilibrium_fraction = sciantix_system[sy["Xe in UO2"]].getResolutionRate()
-      / (sciantix_system[sy["Xe in UO2"]].getResolutionRate() + sciantix_system[sy["Xe in UO2"]].getTrappingRate());
+      double equilibrium_fraction(1.0);
+      if((sciantix_system[sy["Xe in UO2"]].getResolutionRate() + sciantix_system[sy["Xe in UO2"]].getTrappingRate()) > 0.0)
+        equilibrium_fraction = sciantix_system[sy["Xe in UO2"]].getResolutionRate() / (sciantix_system[sy["Xe in UO2"]].getResolutionRate() + sciantix_system[sy["Xe in UO2"]].getTrappingRate());
 
       sciantix_variable[sv["Xe in intragranular solution"]].setFinalValue(
         equilibrium_fraction * sciantix_variable[sv["Xe in grain"]].getFinalValue());
@@ -146,8 +147,9 @@ class Simulation : public Solver, public Model
         )
       );
 
-      double equilibrium_fraction = (sciantix_system[sy["Xe133 in UO2"]].getResolutionRate() + gas[ga["Xe133"]].getDecayRate())
-      / (sciantix_system[sy["Xe133 in UO2"]].getResolutionRate() + sciantix_system[sy["Xe133 in UO2"]].getTrappingRate() + gas[ga["Xe133"]].getDecayRate());
+      double equilibrium_fraction(1.0);
+      if((sciantix_system[sy["Xe in UO2"]].getResolutionRate() + sciantix_system[sy["Xe in UO2"]].getTrappingRate()) > 0.0)
+        equilibrium_fraction = (sciantix_system[sy["Xe133 in UO2"]].getResolutionRate() + gas[ga["Xe133"]].getDecayRate()) / (sciantix_system[sy["Xe133 in UO2"]].getResolutionRate() + sciantix_system[sy["Xe133 in UO2"]].getTrappingRate() + gas[ga["Xe133"]].getDecayRate());
 
       sciantix_variable[sv["Xe133 in intragranular solution"]].setFinalValue(
         equilibrium_fraction * sciantix_variable[sv["Xe133 in grain"]].getFinalValue());
@@ -189,8 +191,10 @@ class Simulation : public Solver, public Model
         )
       );
 
-      double equilibrium_fraction = sciantix_system[sy["Kr in UO2"]].getResolutionRate()
-      / (sciantix_system[sy["Kr in UO2"]].getResolutionRate() + sciantix_system[sy["Kr in UO2"]].getTrappingRate() );
+      double equilibrium_fraction(1.0);
+      if((sciantix_system[sy["Kr in UO2"]].getResolutionRate() + sciantix_system[sy["Kr in UO2"]].getTrappingRate()) > 0.0)
+        equilibrium_fraction = sciantix_system[sy["Kr in UO2"]].getResolutionRate() / (sciantix_system[sy["Kr in UO2"]].getResolutionRate() + sciantix_system[sy["Kr in UO2"]].getTrappingRate());
+
 
       sciantix_variable[sv["Kr in intragranular solution"]].setFinalValue(
         equilibrium_fraction * sciantix_variable[sv["Kr in grain"]].getFinalValue());
@@ -231,8 +235,9 @@ class Simulation : public Solver, public Model
         )
       );
 
-      double equilibrium_fraction = sciantix_system[sy["He in UO2"]].getResolutionRate()
-      / (sciantix_system[sy["He in UO2"]].getResolutionRate() + sciantix_system[sy["He in UO2"]].getTrappingRate() );
+      double equilibrium_fraction(1.0);
+      if((sciantix_system[sy["He in UO2"]].getResolutionRate() + sciantix_system[sy["He in UO2"]].getTrappingRate()) > 0.0)
+        equilibrium_fraction = sciantix_system[sy["He in UO2"]].getResolutionRate() / (sciantix_system[sy["He in UO2"]].getResolutionRate() + sciantix_system[sy["He in UO2"]].getTrappingRate());
 
       sciantix_variable[sv["He in intragranular solution"]].setFinalValue(
         equilibrium_fraction * sciantix_variable[sv["He in grain"]].getFinalValue());

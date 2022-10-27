@@ -36,4 +36,5 @@ void Xenon( )
   gas[index].setMassNumber(133);
   gas[index].setVanDerWaalsVolume(8.48e-29);
   gas[index].setDecayRate(1.53e-6);
+  ++index;
 }

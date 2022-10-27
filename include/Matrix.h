@@ -33,6 +33,7 @@ class Matrix : virtual public Material
     double grain_boundary_thickness;
     double semidihedral_angle;
     double lenticular_shape_factor;
+    double nucleation_rate;
 
   public:
     void setDensity(double d)
@@ -153,6 +154,18 @@ class Matrix : virtual public Material
     {
       /// Member function to get the lenticular shape factor (/)
       return lenticular_shape_factor;
+    }
+
+    void setNucleationRate(double n)
+    {
+      /// Member function to set the nucleation rate of the matrix under irradiation (1/s)
+      nucleation_rate = n;
+    }
+
+    double getNucleationRate( )
+    {
+      /// Member function to get the nucleation rate of the matrix under irradiation (1/s)
+      return nucleation_rate;
     }
 
     Matrix() { }

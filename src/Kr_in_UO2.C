@@ -75,7 +75,7 @@ void Kr_in_UO2( )
 
     case 4 :
     {
-      ref_diffusivity = "Diffusivity from Ronchi, C. Thermophysical properties affecting safety and performance of nuclear fuel. High Temp 45, 552–571 (2007). https://doi.org/10.1134/S0018151X07040177.";
+      ref_diffusivity = "Diffusivity from Ronchi, C. Thermophysical properties affecting safety and performance of nuclear fuel. High Temp 45, 552�571 (2007). https://doi.org/10.1134/S0018151X07040177.";
       double temperature = history_variable[hv["Temperature"]].getFinalValue();
       double fission_rate = history_variable[hv["Fission rate"]].getFinalValue();
       double d1 = 7.6e-10 * exp(- 4.86e-19 / (physics_constant[pc["Boltzmann constant"]].getValue() * temperature));
@@ -136,8 +136,19 @@ void Kr_in_UO2( )
       break;
     }
 
+    case 4 :
+    {
+      ref_resolution_rate = "Lösönen, P. (2017) JNM 496, 140–156. https://doi.org/10.1016/J.JNUCMAT.2017.09.015";
+      double n_res = 15;
+
+      resolution_rate = 2.0 * M_PI * matrix[sma["UO2"]].getFFrange() * pow(matrix[sma["UO2"]].getFFinfluenceRadius() + sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue(), 2) * history_variable[hv["Fission rate"]].getFinalValue() *
+        n_res * sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue() / physics_constant[pc["Avogadro number"]].getValue();
+
+      break;
+    }
+
     default :
-      ErrorMessages::Switch("Resolution rate", "iresolution_rate", input_variable[iv["iResolutionRate"]].getValue());
+      ErrorMessages::Switch("Kr_in_UO2.C", "iresolution_rate", input_variable[iv["iResolutionRate"]].getValue());
       break;
   }
   resolution_rate *= sf_resolution_rate;

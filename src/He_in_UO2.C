@@ -130,8 +130,19 @@ void He_in_UO2( )
       break;
     }
 
+    case 4 :
+    {
+      ref_resolution_rate = "Lösönen, P. (2017) JNM 496, 140–156. https://doi.org/10.1016/J.JNUCMAT.2017.09.015";
+      double n_res = 15;
+
+      resolution_rate = 2.0 * M_PI * matrix[sma["UO2"]].getFFrange() * pow(matrix[sma["UO2"]].getFFinfluenceRadius() + sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue(), 2) * history_variable[hv["Fission rate"]].getFinalValue() *
+        n_res * sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue() / physics_constant[pc["Avogadro number"]].getValue();
+
+      break;
+    }
+
     default :
-      ErrorMessages::Switch("Resolution rate", "iresolution_rate", input_variable[iv["iResolutionRate"]].getValue());
+      ErrorMessages::Switch("He_in_UO2.C", "iresolution_rate", input_variable[iv["iResolutionRate"]].getValue());
       break;
   }
   resolution_rate *= sf_resolution_rate;

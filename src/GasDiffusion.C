@@ -39,12 +39,19 @@ void GasDiffusion( )
         model.emplace_back();
         model_index = model.size() - 1;
         model[model_index].setName("Gas diffusion - " + sciantix_system[i].getName());
-        model[model_index].setRef("Booth, A. H. (1957), Speight 1969.");
+        model[model_index].setRef("Gas diffusion - Booth, A. H. (1957), Speight (1969), White & Tucker (1983).");
 
         parameter.push_back(n_modes);
-        parameter.push_back(
-          ( sciantix_system[i].getResolutionRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) /
-          ( sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) * sciantix_system[i].getDiffusivity());
+        // b = resolution rate
+        // g = trapping rate
+        // l = decay rate
+        // if (b+l+g) == 0 then (b+l)/(b+l+g) = nan
+        if((sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) == 0.0)
+          parameter.push_back(0.0);
+        else
+          parameter.push_back(
+            ( sciantix_system[i].getResolutionRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) /
+            ( sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate() + gas[ga[sciantix_system[i].getGasName()]].getDecayRate()) * sciantix_system[i].getDiffusivity());
         parameter.push_back(sciantix_variable[sv["Grain radius"]].getFinalValue());
         parameter.push_back(sciantix_system[i].getYield() * history_variable[hv["Fission rate"]].getFinalValue());
         parameter.push_back(gas[ga[sciantix_system[i].getGasName()]].getDecayRate());

@@ -32,5 +32,11 @@ void SetPhysicsConstant( )
   physics_constant[index].setValue(0.8815);
   ++index;
 
+  physics_constant.emplace_back();
+  physics_constant[index].setName("Avogadro number");
+  physics_constant[index].setUOM("(at/mol)");
+  physics_constant[index].setValue(6.02214076e23);
+  ++index;
+
   MapPhysicsConstant();
 }
