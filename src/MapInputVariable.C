@@ -25,4 +25,5 @@ void MapInputVariable( )
 {
   for(std::vector<InputVariable>::size_type i = 0; i != input_variable.size(); ++i)
     iv[input_variable[i].getName()] = i;
+  //std::cout << input_variable[iv["iGasDiffusionSolver"]].getValue() << std::endl;
 }

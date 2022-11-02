@@ -22,8 +22,9 @@ void Sciantix(int Sciantix_options[],
               double Sciantix_scaling_factors[],
               double Sciantix_diffusion_modes[])
 {
+  
   SetVariables(Sciantix_options, Sciantix_history, Sciantix_variables, Sciantix_scaling_factors, Sciantix_diffusion_modes);
-
+  
   SetPhysicsConstant( );
   SetMatrix( );
   SetGas( );
@@ -34,11 +35,11 @@ void Sciantix(int Sciantix_options[],
   // Burnup
   Burnup( );                                      MapModel();
   simulation.BurnupEvolution();
-
+  
   // Stoichiometry deviation 
   StoichiometryDeviation();                       MapModel();
   simulation.Stoichiometry_deviation();        
-
+  
   // Grain growth
   GrainGrowth( );                                 MapModel();
   simulation.GrainGrowth();
@@ -59,7 +60,7 @@ void Sciantix(int Sciantix_options[],
 
   GasDiffusion( );                                MapModel(); 
   simulation.GasDiffusion();
-
+  
   GrainBoundaryVacancyDiffusionCoefficient( );    MapModel();
 
   GrainBoundaryMicroCracking( );                  MapModel();

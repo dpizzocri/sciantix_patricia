@@ -26,6 +26,7 @@
 
 void SetVariables(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[], double Sciantix_diffusion_modes[])
 {
+   
   // -----------------------------------------------------------------------------------------------
   // Input variable
   // The vector is used to collect all user input settings relating to the choice of SCIANTIX models
@@ -47,7 +48,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
     input_variable[iv_counter].setName("iGasDiffusionSolver");
     input_variable[iv_counter].setValue(Sciantix_options[2]);
     ++iv_counter;
-
+    //std::cout << input_variable[iv["iGasDiffusionSolver"]].getValue() << std::endl; 
     input_variable.emplace_back();
     input_variable[iv_counter].setName("iIntraGranularBubbleEvolution");
     input_variable[iv_counter].setValue(Sciantix_options[3]);
@@ -146,8 +147,8 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   physics_variable.emplace_back();
   physics_variable[0].setName("Time step");
   physics_variable[0].setUOM("(s)");
-  physics_variable[0].setInitialValue(Sciantix_history[6]);
-  physics_variable[0].setFinalValue(Sciantix_history[6]);
+  physics_variable[0].setInitialValue(Sciantix_history[8]);
+  physics_variable[0].setFinalValue(Sciantix_history[8]);
   physics_variable[0].setOutput(0);
   // ----------------------------------------------------------------------------
   // History variable
@@ -155,15 +156,15 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   history_variable.emplace_back();
   history_variable[0].setName("Time");
   history_variable[0].setUOM("(h)");
-  history_variable[0].setInitialValue(Sciantix_history[7]);
-  history_variable[0].setFinalValue(Sciantix_history[7]);
+  history_variable[0].setInitialValue(Sciantix_history[9]);
+  history_variable[0].setFinalValue(Sciantix_history[9]);
   history_variable[0].setOutput(1);
 
   history_variable.emplace_back();
   history_variable[1].setName("Time step number");
   history_variable[1].setUOM("(/)");
-  history_variable[1].setInitialValue(Sciantix_history[8]);
-  history_variable[1].setFinalValue(Sciantix_history[8]);
+  history_variable[1].setInitialValue(Sciantix_history[10]);
+  history_variable[1].setFinalValue(Sciantix_history[10]);
   history_variable[1].setOutput(0);
 
   history_variable.emplace_back();
@@ -186,6 +187,13 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   history_variable[4].setInitialValue(Sciantix_history[4]);
   history_variable[4].setFinalValue(Sciantix_history[5]);
   history_variable[4].setOutput(1);
+
+  history_variable.emplace_back();
+  history_variable[5].setName("Steam pressure");
+  history_variable[5].setUOM("(atm)");
+  history_variable[5].setInitialValue(Sciantix_history[6]);
+  history_variable[5].setFinalValue(Sciantix_history[7]);
+  history_variable[5].setOutput(1);
   // ----------------------------------------------------------------------------
   // Sciantix variable
   // ----------------------------------------------------------------------------
@@ -741,6 +749,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
   // ----------------------------------------------------------------------------
   // Maps
   // ----------------------------------------------------------------------------
+  std::cout << input_variable[iv["iGasDiffusionSolver"]].getValue() << std::endl;
   MapHistoryVariable();
   MapSciantixVariable();
   MapPhysicsVariable();

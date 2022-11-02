@@ -56,14 +56,17 @@ int main( )
     // Hydrostatic stress
     Sciantix_history[4] = Sciantix_history[5];
     Sciantix_history[5] = InputInterpolation(Time_h, Time_input, Hydrostaticstress_input, Input_history_points);
-
-    Sciantix_history[7] = Time_h;
-    Sciantix_history[8] = Time_step_number;
+    // Steam pressure
+    Sciantix_history[6] = Sciantix_history[7];
+    Sciantix_history[7] = InputInterpolation(Time_h, Time_input, Steampressure_input, Input_history_points);
+   
+    Sciantix_history[9] = Time_h;
+    Sciantix_history[10] = Time_step_number;
 
     Sciantix(Sciantix_options, Sciantix_history, Sciantix_variables, Sciantix_scaling_factors, Sciantix_diffusion_modes);
 
     dTime_h = TimeStepCalculation( );
-    Sciantix_history[6] = dTime_h * 3600;
+    Sciantix_history[8] = dTime_h * 3600;
 
     if (Time_h < Time_end_h)
 	  {

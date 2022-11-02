@@ -29,7 +29,9 @@ void Initialization( )
   Sciantix_history[3] = Fissionrate_input[0];
   Sciantix_history[4] = Hydrostaticstress_input[0];
   Sciantix_history[5] = Hydrostaticstress_input[0];
-  Sciantix_history[6] = 0.0;
+  Sciantix_history[6] = Steampressure_input[0];
+  Sciantix_history[7] = Steampressure_input[0];
+  Sciantix_history[8] = 0.0;
 
   // Sciantix_variables initialization
   Sciantix_variables[25] = 4.0e+13;  // Intergranular_bubble_concentration[0]
