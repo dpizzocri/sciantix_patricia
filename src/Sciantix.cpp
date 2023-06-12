@@ -32,50 +32,65 @@ void Sciantix(int Sciantix_options[],
 
 	Simulation sciantix_simulation;
 
-	Burnup(); 									  									MapModel();
+	Burnup();
+	MapModel();
 	sciantix_simulation.Burnup();
 
-	EffectiveBurnup();                             	MapModel();
+	EffectiveBurnup();
+	MapModel();
 	sciantix_simulation.EffectiveBurnup();
 
-  EnvironmentComposition();												MapModel();
+  EnvironmentComposition();
+	MapModel();
 
-  UO2Thermochemistry();														MapModel();
+  UO2Thermochemistry();
+	MapModel();
   sciantix_simulation.UO2Thermochemistry();
 
-  StoichiometryDeviation();												MapModel();
+  StoichiometryDeviation();
+	MapModel();
   sciantix_simulation.StoichiometryDeviation(); 
 
-	HighBurnupStructureFormation();				  				MapModel();
+	HighBurnupStructureFormation();
+	MapModel();
 	sciantix_simulation.HighBurnupStructureFormation();
 
-	HighBurnupStructurePorosity();									MapModel();
+	HighBurnupStructurePorosity();
+	MapModel();
 	sciantix_simulation.HighBurnupStructurePorosity();
 
-	GrainGrowth();																	MapModel();
+	GrainGrowth();
+	MapModel();
 	sciantix_simulation.GrainGrowth();
 
-	GrainBoundarySweeping();												MapModel();
+	GrainBoundarySweeping();
+	MapModel();
 	sciantix_simulation.GrainBoundarySweeping();
 
-	GasProduction();																MapModel();
+	GasProduction();
+	MapModel();
 	sciantix_simulation.GasProduction();
 
 	sciantix_simulation.GasDecay();
 
-	IntraGranularBubbleEvolution();									MapModel();
+	IntraGranularBubbleEvolution();
+	MapModel();
 	sciantix_simulation.IntraGranularBubbleBehaviour();
 
-	GasDiffusion();																	MapModel();
+	GasDiffusion();
+	MapModel();
 	sciantix_simulation.GasDiffusion();
 
-	GrainBoundaryMicroCracking();										MapModel();
+	GrainBoundaryMicroCracking();
+	MapModel();
 	sciantix_simulation.GrainBoundaryMicroCracking();
 
-	GrainBoundaryVenting();													MapModel();
+	GrainBoundaryVenting();
+	MapModel();
 	sciantix_simulation.GrainBoundaryVenting();
 
-	InterGranularBubbleEvolution();									MapModel();
+	InterGranularBubbleEvolution();
+	MapModel();
 	sciantix_simulation.InterGranularBubbleBehaviour();
 
 	FiguresOfMerit();

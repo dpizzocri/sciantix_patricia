@@ -19,7 +19,7 @@ Model #17: 	Grain-boundary venting	not considered.
 Model #18: 	Intergranular bubble evolution	: No model for grain-boundary bubble evolution.
 
 Matrix #0: 	UO2	
-	Van Uffelen et al. JNM, 434 (2013) 287�29.
+	Van Uffelen et al. JNM, 434 (2013) 287–29.
 	iGrainBoundaryVacancyDiffusivity: from Reynolds and Burton, JNM, 82 (1979) 22-25.
 	
 Matrix #1: 	UO2HBS	

@@ -596,7 +596,7 @@ public:
 				sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()
 			);
 		else
-			similarity_ratio = 0.0;
+			similarity_ratio = 1.0;
 
 		if (similarity_ratio < 1.0)
 		{
