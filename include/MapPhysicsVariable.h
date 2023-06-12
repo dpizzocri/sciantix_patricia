@@ -21,9 +21,9 @@
 #include <string>
 #include "PhysicsVariableDeclaration.h"
 
-extern std::map<std::string,int> pv;
+extern std::map<std::string, int> pv;
 
-void MapPhysicsVariable( );
+void MapPhysicsVariable();
 
 #endif
 

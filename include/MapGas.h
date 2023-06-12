@@ -21,9 +21,9 @@
 #include <string>
 #include "GasDeclaration.h"
 
-extern std::map<std::string,int> ga;
+extern std::map<std::string, int> ga;
 
-void MapGas( );
+void MapGas();
 
 #endif
 

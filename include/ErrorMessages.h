@@ -22,5 +22,5 @@
 
 namespace ErrorMessages
 {
-  void Switch(std::string routine, std::string variable_name, int variable);
+	void Switch(std::string routine, std::string variable_name, int variable);
 };

@@ -16,12 +16,16 @@
 
 #include "MatrixDeclaration.h"
 #include "SciantixVariableDeclaration.h"
-
 #include "MapSciantixVariable.h"
 #include "MapMatrix.h"
-
+#include "SetVariables.h"
 #include "UO2.h"
-#define _USE_MATH_DEFINES
+#include "UO2HBS.h"
 #include <cmath>
+#include <string>
+#include "GasDeclaration.h"
+#include "MapGas.h"
 
-void SetMatrix( );
+void SetMatrix();
+
+

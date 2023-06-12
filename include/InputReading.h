@@ -19,4 +19,4 @@
 #include <vector>
 #include <numeric>
 
-void InputReading( );
+void InputReading();

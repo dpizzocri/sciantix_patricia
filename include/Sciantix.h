@@ -18,19 +18,15 @@
 #include <map>
 #include <string>
 #include <vector>
-
 #include "SetVariables.h"
-
 #include "MaterialDeclaration.h"
-
 #include "SetGas.h"
 #include "SetModel.h"
-#include "SetPhysicsConstant.h"
 #include "SetMatrix.h"
 #include "SetSystem.h"
 #include "UpdateVariables.h"
 #include "Output.h"
 #include "Simulation.h"
-
+#include "FiguresOfMerit.h"
 
 void Sciantix(int Sciantix_options[], double Sciantix_history[], double Sciantix_variables[], double Sciantix_scaling_factors[], double Sciantix_diffusion_modes[]);

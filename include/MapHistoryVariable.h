@@ -21,9 +21,9 @@
 #include <string>
 #include "HistoryVariableDeclaration.h"
 
-extern std::map<std::string,int> hv;
+extern std::map<std::string, int> hv;
 
-void MapHistoryVariable( );
+void MapHistoryVariable();
 
 #endif
 

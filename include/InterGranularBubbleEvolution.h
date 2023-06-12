@@ -20,13 +20,11 @@
 #include "MapModel.h"
 #include "MatrixDeclaration.h"
 #include "MapMatrix.h"
-#include "PhysicsConstantDeclaration.h"
-#include "MapPhysicsConstant.h"
 #include "SystemDeclaration.h"
 #include "MapSystem.h"
 #include "GasDeclaration.h"
 #include "MapGas.h"
-#define _USE_MATH_DEFINES
 #include <cmath>
+#include "ConstantNumbers.h"
 
-void InterGranularBubbleEvolution( );
+void InterGranularBubbleEvolution();

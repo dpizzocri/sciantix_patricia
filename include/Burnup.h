@@ -17,5 +17,6 @@
 #include "SciantixVariableDeclaration.h"
 #include "MapSciantixVariable.h"
 #include "ModelDeclaration.h"
+#include "SetMatrix.h"
 
-void Burnup( );
+void Burnup();

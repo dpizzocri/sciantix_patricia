@@ -16,13 +16,12 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#define _USE_MATH_DEFINES
 #include <cmath>
 #include <limits>
 #include <map>
 
 #include <sys/stat.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <string>
 
 #include "MapSciantixVariable.h"
@@ -37,4 +36,6 @@
 #include "MapHistoryVariable.h"
 #include "MapInputVariable.h"
 
-void Output( );
+#include "MatrixDeclaration.h"
+
+void Output();

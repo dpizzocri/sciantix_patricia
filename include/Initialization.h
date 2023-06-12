@@ -14,8 +14,9 @@
 //                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////
 
-#define _USE_MATH_DEFINES
+
 #include <cmath>
+#include <ConstantNumbers.h>
 #include "MainVariables.h"
 
-void Initialization( );
+void Initialization();

@@ -24,8 +24,6 @@
 #include "MapSystem.h"
 #include "MapModel.h"
 #include "SciantixScalingFactorDeclaration.h"
-
-#define _USE_MATH_DEFINES
 #include <cmath>
 
-void UO2( );
+void UO2();

@@ -21,9 +21,9 @@
 #include <string>
 #include "ModelDeclaration.h"
 
-extern std::map<std::string,int> sm;
+extern std::map<std::string, int> sm;
 
-void MapModel( );
+void MapModel();
 
 #endif
 

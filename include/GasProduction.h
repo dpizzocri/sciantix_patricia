@@ -18,8 +18,10 @@
 #include "SystemDeclaration.h"
 #include "MapSystem.h"
 #include "MapModel.h"
+#include "PhysicsVariable.h"
+#include "MapPhysicsVariable.h"
 
-void GasProduction( );
+void GasProduction();
 
 
 

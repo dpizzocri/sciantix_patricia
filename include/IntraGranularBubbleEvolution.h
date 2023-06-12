@@ -24,12 +24,7 @@
 #include "MapGas.h"
 #include "MatrixDeclaration.h"
 #include "MapMatrix.h"
+#include "MapPhysicsVariable.h"
+#include "PhysicsVariableDeclaration.h"
 
-void IntraGranularBubbleEvolution( );
-
-
-
-
-
-
-
+void IntraGranularBubbleEvolution();

@@ -34,25 +34,25 @@
 
 class Model : public HistoryVariable, public SciantixVariable, public InputVariable, public System
 {
-  protected:
-    std::string overview;
-    std::vector<double> parameter;
+protected:
+	std::string overview;
+	std::vector<double> parameter;
 
-  public:
+public:
 
-    void setParameter(std::vector<double> p)
-    {
-      parameter = p;
-    }
+	void setParameter(std::vector<double> p)
+	{
+		parameter = p;
+	}
 
-    std::vector<double> getParameter( )
-    {
-      return parameter;
-    }
+	std::vector<double> getParameter()
+	{
+		return parameter;
+	}
 
-    // Constructor & destructor
-    Model()  {}
-    ~Model() {}
+	// Constructor & destructor
+	Model() {}
+	~Model() {}
 
 };
 

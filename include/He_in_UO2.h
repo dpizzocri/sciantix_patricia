@@ -23,4 +23,4 @@
 
 /// He_in_UO2
 
-void He_in_UO2( );
+void He_in_UO2();

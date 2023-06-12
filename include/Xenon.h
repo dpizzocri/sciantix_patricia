@@ -16,5 +16,5 @@
 
 #include "GasDeclaration.h"
 
-void Xenon( );
+void Xenon();
 

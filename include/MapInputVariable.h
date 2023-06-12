@@ -20,9 +20,9 @@
 #include <string>
 #include "InputVariableDeclaration.h"
 
-extern std::map<std::string,int> iv;
+extern std::map<std::string, int> iv;
 
-void MapInputVariable( );
+void MapInputVariable();
 
 #endif
 

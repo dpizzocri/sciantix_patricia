@@ -14,10 +14,8 @@
 #//                                                                                  //
 #//////////////////////////////////////////////////////////////////////////////////////
 
-
-#Initialization of useful variables
-
-CC          := g++
+CC          := g++	# Windows and Linux
+# CC := /opt/homebrew/bin/g++-12	# Mac OS
 
 TARGET      := sciantix.x
 
@@ -26,11 +24,11 @@ INCDIR      := include
 BUILDDIR    := obj
 TARGETDIR   := bin
 RESDIR      := src
-SRCEXT      := C
+SRCEXT      := cpp
 DEPEXT      := d
 OBJEXT      := o
 
-CFLAGS      := -Wall -O
+CFLAGS      := -Wall -O -g
 LIB         := -lm
 INC         := -I$(INCDIR) -I/usr/local/include #also this may change according to your environment specs
 INCDEP      := -I$(INCDIR)

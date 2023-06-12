@@ -17,4 +17,4 @@
 
 #include "GasDeclaration.h"
 
-void Krypton( );
+void Krypton();

@@ -21,4 +21,4 @@
 #include "Krypton.h"
 #include <vector>
 
-void SetGas( );
+void SetGas();

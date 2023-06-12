@@ -17,8 +17,16 @@ git push origin <BranchName_#IssueNumber>
 ```
 Create merge request gitlab.com.
 
-
 In every moment, to check the status of your work type `git status`
+
+# Instruction for building SCIANTIX on Macintosh
+
+- Install Git from: https://sourceforge.net/projects/git-osx-installer/files/;
+- Install Home brew from: https://brew.sh;
+- Clone Sciantix using git (git clone);
+- Search g++ in Homebrew directory (e.g., /opt/homebrew/bin/g++-12)
+- Put pwd of g++ into Makefile of Sciantix (e.g., CC := /opt/homebrew/bin/g++-12)
+- Install the command line developer tool to 'make'(usually a windows (usually opens a window when you 'make).
 
 # Syntax guidelines
 
@@ -38,6 +46,24 @@ In Sciantix we use some basic guidelines to help keeping an uniform syntaxing st
 
 Thank for sticking as much as possible to these guidelines. We appreciate! :)
 
+# Short list of useful GIT commands
+
+- Delete old remote GIT branches
+`git remote prune origin`
+
+(source: https://git-scm.com/docs/git-remote#Documentation/git-remote.txt-empruneem)
+
+- Delete local GIT branches that were deleted on remote repository
+`git branch -vv | grep ': gone]'|  grep -v "\*" | awk '{ print $1; }' | xargs -r git branch -d`
+'git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d'
+
+(source: https://medium.com/@kcmueller/delete-local-git-branches-that-were-deleted-on-remote-repository-b596b71b530c)
+
+- Delete local commits (not pushed to origin):
+`git reset HEAD~1`
+
+- Clear git cache
+`git rm -r --cached .`
 
 
 
