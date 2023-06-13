@@ -40,16 +40,16 @@ void Sciantix(int Sciantix_options[],
 	MapModel();
 	sciantix_simulation.EffectiveBurnup();
 
-  EnvironmentComposition();
+	EnvironmentComposition();
 	MapModel();
 
-  UO2Thermochemistry();
+	UO2Thermochemistry();
 	MapModel();
-  sciantix_simulation.UO2Thermochemistry();
+	sciantix_simulation.UO2Thermochemistry();
 
-  StoichiometryDeviation();
+	StoichiometryDeviation();
 	MapModel();
-  sciantix_simulation.StoichiometryDeviation(); 
+	sciantix_simulation.StoichiometryDeviation(); 
 
 	HighBurnupStructureFormation();
 	MapModel();
