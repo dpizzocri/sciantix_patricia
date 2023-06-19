@@ -76,7 +76,6 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[53] = sciantix_variable[sv["Xe133 at grain boundary"]].getFinalValue();
 	Sciantix_variables[54] = sciantix_variable[sv["Xe133 released"]].getFinalValue();
 	Sciantix_variables[55] = sciantix_variable[sv["Restructured volume fraction"]].getFinalValue();
-	Sciantix_variables[56] = sciantix_variable[sv["HBS porosity"]].getFinalValue();
 	Sciantix_variables[57] = sciantix_variable[sv["Kr85m produced"]].getFinalValue();
 	Sciantix_variables[58] = sciantix_variable[sv["Kr85m in grain"]].getFinalValue();
 	Sciantix_variables[59] = sciantix_variable[sv["Kr85m in intragranular solution"]].getFinalValue();
@@ -90,6 +89,7 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[67] = sciantix_variable[sv["Fuel oxygen partial pressure"]].getFinalValue();
 	Sciantix_variables[68] = sciantix_variable[sv["HBS pore number density"]].getFinalValue();
 	Sciantix_variables[69] = sciantix_variable[sv["HBS pore radius"]].getFinalValue();
+	Sciantix_variables[70] = sciantix_variable[sv["HBS porosity"]].getFinalValue();
 
 	for (int i = 0; i < n_modes; ++i)
 	{
