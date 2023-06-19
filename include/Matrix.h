@@ -37,7 +37,7 @@ protected:
 	double grain_radius;
 	std::string matrix_name;
 	double healing_temperature_threshold;
-	double nucleation_rate;
+	double pore_nucleation_rate;
 
 public:
 	
@@ -150,6 +150,12 @@ public:
 		return grain_boundary_thickness;
 	}
 
+	void setPoreNucleationRate();
+	double getPoreNucleationRate()
+	{
+		return pore_nucleation_rate;
+	}
+
 	void setGrainBoundaryVacancyDiffusivity(int input_value);
 	double getGrainBoundaryVacancyDiffusivity()
 	{
@@ -168,19 +174,7 @@ public:
 		/// Member function to get the lenticular shape factor (/)
 		return lenticular_shape_factor;
 	}
-
-	void setNucleationRate(double n)
-	{
-		/// Member function to set the nucleation rate of the matrix under irradiation (1/s)
-		nucleation_rate = n;
-	}
-
-	double getNucleationRate()
-	{
-		/// Member function to get the nucleation rate of the matrix under irradiation (1/s)
-		return nucleation_rate;
-	}
-
+	
 	void setGrainRadius(double gr)
 	{
 		grain_radius = gr;

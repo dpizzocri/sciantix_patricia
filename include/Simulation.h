@@ -863,6 +863,22 @@ public:
 		sciantix_variable[sv["Fuel density"]].setFinalValue(
 			matrix[sma["UO2"]].getTheoreticalDensity() * (1.0 - sciantix_variable[sv["HBS porosity"]].getFinalValue())
 		);
+
+		sciantix_variable[sv["HBS pore number density"]].setFinalValue(
+			solver.Decay(
+					sciantix_variable[sv["HBS pore number density"]].getInitialValue(),
+					sciantix_system[sy["Xe in UO2HBS"]].getResolutionRate(),
+					matrix[sma["UO2HBS"]].getPoreNucleationRate(),
+					physics_variable[pv["Time step"]].getFinalValue()
+				)
+			);
+			
+		double pore_volume(0.0);
+		if(sciantix_variable[sv["HBS pore number density"]].getFinalValue())
+			pore_volume = sciantix_variable[sv["HBS porosity"]].getFinalValue() / sciantix_variable[sv["HBS pore number density"]].getFinalValue();
+
+		sciantix_variable[sv["HBS pore radius"]].setFinalValue(0.620350491 * pow(pore_volume, (1.0 / 3.0)));
+
 	}
 
 

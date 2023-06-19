@@ -917,18 +917,26 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 
 	sciantix_variable.emplace_back();
 	sciantix_variable[sv_counter].setName("Fuel oxygen potential");
-	sciantix_variable[sv_counter].setUOM("(KJ/mol)");
+	sciantix_variable[sv_counter].setUOM("(kJ/mol)");
 	sciantix_variable[sv_counter].setInitialValue(0.0);
 	sciantix_variable[sv_counter].setFinalValue(0.0);
 	sciantix_variable[sv_counter].setOutput(toOutputStoichiometryDeviation);
 	++sv_counter;
 
 	sciantix_variable.emplace_back();
-	sciantix_variable[sv_counter].setName("Specific power");
-	sciantix_variable[sv_counter].setUOM("(MW/kg)");
-	sciantix_variable[sv_counter].setInitialValue(0.0);
-	sciantix_variable[sv_counter].setFinalValue(0.0);
-	sciantix_variable[sv_counter].setOutput(0);
+	sciantix_variable[sv_counter].setName("HBS pore number density");
+	sciantix_variable[sv_counter].setUOM("(pore/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[68]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[68]);
+	sciantix_variable[sv_counter].setOutput(toOutputHighBurnupStructureFormation);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("HBS pore radius");
+	sciantix_variable[sv_counter].setUOM("(m)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[69]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[69]);
+	sciantix_variable[sv_counter].setOutput(toOutputHighBurnupStructureFormation);
 	++sv_counter;
 
 	// ----------------------------------------------------------------------------

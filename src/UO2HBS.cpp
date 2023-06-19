@@ -41,5 +41,6 @@ void UO2HBS()
 	matrix[index].setLenticularShapeFactor(0.168610764);
 	matrix[index].setGrainRadius(150e-9); // (m)
 	matrix[index].setHealingTemperatureThreshold(1273.5); // K
-	matrix[index].setGrainBoundaryVacancyDiffusivity(0); // (m2/s)
+	matrix[index].setGrainBoundaryVacancyDiffusivity(4); // (m2/s)
+	matrix[index].setPoreNucleationRate();
 }

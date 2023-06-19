@@ -24,11 +24,12 @@ void SetSystem()
 	{
 		switch (k)
 		{
-		case 0: Xe_in_UO2();             		MapSystem();    	break;
-		case 1: Kr_in_UO2();            	 	MapSystem();    	break;
-		case 2: He_in_UO2();           			MapSystem();    	break;
+		case 0: Xe_in_UO2();								MapSystem();    	break;
+		case 1: Kr_in_UO2();								MapSystem();    	break;
+		case 2: He_in_UO2();								MapSystem();    	break;
 		case 3: Xe133_in_UO2();							MapSystem();    	break;
 		case 4: Kr85m_in_UO2();							MapSystem();    	break;
+		case 5: Xe_in_UO2HBS();							MapSystem();    	break;
 
 		default:                                            	break;
 		}
@@ -378,7 +379,7 @@ void System::setResolutionRate(int input_value)
 		 * 
 		 */
 
-		reference += "iResolutionRate: P. Losonen, JNM 304 (2002) 29�49.\n\t";
+		reference += "iResolutionRate: P. Losonen, JNM 304 (2002) 29-49.\n\t";
 		resolution_rate = 3.0e-23 * history_variable[hv["Fission rate"]].getFinalValue();
 		resolution_rate *= sf_resolution_rate;
 
@@ -423,6 +424,23 @@ void System::setResolutionRate(int input_value)
 		resolution_rate = irradiation_resolution_rate + thermal_resolution_rate;
 		resolution_rate *= sf_resolution_rate;
 
+		break;
+	}
+
+	case 4:
+	{
+		/**
+		 * @brief iResolutionRate = 4 corresponds to the irradiation-induced intra-granular resolution rate from *P. Losonen, JNM 304 (2002) 29�49*.
+		 * 
+		 */
+    double correction_coefficent = (1.0 - exp(pow( -sciantix_variable[sv["HBS pore radius"]].getFinalValue() / (3.0*3.0*1.0e-9), 3)));
+    
+		resolution_rate =
+			2.0e-23 * history_variable[hv["Fission rate"]].getFinalValue() * correction_coefficent *
+      (3.0 * 1.0e-9 / (3.0 * 1.0e-9 + sciantix_variable[sv["HBS pore radius"]].getFinalValue())) * 
+			(1.0e-9 / (1.0e-9 + sciantix_variable[sv["HBS pore radius"]].getFinalValue()));
+
+		resolution_rate *= sf_resolution_rate;
 		break;
 	}
 

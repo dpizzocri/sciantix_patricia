@@ -131,8 +131,37 @@ void Matrix::setGrainBoundaryVacancyDiffusivity(int input_value)
 		break;
 	}
 
+	case 4:
+	{
+		/**
+		 * @brief iGrainBoundaryVacancyDiffusivity = 2 corresponds to the correction from @ref Pastore et al., JNM, 456 (2015) 156.
+		 * 
+		 */
+
+    grain_boundary_diffusivity = (1.3e-7 * exp(-4.52e-19 /
+           (boltzmann_constant * history_variable[hv["Temperature"]].getFinalValue()))
+    );
+
+		reference += "iGrainBoundaryVacancyDiffusivity: HBS.\n\t";
+
+		break;
+	}
+
 	default:
 		ErrorMessages::Switch("SetMatrix.cpp", "iGrainBoundaryVacancyDiffusivity", input_value);
 		break;
 	}
+}
+
+
+void Matrix::setPoreNucleationRate()
+{
+	double sf_nucleation_rate_porosity = 1.25e-6;
+
+	pore_nucleation_rate = (5.0e17 * 2.77e-7 * 3.54 *
+           (1.0-sciantix_variable[sv["Restructured volume fraction"]].getFinalValue()) *
+           pow(sciantix_variable[sv["Effective burnup"]].getFinalValue(), 2.54)
+    );
+
+	pore_nucleation_rate *= sf_nucleation_rate_porosity;
 }

@@ -88,7 +88,8 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[65] = sciantix_variable[sv["Irradiation time"]].getFinalValue();
 	Sciantix_variables[66] = sciantix_variable[sv["Stoichiometry deviation"]].getFinalValue();
 	Sciantix_variables[67] = sciantix_variable[sv["Fuel oxygen partial pressure"]].getFinalValue();
-
+	Sciantix_variables[68] = sciantix_variable[sv["HBS pore number density"]].getFinalValue();
+	Sciantix_variables[69] = sciantix_variable[sv["HBS pore radius"]].getFinalValue();
 
 	for (int i = 0; i < n_modes; ++i)
 	{

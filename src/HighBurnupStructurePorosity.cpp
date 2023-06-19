@@ -25,6 +25,8 @@ void HighBurnupStructurePorosity()
 	int model_index = int(model.size()) - 1;
 	model[model_index].setName("High burnup structure porosity");
 	double porosity_increment = 0.0;
+	
+  const double pi = CONSTANT_NUMBERS_H::MathConstants::pi;
 
 	std::string reference;
 	std::vector<double> parameter;
@@ -45,7 +47,6 @@ void HighBurnupStructurePorosity()
 
 	case 1:
 	{
-
 		/// @brief 
 		/// Correlation for the HBS porosity evolution based on Spino et al. 2006 data
 
@@ -68,7 +69,6 @@ void HighBurnupStructurePorosity()
 		}
 
 		reference = "based on Spino et al. 2006 data";
-
 		parameter.push_back(porosity_increment);
 
 		break;
