@@ -6,6 +6,7 @@ This is a python script to execute the regression (running the validation databa
 
 """
 
+""" ------------------- Import requiered depedencies ------------------- """
 import os
 import subprocess
 import numpy as np
@@ -13,81 +14,175 @@ import matplotlib.pyplot as plt
 import shutil
 from regression_functions import *
 
-""" Validation: CONTACT1 """
+""" ------------------- Global Variables ------------------- """
+
+
+""" ------------------- Functions ------------------- """
+
+# Verify the test results
+def check_result(number_of_tests_failed):
+  if are_files_equal('output.txt', 'output_gold.txt') == True:
+    print(f"Test passed!\n")
+  else:
+    print(f"Test failed!\n")
+    number_of_tests_failed += 1
+
+  return number_of_tests_failed
+
+# Verify the existence of the files: output.txt and output_gold.txt
+def check_output(file):
+  try :
+    data = import_data("output.txt")
+  except :
+    print(f"output.txt not found in {file}")
+    data = np.zeros(shape=(1, 1))
+
+  try :
+    data_gold = import_data("output_gold.txt")
+  except :
+    print(f"output_gold.txt not found in {file}")
+    data_gold = np.ones(shape=(1, 1))
+
+  return data, data_gold
+
+# Execute sciantix in the current test folder
+def do_sciantix():
+  # copying input files from the regression folder into the current folder
+  #shutil.copy("../input_settings.txt", os.getcwd())
+  #shutil.copy("../input_scaling_factors.txt", os.getcwd())
+
+  # copying and executing sciantix.exe into cwd
+  shutil.copy("../sciantix.x", os.getcwd())
+  os.system("./sciantix.x")
+
+  # removing useless file
+  os.remove("sciantix.x")
+  os.remove("execution.txt")
+  os.remove("input_check.txt")
+  # os.remove("overview.txt")
+
+# Replace the existing output_gold.txt with the new output.txt
+def do_gold():
+  try :
+    os.path.exists('output.txt')
+
+    os.remove('output_gold.txt')
+    os.rename('output.txt', 'output_gold.txt')
+
+  except :
+    print(f"output.txt not found in {file}")
+
+# Plot the regression test results
+def do_plot(exp_Xe133, exp_Kr85m, calculated_Kr85m_Zullo2022, calculated_Xe133_Zullo2022, time, temperature, burnup, Xe133, Kr85m):
+  fig, ax = plt.subplots(1,2)
+  plt.subplots_adjust(left=0.1,
+                      bottom=0.1,
+                      right=0.9,
+                      top=0.9,
+                      wspace=0.34,
+                      hspace=0.4)
+
+  axT = ax[0].twinx()
+  axT.set_ylabel('Temperature (K)')
+  axT.plot(burnup, temperature, 'r-', linewidth = 1, label="Temperature")
+  axT.set_zorder(1)
+
+  ax[0].plot(burnup, Xe133, color = '#98E18D', linewidth = 2, label='SCIANTIX 2.0 ${}^{133}$Xe')
+  ax[0].plot(calculated_Xe133_Zullo2022[1:,0].astype(float), calculated_Xe133_Zullo2022[1:,1].astype(float), '--', color = 'black', linewidth = 1, label='Zullo et al. (2022) ${}^{133}$Xe')
+  ax[0].plot(exp_Xe133[1:,0].astype(float), exp_Xe133[1:,1].astype(float), 'o', color = '#B3B3B3', label='Data from IFPE ${}^{133}$Xe')
+  ax[0].set_zorder(2)
+  ax[0].set_frame_on(False)
+
+  # ax.set_title(file + ' - ${}^{133}$Xe')
+  ax[0].set_xlabel('Burnup (GWd/tU)')
+  ax[0].set_ylabel('Release-to-birth ratio (/)')
+  ax[0].legend()
+  ax[0].set_yscale('log')
+  ax[0].set_ylim(1e-5, 1.0)
+
+  h1, l1 = ax[0].get_legend_handles_labels()
+  h2, l2 = axT.get_legend_handles_labels()
+  ax[0].legend(h1+h2, l1+l2, loc='lower right')
+
+  axT = ax[1].twinx()
+  axT.set_ylabel('Temperature (K)')
+  axT.plot(burnup, temperature, 'r-', linewidth = 1, label="Temperature")
+  axT.set_zorder(1)
+
+  ax[1].plot(burnup, Kr85m, color = '#98E18D', linewidth = 2, label='SCIANTIX 2.0 ${}^{85m}$Kr')
+  ax[1].plot(calculated_Kr85m_Zullo2022[1:,0].astype(float), calculated_Kr85m_Zullo2022[1:,1].astype(float), '--', color = 'black', linewidth = 1, label='Zullo et al. (2022) ${}^{85m}$Kr')
+  ax[1].plot(exp_Kr85m[1:,0].astype(float), exp_Kr85m[1:,1].astype(float), 'o', color = '#B3B3B3', label='Data from IFPE ${}^{85m}$Kr')
+  ax[1].set_zorder(2)
+  ax[1].set_frame_on(False)
+
+  # ax.set_title(file + ' - ${}^{85m}$Kr')
+  ax[1].set_xlabel('Burnup (GWd/tU)')
+  ax[1].set_ylabel('Release-to-birth ratio (/)')
+  ax[1].legend()
+  ax[1].set_yscale('log')
+  ax[1].set_ylim(1e-5, 1.0)
+
+  h1, l1 = ax[1].get_legend_handles_labels()
+  h2, l2 = axT.get_legend_handles_labels()
+  ax[1].legend(h1+h2, l1+l2, loc='lower right')
+
+  # plt.savefig('CONTACT1_Kr85m.png')
+  plt.show()
+
+
+# Main function of the Contact regression
 def regression_contact(wpath, mode_CONTACT, mode_gold, mode_plot, folderList, number_of_tests, number_of_tests_failed):
-  if mode_CONTACT == '0':
+
+  # Exit of the function without doing anything
+  if mode_CONTACT == 0:
     return folderList, number_of_tests, number_of_tests_failed
-  
-  for file in os.listdir(wpath):
-    if "CONTACT" in file and os.path.isdir(file) is True:
-      folderList.append((file))
+
+
+  # Get list of all files and directories in wpath
+  files_and_dirs = os.listdir(wpath)
+
+  # Sort them by filename
+  sorted_files_and_dirs = sorted(files_and_dirs)
+
+  # Iterate over sorted list
+  for file in sorted_files_and_dirs:
+    # Verify on a given folder, if Baker is in it's name
+    if "CONTACT" in file and os.path.isdir(file):
+      folderList.append(file)
       os.chdir(file)
 
-      shutil.copy("..\input_scaling_factors.txt", os.getcwd())
+      shutil.copy("../input_scaling_factors.txt", os.getcwd())
 
       print(f"Now in folder {file}...")
       number_of_tests += 1
 
-      if mode_gold == '0' or mode_gold == '1':
+      # mode_gold = 0 : Use SCIANTIX / Don't use GOLD and check result
+      if mode_gold == 0:
 
-        # copying and executing sciantix.exe into cwd
-        shutil.copy("..\sciantix.exe", os.getcwd())
-        os.system("sciantix.exe")
+        do_sciantix()
+        data, data_gold = check_output(file)
+        number_of_tests_failed = check_result(number_of_tests_failed)
 
-        # removing useless file
-        os.remove("sciantix.exe")
-        os.remove("execution.txt")
-        os.remove("input_check.txt")
-        # os.remove("overview.txt")
-      
-      try : 
-        data = import_data("output.txt")
-      except :
-        print(f"output.txt not found in {file}")
-        data = np.zeros(shape=(1, 1))
-      
-      try : 
-        data_gold = import_data("output_gold.txt")
-      except :
-        print(f"output_gold.txt not found in {file}")
-        data_gold = np.ones(shape=(1, 1))
-        
-      if mode_gold == '0':
-        if are_files_equal('output.txt', 'output_gold.txt') == True:
-          print(f"Test passed!\n")
-        else:
-          print(f"Test failed!\n")
-          number_of_tests_failed += 1
+      # mode_gold = 1 : Use SCIANTIX / Use GOLD
+      if mode_gold == 1:
 
-      if mode_gold == '1':
-        
-        try :
-          os.path.exists('output.txt')
+        do_sciantix()
+        data, data_gold = check_output(file)
+        print("...golding results.")
+        do_gold()
 
-          print(f"...golding results.")
-          os.remove('output_gold.txt')
-          os.rename('output.txt', 'output_gold.txt')
+      # mode_gold = 2 : Don't use SCIANTIX / Don't use GOLD and check result
+      if mode_gold == 2:
 
-        except :
-          print(f"output.txt not found in {file}")
+        data, data_gold = check_output(file)
+        number_of_tests_failed = check_result(number_of_tests_failed)
 
-      if mode_gold == '2':
-        if are_files_equal('output.txt', 'output_gold.txt') == True:
-          print(f"Test passed!\n")
-        else:
-          print(f"Test failed!\n")
-          number_of_tests_failed += 1
+      # mode_gold = 3 : Don't use SCIANTIX / Use GOLD
+      if mode_gold == 3:
 
-        try : 
-          data = import_data("output.txt")
-        except :
-          print(f"output.txt not found in {file}")
-          data = data_gold
-
-      if mode_gold == '3':
-        print(f"...golding existing results.")
-        os.remove('output_gold.txt')
-        os.rename('output.txt', 'output_gold.txt')
+        data, data_gold = check_output(file)
+        print("...golding existing results.")
+        do_gold()
 
       exp_Xe133 = import_data("experimental_RB_Xe133.txt")
       exp_Kr85m = import_data("experimental_RB_Kr85m.txt")
@@ -110,6 +205,11 @@ def regression_contact(wpath, mode_CONTACT, mode_gold, mode_plot, folderList, nu
       # import data
       calculated_Kr85m_Zullo2022 = import_data("calculated_Kr85m_Zullo.txt")
       calculated_Xe133_Zullo2022 = import_data("calculated_Xe133_Zullo.txt")
+
+      # Check if the user has chosen to display the various plots
+      if mode_plot == 1:
+        do_plot(exp_Xe133, exp_Kr85m, calculated_Kr85m_Zullo2022, calculated_Xe133_Zullo2022,
+                time, temperature, burnup, Xe133, Kr85m)
 
       """ Statistical analysis """
       # Find common position in the burnup vector
@@ -158,64 +258,6 @@ def regression_contact(wpath, mode_CONTACT, mode_gold, mode_plot, folderList, nu
       print(f"SCIANTIX 2.0 - Kr85m, Median absolute deviations = ", np.median(dev_kr85m_2))
       print("\n")
 
-      """ Plot: Radiaoctive release """
-      if mode_plot == '1':
-
-        fig, ax = plt.subplots(1,2)
-        plt.subplots_adjust(left=0.1,
-                  bottom=0.1,
-                  right=0.9,
-                  top=0.9,
-                  wspace=0.34,
-                  hspace=0.4)
-        
-        axT = ax[0].twinx()
-        axT.set_ylabel('Temperature (K)')
-        axT.plot(burnup, temperature, 'r-', linewidth = 1, label="Temperature")
-        axT.set_zorder(1)
-
-        ax[0].plot(burnup, Xe133, color = '#98E18D', linewidth = 2, label='SCIANTIX 2.0 ${}^{133}$Xe')
-        ax[0].plot(calculated_Xe133_Zullo2022[1:,0].astype(float), calculated_Xe133_Zullo2022[1:,1].astype(float), '--', color = 'black', linewidth = 1, label='Zullo et al. (2022) ${}^{133}$Xe')
-        ax[0].plot(exp_Xe133[1:,0].astype(float), exp_Xe133[1:,1].astype(float), 'o', color = '#B3B3B3', label='Data from IFPE ${}^{133}$Xe')
-        ax[0].set_zorder(2)
-        ax[0].set_frame_on(False)
-
-        # ax.set_title(file + ' - ${}^{133}$Xe')
-        ax[0].set_xlabel('Burnup (GWd/tU)')
-        ax[0].set_ylabel('Release-to-birth ratio (/)')
-        ax[0].legend()
-        ax[0].set_yscale('log')
-        ax[0].set_ylim(1e-5, 1.0)
-
-        h1, l1 = ax[0].get_legend_handles_labels()
-        h2, l2 = axT.get_legend_handles_labels()
-        ax[0].legend(h1+h2, l1+l2, loc='lower right')
-  
-        axT = ax[1].twinx()
-        axT.set_ylabel('Temperature (K)')
-        axT.plot(burnup, temperature, 'r-', linewidth = 1, label="Temperature")
-        axT.set_zorder(1)
-
-        ax[1].plot(burnup, Kr85m, color = '#98E18D', linewidth = 2, label='SCIANTIX 2.0 ${}^{85m}$Kr')
-        ax[1].plot(calculated_Kr85m_Zullo2022[1:,0].astype(float), calculated_Kr85m_Zullo2022[1:,1].astype(float), '--', color = 'black', linewidth = 1, label='Zullo et al. (2022) ${}^{85m}$Kr')
-        ax[1].plot(exp_Kr85m[1:,0].astype(float), exp_Kr85m[1:,1].astype(float), 'o', color = '#B3B3B3', label='Data from IFPE ${}^{85m}$Kr')
-        ax[1].set_zorder(2)
-        ax[1].set_frame_on(False)
-
-        # ax.set_title(file + ' - ${}^{85m}$Kr')
-        ax[1].set_xlabel('Burnup (GWd/tU)')
-        ax[1].set_ylabel('Release-to-birth ratio (/)')
-        ax[1].legend()
-        ax[1].set_yscale('log')
-        ax[1].set_ylim(1e-5, 1.0)
-
-        h1, l1 = ax[1].get_legend_handles_labels()
-        h2, l2 = axT.get_legend_handles_labels()
-        ax[1].legend(h1+h2, l1+l2, loc='lower right')
-
-        # plt.savefig('CONTACT1_Kr85m.png')
-        plt.show()
-
       os.chdir('..')
-        
+
   return folderList, number_of_tests, number_of_tests_failed
