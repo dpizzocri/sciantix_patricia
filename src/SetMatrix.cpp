@@ -134,7 +134,8 @@ void Matrix::setGrainBoundaryVacancyDiffusivity(int input_value)
 	case 4:
 	{
 		/**
-		 * @brief iGrainBoundaryVacancyDiffusivity = 2 corresponds to the correction from @ref Pastore et al., JNM, 456 (2015) 156.
+		 * @brief iGrainBoundaryVacancyDiffusivity = 4 corresponds to the vacancy diffusivities along HBS grain boundaries.
+		 * This model is from @ref Barani et al., JNM 563 (2022) 153627.
 		 * 
 		 */
 
@@ -142,7 +143,7 @@ void Matrix::setGrainBoundaryVacancyDiffusivity(int input_value)
            (boltzmann_constant * history_variable[hv["Temperature"]].getFinalValue()))
     );
 
-		reference += "iGrainBoundaryVacancyDiffusivity: HBS.\n\t";
+		reference += "iGrainBoundaryVacancyDiffusivity: HBS case, from Barani et al., JNM 563 (2022) 153627.\n\t";
 
 		break;
 	}

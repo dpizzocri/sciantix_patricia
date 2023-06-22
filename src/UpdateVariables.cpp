@@ -89,7 +89,13 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[67] = sciantix_variable[sv["Fuel oxygen partial pressure"]].getFinalValue();
 	Sciantix_variables[68] = sciantix_variable[sv["HBS pore number density"]].getFinalValue();
 	Sciantix_variables[69] = sciantix_variable[sv["HBS pore radius"]].getFinalValue();
-	Sciantix_variables[70] = sciantix_variable[sv["HBS porosity"]].getFinalValue();
+	Sciantix_variables[70] = sciantix_variable[sv["HBS pore volume"]].getFinalValue();
+	Sciantix_variables[71] = sciantix_variable[sv["HBS porosity"]].getFinalValue();
+	Sciantix_variables[72] = sciantix_variable[sv["Xe in HBS pores - average"]].getFinalValue();
+	Sciantix_variables[73] = sciantix_variable[sv["Xe in HBS pores - variance"]].getFinalValue();
+	Sciantix_variables[74] = sciantix_variable[sv["Xe atoms per HBS pore - average"]].getFinalValue();
+	Sciantix_variables[75] = sciantix_variable[sv["Xe atoms per HBS pore - variance"]].getFinalValue();
+
 
 	for (int i = 0; i < n_modes; ++i)
 	{

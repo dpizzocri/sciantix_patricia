@@ -38,7 +38,7 @@ void HighBurnupStructurePorosity()
 		/// @brief 
 		/// No HBS case - no evolution of HBS porosity
 
-		reference += "not considered";
+		reference += "HBS not considered.";
 		parameter.push_back(0.0);
 		sciantix_variable[sv["HBS porosity"]].setInitialValue(0.0);
 		sciantix_variable[sv["HBS porosity"]].setFinalValue(0.0);
@@ -68,7 +68,7 @@ void HighBurnupStructurePorosity()
 			porosity_increment = 0.0;
 		}
 
-		reference = "based on Spino et al. 2006 data";
+		reference = "TRANSURANUS model, based on data from Spino et al. JNM 354 (2006) 66-84";
 		parameter.push_back(porosity_increment);
 
 		break;

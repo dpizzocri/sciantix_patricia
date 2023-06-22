@@ -36,7 +36,7 @@ void Xe_in_UO2HBS()
 	sciantix_system[index].setFissionGasDiffusivity(5);
 	sciantix_system[index].setBubbleDiffusivity(0);
 	sciantix_system[index].setResolutionRate(4);
-	sciantix_system[index].setTrappingRate(99);
+	sciantix_system[index].setTrappingRate(4);
 	sciantix_system[index].setNucleationRate(99);
 }
 
