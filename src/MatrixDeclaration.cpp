@@ -18,3 +18,4 @@
 /// MatrixDeclaration
 
 std::vector<Matrix> matrix;
+std::string current_matrix;

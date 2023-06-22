@@ -453,7 +453,6 @@ void System::setTrappingRate(int input_value)
 	 * 
 	 */
 	const double pi = CONSTANT_NUMBERS_H::MathConstants::pi;
-	const double boltzmann_constant = CONSTANT_NUMBERS_H::PhysicsConstants::boltzmann_constant;
 
 	switch (input_value)
 	{

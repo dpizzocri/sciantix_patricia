@@ -26,11 +26,38 @@ void SetMatrix( )
 	{
 		switch (k)
 		{
-		  case 0: UO2();                MapMatrix();        break;
-		  case 1: UO2HBS();             MapMatrix();        break;
+		  case 0: 
+			{
+				UO2();
+				MapMatrix();
 
-		  default:                                          break;
+				break;
+			}
+
+		  case 1: 
+			{
+				UO2HBS();
+				MapMatrix();
+
+				break;
+			}
+		  default:
+				break;
 		}
+	}
+
+	switch (int (input_variable[iv["iFuelMatrix"]].getValue()))
+	{
+		case 0:
+			current_matrix = "UO2"; 
+			break;
+
+		case 1:
+			current_matrix = "UO2HBS";    
+			break;
+
+		default:
+			break;
 	}
 }
 

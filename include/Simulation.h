@@ -165,14 +165,14 @@ public:
 			sciantix_variable[sv["Xe in grain"]].setFinalValue(
 				solver.SpectralDiffusion(
 					xe_diffusion_modes,
-					model[sm["Gas diffusion - Xe in UO2"]].getParameter(),
+					model[sm["Gas diffusion - Xe in " + current_matrix]].getParameter(),
 					physics_variable[pv["Time step"]].getFinalValue()
 				)
 			);
 
 			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Xe in UO2"]].getResolutionRate() + sciantix_system[sy["Xe in UO2"]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Xe in UO2"]].getResolutionRate() / (sciantix_system[sy["Xe in UO2"]].getResolutionRate() + sciantix_system[sy["Xe in UO2"]].getTrappingRate());
+			if ((sciantix_system[sy["Xe in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Xe in " + current_matrix]].getTrappingRate()) > 0.0)
+				equilibrium_fraction = sciantix_system[sy["Xe in " + current_matrix]].getResolutionRate() / (sciantix_system[sy["Xe in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Xe in " + current_matrix]].getTrappingRate());
 
 			sciantix_variable[sv["Xe in intragranular solution"]].setFinalValue(
 				equilibrium_fraction * sciantix_variable[sv["Xe in grain"]].getFinalValue());
@@ -191,7 +191,7 @@ public:
 				initial_value_bubbles,
 				xe_diffusion_modes_solution,
 				xe_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - Xe in " + matrix[0].getName()]].getParameter(),
+				model[sm["Gas diffusion - Xe in " + current_matrix]].getParameter(),
 				physics_variable[pv["Time step"]].getFinalValue()
 			);
 

@@ -1,3 +1,7 @@
+# This workflow performs automated tests on the official code branch.
+# Test 1: compiling the source code and building the executable
+# Test 2: performing the regression tests.
+
 name: Python application test
 
 on:
