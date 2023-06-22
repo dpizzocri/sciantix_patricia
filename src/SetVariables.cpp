@@ -166,6 +166,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 
 	bool toOutputGrainBoundary(0);
 	if (input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 1) toOutputGrainBoundary = 1;
+	if (input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 4) toOutputGrainBoundary = 1;
 
 	bool toOutputHighBurnupStructureFormation(0);
 	if (input_variable[iv["iHighBurnupStructureFormation"]].getValue() == 1) toOutputHighBurnupStructureFormation = 1;

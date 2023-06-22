@@ -630,6 +630,11 @@ public:
 
 		for (std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
 		{
+			if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 4) // HBS case: no fission gas release, gas goes into HBS pores
+				sciantix_variable[sv[sciantix_system[i].getGasName() + " released"]].setFinalValue(0.0);
+
+			else
+			{
 			sciantix_variable[sv[sciantix_system[i].getGasName() + " released"]].setFinalValue(
 				sciantix_variable[sv[sciantix_system[i].getGasName() + " produced"]].getFinalValue() -
 				sciantix_variable[sv[sciantix_system[i].getGasName() + " decayed"]].getFinalValue() -
@@ -639,6 +644,7 @@ public:
 
 			if(sciantix_variable[sv[sciantix_system[i].getGasName() + " released"]].getFinalValue() < 0.0)
 				sciantix_variable[sv[sciantix_system[i].getGasName() + " released"]].setFinalValue(0.0);
+			}
 		}
 
 		// Intergranular gaseous swelling

@@ -126,6 +126,27 @@ void InterGranularBubbleEvolution()
 		reference += ": Pastore et al., NED, 256 (2013) 75-86.";
 	}
 
+	else if (input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 4)
+	{
+		// HBS case: Gas is not distributed among inter-granular bubbles, since no inter-granular bubbles in HBS. Gas remains at grain boundaries: 
+		
+		double n_at(0);
+		for (std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
+		{
+			if (gas[ga[sciantix_system[i].getGasName()]].getDecayRate() == 0.0)
+			{
+				sciantix_variable[sv["Intergranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(0.0);
+
+				n_at += sciantix_variable[sv["Intergranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue();
+			}
+		}
+		sciantix_variable[sv["Intergranular atoms per bubble"]].setFinalValue(n_at);
+
+		parameter.push_back(0.0);
+		parameter.push_back(0.0);
+
+	}
+
 	model[model_index].setParameter(parameter);
 	model[model_index].setRef(reference);
 }
