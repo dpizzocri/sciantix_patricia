@@ -208,14 +208,14 @@ public:
 			sciantix_variable[sv["Xe133 in grain"]].setFinalValue(
 				solver.SpectralDiffusion(
 					xe133_diffusion_modes,
-					model[sm["Gas diffusion - Xe133 in UO2"]].getParameter(),
+					model[sm["Gas diffusion - Xe133 in " + current_matrix]].getParameter(),
 					physics_variable[pv["Time step"]].getFinalValue()
 				)
 			);
 
 			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Xe133 in UO2"]].getResolutionRate() + sciantix_system[sy["Xe133 in UO2"]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Xe133 in UO2"]].getResolutionRate() / (sciantix_system[sy["Xe133 in UO2"]].getResolutionRate() + sciantix_system[sy["Xe133 in UO2"]].getTrappingRate());
+			if ((sciantix_system[sy["Xe133 in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Xe133 in " + current_matrix]].getTrappingRate()) > 0.0)
+				equilibrium_fraction = sciantix_system[sy["Xe133 in " + current_matrix]].getResolutionRate() / (sciantix_system[sy["Xe133 in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Xe133 in " + current_matrix]].getTrappingRate());
 
 			sciantix_variable[sv["Xe133 in intragranular solution"]].setFinalValue(
 				equilibrium_fraction * sciantix_variable[sv["Xe133 in grain"]].getFinalValue());
@@ -234,7 +234,7 @@ public:
 				initial_value_bubbles,
 				xe133_diffusion_modes_solution,
 				xe133_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - Xe133 in UO2"]].getParameter(),
+				model[sm["Gas diffusion - Xe133 in " + current_matrix]].getParameter(),
 				physics_variable[pv["Time step"]].getFinalValue()
 			);
 
@@ -251,14 +251,14 @@ public:
 			sciantix_variable[sv["Kr85m in grain"]].setFinalValue(
 				solver.SpectralDiffusion(
 					kr85m_diffusion_modes,
-					model[sm["Gas diffusion - Kr85m in UO2"]].getParameter(),
+					model[sm["Gas diffusion - Kr85m in " + current_matrix]].getParameter(),
 					physics_variable[pv["Time step"]].getFinalValue()
 				)
 			);
 
 			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Kr85m in UO2"]].getResolutionRate() + sciantix_system[sy["Kr85m in UO2"]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Kr85m in UO2"]].getResolutionRate() / (sciantix_system[sy["Kr85m in UO2"]].getResolutionRate() + sciantix_system[sy["Kr85m in UO2"]].getTrappingRate());
+			if ((sciantix_system[sy["Kr85m in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Kr85m in " + current_matrix]].getTrappingRate()) > 0.0)
+				equilibrium_fraction = sciantix_system[sy["Kr85m in " + current_matrix]].getResolutionRate() / (sciantix_system[sy["Kr85m in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Kr85m in " + current_matrix]].getTrappingRate());
 
 			sciantix_variable[sv["Kr85m in intragranular solution"]].setFinalValue(
 				equilibrium_fraction * sciantix_variable[sv["Kr85m in grain"]].getFinalValue());
@@ -277,7 +277,7 @@ public:
 				initial_value_bubbles,
 				kr85m_diffusion_modes_solution,
 				kr85m_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - Kr85m in UO2"]].getParameter(),
+				model[sm["Gas diffusion - Kr85m in " + current_matrix]].getParameter(),
 				physics_variable[pv["Time step"]].getFinalValue()
 			);
 
@@ -300,8 +300,8 @@ public:
 			);
 
 			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Kr in UO2"]].getResolutionRate() + sciantix_system[sy["Kr in UO2"]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Kr in UO2"]].getResolutionRate() / (sciantix_system[sy["Kr in UO2"]].getResolutionRate() + sciantix_system[sy["Kr in UO2"]].getTrappingRate());
+			if ((sciantix_system[sy["Kr in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Kr in " + current_matrix]].getTrappingRate()) > 0.0)
+				equilibrium_fraction = sciantix_system[sy["Kr in " + current_matrix]].getResolutionRate() / (sciantix_system[sy["Kr in " + current_matrix]].getResolutionRate() + sciantix_system[sy["Kr in " + current_matrix]].getTrappingRate());
 
 			sciantix_variable[sv["Kr in intragranular solution"]].setFinalValue(
 				equilibrium_fraction * sciantix_variable[sv["Kr in grain"]].getFinalValue());
@@ -345,14 +345,14 @@ public:
 			sciantix_variable[sv["He in grain"]].setFinalValue(
 				solver.SpectralDiffusion(
 					he_diffusion_modes,
-					model[sm["Gas diffusion - He in UO2"]].getParameter(),
+					model[sm["Gas diffusion - He in " + current_matrix]].getParameter(),
 					physics_variable[pv["Time step"]].getFinalValue()
 				)
 			);
 
 			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["He in UO2"]].getResolutionRate() + sciantix_system[sy["He in UO2"]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["He in UO2"]].getResolutionRate() / (sciantix_system[sy["He in UO2"]].getResolutionRate() + sciantix_system[sy["He in UO2"]].getTrappingRate());
+			if ((sciantix_system[sy["He in " + current_matrix]].getResolutionRate() + sciantix_system[sy["He in " + current_matrix]].getTrappingRate()) > 0.0)
+				equilibrium_fraction = sciantix_system[sy["He in " + current_matrix]].getResolutionRate() / (sciantix_system[sy["He in " + current_matrix]].getResolutionRate() + sciantix_system[sy["He in " + current_matrix]].getTrappingRate());
 
 			sciantix_variable[sv["He in intragranular solution"]].setFinalValue(equilibrium_fraction * sciantix_variable[sv["He in grain"]].getFinalValue());
 			sciantix_variable[sv["He in intragranular bubbles"]].setFinalValue((1.0 - equilibrium_fraction) * sciantix_variable[sv["He in grain"]].getFinalValue());
@@ -372,7 +372,7 @@ public:
 				initial_value_bubbles,
 				he_diffusion_modes_solution,
 				he_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - He in UO2"]].getParameter(),
+				model[sm["Gas diffusion - He in " + current_matrix]].getParameter(),
 				physics_variable[pv["Time step"]].getFinalValue()
 			);
 
@@ -517,16 +517,16 @@ public:
 					gas[ga[sciantix_system[i].getGasName()]].getVanDerWaalsVolume();
 			}
 		}
-		vol += sciantix_variable[sv["Intergranular vacancies per bubble"]].getFinalValue() * matrix[sma["UO2"]].getSchottkyVolume();
+		vol += sciantix_variable[sv["Intergranular vacancies per bubble"]].getFinalValue() * matrix[0].getSchottkyVolume();
 		sciantix_variable[sv["Intergranular bubble volume"]].setFinalValue(vol);
 
 		// Grain-boundary bubble radius
 		sciantix_variable[sv["Intergranular bubble radius"]].setFinalValue(
-			0.620350491 * pow(sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue() / (matrix[sma["UO2"]].getLenticularShapeFactor()), 1. / 3.));
+			0.620350491 * pow(sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue() / (matrix[0].getLenticularShapeFactor()), 1. / 3.));
 
 		// Grain-boundary bubble area
 		sciantix_variable[sv["Intergranular bubble area"]].setFinalValue(
-			pi * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sin(matrix[sma["UO2"]].getSemidihedralAngle()), 2));
+			pi * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sin(matrix[0].getSemidihedralAngle()), 2));
 
 		// Grain-boundary bubble coalescence
 		double dbubble_area = sciantix_variable[sv["Intergranular bubble area"]].getIncrement();
@@ -565,15 +565,15 @@ public:
 					gas[ga[sciantix_system[i].getGasName()]].getVanDerWaalsVolume();
 			}
 		}
-		vol += sciantix_variable[sv["Intergranular vacancies per bubble"]].getFinalValue() * matrix[sma["UO2"]].getSchottkyVolume();
+		vol += sciantix_variable[sv["Intergranular vacancies per bubble"]].getFinalValue() * matrix[0].getSchottkyVolume();
 		sciantix_variable[sv["Intergranular bubble volume"]].setFinalValue(vol);
 
 		sciantix_variable[sv["Intergranular bubble radius"]].setFinalValue(
-			0.620350491 * pow(sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue() / (matrix[sma["UO2"]].getLenticularShapeFactor()), 1. / 3.));
+			0.620350491 * pow(sciantix_variable[sv["Intergranular bubble volume"]].getFinalValue() / (matrix[0].getLenticularShapeFactor()), 1. / 3.));
 
 		// sciantix_variable[sv["Intergranular bubble area"]].setInitialValue(sciantix_variable[sv["Intergranular bubble area"]].getFinalValue());
 		sciantix_variable[sv["Intergranular bubble area"]].setFinalValue(
-			pi * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sin(matrix[sma["UO2"]].getSemidihedralAngle()), 2));
+			pi * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sin(matrix[0].getSemidihedralAngle()), 2));
 
 		// Fractional coverage
 		sciantix_variable[sv["Intergranular fractional coverage"]].setFinalValue(
@@ -861,7 +861,7 @@ public:
 
 		// density evolution
 		sciantix_variable[sv["Fuel density"]].setFinalValue(
-			matrix[sma["UO2"]].getTheoreticalDensity() * (1.0 - sciantix_variable[sv["HBS porosity"]].getFinalValue())
+			matrix[0].getTheoreticalDensity() * (1.0 - sciantix_variable[sv["HBS porosity"]].getFinalValue())
 		);
 	}
 
