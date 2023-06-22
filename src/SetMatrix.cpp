@@ -46,19 +46,7 @@ void SetMatrix( )
 		}
 	}
 
-	switch (int (input_variable[iv["iFuelMatrix"]].getValue()))
-	{
-		case 0:
-			current_matrix = "UO2"; 
-			break;
 
-		case 1:
-			current_matrix = "UO2HBS";    
-			break;
-
-		default:
-			break;
-	}
 }
 
 void Matrix::setGrainBoundaryMobility(int input_value)

@@ -21,7 +21,6 @@
 #include "Matrix.h"
 
 extern std::vector<Matrix> matrix;
-extern std::string current_matrix;
 
 #endif
 
