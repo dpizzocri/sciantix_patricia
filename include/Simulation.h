@@ -859,6 +859,9 @@ public:
 			)
 		);
 
+		if(sciantix_variable[sv["HBS porosity"]].getFinalValue() > 0.15)
+			sciantix_variable[sv["HBS porosity"]].setFinalValue(0.15);
+
 		// density evolution
 		sciantix_variable[sv["Fuel density"]].setFinalValue(
 			matrix[sma["UO2"]].getTheoreticalDensity() * (1.0 - sciantix_variable[sv["HBS porosity"]].getFinalValue())
