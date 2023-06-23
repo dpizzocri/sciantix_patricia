@@ -62,7 +62,7 @@ def main():
         mode_CONTACT = 1
         mode_oxidation = 1
         # Set the test condition to '0' or '1'
-        test_condition = 0
+        test_condition = 1
 
         # Run regression tests for each regression mode and update the test list and test counts accordingly.
         folderListB, number_of_tests_b, number_of_tests_failed_b = regression_baker(wpath, mode_Baker, mode_gold, mode_plot, folderList, number_of_tests, number_of_tests_failed)

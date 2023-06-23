@@ -252,60 +252,6 @@ public:
 		}
 	}
 
-	double* getDiffusionModes(std::string gas_name)
-	{	
-		if(gas_name == "Xe")
-			return &modes_initial_conditions[0];
-
-		else if(gas_name == "Kr")
-			return &modes_initial_conditions[3 * 40];
-
-		else if(gas_name == "He")
-			return &modes_initial_conditions[6 * 40];
-
-		else if(gas_name == "Xe133")
-			return &modes_initial_conditions[9 * 40];
-
-		else // (gas_name == "Kr85m")
-			return &modes_initial_conditions[12 * 40];
-	}
-
-	double* getDiffusionModesSolution(std::string gas_name)
-	{	
-		if(gas_name == "Xe")
-			return &modes_initial_conditions[1 * 40];
-
-		else if(gas_name == "Kr")
-			return &modes_initial_conditions[4 * 40];
-
-		else if(gas_name == "He")
-			return &modes_initial_conditions[7 * 40];
-
-		else if(gas_name == "Xe133")
-			return &modes_initial_conditions[10 * 40];
-
-		else // (gas_name == "Kr85m")
-			return &modes_initial_conditions[13 * 40];
-	}
-
-	double* getDiffusionModesBubbles(std::string gas_name)
-	{	
-		if(gas_name == "Xe")
-			return &modes_initial_conditions[2 * 40];
-
-		else if(gas_name == "Kr")
-			return &modes_initial_conditions[5 * 40];
-
-		else if(gas_name == "He")
-			return &modes_initial_conditions[8 * 40];
-
-		else if(gas_name == "Xe133")
-			return &modes_initial_conditions[11 * 40];
-
-		else // (gas_name == "Kr85m")
-			return &modes_initial_conditions[14 * 40];
-	}
-
 	void GrainGrowth()
 	{
 		/**
@@ -369,7 +315,7 @@ public:
 			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(sqrt(sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue() / sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue()));
 		else
 			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(0.0);
-			
+
 	}
 
 	void InterGranularBubbleBehaviour()
@@ -809,6 +755,60 @@ public:
         	model[sm["UO2 thermochemistry"]].getParameter()
 				)
       );
+	}
+
+	double* getDiffusionModes(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[0];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[3 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[6 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[9 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[12 * 40];
+	}
+
+	double* getDiffusionModesSolution(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[1 * 40];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[4 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[7 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[10 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[13 * 40];
+	}
+
+	double* getDiffusionModesBubbles(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[2 * 40];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[5 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[8 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[11 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[14 * 40];
 	}
 
 	Simulation() {}

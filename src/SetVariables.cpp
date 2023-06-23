@@ -30,6 +30,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	// Input variable
 	// The vector is used to collect all user input settings relating to the choice of SCIANTIX models
 	// -----------------------------------------------------------------------------------------------
+	
 	int iv_counter(0);
 	if (input_variable.empty())
 	{
@@ -147,7 +148,6 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 		input_variable[iv_counter].setName("iBubbleDiffusivity");
 		input_variable[iv_counter].setValue(Sciantix_options[22]);
 		++iv_counter;
-
 	}
 
 	MapInputVariable();
@@ -173,9 +173,9 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	bool toOutputStoichiometryDeviation(0);
 	if (input_variable[iv["iStoichiometryDeviation"]].getValue() > 0) toOutputStoichiometryDeviation = 1;
 
-	// ----------------------------------------------------------------------------
+	// ----------------
 	// Physics variable
-	// ----------------------------------------------------------------------------
+	// ----------------
 	
 	int pv_counter(0);
 
@@ -187,9 +187,10 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	physics_variable[pv_counter].setOutput(0);
 	++pv_counter;
 
-	// ----------------------------------------------------------------------------
+	// ----------------
 	// History variable
-	// ----------------------------------------------------------------------------
+	// ----------------
+
 	int hv_counter(0);
 	history_variable.emplace_back();
 	history_variable[hv_counter].setName("Time");
