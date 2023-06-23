@@ -216,11 +216,6 @@ public:
 					break;
 			}
 		}
-
-		if(sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue() > 0.0)
-			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(sqrt(sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue() / sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue()));
-		else
-			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(0.0);
 	
 		// Calculation of the gas concentration arrived at the grain boundary, by mass balance.
 		for (std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
@@ -369,6 +364,12 @@ public:
 			pow(sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue(), 3) *
 			sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue()
 		);
+
+		if(sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue() > 0.0)
+			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(sqrt(sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue() / sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue()));
+		else
+			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(0.0);
+			
 	}
 
 	void InterGranularBubbleBehaviour()
