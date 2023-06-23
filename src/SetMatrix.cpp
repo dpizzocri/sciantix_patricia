@@ -22,28 +22,27 @@ void SetMatrix( )
    * @brief This routine defines the available options for fuel matrices and their properties.
    * 
    */
-	for (int k = 0; k < 3; ++k)
+
+	switch (int(input_variable[iv["iFuelMatrix"]].getValue()))
 	{
-		switch (k)
+		case 0: 
 		{
-		  case 0: 
-			{
-				UO2();
-				MapMatrix();
+			UO2();
+			MapMatrix();
 
-				break;
-			}
-
-		  case 1: 
-			{
-				UO2HBS();
-				MapMatrix();
-
-				break;
-			}
-		  default:
-				break;
+			break;
 		}
+
+		case 1: 
+		{
+			UO2HBS();
+			MapMatrix();
+
+			break;
+		}
+		
+		default:
+			break;
 	}
 
 

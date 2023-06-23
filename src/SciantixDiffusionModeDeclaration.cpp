@@ -20,18 +20,3 @@
 
 const int n_modes(40);
 double modes_initial_conditions[n_modes * n_modes];
-double xe_diffusion_modes[n_modes];
-double xe_diffusion_modes_solution[n_modes];
-double xe_diffusion_modes_bubbles[n_modes];
-double xe133_diffusion_modes[n_modes];
-double xe133_diffusion_modes_solution[n_modes];
-double xe133_diffusion_modes_bubbles[n_modes];
-double kr_diffusion_modes[n_modes];
-double kr_diffusion_modes_solution[n_modes];
-double kr_diffusion_modes_bubbles[n_modes];
-double kr85m_diffusion_modes[n_modes];
-double kr85m_diffusion_modes_solution[n_modes];
-double kr85m_diffusion_modes_bubbles[n_modes];
-double he_diffusion_modes[n_modes];
-double he_diffusion_modes_solution[n_modes];
-double he_diffusion_modes_bubbles[n_modes];

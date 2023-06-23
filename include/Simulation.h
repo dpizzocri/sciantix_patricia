@@ -158,247 +158,70 @@ public:
 		}
 	}
 
-	void XeDiffusion()
-	{
-		if (int(input_variable[iv["iDiffusionSolver"]].getValue()) == 1)
-		{
-			sciantix_variable[sv["Xe in grain"]].setFinalValue(
-				solver.SpectralDiffusion(
-					xe_diffusion_modes,
-					model[sm["Gas diffusion - Xe in " + matrix[0].getName()]].getParameter(),
-					physics_variable[pv["Time step"]].getFinalValue()
-				)
-			);
-
-			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Xe in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Xe in " + matrix[0].getName()]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Xe in " + matrix[0].getName()]].getResolutionRate() / (sciantix_system[sy["Xe in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Xe in " + matrix[0].getName()]].getTrappingRate());
-
-			sciantix_variable[sv["Xe in intragranular solution"]].setFinalValue(
-				equilibrium_fraction * sciantix_variable[sv["Xe in grain"]].getFinalValue());
-
-			sciantix_variable[sv["Xe in intragranular bubbles"]].setFinalValue(
-				(1.0 - equilibrium_fraction) * sciantix_variable[sv["Xe in grain"]].getFinalValue());
-		}
-
-		else if (input_variable[iv["iDiffusionSolver"]].getValue() == 2)
-		{
-			double initial_value_solution = sciantix_variable[sv["Xe in intragranular solution"]].getFinalValue();
-			double initial_value_bubbles = sciantix_variable[sv["Xe in intragranular bubbles"]].getFinalValue();
-
-			solver.SpectralDiffusionNonEquilibrium(
-				initial_value_solution,
-				initial_value_bubbles,
-				xe_diffusion_modes_solution,
-				xe_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - Xe in " + matrix[0].getName()]].getParameter(),
-				physics_variable[pv["Time step"]].getFinalValue()
-			);
-
-			sciantix_variable[sv["Xe in intragranular solution"]].setFinalValue(initial_value_solution);
-			sciantix_variable[sv["Xe in intragranular bubbles"]].setFinalValue(initial_value_bubbles);
-			sciantix_variable[sv["Xe in grain"]].setFinalValue(initial_value_solution + initial_value_bubbles);
-		}
-	}
-
-	void Xe133Diffusion()
-	{
-		if (input_variable[iv["iDiffusionSolver"]].getValue() == 1)
-		{
-			sciantix_variable[sv["Xe133 in grain"]].setFinalValue(
-				solver.SpectralDiffusion(
-					xe133_diffusion_modes,
-					model[sm["Gas diffusion - Xe133 in " + matrix[0].getName()]].getParameter(),
-					physics_variable[pv["Time step"]].getFinalValue()
-				)
-			);
-
-			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Xe133 in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Xe133 in " + matrix[0].getName()]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Xe133 in " + matrix[0].getName()]].getResolutionRate() / (sciantix_system[sy["Xe133 in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Xe133 in " + matrix[0].getName()]].getTrappingRate());
-
-			sciantix_variable[sv["Xe133 in intragranular solution"]].setFinalValue(
-				equilibrium_fraction * sciantix_variable[sv["Xe133 in grain"]].getFinalValue());
-
-			sciantix_variable[sv["Xe133 in intragranular bubbles"]].setFinalValue(
-				(1 - equilibrium_fraction) * sciantix_variable[sv["Xe133 in grain"]].getFinalValue());
-		}
-
-		else if (input_variable[iv["iDiffusionSolver"]].getValue() == 2)
-		{
-			double initial_value_solution = sciantix_variable[sv["Xe133 in intragranular solution"]].getFinalValue();
-			double initial_value_bubbles = sciantix_variable[sv["Xe133 in intragranular bubbles"]].getFinalValue();
-
-			solver.SpectralDiffusionNonEquilibrium(
-				initial_value_solution,
-				initial_value_bubbles,
-				xe133_diffusion_modes_solution,
-				xe133_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - Xe133 in " + matrix[0].getName()]].getParameter(),
-				physics_variable[pv["Time step"]].getFinalValue()
-			);
-
-			sciantix_variable[sv["Xe133 in intragranular solution"]].setFinalValue(initial_value_solution);
-			sciantix_variable[sv["Xe133 in intragranular bubbles"]].setFinalValue(initial_value_bubbles);
-			sciantix_variable[sv["Xe133 in grain"]].setFinalValue(initial_value_solution + initial_value_bubbles);
-		}
-	}
-
-	void Kr85mDiffusion()
-	{
-		if (input_variable[iv["iDiffusionSolver"]].getValue() == 1)
-		{
-			sciantix_variable[sv["Kr85m in grain"]].setFinalValue(
-				solver.SpectralDiffusion(
-					kr85m_diffusion_modes,
-					model[sm["Gas diffusion - Kr85m in " + matrix[0].getName()]].getParameter(),
-					physics_variable[pv["Time step"]].getFinalValue()
-				)
-			);
-
-			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Kr85m in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Kr85m in " + matrix[0].getName()]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Kr85m in " + matrix[0].getName()]].getResolutionRate() / (sciantix_system[sy["Kr85m in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Kr85m in " + matrix[0].getName()]].getTrappingRate());
-
-			sciantix_variable[sv["Kr85m in intragranular solution"]].setFinalValue(
-				equilibrium_fraction * sciantix_variable[sv["Kr85m in grain"]].getFinalValue());
-
-			sciantix_variable[sv["Kr85m in intragranular bubbles"]].setFinalValue(
-				(1 - equilibrium_fraction) * sciantix_variable[sv["Kr85m in grain"]].getFinalValue());
-		}
-
-		else if (input_variable[iv["iDiffusionSolver"]].getValue() == 2)
-		{
-			double initial_value_solution = sciantix_variable[sv["Kr85m in intragranular solution"]].getFinalValue();
-			double initial_value_bubbles = sciantix_variable[sv["Kr85m in intragranular bubbles"]].getFinalValue();
-
-			solver.SpectralDiffusionNonEquilibrium(
-				initial_value_solution,
-				initial_value_bubbles,
-				kr85m_diffusion_modes_solution,
-				kr85m_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - Kr85m in " + matrix[0].getName()]].getParameter(),
-				physics_variable[pv["Time step"]].getFinalValue()
-			);
-
-			sciantix_variable[sv["Kr85m in intragranular solution"]].setFinalValue(initial_value_solution);
-			sciantix_variable[sv["Kr85m in intragranular bubbles"]].setFinalValue(initial_value_bubbles);
-			sciantix_variable[sv["Kr85m in grain"]].setFinalValue(initial_value_solution + initial_value_bubbles);
-		}
-	}
-
-	void KrDiffusion()
-	{
-		if (input_variable[iv["iDiffusionSolver"]].getValue() == 1)
-		{
-			sciantix_variable[sv["Kr in grain"]].setFinalValue(
-				solver.SpectralDiffusion(
-					kr_diffusion_modes,
-					model[sm["Gas diffusion - Kr in " + matrix[0].getName()]].getParameter(),
-					physics_variable[pv["Time step"]].getFinalValue()
-				)
-			);
-
-			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["Kr in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Kr in " + matrix[0].getName()]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["Kr in " + matrix[0].getName()]].getResolutionRate() / (sciantix_system[sy["Kr in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["Kr in " + matrix[0].getName()]].getTrappingRate());
-
-			sciantix_variable[sv["Kr in intragranular solution"]].setFinalValue(
-				equilibrium_fraction * sciantix_variable[sv["Kr in grain"]].getFinalValue());
-
-			sciantix_variable[sv["Kr in intragranular bubbles"]].setFinalValue(
-				(1 - equilibrium_fraction) * sciantix_variable[sv["Kr in grain"]].getFinalValue());
-		}
-
-		else if (input_variable[iv["iDiffusionSolver"]].getValue() == 2)
-		{
-			double initial_value_solution = sciantix_variable[sv["Kr in intragranular solution"]].getFinalValue();
-			double initial_value_bubbles = sciantix_variable[sv["Kr in intragranular bubbles"]].getFinalValue();
-
-			solver.SpectralDiffusionNonEquilibrium(
-				initial_value_solution,
-				initial_value_bubbles,
-				kr_diffusion_modes_solution,
-				kr_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - Kr in " + matrix[0].getName()]].getParameter(),
-				physics_variable[pv["Time step"]].getFinalValue()
-			);
-
-			sciantix_variable[sv["Kr in intragranular solution"]].setFinalValue(initial_value_solution);
-			sciantix_variable[sv["Kr in intragranular bubbles"]].setFinalValue(initial_value_bubbles);
-			sciantix_variable[sv["Kr in grain"]].setFinalValue(initial_value_solution + initial_value_bubbles);
-		}
-	}
-
-	/**
-	 * @brief ### Intragranular helium diffusion
-	 * 
-	 */
-	void HeDiffusion()
-	{
-		/**
-		 * @brief iDiffusionSolver = 1
-		 * 
-		 */
-		if (input_variable[iv["iDiffusionSolver"]].getValue() == 1)
-		{
-			sciantix_variable[sv["He in grain"]].setFinalValue(
-				solver.SpectralDiffusion(
-					he_diffusion_modes,
-					model[sm["Gas diffusion - He in " + matrix[0].getName()]].getParameter(),
-					physics_variable[pv["Time step"]].getFinalValue()
-				)
-			);
-
-			double equilibrium_fraction(1.0);
-			if ((sciantix_system[sy["He in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["He in " + matrix[0].getName()]].getTrappingRate()) > 0.0)
-				equilibrium_fraction = sciantix_system[sy["He in " + matrix[0].getName()]].getResolutionRate() / (sciantix_system[sy["He in " + matrix[0].getName()]].getResolutionRate() + sciantix_system[sy["He in " + matrix[0].getName()]].getTrappingRate());
-
-			sciantix_variable[sv["He in intragranular solution"]].setFinalValue(equilibrium_fraction * sciantix_variable[sv["He in grain"]].getFinalValue());
-			sciantix_variable[sv["He in intragranular bubbles"]].setFinalValue((1.0 - equilibrium_fraction) * sciantix_variable[sv["He in grain"]].getFinalValue());
-		}
-
-		/**
-		 * @brief iDiffusionSolver = 2
-		 * 
-		 */
-		else if (input_variable[iv["iDiffusionSolver"]].getValue() == 2)
-		{
-			double initial_value_solution = sciantix_variable[sv["He in intragranular solution"]].getFinalValue();
-			double initial_value_bubbles = sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue();
-
-			solver.SpectralDiffusionNonEquilibrium(
-				initial_value_solution,
-				initial_value_bubbles,
-				he_diffusion_modes_solution,
-				he_diffusion_modes_bubbles,
-				model[sm["Gas diffusion - He in " + matrix[0].getName()]].getParameter(),
-				physics_variable[pv["Time step"]].getFinalValue()
-			);
-
-			sciantix_variable[sv["He in intragranular solution"]].setFinalValue(initial_value_solution);
-			sciantix_variable[sv["He in intragranular bubbles"]].setFinalValue(initial_value_bubbles);
-			sciantix_variable[sv["He in grain"]].setFinalValue(initial_value_solution + initial_value_bubbles);
-		}
-
-		if(sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue() > 0.0)
-    	sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(sqrt(sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue() / sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue()));
-		else
-			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(0.0);
-	}
-
 	void GasDiffusion()
 	{
 		/// @brief
 		/// GasDiffusion
-		/// This simulation method solves the PDE for the intra-granular gas diffusion within the (ideal) spherical fuel grain.
+		/// This simulation method solves the PDE for the intra-granular gas diffusion within the (ideal) spherical fuel grain.		
+		for (std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
+		{
+			switch (int(input_variable[iv["iDiffusionSolver"]].getValue()))
+			{
+				case 1:
+				{
+					sciantix_variable[sv[sciantix_system[i].getGasName() + " in grain"]].setFinalValue(
+						solver.SpectralDiffusion(
+							getDiffusionModes(sciantix_system[i].getGasName()),
+							model[sm["Gas diffusion - " + sciantix_system[i].getName()]].getParameter(),
+							physics_variable[pv["Time step"]].getFinalValue()
+						)
+					);
 
-		XeDiffusion();
-		Xe133Diffusion();
-		KrDiffusion();
-		HeDiffusion();
-		Kr85mDiffusion();
+					double equilibrium_fraction(1.0);
+					if ((sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate()) > 0.0)
+						equilibrium_fraction = sciantix_system[i].getResolutionRate() / (sciantix_system[i].getResolutionRate() + sciantix_system[i].getTrappingRate());
 
+					sciantix_variable[sv[sciantix_system[i].getGasName() + " in intragranular solution"]].setFinalValue(
+						equilibrium_fraction * sciantix_variable[sv[sciantix_system[i].getGasName() + " in grain"]].getFinalValue());
+
+					sciantix_variable[sv[sciantix_system[i].getGasName() + " in intragranular bubbles"]].setFinalValue(
+						(1.0 - equilibrium_fraction) * sciantix_variable[sv[sciantix_system[i].getGasName() + " in grain"]].getFinalValue());
+
+					break;
+				}
+
+				case 2:
+				{
+					double initial_value_solution = sciantix_variable[sv[sciantix_system[i].getGasName() + " in intragranular solution"]].getFinalValue();
+					double initial_value_bubbles  = sciantix_variable[sv[sciantix_system[i].getGasName() + " in intragranular bubbles"]].getFinalValue();
+
+					solver.SpectralDiffusionNonEquilibrium(
+						initial_value_solution,
+						initial_value_bubbles,
+						getDiffusionModesSolution(sciantix_system[i].getGasName()),
+						getDiffusionModesBubbles(sciantix_system[i].getGasName()),
+						model[sm["Gas diffusion - " + sciantix_system[i].getName()]].getParameter(),
+						physics_variable[pv["Time step"]].getFinalValue()
+					);
+
+					sciantix_variable[sv[sciantix_system[i].getGasName() + " in intragranular solution"]].setFinalValue(initial_value_solution);
+					sciantix_variable[sv[sciantix_system[i].getGasName() + " in intragranular bubbles"]].setFinalValue(initial_value_bubbles);
+					sciantix_variable[sv[sciantix_system[i].getGasName() + " in grain"]].setFinalValue(initial_value_solution + initial_value_bubbles);
+					
+					break;
+				}
+
+				default:
+					ErrorMessages::Switch("Simulation.h", "iDiffusionSolver", int(input_variable[iv["iDiffusionSolver"]].getValue()));
+					break;
+			}
+		}
+
+		if(sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue() > 0.0)
+			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(sqrt(sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue() / sciantix_variable[sv["He in intragranular bubbles"]].getInitialValue()));
+		else
+			sciantix_variable[sv["Intragranular similarity ratio"]].setFinalValue(0.0);
+	
 		// Calculation of the gas concentration arrived at the grain boundary, by mass balance.
 		for (std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
 		{
@@ -432,6 +255,60 @@ public:
 				);
 			}
 		}
+	}
+
+	double* getDiffusionModes(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[0];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[3 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[6 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[9 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[12 * 40];
+	}
+
+	double* getDiffusionModesSolution(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[1 * 40];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[4 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[7 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[10 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[13 * 40];
+	}
+
+	double* getDiffusionModesBubbles(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[2 * 40];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[5 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[8 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[11 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[14 * 40];
 	}
 
 	void GrainGrowth()
@@ -657,40 +534,51 @@ public:
 		if (!input_variable[iv["Grain-boundary sweeping"]].getValue()) return;
 
 		// intra-granular gas diffusion modes
-		if (input_variable[iv["iDiffusionSolver"]].getValue() == 1)
+		switch (int(input_variable[iv["iDiffusionSolver"]].getValue()))
 		{
-			for (int i = 0; i < n_modes; ++i)
+			case 1:
 			{
-				he_diffusion_modes[i] =
-					solver.Decay(
-						he_diffusion_modes[i],
-						1.0,
-						0.0,
-						model[sm["Grain-boundary sweeping"]].getParameter().at(0)
-					);
+				for (int i = 0; i < n_modes; ++i)
+				{
+					modes_initial_conditions[6 * 40 + i] =
+						solver.Decay(
+							modes_initial_conditions[6 * 40 + i],
+							1.0,
+							0.0,
+							model[sm["Grain-boundary sweeping"]].getParameter().at(0)
+						);
+				}
+				
+				break;
 			}
-		}
 
-		else if (input_variable[iv["iDiffusionSolver"]].getValue() == 2)
-		{
-			for (int i = 0; i < n_modes; ++i)
+			case 2:
 			{
-				he_diffusion_modes_solution[i] =
-					solver.Decay(
-						he_diffusion_modes_solution[i],
-						1.0,
-						0.0,
-						model[sm["Grain-boundary sweeping"]].getParameter().at(0)
-					);
+				for (int i = 0; i < n_modes; ++i)
+				{
+					modes_initial_conditions[7 * 40 + i] =
+						solver.Decay(
+							modes_initial_conditions[7 * 40 + i],
+							1.0,
+							0.0,
+							model[sm["Grain-boundary sweeping"]].getParameter().at(0)
+						);
 
-				he_diffusion_modes_bubbles[i] =
-					solver.Decay(
-						he_diffusion_modes_bubbles[i],
-						1.0,
-						0.0,
-						model[sm["Grain-boundary sweeping"]].getParameter().at(0)
-					);
+					modes_initial_conditions[8 * 40 + i] =
+						solver.Decay(
+							modes_initial_conditions[8 * 40 + i],
+							1.0,
+							0.0,
+							model[sm["Grain-boundary sweeping"]].getParameter().at(0)
+						);
+				}
+
+				break;
 			}
+
+			default:
+				ErrorMessages::Switch("Simulation.h", "iDiffusionSolver", int(input_variable[iv["iDiffusionSolver"]].getValue()));
+				break;
 		}
 	}
 

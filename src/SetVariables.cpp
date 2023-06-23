@@ -931,31 +931,31 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	sciantix_variable[sv_counter].setOutput(0);
 	++sv_counter;
 
-	// ----------------------------------------------------------------------------
+	// ---------------
 	// Diffusion modes
-	// ----------------------------------------------------------------------------
+	// ---------------
 	for (int i = 0; i < n_modes; ++i)
 	{
-		xe_diffusion_modes[i] = Sciantix_diffusion_modes[i];
-		xe_diffusion_modes_solution[i] = Sciantix_diffusion_modes[1 * n_modes + i];
-		xe_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[2 * n_modes + i];
-		kr_diffusion_modes[i] = Sciantix_diffusion_modes[3 * n_modes + i];
-		kr_diffusion_modes_solution[i] = Sciantix_diffusion_modes[4 * n_modes + i];
-		kr_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[5 * n_modes + i];
-		he_diffusion_modes[i] = Sciantix_diffusion_modes[6 * n_modes + i];
-		he_diffusion_modes_solution[i] = Sciantix_diffusion_modes[7 * n_modes + i];
-		he_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[8 * n_modes + i];
-		xe133_diffusion_modes[i] = Sciantix_diffusion_modes[9 * n_modes + i];
-		xe133_diffusion_modes_solution[i] = Sciantix_diffusion_modes[10 * n_modes + i];
-		xe133_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[11 * n_modes + i];
-		kr85m_diffusion_modes[i] = Sciantix_diffusion_modes[12 * n_modes + i];
-		kr85m_diffusion_modes_solution[i] = Sciantix_diffusion_modes[13 * n_modes + i];
-		kr85m_diffusion_modes_bubbles[i] = Sciantix_diffusion_modes[14 * n_modes + i];
+		modes_initial_conditions[i] = Sciantix_diffusion_modes[i];
+		modes_initial_conditions[1 * n_modes + i] = Sciantix_diffusion_modes[1 * n_modes + i];
+		modes_initial_conditions[2 * n_modes + i] = Sciantix_diffusion_modes[2 * n_modes + i];
+		modes_initial_conditions[3 * n_modes + i] = Sciantix_diffusion_modes[3 * n_modes + i];
+		modes_initial_conditions[4 * n_modes + i] = Sciantix_diffusion_modes[4 * n_modes + i];
+		modes_initial_conditions[5 * n_modes + i] = Sciantix_diffusion_modes[5 * n_modes + i];
+		modes_initial_conditions[6 * n_modes + i] = Sciantix_diffusion_modes[6 * n_modes + i];
+		modes_initial_conditions[7 * n_modes + i] = Sciantix_diffusion_modes[7 * n_modes + i];
+		modes_initial_conditions[8 * n_modes + i] = Sciantix_diffusion_modes[8 * n_modes + i];
+		modes_initial_conditions[9 * n_modes + i] = Sciantix_diffusion_modes[9 * n_modes + i];
+		modes_initial_conditions[10 * n_modes + i] = Sciantix_diffusion_modes[10 * n_modes + i];
+		modes_initial_conditions[11 * n_modes + i] = Sciantix_diffusion_modes[11 * n_modes + i];
+		modes_initial_conditions[12 * n_modes + i] = Sciantix_diffusion_modes[12 * n_modes + i];
+		modes_initial_conditions[13 * n_modes + i] = Sciantix_diffusion_modes[13 * n_modes + i];
+		modes_initial_conditions[14 * n_modes + i] = Sciantix_diffusion_modes[14 * n_modes + i];
 	}
 
-	// ----------------------------------------------------------------------------
+	// ---------------
 	// Scaling factors
-	// ----------------------------------------------------------------------------
+	// ---------------
 	sf_resolution_rate = Sciantix_scaling_factors[0];
 	sf_trapping_rate = Sciantix_scaling_factors[1];
 	sf_nucleation_rate = Sciantix_scaling_factors[2];
@@ -965,12 +965,10 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	sf_cent_parameter = Sciantix_scaling_factors[6];
 	sf_helium_production_rate = Sciantix_scaling_factors[7];
 
-	// ----------------------------------------------------------------------------
+	// ----
 	// Maps
-	// ----------------------------------------------------------------------------
+	// ----
 	MapHistoryVariable();
 	MapSciantixVariable();
 	MapPhysicsVariable();
-
-	// ----------------------------------------------------------------------------
 }
