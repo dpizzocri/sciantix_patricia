@@ -90,7 +90,7 @@ void System::setBubbleDiffusivity(int input_value)
 	{
 		case 0:
 		{
-			bubble_diffusivity = 0;
+			bubble_diffusivity = 0.0;
 			break;
 		}
 
@@ -248,7 +248,7 @@ void System::setFissionGasDiffusivity(int input_value)
 	case 6:
 	{
 		/**
-		 * @brief this case is for 
+		 * @brief this case is for ...
 		 * 
 		 */
 		double x = sciantix_variable[sv["Stoichiometry deviation"]].getFinalValue();
@@ -348,7 +348,7 @@ void System::setHeliumDiffusivity(int input_value)
 	case 3:
 	{
 		/**
-		 * @brief iHeDiffusivity = 2 sets the single gas-atom intra-granular diffusivity equal to the correlation reported in @ref *Z. Talip et al. JNM 445 (2014) 117�127*.
+		 * @brief iHeDiffusivity = 3 sets the single gas-atom intra-granular diffusivity equal to the correlation reported in @ref *Z. Talip et al. JNM 445 (2014) 117�127*.
 		 * 
 		 */
 
@@ -420,11 +420,11 @@ void System::setResolutionRate(int input_value)
 	case 2:
 	{
 		/**
-		 * @brief iResolutionRate = 2 corresponds to the irradiation-induced intra-granular resolution rate from *P. Losonen, JNM 304 (2002) 29�49*.
+		 * @brief iResolutionRate = 2 corresponds to the irradiation-induced intra-granular resolution rate from *P. Losonen, JNM 304 (2002) 29-49*.
 		 * 
 		 */
 
-		reference += "iResolutionRate: P. Losonen, JNM 304 (2002) 29�49.\n\t";
+		reference += "iResolutionRate: P. Losonen, JNM 304 (2002) 29-49.\n\t";
 		resolution_rate = 3.0e-23 * history_variable[hv["Fission rate"]].getFinalValue();
 		resolution_rate *= sf_resolution_rate;
 
@@ -468,6 +468,25 @@ void System::setResolutionRate(int input_value)
 
 		resolution_rate = irradiation_resolution_rate + thermal_resolution_rate;
 		resolution_rate *= sf_resolution_rate;
+
+		break;
+	}
+
+	case 4:
+	{
+		/**
+		 * @brief iResolutionRate = 4 corresponds to the resolution rate of gas atoms from HBS pores, from *Barani et al., JNM 563 (2022) 153627*.
+		 * 
+		 */
+    
+		double correction_coefficient = (1.0 - exp(pow( -sciantix_variable[sv["HBS pore radius"]].getFinalValue() / (3.0*3.0*1.0e-9), 3)));
+    
+		resolution_rate =
+			2.0e-23 * history_variable[hv["Fission rate"]].getFinalValue() * correction_coefficient *
+      (3.0 * 1.0e-9 / (3.0 * 1.0e-9 + sciantix_variable[sv["HBS pore radius"]].getFinalValue())) * 
+			(1.0e-9 / (1.0e-9 + sciantix_variable[sv["HBS pore radius"]].getFinalValue()));
+
+		//resolution_rate *= sf_resolution_rate;
 
 		break;
 	}
@@ -540,6 +559,26 @@ void System::setTrappingRate(int input_value)
 
 		trapping_rate *= sf_trapping_rate;
 
+
+		break;
+	}
+
+	case 4:
+	{
+		/**
+		 * @brief iTrappingRate = 4 corresponds to the trapping rate of gas atoms in HBS pores.
+		 * This model is from @ref *Barani et al., JNM 563 (2022) 153627*.
+		 * 
+		 */
+
+		reference += "iTrappingRate: model from Barani et al., JNM 563 (2022) 153627.\n\t";
+				
+		trapping_rate = 4.0 * pi * matrix[sma["UO2HBS"]].getGrainBoundaryVacancyDiffusivity() *
+      sciantix_variable[sv["Xe at grain boundary"]].getFinalValue() *
+      sciantix_variable[sv["HBS pore radius"]].getFinalValue() *
+      (1.0 + 1.8 * pow(sciantix_variable[sv["HBS porosity"]].getFinalValue(), 1.3));
+
+		//trapping_rate *= sf_trapping_rate;
 
 		break;
 	}

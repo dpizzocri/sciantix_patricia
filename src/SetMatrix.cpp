@@ -149,8 +149,38 @@ void Matrix::setGrainBoundaryVacancyDiffusivity(int input_value)
 			break;
 		}
 
-		default:
-			ErrorMessages::Switch("SetMatrix.cpp", "iGrainBoundaryVacancyDiffusivity", input_value);
-			break;
+	case 4:
+	{
+		/**
+		 * @brief iGrainBoundaryVacancyDiffusivity = 4 corresponds to the vacancy diffusivities along HBS grain boundaries.
+		 * This model is from @ref Barani et al., JNM 563 (2022) 153627.
+		 * 
+		 */
+
+    grain_boundary_diffusivity = (1.3e-7 * exp(-4.52e-19 /
+           (boltzmann_constant * history_variable[hv["Temperature"]].getFinalValue()))
+    );
+
+		reference += "iGrainBoundaryVacancyDiffusivity: HBS case, from Barani et al., JNM 563 (2022) 153627.\n\t";
+
+		break;
 	}
+
+	default:
+		ErrorMessages::Switch("SetMatrix.cpp", "iGrainBoundaryVacancyDiffusivity", input_value);
+		break;
+	}
+}
+
+
+void Matrix::setPoreNucleationRate()
+{
+	double sf_nucleation_rate_porosity = 1.25e-6;
+
+	pore_nucleation_rate = (5.0e17 * 2.77e-7 * 3.54 *
+           (1.0-sciantix_variable[sv["Restructured volume fraction"]].getFinalValue()) *
+           pow(sciantix_variable[sv["Effective burnup"]].getFinalValue(), 2.54)
+    );
+
+	pore_nucleation_rate *= sf_nucleation_rate_porosity;
 }

@@ -41,7 +41,6 @@ protected:
 	double trapping_rate;
 	double nucleation_rate;
 	std::string gas_name;
-	double pore_nucleation_rate;
 	std::vector<double> modes;
 	double production_rate;
 
@@ -145,16 +144,6 @@ public:
 	double getNucleationRate()
 	{
 		return nucleation_rate;
-	}
-
-	void setPoreNucleationRate(double t)
-	{
-		pore_nucleation_rate = t;
-	}
-
-	double getPoreNucleationRate()
-	{
-		return pore_nucleation_rate;
 	}
 
 	void setProductionRate(int input_value);
