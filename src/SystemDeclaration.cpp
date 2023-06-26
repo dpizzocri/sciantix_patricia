@@ -17,5 +17,4 @@
 #include "SystemDeclaration.h"
 
 /// SystemDeclaration
-
 std::vector<System> sciantix_system;

@@ -43,8 +43,5 @@ double TimeStepCalculation( )
 
     }
 
-  //if ((upper_bound - (Time_h+time_step) < 1.0e-3))
-  //time_step = upper_bound - Time_h;
-
   return time_step;
 }

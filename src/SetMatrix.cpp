@@ -22,16 +22,34 @@ void SetMatrix( )
    * @brief This routine defines the available options for fuel matrices and their properties.
    * 
    */
-	for (int k = 0; k < 3; ++k)
-	{
-		switch (k)
-		{
-		  case 0: UO2();                MapMatrix();        break;
-		  case 1: UO2HBS();             MapMatrix();        break;
 
-		  default:                                          break;
+	switch (int(input_variable[iv["iFuelMatrix"]].getValue()))
+	{
+		case 0: 
+		{
+			UO2();
+			MapMatrix();
+
+			break;
 		}
+
+		case 1: 
+		{
+			UO2();
+			MapMatrix();
+
+			UO2HBS();
+			MapMatrix();
+
+			break;
+		}
+		
+		default:
+			ErrorMessages::Switch("SetMatrix.cpp", "iFuelMatrix", int(input_variable[iv["iFuelMatrix"]].getValue()));
+			break;
 	}
+
+
 }
 
 void Matrix::setGrainBoundaryMobility(int input_value)
@@ -92,44 +110,44 @@ void Matrix::setGrainBoundaryVacancyDiffusivity(int input_value)
 
 	switch (input_value)
 	{
-	case 0:
-	{
-		/**
-		 * @brief iGrainBoundaryVacancyDiffusivity = 0 corresponds to a constant diffusivity value, equal to 1e-30 m^2/s.
-		 * 
-		 */
+		case 0:
+		{
+			/**
+			 * @brief iGrainBoundaryVacancyDiffusivity = 0 corresponds to a constant diffusivity value, equal to 1e-30 m^2/s.
+			 * 
+			 */
 
-		grain_boundary_diffusivity = 1e-30;
-		reference += "iGrainBoundaryVacancyDiffusivity: constant value (1e-30 m^2/s).\n\t";
+			grain_boundary_diffusivity = 1e-30;
+			reference += "iGrainBoundaryVacancyDiffusivity: constant value (1e-30 m^2/s).\n\t";
 
-		break;
-	}
+			break;
+		}
 
-	case 1:
-	{
-		/**
-		 * @brief iGrainBoundaryVacancyDiffusivity = 1 corresponds to the relation from @ref Reynolds and Burton, JNM, 82 (1979) 22-25.
-		 * 
-		 */
+		case 1:
+		{
+			/**
+			 * @brief iGrainBoundaryVacancyDiffusivity = 1 corresponds to the relation from @ref Reynolds and Burton, JNM, 82 (1979) 22-25.
+			 * 
+			 */
 
-		grain_boundary_diffusivity = 6.9e-04 * exp(- 5.35e-19 / (boltzmann_constant * history_variable[hv["Temperature"]].getFinalValue()));
-		reference += "iGrainBoundaryVacancyDiffusivity: from Reynolds and Burton, JNM, 82 (1979) 22-25.\n\t";
+			grain_boundary_diffusivity = 6.9e-04 * exp(- 5.35e-19 / (boltzmann_constant * history_variable[hv["Temperature"]].getFinalValue()));
+			reference += "iGrainBoundaryVacancyDiffusivity: from Reynolds and Burton, JNM, 82 (1979) 22-25.\n\t";
 
-		break;
-	}
+			break;
+		}
 
-	case 2:
-	{
-		/**
-		 * @brief iGrainBoundaryVacancyDiffusivity = 2 corresponds to the correction from @ref Pastore et al., JNM, 456 (2015) 156.
-		 * 
-		 */
+		case 2:
+		{
+			/**
+			 * @brief iGrainBoundaryVacancyDiffusivity = 2 corresponds to the correction from @ref Pastore et al., JNM, 456 (2015) 156.
+			 * 
+			 */
 
-		grain_boundary_diffusivity = 8.86e-6 * exp(- 5.75e-19 / (boltzmann_constant * history_variable[hv["Temperature"]].getFinalValue()));
-		reference += "iGrainBoundaryVacancyDiffusivity: from Pastore et al., JNM, 456 (2015) 156.\n\t";
+			grain_boundary_diffusivity = 8.86e-6 * exp(- 5.75e-19 / (boltzmann_constant * history_variable[hv["Temperature"]].getFinalValue()));
+			reference += "iGrainBoundaryVacancyDiffusivity: from Pastore et al., JNM, 456 (2015) 156.\n\t";
 
-		break;
-	}
+			break;
+		}
 
 	case 4:
 	{

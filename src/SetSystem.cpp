@@ -20,19 +20,64 @@
 
 void SetSystem()
 {
-	for (int k = 0; k < 10; ++k)
+	switch (int(input_variable[iv["iFuelMatrix"]].getValue()))
 	{
-		switch (k)
+		case 0: 
 		{
-		case 0: Xe_in_UO2();								MapSystem();    	break;
-		case 1: Kr_in_UO2();								MapSystem();    	break;
-		case 2: He_in_UO2();								MapSystem();    	break;
-		case 3: Xe133_in_UO2();							MapSystem();    	break;
-		case 4: Kr85m_in_UO2();							MapSystem();    	break;
-		case 5: Xe_in_UO2HBS();							MapSystem();    	break;
+			for (int k = 0; k < 10; ++k)
+			{
+				switch (k)
+				{
+					case 0:
+					{
+						Xe_in_UO2();
+						MapSystem();
+						
+						break;
+					}
 
-		default:                                            	break;
+					case 1:
+					{
+						Kr_in_UO2();
+						MapSystem();
+						
+						break;
+					}
+
+					case 2:
+					{
+						He_in_UO2();
+						MapSystem();
+						
+						break;
+					}
+
+					case 3:
+					{
+						Xe133_in_UO2();
+						MapSystem();
+						
+						break;
+					}
+					
+					case 4:
+					{
+						Kr85m_in_UO2();
+						MapSystem();
+						
+						break;
+					}
+
+					default:
+						break;
+				}
+			}
+
+			break;
 		}
+		
+		default:
+			break;
 	}
 }
 
@@ -64,7 +109,7 @@ void System::setBubbleDiffusivity(int input_value)
 				double volume_self_diffusivity = 3.0e-5*exp(-4.5/(boltzmann_constant*history_variable[hv["Temperature"]].getFinalValue()));
 				double bubble_radius = sciantix_variable[sv["Intragranular bubble radius"]].getInitialValue();
 
-				bubble_diffusivity = 3 * matrix[sma["UO2"]].getSchottkyVolume() * volume_self_diffusivity / (4.0 * pi * pow(bubble_radius,3.0));
+				bubble_diffusivity = 3 * matrix[0].getSchottkyVolume() * volume_self_diffusivity / (4.0 * pi * pow(bubble_radius,3.0));
 			}
 			
 			break;
@@ -365,7 +410,7 @@ void System::setResolutionRate(int input_value)
 		 */
 
 		reference += "iResolutionRate: J.A. Turnbull, JNM, 38 (1971), 203.\n\t";
-		resolution_rate = 2.0 * pi * matrix[sma["UO2"]].getFFrange() * pow(matrix[sma["UO2"]].getFFinfluenceRadius()
+		resolution_rate = 2.0 * pi * matrix[0].getFFrange() * pow(matrix[0].getFFinfluenceRadius()
 			+ sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue(), 2) * history_variable[hv["Fission rate"]].getFinalValue();
 		resolution_rate *= sf_resolution_rate;
 
@@ -398,12 +443,12 @@ void System::setResolutionRate(int input_value)
 		reference += "iResolutionRate: Cognini et al. NET 53 (2021) 562-571.\n\t";
 
 		/// @param irradiation_resolution_rate
-		double irradiation_resolution_rate = 2.0 * pi * matrix[sma["UO2"]].getFFrange() * pow(matrix[sma["UO2"]].getFFinfluenceRadius()
+		double irradiation_resolution_rate = 2.0 * pi * matrix[0].getFFrange() * pow(matrix[0].getFFinfluenceRadius()
 			+ sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue(), 2) * history_variable[hv["Fission rate"]].getFinalValue();
 
 		/// @param compressibility_factor
 		double helium_hard_sphere_diameter = 2.973e-10 * (0.8414 - 0.05 * log(history_variable[hv["Temperature"]].getFinalValue() / 10.985)); // (m)
-		double helium_volume_in_bubble = matrix[sma["UO2"]].getOIS(); // 7.8e-30, approximation of saturated nanobubbles
+		double helium_volume_in_bubble = matrix[0].getOIS(); // 7.8e-30, approximation of saturated nanobubbles
 		double y = pi * pow(helium_hard_sphere_diameter, 3) / (6.0 * helium_volume_in_bubble);
 		double compressibility_factor = (1.0 + y + pow(y, 2) - pow(y, 3)) / (pow(1.0 - y, 3));
 		
@@ -473,7 +518,6 @@ void System::setTrappingRate(int input_value)
 	 * 
 	 */
 	const double pi = CONSTANT_NUMBERS_H::MathConstants::pi;
-	const double boltzmann_constant = CONSTANT_NUMBERS_H::PhysicsConstants::boltzmann_constant;
 
 	switch (input_value)
 	{

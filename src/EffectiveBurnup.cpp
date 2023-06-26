@@ -33,7 +33,7 @@ void EffectiveBurnup()
 	std::string reference;
 	std::vector<double> parameter;
 
-	double temperature_threshold = matrix[sma["UO2"]].getHealingTemperatureThreshold();
+	double temperature_threshold = matrix[0].getHealingTemperatureThreshold();
 
 	if ((history_variable[hv["Temperature"]].getFinalValue()) <= temperature_threshold)
 		parameter.push_back(sciantix_variable[sv["Specific power"]].getFinalValue() / 86400.0);
