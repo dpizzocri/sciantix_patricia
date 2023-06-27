@@ -42,9 +42,7 @@ The provided input settings are the **recommended** choice for standard simulati
 
 0 #  grain boundary venting -- if 1, the gas release consider the contribution from the venting probability calculated according to *Pizzocri et al., D6.4 (2020), H2020 Project INSPYRE*.
 
-0 # hbs formation -- no HBS forming in the UO2 fuel matrix.
-
-0 # radioactive fission gases behaviour 
+0 # radioactive fission gas behaviour 
 
 0	#	iHelium (0= no model considered, 1= Cognini et al. (2021))
 
@@ -52,9 +50,15 @@ The provided input settings are the **recommended** choice for standard simulati
 
 0	#	iGrainBoundarySweeping (0= no model considered, 1= TRANSURANUS swept volume model)
 
-0	#	iHBS_FGDiffusionCoefficient (0= constant value)
+0	#	iHighBurnupStructureFormation (0= no model considered, 1= fraction of HBS-restructured volume from Barani et al. (2020))
 
 0	#	iHighBurnupStructurePorosity (0= no evolution of HBS porosity, 1= HBS porosity evolution based on Spino et al. (2006) data)
+
+0	#	iHeliumProductionRate (0= zero production rate, 1= helium from ternary fissions, 2= linear with burnup (FR))
+
+0	#	iStoichiometryDeviation (0= not considered, 1= Cox et al. 1986, 2= Bittel et al. 1969, 3= Abrefah et al. 1994, 4= Imamura et al. 1997, 5= Langmuir-based approach)
+
+0	#	iBubbleDiffusivity (0= not considered, 1= volume diffusivity)
 
 # Input initial conditions
 
