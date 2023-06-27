@@ -162,7 +162,8 @@ public:
 	{
 		/// @brief
 		/// GasDiffusion
-		/// This simulation method solves the PDE for the intra-granular gas diffusion within the (ideal) spherical fuel grain.		
+		/// This simulation method solves the PDE for the intra-granular gas diffusion within the (ideal) spherical fuel grain.
+
 		for (std::vector<System>::size_type i = 0; i != sciantix_system.size(); ++i)
 		{
 			switch (int(input_variable[iv["iDiffusionSolver"]].getValue()))
@@ -320,7 +321,7 @@ public:
 
 	void InterGranularBubbleBehaviour()
 	{
-		if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 4) // HBS case: no fission gas release, gas goes into HBS pores
+		if(input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 5) // HBS case: no fission gas release, gas goes into HBS pores
 		{
 				sciantix_variable[sv["Intergranular bubble concentration"]].setFinalValue(0.0);
 				return;

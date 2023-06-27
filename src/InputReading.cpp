@@ -168,9 +168,6 @@ void InputReading()
 	 * 	0= no model considered,
 	 * 	1= fraction of HBS-restructured volume from Barani et al. (2020)
 	 * 
-	 * iHBS_FGDiffusionCoefficient
-	 * 	0= constant value
-	 * 
 	 * iHighBurnupStructurePorosity
 	 * 	0= no evolution of HBS porosity,
 	 * 	1= HBS porosity evolution based on Spino et al. (2006) data
@@ -204,7 +201,7 @@ void InputReading()
 	Sciantix_options[15] = ReadOneSetting("iHeDiffusivity", input_settings, input_check);
 	Sciantix_options[16] = ReadOneSetting("iGrainBoundarySweeping", input_settings, input_check);
 	Sciantix_options[17] = ReadOneSetting("iHighBurnupStructureFormation", input_settings, input_check);
-	Sciantix_options[18] = ReadOneSetting("iHBS_FGDiffusionCoefficient", input_settings, input_check);
+	Sciantix_options[18] = ReadOneSetting("iHBS_FGDiffusionCoefficient", input_settings, input_check); // ---
 	Sciantix_options[19] = ReadOneSetting("iHighBurnupStructurePorosity", input_settings, input_check);
 	Sciantix_options[20] = ReadOneSetting("iHeliumProductionRate", input_settings, input_check);
 	Sciantix_options[21] = ReadOneSetting("iStoichiometryDeviation", input_settings, input_check);

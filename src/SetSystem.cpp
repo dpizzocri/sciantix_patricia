@@ -368,7 +368,7 @@ void System::setResolutionRate(int input_value)
 {
 	/** 
 	 * ### setResolutionRate
-	 * @brief The helium intra-granular resolution rate is set according to the input_variable iResolutionRate.
+	 * @brief The gas intra-granular resolution rate is set according to the input_variable iResolutionRate.
 	 * 
 	 */
 
@@ -461,25 +461,6 @@ void System::setResolutionRate(int input_value)
 		break;
 	}
 
-	case 4:
-	{
-		/**
-		 * @brief iResolutionRate = 4 corresponds to the resolution rate of gas atoms from HBS pores, from *Barani et al., JNM 563 (2022) 153627*.
-		 * 
-		 */
-    
-		double correction_coefficient = (1.0 - exp(pow( -sciantix_variable[sv["HBS pore radius"]].getFinalValue() / (3.0*3.0*1.0e-9), 3)));
-    
-		resolution_rate =
-			2.0e-23 * history_variable[hv["Fission rate"]].getFinalValue() * correction_coefficient *
-      (3.0 * 1.0e-9 / (3.0 * 1.0e-9 + sciantix_variable[sv["HBS pore radius"]].getFinalValue())) * 
-			(1.0e-9 / (1.0e-9 + sciantix_variable[sv["HBS pore radius"]].getFinalValue()));
-
-		//resolution_rate *= sf_resolution_rate;
-
-		break;
-	}
-
 	case 99:
 	{
 		/**
@@ -503,7 +484,7 @@ void System::setTrappingRate(int input_value)
 {
 	/** 
 	 * ### setTrappingRate
-	 * @brief The krypton intra-granular trapping rate is set according to the input_variable iTrappingRate.
+	 * @brief The gas intra-granular trapping rate is set according to the input_variable iTrappingRate.
 	 * 
 	 */
 	const double pi = CONSTANT_NUMBERS_H::MathConstants::pi;
@@ -548,26 +529,6 @@ void System::setTrappingRate(int input_value)
 
 		trapping_rate *= sf_trapping_rate;
 
-
-		break;
-	}
-
-	case 4:
-	{
-		/**
-		 * @brief iTrappingRate = 4 corresponds to the trapping rate of gas atoms in HBS pores.
-		 * This model is from @ref *Barani et al., JNM 563 (2022) 153627*.
-		 * 
-		 */
-
-		reference += "iTrappingRate: model from Barani et al., JNM 563 (2022) 153627.\n\t";
-				
-		trapping_rate = 4.0 * pi * matrix[sma["UO2HBS"]].getGrainBoundaryVacancyDiffusivity() *
-      sciantix_variable[sv["Xe at grain boundary"]].getFinalValue() *
-      sciantix_variable[sv["HBS pore radius"]].getFinalValue() *
-      (1.0 + 1.8 * pow(sciantix_variable[sv["HBS porosity"]].getFinalValue(), 1.3));
-
-		//trapping_rate *= sf_trapping_rate;
 
 		break;
 	}

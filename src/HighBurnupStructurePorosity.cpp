@@ -74,6 +74,14 @@ void HighBurnupStructurePorosity()
 		break;
 	}
 
+	case 2:
+	{
+		/// @brief 
+		/// HBS porosity evolution based on Barani et al. - part II (2022)
+
+		break;
+	}
+
 	default:
 		ErrorMessages::Switch("HighBurnupStructurePorosity.cpp", "HighBurnupStructurePorosity", int(input_variable[iv["HighBurnupStructurePorosity"]].getValue()));
 		break;

@@ -38,6 +38,8 @@ protected:
 	std::string matrix_name;
 	double healing_temperature_threshold;
 	double pore_nucleation_rate;
+	double pore_resolution_rate;
+	double pore_trapping_rate;
 
 public:
 	
@@ -154,6 +156,18 @@ public:
 	double getPoreNucleationRate()
 	{
 		return pore_nucleation_rate;
+	}
+
+	void setPoreResolutionRate();
+	double getPoreResolutionRate()
+	{
+		return pore_resolution_rate;
+	}
+
+	void setPoreTrappingRate();
+	double getPoreTrappingRate()
+	{
+		return pore_trapping_rate;
 	}
 
 	void setGrainBoundaryVacancyDiffusivity(int input_value);

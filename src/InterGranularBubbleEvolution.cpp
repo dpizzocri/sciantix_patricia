@@ -126,7 +126,7 @@ void InterGranularBubbleEvolution()
 		reference += ": Pastore et al., NED, 256 (2013) 75-86.";
 	}
 
-	else if (input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 4)
+	else if (input_variable[iv["iGrainBoundaryBehaviour"]].getValue() == 5)
 	{
 		// HBS case: Gas is not distributed among inter-granular bubbles, since no inter-granular bubbles in HBS. Gas remains at grain boundaries: 
 		
