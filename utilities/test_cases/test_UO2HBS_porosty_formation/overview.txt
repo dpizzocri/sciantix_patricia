@@ -10,7 +10,7 @@ Model #8: 	Gas production - He in UO2
 Model #9: 	Gas production - Xe133 in UO2	 
 Model #10: 	Gas production - Kr85m in UO2	 
 Model #11: 	Gas production - Xe in UO2HBS	 
-Model #12: 	Intragranular bubble evolution	Pizzocri et al., JNM, 502 (2018) 323-330.
+Model #12: 	Intragranular bubble evolution	No intragranular bubbles.
 Model #13: 	Gas diffusion - Xe in UO2	
 Model #14: 	Gas diffusion - Kr in UO2	
 Model #15: 	Gas diffusion - He in UO2	
@@ -68,7 +68,7 @@ System #5: 	Xe in UO2HBS	Production rate = cumulative yield * fission rate densi
 Input setting #0: 	iGrainGrowth = 0
 Input setting #1: 	iFGDiffusionCoefficient = 1
 Input setting #2: 	iDiffusionSolver = 1
-Input setting #3: 	iIntraGranularBubbleEvolution = 1
+Input setting #3: 	iIntraGranularBubbleEvolution = 99
 Input setting #4: 	iResolutionRate = 1
 Input setting #5: 	iTrappingRate = 1
 Input setting #6: 	iNucleationRate = 1
