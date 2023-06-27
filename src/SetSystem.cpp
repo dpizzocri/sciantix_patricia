@@ -24,55 +24,44 @@ void SetSystem()
 	{
 		case 0: 
 		{
-			for (int k = 0; k < 10; ++k)
-			{
-				switch (k)
-				{
-					case 0:
-					{
-						Xe_in_UO2();
-						MapSystem();
-						
-						break;
-					}
+			Xe_in_UO2();
+			MapSystem();
 
-					case 1:
-					{
-						Kr_in_UO2();
-						MapSystem();
-						
-						break;
-					}
+			Kr_in_UO2();
+			MapSystem();
+			
+			He_in_UO2();
+			MapSystem();
+			
+			Xe133_in_UO2();
+			MapSystem();
+			
+			Kr85m_in_UO2();
+			MapSystem();
+			
+			break;
+		}
 
-					case 2:
-					{
-						He_in_UO2();
-						MapSystem();
-						
-						break;
-					}
+		case 1:
+		{
+			Xe_in_UO2();
+			MapSystem();
 
-					case 3:
-					{
-						Xe133_in_UO2();
-						MapSystem();
-						
-						break;
-					}
-					
-					case 4:
-					{
-						Kr85m_in_UO2();
-						MapSystem();
-						
-						break;
-					}
+			Kr_in_UO2();
+			MapSystem();
+			
+			He_in_UO2();
+			MapSystem();
+			
+			Xe133_in_UO2();
+			MapSystem();
+			
+			Kr85m_in_UO2();
+			MapSystem();
 
-					default:
-						break;
-				}
-			}
-
+			Xe_in_UO2HBS();
+			MapSystem();
+			
 			break;
 		}
 		
