@@ -681,6 +681,119 @@ void System::setProductionRate(int input_value)
 		break;
 	}
 
+	case 4:
+  {
+    /**
+		 * @brief Surrogate model for **helium production in Am-MOX fuels under MYRRHA "Revision 1.8" irradiation conditions**
+		 * @ref: "Luzzi et al., submitted to Nuclear Engineering and Design (2023)"
+		 * Derived from SCIANTIX burnup module capabilities.
+		 * 
+		 * **Ranges of utilization**
+     * - Fast reactor conditions: (U,Pu)O2 MOX and (U,Pu,Am)O2 MOX fuels
+	   * - Burnup: up to 200 GWd/tHM
+     * - Fission rate: 0.9e19 - 3.0e19 fissions/m3 s
+	   * - Pu concentration: 25-30 wt.%
+     * - Am concentration: 0-5 wt.%
+     * - U235 enrichment/U : 0.711 wt.%
+     * - Temperature: 550-1200 °C
+	   * - O/M : 1.969
+	   * - Fuel density: 10970 kg/m3
+		 * 
+		 */
+		
+		// model coefficients:
+		double A = 3.387e+20;
+		double B = 2.717e+19;
+		double C = 3.528e+20;
+		double D = -9.692e+14;
+		double E = -2.397e14;
+		double F = 2.057e+15;
+		double G = 80.77;
+		double H = 8.864;
+		double I = -1.252e-23;
+		double J = 1.811e-23;
+		double K = -1.970e+25;
+		double X = 2.218e+23;
+
+		double Fdot = history_variable[hv["Fission rate"]].getFinalValue(); // (fissions/m3 s)
+		double time_irr = sciantix_variable[sv["Irradiation time"]].getFinalValue(); // (h)
+		double Am241 = sciantix_variable[sv["Am241"]].getFinalValue(); // (at.% HM)
+
+
+		reference += "Case for helium production rate: Luzzi et al., submitted to Nuclear Engineering and Design (2023).\n\t";
+
+    production_rate = (A* Am241 + B * pow(Am241,2) + C) +
+                       2 * time_irr *(D * Am241 + E * pow(Am241,2) + F) +
+                       Fdot * (G * Am241 + H)+ 2 * time_irr * pow(Fdot,2) * (I * Am241 + J) -
+                       K * Am241 * (Fdot / X) *(((time_irr * Fdot)/X)-1.0)* exp(-(time_irr * Fdot) / X); // (at/m3 h)			
+    production_rate /= 3600.0; // (at/m3 s)
+
+    production_rate *= sf_helium_production_rate;
+    break;
+  }
+
+	case 5:
+  {
+    /**
+		 * @brief Surrogate model for **helium production in fast reactor MOX fuel**
+		 * @ref: "Pizzocri et al., Nuclear Engineering and Technology 55 (2023) 3071-3079"
+     * Derived from SCIANTIX burnup module capabilities.
+		 * 
+		 * **Range of utilization**
+     * - Fast reactor conditions: (U,Pu)O2 MOX and (U,Pu,Am)O2 MOX fuels
+     * - Fission rate: 1e18 - 1e19 fissions/m3 s
+	   * - Pu concentration: 20-50 wt.%
+     * - Am concentration: 0-5 wt.%
+	   * - U235 enrichment/U : 0.711-5 wt.%
+     * - Temperature: 900-1900°C
+     * - O/M : 1.95-2.00
+   	 * - Fuel density: 9325-10970 kg/m3
+		 */
+		 
+		// model coefficients:
+		double A = 6.70e-1;
+		double B = 2.58e-21;
+		double C = -9.01e-1;
+		double D = 2.38e-2;
+		double E = -2.05e-4;
+		double F = 3.12e-5;
+		double G = 6.80e-2;
+		double H = 1.69e-1;
+		double I = 1.85e-1;
+		double S = 34.1;
+
+		double Fdot = history_variable[hv["Fission rate"]].getFinalValue(); // (fissions/m3 s)
+		double time_irr = sciantix_variable[sv["Irradiation time"]].getFinalValue(); // (h)
+    double rho = sciantix_variable[sv["Fuel density"]].getFinalValue(); // (kg/m3)
+
+    // double Pu = 0.0; // MARINE-specific: zero initial concentration of Pu in the fuel
+		double Pu = sciantix_variable[sv["Pu"]].getFinalValue(); // (at.% HM)
+		// double Pu = sciantix_variable[sv["enriPu238"]].getFinalValue() + sciantix_variable[sv["enriPu239"]].getFinalValue() + sciantix_variable[sv["enriPu240"]].getFinalValue() + sciantix_variable[sv["enriPu241"]].getFinalValue() + sciantix_variable[sv["enriPu242"]].getFinalValue(); // (at.% HM)
+
+		double Am241 = sciantix_variable[sv["Am241"]].getFinalValue(); // (at.% HM)
+
+    // double Am242 = 0.0; // MARINE-specific: zero initial concentration of Am242 in the fuel
+    double Am242 = sciantix_variable[sv["Am242"]].getFinalValue(); // (at.% HM)
+
+    //double Cm242 = 0.0; // MARINE-specific: zero initial concentration of Cm242 in the fuel
+    double Cm242 = sciantix_variable[sv["Cm242"]].getFinalValue(); // (at.% HM)
+
+		reference += "Case for helium production rate: Pizzocri et al., Nuclear Engineering and Technology 55 (2023) 3071-3079.\n\t";
+
+    double P_exponent = B*Fdot + (C*Pu + D*pow(Pu,2) + E*pow(Pu,3)) + F*rho + G*Am241 + H*Am242 + I*Cm242 +S;
+    
+		if (time_irr == 0)
+      production_rate = 1.0e32; // (at /m3 s) -- MARINE-specific: guess value based on production rate calculated at first time step != 0
+    else
+    {
+      production_rate = A * pow(time_irr,A-1.0) * pow(10.0,P_exponent); // (at/m3 h)
+      production_rate /= 3600.0; // (at/m3 s)
+    }
+
+    production_rate *= sf_helium_production_rate;
+    break;
+  }
+
 	default:
 		ErrorMessages::Switch("SetSystem.cpp", "iHeliumProductionRate", input_value);
 		break;

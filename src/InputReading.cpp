@@ -279,6 +279,11 @@ void InputReading()
 		Sciantix_variables[63] = initial_composition_Kr85m[6];
 
 		Sciantix_variables[66] = ReadOneParameter("Initial stoichiometry deviation[0]", input_initial_conditions, input_check);
+
+		Sciantix_variables[79] = ReadOneParameter("Initial composition Am241", input_initial_conditions, input_check);
+		Sciantix_variables[80] = ReadOneParameter("Initial composition Am242", input_initial_conditions, input_check);
+		Sciantix_variables[81] = ReadOneParameter("Initial composition Cm242", input_initial_conditions, input_check);
+		Sciantix_variables[82] = ReadOneParameter("Initial composition Pu", input_initial_conditions, input_check);
 	}
 
 	int n = 0;

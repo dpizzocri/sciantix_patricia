@@ -976,6 +976,39 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	sciantix_variable[sv_counter].setOutput(toOutputHighBurnupStructureFormation);
 	++sv_counter;
 
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Am241");
+	sciantix_variable[sv_counter].setUOM("(at./at.HM)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[79]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[79]);
+	sciantix_variable[sv_counter].setOutput(0);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Am242");
+	sciantix_variable[sv_counter].setUOM("(at./at. HM)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[80]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[80]);
+	sciantix_variable[sv_counter].setOutput(0);
+	++sv_counter;
+
+  sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Cm242");
+	sciantix_variable[sv_counter].setUOM("(at./at. HM)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[81]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[81]);
+	sciantix_variable[sv_counter].setOutput(0);
+	++sv_counter;
+
+  sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Pu");
+	sciantix_variable[sv_counter].setUOM("(at./at. HM)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[82]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[82]);
+	sciantix_variable[sv_counter].setOutput(0);
+	++sv_counter;
+
+
 	// ---------------
 	// Diffusion modes
 	// ---------------
