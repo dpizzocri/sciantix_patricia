@@ -143,6 +143,21 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 		input_variable[iv_counter].setName("iBubbleDiffusivity");
 		input_variable[iv_counter].setValue(Sciantix_options[21]);
 		++iv_counter;
+
+		input_variable.emplace_back();
+		input_variable[iv_counter].setName("iGrainBoundaryHeliumDiffusivity");
+		input_variable[iv_counter].setValue(Sciantix_options[22]);
+		++iv_counter;
+
+		input_variable.emplace_back();
+		input_variable[iv_counter].setName("iGrainBoundaryHeliumTrappingRate");
+		input_variable[iv_counter].setValue(Sciantix_options[23]);
+		++iv_counter;
+
+		input_variable.emplace_back();
+		input_variable[iv_counter].setName("iGrainBoundaryHeliumThermalResolution");
+		input_variable[iv_counter].setValue(Sciantix_options[24]);
+		++iv_counter;
 	}
 
 	MapInputVariable();

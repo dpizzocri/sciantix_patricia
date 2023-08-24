@@ -114,6 +114,13 @@ public:
 		return diffusivity;
 	}
 
+	void setGrainBoundaryHeliumDiffusivity(int input_value);	
+	double getGrainBoundaryHeliumDiffusivity()
+	{
+		/// Member function to get the diffusivity of the isotope at the fuel grain boundaries
+		return diffusivity;
+	}
+
 	void setHenryConstant(double h)
 	{
 		/// Member function to set the value of the Henry constant
@@ -133,10 +140,24 @@ public:
 		return resolution_rate;
 	}
 
+	void setGrainBoundaryHeliumThermalResolutionRate(int input_value);
+	double getGrainBoundaryHeliumThermalResolutionRate()
+	{
+		/// Member function to get the value of the thermal resolution rate of the isotope from the fuel grain boundaries
+		return resolution_rate;
+	}
+
 	void setTrappingRate(int input_value);
 	double getTrappingRate()
 	{
 		/// Member function to get the value of the trapping rate of the isotope in the fuel matrix nanobubbles
+		return trapping_rate;
+	}
+
+	void setGrainBoundaryHeliumTrappingRate(int input_value);
+	double getGrainBoundaryHeliumTrappingRate()
+	{
+		/// Member function to get the value of the trapping rate of the isotope at the fuel grain boundaries
 		return trapping_rate;
 	}
 

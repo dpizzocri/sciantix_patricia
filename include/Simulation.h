@@ -480,6 +480,39 @@ public:
 		);
 	}
 
+	void GrainBoundaryHeliumBehaviour()
+	{
+		/*
+		  double henry_constant = HeliumHenryConstant(Temperature[0]);
+  		double diffusion_coefficient_boundary = HeliumDiffusionCoefficientBoundary(Temperature[0]);
+  		double Intergranular_He_bubble_radius = pow(10,-7);
+  		double Helium_bubble_concentration_boundary = pow(10,12);
+  		double trapping_rate_boundary = TrappingRateBoundary(diffusion_coefficient_boundary, Intergranular_He_bubble_radius, Helium_bubble_concentration_boundary);
+  		double thermal_resolution_rate_boundary = ThermalResolutionBoundary(diffusion_coefficient_boundary, henry_constant, Temperature[0], Intergranular_He_bubble_radius, Grain_radius[0], Helium_bubble_concentration_boundary);
+  		double resolution_rate_boundary = thermal_resolution_rate_boundary;
+
+  		const unsigned short int N(40);
+  		const unsigned short int circles = 14;
+
+  		if (dTime_s == 0)
+  		{
+    		double source_term_solution_boundary = (Grain_radius[1]/3)*(1 - Intergranular_saturation_fractional_coverage[0])*(Helium_boundary[1] - Helium_boundary[0]);
+    		double source_term_bubble_boundary = (Grain_radius[1]/3)*Intergranular_saturation_fractional_coverage[0]*(Helium_boundary[1] - Helium_boundary[0]);
+    		Solver::SpectralDiffusionNonEquilibriumCylinder(Helium_boundary_solution[1], Helium_boundary_bubbles[1], Helium_boundary_solution_modes, Helium_boundary_bubbles_modes, N, diffusion_coefficient_boundary, resolution_rate_boundary, trapping_rate_boundary, Grain_radius[1], circles, source_term_solution_boundary, source_term_bubble_boundary, dTime_s);
+  		}
+
+  		else
+  		{
+    		double source_term_solution_boundary = (Grain_radius[1]/3)*(1 - Intergranular_saturation_fractional_coverage[0])*(Helium_boundary[1] - Helium_boundary[0])/dTime_s;
+    		double source_term_bubble_boundary = (Grain_radius[1]/3)*Intergranular_saturation_fractional_coverage[0]*(Helium_boundary[1] - Helium_boundary[0])/dTime_s;
+    		Solver::SpectralDiffusionNonEquilibriumCylinder(Helium_boundary_solution[1], Helium_boundary_bubbles[1], Helium_boundary_solution_modes, Helium_boundary_bubbles_modes, N, diffusion_coefficient_boundary, resolution_rate_boundary, trapping_rate_boundary, Grain_radius[1], circles, source_term_solution_boundary, source_term_bubble_boundary, dTime_s);
+  		}
+  		Helium_boundary[1] = Helium_boundary_solution[1] + Helium_boundary_bubbles[1]; 
+		*/
+
+		// update He release from GBs ?
+	}
+
 	void GrainBoundarySweeping()
 	{
 		// Sweeping of the intra-granular gas concentrations
