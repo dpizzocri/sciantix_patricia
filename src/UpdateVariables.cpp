@@ -38,6 +38,8 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[15] = sciantix_variable[sv["He in intragranular solution"]].getFinalValue();
 	Sciantix_variables[16] = sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue();
 	Sciantix_variables[17] = sciantix_variable[sv["He at grain boundary"]].getFinalValue();
+	Sciantix_variables[115] = sciantix_variable[sv["He in intergranular solution"]].getFinalValue();
+	Sciantix_variables[116] = sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue();
 	Sciantix_variables[18] = sciantix_variable[sv["He released"]].getFinalValue();
 	Sciantix_variables[19] = sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue();
 	Sciantix_variables[20] = sciantix_variable[sv["Intragranular bubble radius"]].getFinalValue();
@@ -118,5 +120,7 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 		Sciantix_diffusion_modes[12 * n_modes + i] = modes_initial_conditions[12 * n_modes + i];
 		Sciantix_diffusion_modes[13 * n_modes + i] = modes_initial_conditions[13 * n_modes + i];
 		Sciantix_diffusion_modes[14 * n_modes + i] = modes_initial_conditions[14 * n_modes + i];
+		Sciantix_diffusion_modes[15 * n_modes + i] = modes_initial_conditions[15 * n_modes + i];
+		Sciantix_diffusion_modes[16 * n_modes + i] = modes_initial_conditions[16 * n_modes + i];
 	}
 }

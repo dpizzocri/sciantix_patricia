@@ -381,7 +381,7 @@ void System::setGrainBoundaryHeliumDiffusivity(int input_value)
 		 */
 		
 		reference += "iGrainBoundaryHeliumDiffusivity: constant intragranular diffusivity.\n\t";
-		diffusivity = 1.0e-18 * 1.0e+6;
+		grain_boundary_diffusivity = 1.0e-18 * 1.0e+6;
 		break;
 	}
 
@@ -395,7 +395,7 @@ void System::setGrainBoundaryHeliumDiffusivity(int input_value)
 		 */
 
 		reference += "(no or very limited lattice damage) L. Luzzi et al., Nuclear Engineering and Design, 330 (2018) 265-271.\n\t";
-		diffusivity = 2.0e-10 * exp(-24603.4 / history_variable[hv["Temperature"]].getFinalValue()) * 1.0e+3;
+		grain_boundary_diffusivity = 2.0e-10 * exp(-24603.4 / history_variable[hv["Temperature"]].getFinalValue()) * 1.0e+3;
 		break;
 	}
 
@@ -409,7 +409,7 @@ void System::setGrainBoundaryHeliumDiffusivity(int input_value)
 		 */
 
 		reference += "(significant lattice damage) L. Luzzi et al., Nuclear Engineering and Design, 330 (2018) 265-271.\n\t";
-		diffusivity = 3.3e-10 * exp(-19032.8 / history_variable[hv["Temperature"]].getFinalValue()) * 1.0e+6;
+		grain_boundary_diffusivity = 3.3e-10 * exp(-19032.8 / history_variable[hv["Temperature"]].getFinalValue()) * 1.0e+6;
 		break;
 	}
 
@@ -421,7 +421,7 @@ void System::setGrainBoundaryHeliumDiffusivity(int input_value)
 		 */
 
 		reference += "iHeDiffusivity: Z. Talip et al. JNM 445 (2014) 117-127.\n\t";
-		diffusivity = 1.0e-7 * exp(-30057.9 / history_variable[hv["Temperature"]].getFinalValue()) * 1.0e+6;
+		grain_boundary_diffusivity = 1.0e-7 * exp(-30057.9 / history_variable[hv["Temperature"]].getFinalValue()) * 1.0e+6;
 		break;
 	}
 
@@ -433,7 +433,7 @@ void System::setGrainBoundaryHeliumDiffusivity(int input_value)
 		 */
 		
 		reference += "iGrainBoundaryHeliumDiffusivity: null intragranular diffusivity.\n\t";
-		diffusivity = 0.0;
+		grain_boundary_diffusivity = 0.0;
 		break;
 	}
 
@@ -570,6 +570,8 @@ void System::setGrainBoundaryHeliumThermalResolutionRate(int input_value)
 	const double pi = CONSTANT_NUMBERS_H::MathConstants::pi;
 	const double boltzmann_constant = CONSTANT_NUMBERS_H::PhysicsConstants::boltzmann_constant;
 
+	double grain_radius = sciantix_variable[sv["Grain radius"]].getFinalValue();
+
 	switch (input_value)
 	{
 	case 0:
@@ -583,7 +585,7 @@ void System::setGrainBoundaryHeliumThermalResolutionRate(int input_value)
     // D = 1.789e-18 m2/s
     // kH = 2.172e+21 at/m3/Pa
     // R_b = 2e-9 m
-		resolution_rate = 3.876e-5;
+		grain_boundary_resolution_rate = 3.876e-5;
 		break;
 	}
 
@@ -598,8 +600,12 @@ void System::setGrainBoundaryHeliumThermalResolutionRate(int input_value)
     double phi_bubble = 1.0 - 1.5*cos(semi_dihed) + 0.5*pow(cos(semi_dihed), 3);
     double q = 1.0/(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sqrt(pi*sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue()));
 
+
     if(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() > 0.0)
-			resolution_rate = (diffusivity / log(q))*  boltzmann_constant * pow(sin(semi_dihed), 3) * henry_constant * history_variable[hv["Temperature"]].getFinalValue() * grain_radius / (2.0 * phi_bubble * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue(), 3));
+			grain_boundary_resolution_rate = (grain_boundary_diffusivity / log(q))*  boltzmann_constant * pow(sin(semi_dihed), 3) * henry_constant * history_variable[hv["Temperature"]].getFinalValue() * grain_radius / (2.0 * phi_bubble * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue(), 3));
+
+		else
+			grain_boundary_resolution_rate = 0.0;
 
 		break;
 	}
@@ -621,7 +627,7 @@ void System::setGrainBoundaryHeliumThermalResolutionRate(int input_value)
     double compressibility_factor = (1.0 + y + pow(y,2) - pow(y,3)) / (pow(1.0-y,3));
 
     if(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() > 0.0)
-    	resolution_rate = (diffusivity / log(q))*  boltzmann_constant * pow(sin(semi_dihed), 3) * (henry_constant/1e+6) * history_variable[hv["Temperature"]].getFinalValue() * grain_radius * compressibility_factor / (2.0 * phi_bubble * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue(), 3));
+    	grain_boundary_resolution_rate = (diffusivity / log(q))*  boltzmann_constant * pow(sin(semi_dihed), 3) * (henry_constant/1e+6) * history_variable[hv["Temperature"]].getFinalValue() * grain_radius * compressibility_factor / (2.0 * phi_bubble * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue(), 3));
 
 		break;
 	}
@@ -634,7 +640,7 @@ void System::setGrainBoundaryHeliumThermalResolutionRate(int input_value)
 		 */
 
 		reference += "iGrainBoundaryHeliumThermalResolution: Null resolution rate.\n\t";
-		resolution_rate = 0.0;
+		grain_boundary_resolution_rate = 0.0;
 		break;
 	}
 
@@ -732,7 +738,7 @@ void System::setGrainBoundaryHeliumTrappingRate(int input_value)
 		 * 
 		 */
 
-		trapping_rate = 9.35e-6; // (1/s)
+		grain_boundary_trapping_rate = 9.35e-6; // (1/s)
 		break;
 	}
 
@@ -746,7 +752,7 @@ void System::setGrainBoundaryHeliumTrappingRate(int input_value)
 
 		reference += "iGrainBoundaryHeliumTrappingRate: Giorgi et al., Nuclear Engineering and Technology 54 (2022) 2367-2375.\n\t";
 
-		trapping_rate = 2.0 * pi * diffusivity * sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() / (log(1.0/(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sqrt(pi*sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue()))));
+		grain_boundary_trapping_rate = 2.0 * pi * grain_boundary_diffusivity * sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() / (log(1.0/(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sqrt(pi*sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue()))));
 
 		break;
 	}
@@ -759,7 +765,7 @@ void System::setGrainBoundaryHeliumTrappingRate(int input_value)
 		 */
 		reference += "iGrainBoundaryHeliumTrappingRate: case with zero trapping rate.\n\t";
 
-		trapping_rate = 0.0;
+		grain_boundary_trapping_rate = 0.0;
 		break;
 	}
 

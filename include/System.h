@@ -39,6 +39,9 @@ protected:
 	double henry_constant;
 	double resolution_rate;
 	double trapping_rate;
+	double grain_boundary_trapping_rate;
+	double grain_boundary_resolution_rate;
+	double grain_boundary_diffusivity;
 	double nucleation_rate;
 	std::string gas_name;
 	std::vector<double> modes;
@@ -101,24 +104,18 @@ public:
 	}
 
 	void setHeliumDiffusivity(int input_value);
-	double getHeliumDiffusivity()
-	{
-		/// Member function to get the bubble diffusivity of the isotope in the fuel matrix
-		return diffusivity;	
-	}
-
 	void setFissionGasDiffusivity(int input_value);	
-	double getFissionGasDiffusivity()
+	double getDiffusivity()
 	{
 		/// Member function to get the diffusivity of the isotope in the fuel matrix
 		return diffusivity;
 	}
 
 	void setGrainBoundaryHeliumDiffusivity(int input_value);	
-	double getGrainBoundaryHeliumDiffusivity()
+	double getGrainBoundaryDiffusivity()
 	{
 		/// Member function to get the diffusivity of the isotope at the fuel grain boundaries
-		return diffusivity;
+		return grain_boundary_diffusivity;
 	}
 
 	void setHenryConstant(double h)
@@ -144,7 +141,7 @@ public:
 	double getGrainBoundaryHeliumThermalResolutionRate()
 	{
 		/// Member function to get the value of the thermal resolution rate of the isotope from the fuel grain boundaries
-		return resolution_rate;
+		return grain_boundary_resolution_rate;
 	}
 
 	void setTrappingRate(int input_value);
@@ -158,7 +155,7 @@ public:
 	double getGrainBoundaryHeliumTrappingRate()
 	{
 		/// Member function to get the value of the trapping rate of the isotope at the fuel grain boundaries
-		return trapping_rate;
+		return grain_boundary_trapping_rate;
 	}
 
 	void setNucleationRate(int input_value);

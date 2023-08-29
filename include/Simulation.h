@@ -509,8 +509,33 @@ public:
   		}
   		Helium_boundary[1] = Helium_boundary_solution[1] + Helium_boundary_bubbles[1]; 
 		*/
+		double initial_value_solution = sciantix_variable[sv["He in intergranular solution"]].getFinalValue() * (sciantix_variable[sv["Grain radius"]].getFinalValue()/3);
+		double initial_value_bubbles  = sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue() * (sciantix_variable[sv["Grain radius"]].getFinalValue()/3);
 
-		// update He release from GBs ?
+    double source_term_solution_boundary = (sciantix_variable[sv["Grain radius"]].getFinalValue()/3)*(1 - sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue())*(sciantix_variable[sv["He at grain boundary"]].getIncrement());
+    double source_term_bubble_boundary = (sciantix_variable[sv["Grain radius"]].getFinalValue()/3)*sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()*(sciantix_variable[sv["He at grain boundary"]].getIncrement());
+
+		solver.SpectralDiffusionNonEquilibriumCylinder(
+			initial_value_solution, initial_value_bubbles, 
+			&modes_initial_conditions[15*n_modes], &modes_initial_conditions[16*n_modes], 
+			n_modes, 
+			sciantix_system[sy["He in UO2"]].getGrainBoundaryDiffusivity(),
+			sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumThermalResolutionRate(),
+			sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumTrappingRate(),
+			sciantix_variable[sv["Grain radius"]].getFinalValue(),
+			source_term_solution_boundary,
+			source_term_bubble_boundary,
+			physics_variable[pv["Time step"]].getFinalValue()
+		);
+
+		// std::cout << sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumThermalResolutionRate() << std::endl; // negativ
+		// std::cout << sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumTrappingRate() << std::endl; // negativ
+
+		sciantix_variable[sv["He in intergranular solution"]].setFinalValue(initial_value_solution / (sciantix_variable[sv["Grain radius"]].getFinalValue()/3));
+		sciantix_variable[sv["He in intergranular bubbles"]].setFinalValue(initial_value_bubbles / (sciantix_variable[sv["Grain radius"]].getFinalValue()/3));
+		sciantix_variable[sv["He at grain boundary"]].setFinalValue(sciantix_variable[sv["He in intergranular solution"]].getFinalValue() + sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue()); // prima di assegnare questo numero, bisogna riscalare le udm
+
+		std::cout << sciantix_variable[sv["He at grain boundary"]].getFinalValue() << std::endl;
 	}
 
 	void GrainBoundarySweeping()

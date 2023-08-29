@@ -424,6 +424,22 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	++sv_counter;
 
 	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("He in intergranular solution");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[115]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[115]);
+	sciantix_variable[sv_counter].setOutput(toOutputHelium);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("He in intergranular bubbles");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[116]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[116]);
+	sciantix_variable[sv_counter].setOutput(toOutputHelium);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
 	sciantix_variable[sv_counter].setName("He released");
 	sciantix_variable[sv_counter].setUOM("(at/m3)");
 	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[18]);
@@ -1044,6 +1060,9 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 		modes_initial_conditions[12 * n_modes + i] = Sciantix_diffusion_modes[12 * n_modes + i];
 		modes_initial_conditions[13 * n_modes + i] = Sciantix_diffusion_modes[13 * n_modes + i];
 		modes_initial_conditions[14 * n_modes + i] = Sciantix_diffusion_modes[14 * n_modes + i];
+		modes_initial_conditions[15 * n_modes + i] = Sciantix_diffusion_modes[15 * n_modes + i];
+		modes_initial_conditions[16 * n_modes + i] = Sciantix_diffusion_modes[16 * n_modes + i];
+
 	}
 
 	// ---------------
