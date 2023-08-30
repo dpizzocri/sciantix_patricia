@@ -81,7 +81,9 @@ void Sciantix(int Sciantix_options[],
 	MapModel();
 	sciantix_simulation.GasDiffusion();
 
+	//std::cout << "He GB - preGiorgi = " << sciantix_variable[sv["He at grain boundary"]].getFinalValue() << std::endl;
 	sciantix_simulation.GrainBoundaryHeliumBehaviour();
+	//std::cout << "He GB - postGiorgi = " << sciantix_variable[sv["He at grain boundary"]].getFinalValue() << std::endl;
 
 	GrainBoundaryMicroCracking();
 	MapModel();
@@ -90,10 +92,12 @@ void Sciantix(int Sciantix_options[],
 	GrainBoundaryVenting();
 	MapModel();
 	sciantix_simulation.GrainBoundaryVenting();
+	//std::cout << "He GB - post venting = " << sciantix_variable[sv["He at grain boundary"]].getFinalValue() << std::endl;
 
 	InterGranularBubbleEvolution();
 	MapModel();
 	sciantix_simulation.InterGranularBubbleBehaviour();
+	//std::cout << "He GB - post inter- = " << sciantix_variable[sv["He at grain boundary"]].getFinalValue() << std::endl;
 
 	FiguresOfMerit();
 	

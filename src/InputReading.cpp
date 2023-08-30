@@ -205,9 +205,10 @@ void InputReading()
 	Sciantix_options[19] = ReadOneSetting("iHeliumProductionRate", input_settings, input_check);
 	Sciantix_options[20] = ReadOneSetting("iStoichiometryDeviation", input_settings, input_check);
 	Sciantix_options[21] = ReadOneSetting("iBubbleDiffusivity",input_settings,input_check);
-	Sciantix_options[22] = ReadOneSetting("iGrainBoundaryHeliumDiffusivity",input_settings,input_check);
-	Sciantix_options[23] = ReadOneSetting("iGrainBoundaryHeliumTrappingRate",input_settings,input_check);
-	Sciantix_options[24] = ReadOneSetting("iGrainBoundaryHeliumThermalResolution",input_settings,input_check);
+	Sciantix_options[22] = ReadOneSetting("iGrainBoundaryHeliumBehaviour",input_settings,input_check);
+	Sciantix_options[23] = ReadOneSetting("iGrainBoundaryHeliumDiffusivity",input_settings,input_check);
+	Sciantix_options[24] = ReadOneSetting("iGrainBoundaryHeliumTrappingRate",input_settings,input_check);
+	Sciantix_options[25] = ReadOneSetting("iGrainBoundaryHeliumThermalResolution",input_settings,input_check);
 	
 	if (!input_initial_conditions.fail())
 	{

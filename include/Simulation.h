@@ -482,7 +482,7 @@ public:
 
 	void GrainBoundaryHeliumBehaviour()
 	{
-		/*
+		/*SCIANTIX 1.0 - Giorgi:
 		  double henry_constant = HeliumHenryConstant(Temperature[0]);
   		double diffusion_coefficient_boundary = HeliumDiffusionCoefficientBoundary(Temperature[0]);
   		double Intergranular_He_bubble_radius = pow(10,-7);
@@ -509,33 +509,39 @@ public:
   		}
   		Helium_boundary[1] = Helium_boundary_solution[1] + Helium_boundary_bubbles[1]; 
 		*/
-		double initial_value_solution = sciantix_variable[sv["He in intergranular solution"]].getFinalValue() * (sciantix_variable[sv["Grain radius"]].getFinalValue()/3);
-		double initial_value_bubbles  = sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue() * (sciantix_variable[sv["Grain radius"]].getFinalValue()/3);
 
-    double source_term_solution_boundary = (sciantix_variable[sv["Grain radius"]].getFinalValue()/3)*(1 - sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue())*(sciantix_variable[sv["He at grain boundary"]].getIncrement());
-    double source_term_bubble_boundary = (sciantix_variable[sv["Grain radius"]].getFinalValue()/3)*sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()*(sciantix_variable[sv["He at grain boundary"]].getIncrement());
+		if(input_variable[iv["iGrainBoundaryHeliumBehaviour"]].getValue() == 0) // no sub-division between He in solution / in bubbles at grain boundary, He is all contained in grain boundary bubbles
+			return;
 
+		double initial_value_solution = sciantix_variable[sv["He in intergranular solution"]].getFinalValue() * (sciantix_variable[sv["Grain radius"]].getFinalValue()/3.0); // (at/m2)
+		double initial_value_bubbles  = sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue() * (sciantix_variable[sv["Grain radius"]].getFinalValue()/3.0); // (at/m2)
+
+    double source_term_solution_boundary = (sciantix_variable[sv["Grain radius"]].getFinalValue()/3.0) * (1.0 - sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()) * (sciantix_variable[sv["He at grain boundary"]].getIncrement());
+    double source_term_bubble_boundary = (sciantix_variable[sv["Grain radius"]].getFinalValue()/3.0) * sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue() * (sciantix_variable[sv["He at grain boundary"]].getIncrement());
+
+		std::cout << "He GB sol - pre = " << initial_value_solution << std::endl;
+		std::cout << "He GB bub - pre = " << initial_value_bubbles << std::endl;
+
+		// funziona con "condizione iniziale" diversa da 0 ?
 		solver.SpectralDiffusionNonEquilibriumCylinder(
 			initial_value_solution, initial_value_bubbles, 
-			&modes_initial_conditions[15*n_modes], &modes_initial_conditions[16*n_modes], 
+			&modes_initial_conditions[15*n_modes], &modes_initial_conditions[16*n_modes], // getDiffusionModesGrainBoundarySolution("He"), getDiffusionModesGrainBoundaryBubbles("He"),  // &modes_initial_conditions[15*n_modes], &modes_initial_conditions[16*n_modes],
 			n_modes, 
 			sciantix_system[sy["He in UO2"]].getGrainBoundaryDiffusivity(),
 			sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumThermalResolutionRate(),
 			sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumTrappingRate(),
 			sciantix_variable[sv["Grain radius"]].getFinalValue(),
-			source_term_solution_boundary,
-			source_term_bubble_boundary,
+			source_term_solution_boundary, source_term_bubble_boundary,
 			physics_variable[pv["Time step"]].getFinalValue()
 		);
 
-		// std::cout << sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumThermalResolutionRate() << std::endl; // negativ
-		// std::cout << sciantix_system[sy["He in UO2"]].getGrainBoundaryHeliumTrappingRate() << std::endl; // negativ
+		std::cout << "He GB sol - post = " << initial_value_solution << std::endl;
+		std::cout << "He GB bub - post = " << initial_value_bubbles << std::endl;
 
-		sciantix_variable[sv["He in intergranular solution"]].setFinalValue(initial_value_solution / (sciantix_variable[sv["Grain radius"]].getFinalValue()/3));
-		sciantix_variable[sv["He in intergranular bubbles"]].setFinalValue(initial_value_bubbles / (sciantix_variable[sv["Grain radius"]].getFinalValue()/3));
-		sciantix_variable[sv["He at grain boundary"]].setFinalValue(sciantix_variable[sv["He in intergranular solution"]].getFinalValue() + sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue()); // prima di assegnare questo numero, bisogna riscalare le udm
-
-		std::cout << sciantix_variable[sv["He at grain boundary"]].getFinalValue() << std::endl;
+		sciantix_variable[sv["He in intergranular solution"]].setFinalValue(initial_value_solution / (sciantix_variable[sv["Grain radius"]].getFinalValue()/3.0)); // (at/m3)
+		sciantix_variable[sv["He in intergranular bubbles"]].setFinalValue(initial_value_bubbles / (sciantix_variable[sv["Grain radius"]].getFinalValue()/3.0)); // (at/m3)
+		// prima di assegnare questo numero, bisogna riscalare le udm
+		sciantix_variable[sv["He at grain boundary"]].setFinalValue(sciantix_variable[sv["He in intergranular solution"]].getFinalValue() + sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue());
 	}
 
 	void GrainBoundarySweeping()
@@ -612,7 +618,7 @@ public:
 		);
 
 		// ODE for the intergranular fractional coverage: this equation accounts for the reduction of the intergranular fractional coverage following a temperature transient
-		// dFc / dT = - ( dm/dT f) Fc
+		// dFc / dT = - (dm/dT f) Fc
 		sciantix_variable[sv["Intergranular fractional coverage"]].setFinalValue(
 			solver.Decay(sciantix_variable[sv["Intergranular fractional coverage"]].getInitialValue(),
 				model[sm["Grain-boundary micro-cracking"]].getParameter().at(0) * sciantix_variable[sv["Intergranular fractional intactness"]].getFinalValue(),
@@ -955,6 +961,44 @@ public:
 		else // (gas_name == "Kr85m")
 			return &modes_initial_conditions[14 * 40];
 	}
+
+/*
+	double* getDiffusionModesGrainBoundarySolution(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[3 * 40];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[6 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[9 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[12 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[15 * 40];
+	}
+
+	double* getDiffusionModesGrainBoundaryBubbles(std::string gas_name)
+	{	
+		if(gas_name == "Xe")
+			return &modes_initial_conditions[4 * 40];
+
+		else if(gas_name == "Kr")
+			return &modes_initial_conditions[7 * 40];
+
+		else if(gas_name == "He")
+			return &modes_initial_conditions[10 * 40];
+
+		else if(gas_name == "Xe133")
+			return &modes_initial_conditions[13 * 40];
+
+		else // (gas_name == "Kr85m")
+			return &modes_initial_conditions[16 * 40];
+	}
+*/
 
 	Simulation() {}
 	~Simulation() {}

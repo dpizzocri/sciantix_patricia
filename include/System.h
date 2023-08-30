@@ -99,7 +99,7 @@ public:
 	void setBubbleDiffusivity(int input_value);
 	double getBubbleDiffusivity()
 	{
-		/// Member function to get the bubble diffusivity of the isotope in the fuel matrix
+		/// Member function to get the bubble diffusivity in the fuel matrix
 		return bubble_diffusivity;	
 	}
 

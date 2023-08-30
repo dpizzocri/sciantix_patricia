@@ -602,7 +602,7 @@ void System::setGrainBoundaryHeliumThermalResolutionRate(int input_value)
 
 
     if(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() > 0.0)
-			grain_boundary_resolution_rate = (grain_boundary_diffusivity / log(q))*  boltzmann_constant * pow(sin(semi_dihed), 3) * henry_constant * history_variable[hv["Temperature"]].getFinalValue() * grain_radius / (2.0 * phi_bubble * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue(), 3));
+			grain_boundary_resolution_rate = (grain_boundary_diffusivity / log(q))*  boltzmann_constant * pow(sin(semi_dihed), 3) * (henry_constant/1e+6) * history_variable[hv["Temperature"]].getFinalValue() * grain_radius / (2.0 * phi_bubble * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue(), 3));
 
 		else
 			grain_boundary_resolution_rate = 0.0;
@@ -628,6 +628,9 @@ void System::setGrainBoundaryHeliumThermalResolutionRate(int input_value)
 
     if(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() > 0.0)
     	grain_boundary_resolution_rate = (diffusivity / log(q))*  boltzmann_constant * pow(sin(semi_dihed), 3) * (henry_constant/1e+6) * history_variable[hv["Temperature"]].getFinalValue() * grain_radius * compressibility_factor / (2.0 * phi_bubble * pow(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue(), 3));
+
+		else
+			grain_boundary_resolution_rate = 0.0;
 
 		break;
 	}
@@ -752,7 +755,7 @@ void System::setGrainBoundaryHeliumTrappingRate(int input_value)
 
 		reference += "iGrainBoundaryHeliumTrappingRate: Giorgi et al., Nuclear Engineering and Technology 54 (2022) 2367-2375.\n\t";
 
-		grain_boundary_trapping_rate = 2.0 * pi * grain_boundary_diffusivity * sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() / (log(1.0/(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sqrt(pi*sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue()))));
+		grain_boundary_trapping_rate = 2.0 * pi * grain_boundary_diffusivity * sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue() / (log(1.0/(sciantix_variable[sv["Intergranular bubble radius"]].getFinalValue() * sqrt(pi * sciantix_variable[sv["Intergranular bubble concentration"]].getFinalValue()))));
 
 		break;
 	}
