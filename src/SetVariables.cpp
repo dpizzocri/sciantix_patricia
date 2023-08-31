@@ -309,6 +309,22 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	++sv_counter;
 
 	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Xe in intergranular solution");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[111]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[111]);
+	sciantix_variable[sv_counter].setOutput(1);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Xe in intergranular bubbles");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[112]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[112]);
+	sciantix_variable[sv_counter].setOutput(1);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
 	sciantix_variable[sv_counter].setName("Xe released");
 	sciantix_variable[sv_counter].setUOM("(at/m3)");
 	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[6]);
@@ -361,6 +377,22 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	sciantix_variable[sv_counter].setUOM("(at/m3)");
 	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[11]);
 	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[11]);
+	sciantix_variable[sv_counter].setOutput(1);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Kr in intergranular solution");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[113]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[113]);
+	sciantix_variable[sv_counter].setOutput(1);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Kr in intergranular bubbles");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[114]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[114]);
 	sciantix_variable[sv_counter].setOutput(1);
 	++sv_counter;
 
@@ -525,6 +557,22 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	++sv_counter;
 
 	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Xe133 in intergranular solution");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[117]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[117]);
+	sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Xe133 in intergranular bubbles");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[118]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[118]);
+	sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
 	sciantix_variable[sv_counter].setName("Xe133 released");
 	sciantix_variable[sv_counter].setUOM("(at/m3)");
 	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[54]);
@@ -585,6 +633,22 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	sciantix_variable[sv_counter].setUOM("(at/m3)");
 	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[62]);
 	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[62]);
+	sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Kr85m in intergranular solution");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[119]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[119]);
+	sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
+	++sv_counter;
+
+	sciantix_variable.emplace_back();
+	sciantix_variable[sv_counter].setName("Kr85m in intergranular bubbles");
+	sciantix_variable[sv_counter].setUOM("(at/m3)");
+	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[120]);
+	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[120]);
 	sciantix_variable[sv_counter].setOutput(toOutputRadioactiveFG);
 	++sv_counter;
 

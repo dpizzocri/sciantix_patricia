@@ -55,13 +55,15 @@ void InterGranularBubbleEvolution()
 			if (gas[ga[sciantix_system[i].getGasName()]].getDecayRate() == 0.0)
 			{
 				sciantix_variable[sv["Intergranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].setFinalValue(
-					sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue() /
+					sciantix_variable[sv[sciantix_system[i].getGasName() + " in intergranular bubbles"]].getFinalValue() /	// mod Giorgi
 					(sciantix_variable[sv["Intergranular bubble concentration"]].getInitialValue() * (3.0 / sciantix_variable[sv["Grain radius"]].getFinalValue())));
 
 				n_at += sciantix_variable[sv["Intergranular " + sciantix_system[i].getGasName() + " atoms per bubble"]].getFinalValue();
 			}
 		}
 		sciantix_variable[sv["Intergranular atoms per bubble"]].setFinalValue(n_at);
+
+		//std::cout << "at/bub tot inter.cpp = " << sciantix_variable[sv["Intergranular atoms per bubble"]].getFinalValue() << std::endl;
 
 		// Calculation of the bubble dimension
 		// initial volume
@@ -144,7 +146,6 @@ void InterGranularBubbleEvolution()
 
 		parameter.push_back(0.0);
 		parameter.push_back(0.0);
-
 	}
 
 	model[model_index].setParameter(parameter);

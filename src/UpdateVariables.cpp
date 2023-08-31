@@ -26,12 +26,16 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[3] = sciantix_variable[sv["Xe in intragranular solution"]].getFinalValue();
 	Sciantix_variables[4] = sciantix_variable[sv["Xe in intragranular bubbles"]].getFinalValue();
 	Sciantix_variables[5] = sciantix_variable[sv["Xe at grain boundary"]].getFinalValue();
+	Sciantix_variables[111] = sciantix_variable[sv["Xe in intergranular solution"]].getFinalValue();
+	Sciantix_variables[112] = sciantix_variable[sv["Xe in intergranular bubbles"]].getFinalValue();
 	Sciantix_variables[6] = sciantix_variable[sv["Xe released"]].getFinalValue();
 	Sciantix_variables[7] = sciantix_variable[sv["Kr produced"]].getFinalValue();
 	Sciantix_variables[8] = sciantix_variable[sv["Kr in grain"]].getFinalValue();
 	Sciantix_variables[9] = sciantix_variable[sv["Kr in intragranular solution"]].getFinalValue();
 	Sciantix_variables[10] = sciantix_variable[sv["Kr in intragranular bubbles"]].getFinalValue();
 	Sciantix_variables[11] = sciantix_variable[sv["Kr at grain boundary"]].getFinalValue();
+	Sciantix_variables[113] = sciantix_variable[sv["Kr in intergranular solution"]].getFinalValue();
+	Sciantix_variables[114] = sciantix_variable[sv["Kr in intergranular bubbles"]].getFinalValue();
 	Sciantix_variables[12] = sciantix_variable[sv["Kr released"]].getFinalValue();
 	Sciantix_variables[13] = sciantix_variable[sv["He produced"]].getFinalValue();
 	Sciantix_variables[14] = sciantix_variable[sv["He in grain"]].getFinalValue();
@@ -76,6 +80,8 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[51] = sciantix_variable[sv["Xe133 in intragranular bubbles"]].getFinalValue();
 	Sciantix_variables[52] = sciantix_variable[sv["Xe133 decayed"]].getFinalValue();
 	Sciantix_variables[53] = sciantix_variable[sv["Xe133 at grain boundary"]].getFinalValue();
+	Sciantix_variables[117] = sciantix_variable[sv["Xe133 in intergranular solution"]].getFinalValue();
+	Sciantix_variables[118] = sciantix_variable[sv["Xe133 in intergranular bubbles"]].getFinalValue();
 	Sciantix_variables[54] = sciantix_variable[sv["Xe133 released"]].getFinalValue();
 	Sciantix_variables[55] = sciantix_variable[sv["Restructured volume fraction"]].getFinalValue();
 	Sciantix_variables[57] = sciantix_variable[sv["Kr85m produced"]].getFinalValue();
@@ -84,6 +90,8 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[60] = sciantix_variable[sv["Kr85m in intragranular bubbles"]].getFinalValue();
 	Sciantix_variables[61] = sciantix_variable[sv["Kr85m decayed"]].getFinalValue();
 	Sciantix_variables[62] = sciantix_variable[sv["Kr85m at grain boundary"]].getFinalValue();
+	Sciantix_variables[119] = sciantix_variable[sv["Kr85m in intergranular solution"]].getFinalValue();
+	Sciantix_variables[120] = sciantix_variable[sv["Kr85m in intergranular bubbles"]].getFinalValue();
 	Sciantix_variables[63] = sciantix_variable[sv["Kr85m released"]].getFinalValue();
 	Sciantix_variables[64] = sciantix_variable[sv["Intragranular similarity ratio"]].getFinalValue();
 	Sciantix_variables[65] = sciantix_variable[sv["Irradiation time"]].getFinalValue();
