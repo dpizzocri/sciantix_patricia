@@ -230,7 +230,16 @@ public:
 
 			if (sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue() < 0.0)
 				sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].setFinalValue(0.0);
+
+			// mod Giorgi
+			sciantix_variable[sv[sciantix_system[i].getGasName() + " in intergranular bubbles"]].setFinalValue(sciantix_variable[sv[sciantix_system[i].getGasName() + " at grain boundary"]].getFinalValue());
 		}
+
+		// He arriving at grain boundary from intra-granular diffusion is re-distributed between grain boundary solution and grain boundary bubbles
+		// according to the grain boundary bubble fractional coverage
+		// mod Giorgi
+		sciantix_variable[sv["He in intergranular bubbles"]].setFinalValue(sciantix_variable[sv["He at grain boundary"]].getFinalValue() * sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue());
+		sciantix_variable[sv["He in intergranular solution"]].setFinalValue(sciantix_variable[sv["He at grain boundary"]].getFinalValue() * (1.0 - sciantix_variable[sv["Intergranular fractional coverage"]].getFinalValue()));
 
 		/**
 		 * @brief If **iGrainBoundaryBehaviour = 0** (e.g., grain-boundary calculations are neglected), 
