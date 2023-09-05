@@ -21,6 +21,6 @@
 0	#	iStoichiometryDeviation (0= not considered, 1= Cox et al., 2= Bittel et al., 3= Abrefah et al., 4= Imamura et al.)
 0 # iBubbleSurfaceDiffusivity
 1	# iGrainBoundaryHeliumBehaviour (0= not considered)
-1	# iGrainBoundaryHeliumDiffusivity (...)
+3	# iGrainBoundaryHeliumDiffusivity (...)
 1	#	iGrainBoundaryHeliumTrappingRate (...)
 2	#	iGrainBoundaryHeliumThermalResolution (...)

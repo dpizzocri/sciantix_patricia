@@ -36,7 +36,7 @@ System #1: 	Kr in UO2	Production rate = cumulative yield * fission rate density.
 	iNucleationRate: Olander, Wongsawaeng, JNM, 354 (2006), 94-109.
 	
 System #2: 	He in UO2	(no or very limited lattice damage) L. Luzzi et al., Nuclear Engineering and Design, 330 (2018) 265-271.
-	(no or very limited lattice damage) L. Luzzi et al., Nuclear Engineering and Design, 330 (2018) 265-271.
+	iHeDiffusivity: Z. Talip et al. JNM 445 (2014) 117-127.
 	iResolutionRate: Cognini et al. NET 53 (2021) 562-571.
 	iTrappingRate: F.S. Ham, Journal of Physics and Chemistry of Solids, 6 (1958) 335-351.
 	iGrainBoundaryHeliumTrappingRate: Giorgi et al., Nuclear Engineering and Technology 54 (2022) 2367-2375.
@@ -79,7 +79,7 @@ Input setting #19: 	iHeliumProductionRate = 0
 Input setting #20: 	iStoichiometryDeviation = 0
 Input setting #21: 	iBubbleDiffusivity = 0
 Input setting #22: 	iGrainBoundaryHeliumBehaviour = 1
-Input setting #23: 	iGrainBoundaryHeliumDiffusivity = 1
+Input setting #23: 	iGrainBoundaryHeliumDiffusivity = 3
 Input setting #24: 	iGrainBoundaryHeliumTrappingRate = 1
 Input setting #25: 	iGrainBoundaryHeliumThermalResolution = 2
 
