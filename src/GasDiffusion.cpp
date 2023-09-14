@@ -23,7 +23,6 @@ void GasDiffusion()
 	 * The intragranular diffusion exploits the hypothesis of the equivalent Booth approach,
 	 * namely, considering the atom diffusion in a spherical fuel grain.
 	 * 
-	 * 
 	 */
 
 	std::string reference;

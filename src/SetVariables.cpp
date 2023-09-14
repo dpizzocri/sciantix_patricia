@@ -145,7 +145,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 		++iv_counter;
 
 		input_variable.emplace_back();
-		input_variable[iv_counter].setName("iGrainBoundaryHeliumBehaviour");
+		input_variable[iv_counter].setName("iGrainBoundaryHeliumBehaviour"); // modifications for inter-granular helium
 		input_variable[iv_counter].setValue(Sciantix_options[22]);
 		++iv_counter;
 
@@ -461,7 +461,7 @@ void SetVariables(int Sciantix_options[], double Sciantix_history[], double Scia
 	++sv_counter;
 
 	sciantix_variable.emplace_back();
-	sciantix_variable[sv_counter].setName("He in intergranular solution");
+	sciantix_variable[sv_counter].setName("He in intergranular solution"); // modifications for inter-granular helium
 	sciantix_variable[sv_counter].setUOM("(at/m3)");
 	sciantix_variable[sv_counter].setInitialValue(Sciantix_variables[115]);
 	sciantix_variable[sv_counter].setFinalValue(Sciantix_variables[115]);

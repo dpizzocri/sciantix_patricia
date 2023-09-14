@@ -42,7 +42,7 @@ void UpdateVariables(double Sciantix_variables[], double Sciantix_diffusion_mode
 	Sciantix_variables[15] = sciantix_variable[sv["He in intragranular solution"]].getFinalValue();
 	Sciantix_variables[16] = sciantix_variable[sv["He in intragranular bubbles"]].getFinalValue();
 	Sciantix_variables[17] = sciantix_variable[sv["He at grain boundary"]].getFinalValue();
-	Sciantix_variables[115] = sciantix_variable[sv["He in intergranular solution"]].getFinalValue();
+	Sciantix_variables[115] = sciantix_variable[sv["He in intergranular solution"]].getFinalValue(); // modification for inter-granular helium
 	Sciantix_variables[116] = sciantix_variable[sv["He in intergranular bubbles"]].getFinalValue();
 	Sciantix_variables[18] = sciantix_variable[sv["He released"]].getFinalValue();
 	Sciantix_variables[19] = sciantix_variable[sv["Intragranular bubble concentration"]].getFinalValue();

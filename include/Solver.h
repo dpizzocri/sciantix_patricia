@@ -425,7 +425,9 @@ public:
 
   void SpectralDiffusionNonEquilibriumCylinder(double& gas_solution, double& gas_bubble, double* initial_condition_gas_solution, double* initial_condition_gas_bubble, int N, double diffusion_coefficient, double resolution_rate, double trapping_rate, double domain_radius, double source_term, double source_term_bubbles, double time_step)
   {
-    unsigned short int n(0);
+    // used for the inter-granular helium behaviour: helium in intergranular solution / bubbles
+		
+		unsigned short int n(0);
 
     double diffusion_rate_coeff(0.0);
     double diffusion_rate(0.0);

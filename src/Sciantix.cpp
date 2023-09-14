@@ -81,7 +81,7 @@ void Sciantix(int Sciantix_options[],
 	MapModel();
 	sciantix_simulation.GasDiffusion();
 
-	sciantix_simulation.GrainBoundaryHeliumBehaviour();
+	sciantix_simulation.GrainBoundaryHeliumBehaviour(); // modification for inter-granular helium
 
 	GrainBoundaryMicroCracking();
 	MapModel();
