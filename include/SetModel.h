@@ -23,12 +23,10 @@
 #include "SystemDeclaration.h"
 #include "SolverDeclaration.h"
 #include "PhysicsVariableDeclaration.h"
-#include "PhysicsConstantDeclaration.h"
 
 #include "MapInputVariable.h"
 #include "MapHistoryVariable.h"
 #include "MapPhysicsVariable.h"
-#include "MapPhysicsConstant.h"
 #include "MapGas.h"
 #include "MapModel.h"
 #include "MapMatrix.h"
@@ -41,14 +39,19 @@
 #include "GasDiffusion.h"
 #include "IntraGranularBubbleEvolution.h"
 #include "Burnup.h"
-#include "GrainBoundaryVacancyDiffusionCoefficient.h"
+#include "EffectiveBurnup.h"
 #include "InterGranularBubbleEvolution.h"
 #include "GrainBoundaryMicroCracking.h"
 #include "GrainBoundaryVenting.h"
+#include "HighBurnupStructureFormation.h"
+#include "StoichiometryDeviation.h"
+#include "EnvironmentComposition.h"
+#include "UO2Thermochemistry.h"
+
 #include "ErrorMessages.h"
 
 #include <iostream>
-#define _USE_MATH_DEFINES
+
 #include <cmath>
 
-void SetModel( );
+void SetModel();

@@ -13,10 +13,11 @@
 //  Authors: D. Pizzocri, T. Barani                                                 //
 //                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////
+
 #include "MainVariables.h"
 #include <string>
 #include <sstream>
 #include <vector>
 #include <numeric>
 
-void InputReading( );
+void InputReading();

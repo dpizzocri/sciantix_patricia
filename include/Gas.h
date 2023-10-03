@@ -22,63 +22,82 @@
 /// Derived class for the fission gases (e.g., xenon, krypton, helium).
 class Gas : virtual public Material
 {
-  protected:
-    int atomic_number;
-    double mass_number;
-    double van_der_waals_volume;
-    double decay_rate;
+protected:
+	int atomic_number;
+	double mass_number;
+	double van_der_waals_volume;
+	double decay_rate;
+	double precursor_factor;
 
-  public:
-    void setAtomicNumber(int y)
-    {
-      /// Member function to set the atomic number of the fission gas
-      atomic_number = y;
-    }
+public:
+	void setAtomicNumber(int y)
+	{
+		/// Member function to set the atomic number of the fission gas
+		atomic_number = y;
+	}
 
-    int getAtomicNumber( )
-    {
-      /// Member function to get the atomic number of the fission gas
-      return atomic_number;
-    }
+	int getAtomicNumber()
+	{
+		/// Member function to get the atomic number of the fission gas
+		return atomic_number;
+	}
 
-      void setMassNumber(int y)
-    {
-      /// Member function to set the mass number of the fission gas
-      mass_number = y;
-    }
+	void setMassNumber(double y)
+	{
+		/// Member function to set the mass number of the fission gas
+		mass_number = y;
+	}
 
-    int getMassNumber( )
-    {
-      /// Member function to get the mass number of the fission gas
-      return mass_number;
-    }
+	double getMassNumber()
+	{
+		/// Member function to get the mass number of the fission gas
+		return mass_number;
+	}
 
-    void setVanDerWaalsVolume(double y)
-    {
-      /// Member function to set the Wan der Waals volume of the gas
-      van_der_waals_volume = y;
-    }
+	void setVanDerWaalsVolume(double y)
+	{
+		/// Member function to set the Wan der Waals volume of the gas
+		van_der_waals_volume = y;
+	}
 
-    double getVanDerWaalsVolume( )
-    {
-      /// Member function to get the Wan der Waals volume of the gas
-      return van_der_waals_volume;
-    }
+	double getVanDerWaalsVolume()
+	{
+		/// Member function to get the Wan der Waals volume of the gas
+		return van_der_waals_volume;
+	}
 
-    void setDecayRate(double l)
-    {
-      /// Member function to set the gas decay rate
-      decay_rate = l;
-    }
+	void setDecayRate(double l)
+	{
+		/// Member function to set the gas decay rate
+		decay_rate = l;
+	}
 
-    double getDecayRate( )
-    {
-      /// Member function to get the Wan der Waals volume of the gas
-      return decay_rate;
-    }
+	double getDecayRate()
+	{
+		/// Member function to get the Wan der Waals volume of the gas
+		return decay_rate;
+	}
 
-    Gas() { }
-    ~Gas() { }
+	void setPrecursorFactor(double h)
+	{
+		/**
+		 * @brief Member function to set the value of the precursor enhancement factor, from input.
+		 * 
+		 */
+		precursor_factor = h;
+	}
+
+	double getPrecursorFactor()
+	{
+		/**
+		 * @brief Member function to get the value of the precursor enhancement factor.
+		 * 
+		 */
+		return precursor_factor;
+	}
+	
+	Gas() { }
+	~Gas() { }
 };
 
 #endif

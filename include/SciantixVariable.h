@@ -23,12 +23,12 @@
 
 class SciantixVariable : virtual public PhysicsVariable
 {
-  protected:
-    bool to_output;
+protected:
+	bool to_output;
 
-  public:
-    SciantixVariable() { }
-    ~SciantixVariable() { }
+public:
+	SciantixVariable() { }
+	~SciantixVariable() { }
 };
 
 #endif

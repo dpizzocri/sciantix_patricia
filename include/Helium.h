@@ -16,6 +16,6 @@
 
 #include "GasDeclaration.h"
 
-void Helium( );
+void Helium();
 
 

@@ -21,6 +21,9 @@
 #include "MapModel.h"
 #include "MapMatrix.h"
 #include "MapSciantixVariable.h"
+#include "SetMatrix.h"
+#include "Matrix.h"
+#include "SetVariables.h"
+#include <string>
 
-
-void GrainGrowth( );
+void GrainGrowth();

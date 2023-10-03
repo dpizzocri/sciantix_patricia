@@ -21,9 +21,9 @@
 #include <string>
 #include "MatrixDeclaration.h"
 
-extern std::map<std::string,int> sma;
+extern std::map<std::string, int> sma;
 
-void MapMatrix( );
+void MapMatrix();
 
 #endif
 

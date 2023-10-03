@@ -21,8 +21,8 @@
 #include <string>
 #include "SciantixVariableDeclaration.h"
 
-extern std::map<std::string,int> sv;
+extern std::map<std::string, int> sv;
 
-void MapSciantixVariable( );
+void MapSciantixVariable();
 
 #endif

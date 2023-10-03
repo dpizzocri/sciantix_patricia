@@ -22,38 +22,38 @@
 
 class Entity
 {
-  protected:
-    std::string reference;
-    std::string name;
+protected:
+	std::string reference;
+	std::string name;
 
-  public:
-    void setName(std::string n)
-    {
-      /// Member function to set the name of the object
-      name = n;
-    }
+public:
+	void setName(std::string n)
+	{
+		/// Member function to set the name of the object
+		name = n;
+	}
 
-    std::string getName( )
-    {
-      /// Member function to get the name of the object
-      return name;
-    }
+	std::string getName()
+	{
+		/// Member function to get the name of the object
+		return name;
+	}
 
-    void setRef(std::string n)
-    {
-      /// Member function to set the reference field of the object
-      reference = n;
-    }
+	void setRef(std::string n)
+	{
+		/// Member function to set the reference field of the object
+		reference = n;
+	}
 
-    std::string getRef( )
-    {
-      /// Member function to get the reference field of the object
-      return reference;
-    }
+	std::string getRef()
+	{
+		/// Member function to get the reference field of the object
+		return reference;
+	}
 
 
-  Entity() { }
-  ~Entity() { }
+	Entity() { }
+	~Entity() { }
 
 };
 

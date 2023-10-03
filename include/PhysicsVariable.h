@@ -22,77 +22,88 @@
 
 class PhysicsVariable : virtual public Variable
 {
-  protected:
-    std::string uom;
-    double final_value;
-    double initial_value;
-    bool to_output;
+protected:
+	std::string uom;
+	double final_value;
+	double initial_value;
+	bool to_output;
 
-  public:
-    void rescaleValue(const double factor)
-    {
-      // Function to rescale the final value
-      final_value *= factor;
-    }
+public:
+	void rescaleInitialValue(const double factor)
+	{
+		// Function to rescale the final value
+		initial_value *= factor;
+	}
 
-    void addValue(const double v)
-    {
-      // Function to increase final_value by v
-      final_value += v;
-    }
+	void rescaleFinalValue(const double factor)
+	{
+		// Function to rescale the final value
+		final_value *= factor;
+	}
 
-    void setUOM(std::string s)
-    {
-      uom = s;
-    }
+	void addValue(const double v)
+	{
+		// Function to increase final_value by v
+		final_value += v;
+	}
 
-    std::string getUOM( )
-    {
-      return uom;
-    }
+	void setUOM(std::string s)
+	{
+		uom = s;
+	}
 
-    void setConstant()
-    {
-      final_value = initial_value;
-    }
+	std::string getUOM()
+	{
+		return uom;
+	}
 
-    void setFinalValue(double FinalValue)
-    {
-      final_value = FinalValue;
-    }
+	void setConstant()
+	{
+		final_value = initial_value;
+	}
 
-    void setInitialValue(double InitialValue)
-    {
-      initial_value = InitialValue;
-    }
+	void resetValue()
+	{
+		initial_value = final_value;
+	}
 
-    double getFinalValue( )
-    {
-      return final_value;
-    }
+	void setFinalValue(double FinalValue)
+	{
+		final_value = FinalValue;
+	}
 
-    double getInitialValue( )
-    {
-      return initial_value;
-    }
+	void setInitialValue(double InitialValue)
+	{
+		initial_value = InitialValue;
+	}
 
-    double getIncrement( )
-    {
-      return final_value - initial_value;
-    }
+	double getFinalValue()
+	{
+		return final_value;
+	}
 
-    void setOutput(bool io)
-    {
-      to_output = io;
-    }
+	double getInitialValue()
+	{
+		return initial_value;
+	}
 
-    bool getOutput( )
-    {
-      return to_output;
-    }
-    
-  PhysicsVariable() { }
-  ~PhysicsVariable() { }
+	double getIncrement()
+	{
+		return final_value - initial_value;
+	}
+
+	void setOutput(bool io)
+	{
+		to_output = io;
+	}
+
+	bool getOutput()
+	{
+		return to_output;
+	}
+
+	PhysicsVariable() { }
+	~PhysicsVariable() { }
 
 };
 

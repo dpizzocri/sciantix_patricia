@@ -32,10 +32,19 @@
 *.app
 *.x
 
+# Backup files
+*.bak
+
+# Mac OS files
+*.DS_Store
+
 # Folders
 bin/
 obj/
 build/
+out/
 documentation/
-**/.vscode/
-**/old_files/
+.vscode/
+.vs/
+old_files/
+__pycache__/

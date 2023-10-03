@@ -19,7 +19,8 @@
 extern double sf_resolution_rate;
 extern double sf_trapping_rate;
 extern double sf_nucleation_rate;
-extern double sf_diffusion_coeff;
+extern double sf_diffusivity;
 extern double sf_screw_parameter;
 extern double sf_span_parameter;
 extern double sf_cent_parameter;
+extern double sf_helium_production_rate;

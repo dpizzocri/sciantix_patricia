@@ -18,4 +18,4 @@
 #include "ModelDeclaration.h"
 #include "MapSciantixVariable.h"
 
-void GrainBoundarySweeping( );
+void GrainBoundarySweeping();

@@ -22,7 +22,7 @@
 extern clock_t timer, timer_time_step;
 
 extern int Sciantix_options[40];
-extern double Sciantix_history[9];
+extern double Sciantix_history[20];
 extern double Sciantix_variables[300];
 extern double Sciantix_scaling_factors[10];
 extern double Sciantix_diffusion_modes[1000];
@@ -38,14 +38,14 @@ extern std::ofstream Execution_file;
 extern int Input_history_points;
 extern int Temperature_input_points;
 extern int Fissionrate_input_points;
-extern int Specificpower_input_points;
 extern int Hydrostaticstress_input_points;
+extern int Stempressure_input_points;
 extern std::vector<double> Time_temperature_input;
 extern std::vector<double> Time_fissionrate_input;
-extern std::vector<double> Time_specificpower_input;
 extern std::vector<double> Time_hydrostaticstress_input;
+extern std::vector<double> Time_steampressure_input;
 extern std::vector<double> Time_input;
 extern std::vector<double> Temperature_input;
 extern std::vector<double> Fissionrate_input;
-extern std::vector<double> Specificpower_input;
 extern std::vector<double> Hydrostaticstress_input;
+extern std::vector<double> Steampressure_input;

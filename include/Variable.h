@@ -26,13 +26,13 @@
 
 class Variable : virtual public Entity
 {
-  protected:
-    std::string name;
-    std::string reference;
+protected:
+	std::string name;
+	std::string reference;
 
-  public:
-    Variable() { }
-    ~Variable() { }
+public:
+	Variable() { }
+	~Variable() { }
 };
 
 #endif

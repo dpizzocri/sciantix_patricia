@@ -26,8 +26,9 @@
 #include "SciantixDiffusionModeDeclaration.h"
 #include "GasDeclaration.h"
 #include "MapGas.h"
+#include "SetMatrix.h"
 
-void GasDiffusion( );
+void GasDiffusion();
 
 
 

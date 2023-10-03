@@ -22,24 +22,24 @@
 /// Derived class for the input variables (e.g., input settings for model selection).
 class InputVariable : virtual public Variable
 {
-  public:
-    void setValue(double v)
-    {
-      /// Member function to set the setting value of the declared object.
-      value = v;
-    }
+public:
+	void setValue(double v)
+	{
+		/// Member function to set the setting value of the declared object.
+		value = v;
+	}
 
-    int getValue( )
-    {
-      /// Member function to get the setting value of the object.
-      return value;
-    }
+	double getValue()
+	{
+		/// Member function to get the setting value of the object.
+		return value;
+	}
 
-    InputVariable() { }
-   ~InputVariable() { }
+	InputVariable() { }
+	~InputVariable() { }
 
-  protected:
-    int value;
+protected:
+	double value;
 
 };
 

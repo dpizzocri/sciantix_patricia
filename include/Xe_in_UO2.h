@@ -21,6 +21,4 @@
 #include "SciantixVariableDeclaration.h"
 #include "MapSciantixVariable.h"
 
-/// Xe_in_UO2
-
-void Xe_in_UO2( );
+void Xe_in_UO2();

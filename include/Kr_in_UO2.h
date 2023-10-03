@@ -22,4 +22,4 @@
 #include "SciantixVariableDeclaration.h"
 #include "MapSciantixVariable.h"
 
-void Kr_in_UO2( );
+void Kr_in_UO2();

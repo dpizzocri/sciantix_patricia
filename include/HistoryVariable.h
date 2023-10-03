@@ -23,9 +23,9 @@
 
 class HistoryVariable : virtual public PhysicsVariable
 {
-  public:
-    HistoryVariable() { }
-    ~HistoryVariable() { }
+public:
+	HistoryVariable() { }
+	~HistoryVariable() { }
 };
 
 #endif

@@ -16,11 +16,9 @@
 
 #include "SciantixVariableDeclaration.h"
 #include "HistoryVariableDeclaration.h"
-#include "PhysicsConstantDeclaration.h"
 #include "ModelDeclaration.h"
 
 #include "MapSciantixVariable.h"
 #include "MapHistoryVariable.h"
-#include "MapPhysicsConstant.h"
 
-void GrainBoundaryMicroCracking( );
+void GrainBoundaryMicroCracking();

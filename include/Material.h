@@ -24,12 +24,12 @@
 
 class Material : virtual public Entity
 {
-  public:
-    Material() { }
-    ~Material() { }
+public:
+	Material() { }
+	~Material() { }
 
-  protected:
-    std::string name;
+protected:
+	std::string name;
 };
 
 #endif

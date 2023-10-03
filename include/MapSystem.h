@@ -21,9 +21,9 @@
 #include <string>
 #include "SystemDeclaration.h"
 
-extern std::map<std::string,int> sy;
+extern std::map<std::string, int> sy;
 
-void MapSystem( );
+void MapSystem();
 
 #endif
 
